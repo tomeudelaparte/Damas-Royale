@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Usuario {
 
 	private Integer idusuario;
-	private String nickname;
+	private String nombre;
 	private String email;
 	private String contrasenya;
 	private String imagen;
@@ -14,13 +14,13 @@ public class Usuario {
 	private String estado;
 
 	public Usuario() {
-		
+
 	}
 
-	public Usuario(Integer idusuario, String nickname, String email, String contrasenya, String imagen, int puntuacion, Timestamp registro, String estado) {
+	public Usuario(Integer idusuario, String nombre, String email, String contrasenya, String imagen, int puntuacion, Timestamp registro, String estado) {
 		
 		this.idusuario = idusuario;
-		this.nickname = nickname;
+		this.nombre = nombre;
 		this.email = email;
 		this.contrasenya = contrasenya;
 		this.imagen = imagen;
@@ -37,12 +37,12 @@ public class Usuario {
 		this.idusuario = idusuario;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getEmail() {

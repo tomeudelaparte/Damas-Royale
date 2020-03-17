@@ -89,8 +89,8 @@ public class MailEJB {
 		MailEJB mail = new MailEJB();
 
 		String asunto = "Activar cuenta - CalculaIMC";
-		String mensaje = "Hola " + usuario.getNickname()
-				+ ", pulse el enlace para activar la cuenta: http://localhost:8080/CalculaIMC/Login?activation="
+		String mensaje = "Hola " + usuario.getNombre()
+				+ ", pulse el enlace para activar la cuenta: http://localhost:8080/DamasRoyale/Login?activation="
 				+ codigo;
 
 		String remitente = "dwesaplicaciontomeu@gmail.com";

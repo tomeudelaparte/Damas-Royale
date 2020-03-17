@@ -3,7 +3,50 @@
   'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 
 <mapper namespace='com.modelo.dao.mappers.UsuarioMapper'>
-	
 
+	<select id='getAllUsuario' resultType="Usuario">
+		SELECT * FROM USUARIOS
+	</select>
+
+	<select id='getUsuarioByID' resultType="Usuario">
+		SELECT * FROM USUARIOS
+		WHERE
+		IDUSUARIO = #{idusuario}
+	</select>
+
+	<select id='getUsuarioLogin' resultType="Usuario">
+		SELECT * FROM USUARIOS
+		WHERE
+		EMAIL = #{email} AND
+		CONTRASENYA = #{contrasenya}
+	</select>
 	
+	<select id='getExistUsuario' resultType='string'>
+		SELECT IDUSUARIO FROM
+		USUARIO WHERE NOMBRE = #{nombre} OR EMAIL = #{email}
+	</select>
+
+	<insert id="addUsuario" parameterType="Usuario">
+		INSERT INTO USUARIOS
+		(NOMBRE, EMAIL, CONTRASENYA, IMAGEN, PUNTUACION , REGISTRO ,ESTADO)
+		VALUES
+		(#{nombre},#{email},#{contrasenya},#{imagen},#{puntuacion},#{registro},#{estado});
+	</insert>
+
+	<update id='updateUsuario' parameterType="Usuario">
+		UPDATE USUARIOS SET
+		NOMBRE = #{nombre},
+		IMAGEN = #{imagen}
+		WHERE IDUSUARIO = #{idusuario}
+	</update>
+	
+	<update id='activateUsuario' parameterType='Usuario'>
+		UPDATE USUARIOS SET
+		ESTADO = 'S' WHERE IDUSUARIO = #{idusuario}
+	</update>
+
+	<delete id='delUsuario'>
+		DELETE FROM USUARIOS WHERE IDUSUARIO = #{idusuario}
+	</delete>
+
 </mapper>
