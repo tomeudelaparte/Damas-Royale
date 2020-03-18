@@ -17,24 +17,10 @@ import javax.mail.internet.MimeMultipart;
 
 import com.damasroyale.modelo.pojo.Usuario;
 
-/**
- * Clase EJB para enviar correos a usuarios.
- * 
- * @author Tomeu
- *
- */
 @Stateless
 @LocalBean
 public class MailEJB {
 
-	/**
-	 * Enviar un correo electrónico.
-	 * 
-	 * @param email     String con el mail del receptor.
-	 * @param remitente String con el mail del remitente.
-	 * @param asunto    String con el asunto del correo.
-	 * @param mensaje   String con el mensaje del correo.
-	 */
 	public void sendMail(String email, String remitente, String asunto, String mensaje) {
 
 		// Para realizar las conexiones smtp.
@@ -78,12 +64,6 @@ public class MailEJB {
 		}
 	}
 
-	/**
-	 * Envia un correo de verificacion al usuario que se ha registrado.
-	 * 
-	 * @param usuario
-	 * @param codigo
-	 */
 	public void sendVerificacion(Usuario usuario, String codigo) {
 
 		MailEJB mail = new MailEJB();

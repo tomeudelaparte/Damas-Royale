@@ -11,7 +11,7 @@
 	<select id='getUsuarioByID' resultType="Usuario">
 		SELECT * FROM USUARIOS
 		WHERE
-		IDUSUARIO = #{idusuario}
+		IDUSUARIO = #{idUsuario}
 	</select>
 
 	<select id='getUsuarioLogin' resultType="Usuario">
@@ -28,25 +28,25 @@
 
 	<insert id="addUsuario" parameterType="Usuario">
 		INSERT INTO USUARIOS
-		(NOMBRE, EMAIL, CONTRASENYA, IMAGEN, PUNTUACION , REGISTRO ,ESTADO)
+		(NOMBRE, EMAIL, CONTRASENYA, IMAGEN, REGISTRO ,ESTADO)
 		VALUES
-		(#{nombre},#{email},#{contrasenya},#{imagen},#{puntuacion},#{registro},#{estado});
+		(#{nombre},#{email},#{contrasenya},#{imagen},#{registro},#{estado});
 	</insert>
 
 	<update id='updateUsuario' parameterType="Usuario">
 		UPDATE USUARIOS SET
 		NOMBRE = #{nombre},
 		IMAGEN = #{imagen}
-		WHERE IDUSUARIO = #{idusuario}
+		WHERE IDUSUARIO = #{idUsuario}
 	</update>
 	
 	<update id='activateUsuario' parameterType='Usuario'>
 		UPDATE USUARIOS SET
-		ESTADO = 'S' WHERE IDUSUARIO = #{idusuario}
+		ESTADO = 'S' WHERE IDUSUARIO = #{idUsuario}
 	</update>
 
 	<delete id='delUsuario'>
-		DELETE FROM USUARIOS WHERE IDUSUARIO = #{idusuario}
+		DELETE FROM USUARIOS WHERE IDUSUARIO = #{idUsuario}
 	</delete>
 
 </mapper>
