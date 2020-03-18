@@ -12,8 +12,8 @@ public class ActivacionDAO {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
-			ActivacionMapper activacionesMapper = sqlSession.getMapper(ActivacionMapper.class);
-			activacionesMapper.addActivacion(activacion);
+			ActivacionMapper activacionMapper = sqlSession.getMapper(ActivacionMapper.class);
+			activacionMapper.addActivacion(activacion);
 			sqlSession.commit();
 		} finally {
 			sqlSession.close();
@@ -25,8 +25,8 @@ public class ActivacionDAO {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
-			ActivacionMapper activacionesMapper = sqlSession.getMapper(ActivacionMapper.class);
-			activacionesMapper.delActivacion(usuario);
+			ActivacionMapper activacionMapper = sqlSession.getMapper(ActivacionMapper.class);
+			activacionMapper.delActivacion(usuario);
 			sqlSession.commit();
 		} finally {
 			sqlSession.close();
@@ -37,8 +37,8 @@ public class ActivacionDAO {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
-			ActivacionMapper activacionesMapper = sqlSession.getMapper(ActivacionMapper.class);
-			return activacionesMapper.checkActivacion(codigo);
+			ActivacionMapper activacionMapper = sqlSession.getMapper(ActivacionMapper.class);
+			return activacionMapper.checkActivacion(codigo);
 		} finally {
 			sqlSession.close();
 		}
