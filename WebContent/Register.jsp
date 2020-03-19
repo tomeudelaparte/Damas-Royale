@@ -10,6 +10,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="js/InputFile.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -36,10 +37,10 @@
 						    <input type="password" class="form-control"  required="required" name="contrasenya">
 						  </div>
 							<div class="form-group">
-							<label>Imagen de usuario</label>
+							<label>Imagen de perfil</label>
 								<div class="custom-file">
-								  <input type="file" class="custom-file-input" name="imagen">
-								  <label class="custom-file-label" >Seleccionar Archivo</label>
+								  <input type="file" class="custom-file-input" name="imagen" id="file">
+								  <label class="custom-file-label" >Seleccionar imagen</label>
 								</div>
 							</div>
 							<%

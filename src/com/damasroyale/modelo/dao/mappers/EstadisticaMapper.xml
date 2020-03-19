@@ -6,7 +6,7 @@
 	<insert id='addEstadistica' parameterType="Estadistica">
 		INSERT INTO ESTADISTICAS
 		(IDUSUARIO, TOTALES, GANADAS, PERDIDAS, PUNTUACION)
-		VALULES
+		VALUES
 		(#{idUsuario}, #{totales}, #{ganadas}, #{perdidas}, #{puntuacion})
 	</insert>
 

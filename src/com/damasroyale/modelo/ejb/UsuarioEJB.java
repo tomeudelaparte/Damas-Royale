@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.damasroyale.modelo.dao.UsuarioDAO;
+import com.damasroyale.modelo.pojo.Estadistica;
 import com.damasroyale.modelo.pojo.Usuario;
 
 @Stateless
@@ -15,6 +16,9 @@ public class UsuarioEJB {
 
 	@EJB
 	ActivacionEJB activacionEJB;
+
+	@EJB
+	EstadisticaEJB estadisticaEJB;
 
 	@EJB
 	MailEJB mailEJB;
@@ -50,7 +54,7 @@ public class UsuarioEJB {
 	public void addUsuario(Usuario usuario) {
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		
+
 		if (usuario.getImagen().length() <= 0) {
 			usuario.setImagen("Default.jpg");
 		}
@@ -74,13 +78,13 @@ public class UsuarioEJB {
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 
+		Estadistica estadistica = new Estadistica(0, usuario.getId(), 0, 0, 0, 0);
+
 		usuarioDAO.activateUsuario(usuario);
 
-		activacionEJB.delActivacion(usuario);
-		
-		
+		estadisticaEJB.addEstadistica(estadistica);
 
-		usuario.setEstado("S");
+		activacionEJB.delActivacion(usuario);
 	}
 
 	public void delUsuario(Usuario usuario) {
