@@ -23,7 +23,6 @@ public class MailEJB {
 
 	public void sendMail(String email, String remitente, String asunto, String mensaje) {
 
-		// Para realizar las conexiones smtp.
 		String host = "smtp.gmail.com";
 		int port = 587;
 		String username = "dwesaplicaciontomeu@gmail.com";
@@ -64,13 +63,13 @@ public class MailEJB {
 		}
 	}
 
-	public void sendVerificacion(Usuario usuario, String codigo) {
+	public void sendActivacion(Usuario usuario, String codigo) {
 
 		MailEJB mail = new MailEJB();
 
-		String asunto = "Activar cuenta - CalculaIMC";
+		String asunto = "Activar cuenta - DamasRoyale";
 		String mensaje = "Hola " + usuario.getNombre()
-				+ ", pulse el enlace para activar la cuenta: http://localhost:8080/DamasRoyale/Login?activation="
+				+ ", pulse el enlace para activar la cuenta: http://localhost:8080/Damas_Royale/Login?activacion="
 				+ codigo;
 
 		String remitente = "dwesaplicaciontomeu@gmail.com";

@@ -29,6 +29,8 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 
 		String error = request.getParameter("error");
+		String registro = request.getParameter("registro");
+		String activacion = request.getParameter("activacion");
 
 		HttpSession session = request.getSession(false);
 
@@ -42,6 +44,8 @@ public class Login extends HttpServlet {
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Login.jsp");
 
 		request.setAttribute("error", error);
+		request.setAttribute("registro", registro);
+		request.setAttribute("activacion", activacion);
 
 		rs.forward(request, response);
 	}
@@ -60,7 +64,7 @@ public class Login extends HttpServlet {
 
 		} else {
 
-			Usuario usuario = usuarioEJB.getUsuarioLogin(email, contrasenya);
+			Usuario usuario = usuarioEJB.getUsuarioLogin(email.toLowerCase(), contrasenya);
 
 			if (usuario == null) {
 

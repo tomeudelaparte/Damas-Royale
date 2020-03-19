@@ -57,7 +57,7 @@ public class UsuarioEJB {
 
 		String codigo = activacionEJB.addActivacion(usuario);
 
-		mailEJB.sendVerificacion(usuario, codigo);
+		mailEJB.sendActivacion(usuario, codigo);
 	}
 
 	public void updateUsuario(Usuario usuario) {
