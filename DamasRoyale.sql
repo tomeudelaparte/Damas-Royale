@@ -2,7 +2,7 @@ CREATE DATABASE damasroyale;
 
 USE damasroyale;
 
-CREATE USER 'DamasRoyale'@'localhost' IDENTIFIED BY 'Dorami2019';
+CREATE USER 'DamasRoyale'@'localhost' IDENTIFIED BY 'NoSeJugarAlAjedrez';
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON damasroyale.* TO 'DamasRoyale'@'localhost';
 
