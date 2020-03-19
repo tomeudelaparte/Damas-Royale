@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.damasroyale.modelo.ejb.ActivacionEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Usuario;
@@ -24,6 +25,9 @@ public class Login extends HttpServlet {
 
 	@EJB
 	SessionEJB sessionEJB;
+	
+	@EJB
+	ActivacionEJB activacionEJB;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -39,6 +43,17 @@ public class Login extends HttpServlet {
 		if (usuario != null) {
 
 			sessionEJB.usuarioLogout(session);
+		}
+		
+		if (activation != null) {
+
+			usuario = activacionEJB.checkActivacion(activation);
+
+			if (usuario != null) {
+
+				usuarioEJB.activateUsuario(usuario);
+
+			}
 		}
 
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Login.jsp");
@@ -66,7 +81,7 @@ public class Login extends HttpServlet {
 
 			Usuario usuario = usuarioEJB.getUsuarioLogin(email.toLowerCase(), contrasenya);
 
-			if (usuario == null) {
+			if (usuario == null || usuario.getEstado().equals("N")) {
 
 				response.sendRedirect("Login?error=true");
 

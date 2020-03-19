@@ -1,6 +1,6 @@
 package com.damasroyale.modelo.ejb;
 
-import java.util.Properties;
+import java.util.Properties; 
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -67,9 +67,9 @@ public class MailEJB {
 
 		MailEJB mail = new MailEJB();
 
-		String asunto = "Activar cuenta - DamasRoyale";
+		String asunto = "Activar cuenta - Damas Royale";
 		String mensaje = "Hola " + usuario.getNombre()
-				+ ", pulse el enlace para activar la cuenta: http://localhost:8080/Damas_Royale/Login?activacion="
+				+ ", pulse el enlace para activar la cuenta: http://localhost:8080/Damas_Royale/Login?activation="
 				+ codigo;
 
 		String remitente = "dwesaplicaciontomeu@gmail.com";

@@ -50,6 +50,10 @@ public class UsuarioEJB {
 	public void addUsuario(Usuario usuario) {
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		
+		if (usuario.getImagen().length() <= 0) {
+			usuario.setImagen("Default.jpg");
+		}
 
 		usuarioDAO.addUsuario(usuario);
 

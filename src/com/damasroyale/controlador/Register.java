@@ -19,9 +19,9 @@ import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Usuario;
 
-@WebServlet("/Registro")
+@WebServlet("/Register")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5)
-public class Registro extends HttpServlet {
+public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -48,7 +48,7 @@ public class Registro extends HttpServlet {
 
 		} else {
 
-			RequestDispatcher rs = getServletContext().getRequestDispatcher("/Registro.jsp");
+			RequestDispatcher rs = getServletContext().getRequestDispatcher("/Register.jsp");
 
 			request.setAttribute("error", error);
 
@@ -78,7 +78,7 @@ public class Registro extends HttpServlet {
 			if (nombre == null || contrasenya == null || email == null || imagen == null || nombre.length() > 32
 					|| contrasenya.length() > 64 || email.length() > 64) {
 
-				response.sendRedirect("Registro?error=true");
+				response.sendRedirect("Register?error=true");
 
 			} else {
 
@@ -86,7 +86,7 @@ public class Registro extends HttpServlet {
 
 				if (usuarioID != null) {
 
-					response.sendRedirect("Registro?error=true");
+					response.sendRedirect("Register?error=true");
 
 				} else {
 
@@ -94,11 +94,11 @@ public class Registro extends HttpServlet {
 
 					Timestamp registro = new Timestamp(date.getTime());
 
-					Usuario newUsuario = new Usuario(0, nombre, contrasenya, email, imagen, registro, "N");
+					Usuario newUsuario = new Usuario(0, nombre, email, contrasenya, imagen, registro, "N");
 
 					usuarioEJB.addUsuario(newUsuario);
 
-					response.sendRedirect("Login?registro=true");
+					response.sendRedirect("Login?register=true");
 				}
 
 			}
