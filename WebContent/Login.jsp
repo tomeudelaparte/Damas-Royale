@@ -11,6 +11,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="icon" href="media/favicon.png">
 </head>
 <body>
 	<%
@@ -23,8 +24,7 @@
 			<div class="col-6 mx-auto">
 				<div class="container bg-dark rounded p-2">
 					<div class="jumbotron ">
-							<img class="img-fluid mx-auto d-block mb-5" src="media/banner.png" width="350">
-
+						<img class="img-fluid mx-auto d-block mb-5" src="media/logo.png" width="350">
 						<form action="Login" method="post">
 							<div class="form-group input-group">
 								<input type="email" class="form-control" name="email" placeholder="Correo electrónico" required="required">
@@ -60,11 +60,11 @@
 									out.append(activation);
 								}
 							%>
-							<button type="submit" class="btn btn-secondary d-flex mx-auto ">Iniciar sesión en Damas Royale</button>
+								<button type="submit" class="btn btn-secondary d-flex mx-auto">Iniciar sesión en Damas Royale<i class="fa fa-sign-out ml-2" style="font-size:24px"></i></button>
 								<p class="divider-text">
 							        <span class="font-weight-bold text-dark">O</span>
 							    </p>
-							<a href="Register" class="text-decoration-none"><button type="button" class="btn btn-secondary d-flex mx-auto">Crear una nueva cuenta</button></a>
+							<a href="Register" class="text-decoration-none"><button type="button" class="btn btn-secondary d-flex mx-auto">Crear una nueva cuenta </button></a>
 						</form>
 					</div>
 				</div>

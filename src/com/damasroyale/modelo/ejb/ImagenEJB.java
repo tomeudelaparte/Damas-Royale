@@ -19,7 +19,7 @@ public class ImagenEJB {
 
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(ImagenEJB.class);
 
-	private final String UPLOAD_DIRECTORY = "ImagenUsuario";
+	private final String UPLOAD_DIRECTORY = "media";
 
 	public String uploadImage(HttpServletRequest request) {
 
