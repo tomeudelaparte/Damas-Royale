@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.damasroyale.modelo.dao.mappers.EstadisticaMapper'>
+
+	<insert id='addEstadistica' parameterType="Estadistica">
+		INSERT INTO ESTADISTICAS
+		(IDUSUARIO, TOTALES, GANADAS, PERDIDAS, PUNTUACION)
+		VALULES
+		(#{idUsuario}, #{totales}, #{ganadas}, #{perdidas}, #{puntuacion})
+	</insert>
+
+	<select id='getEstadisticaByUsuarioID' resultType="Estadistica">
+		SELECT * FROM ESTADISTICAS
+		WHERE IDUSUARIO = #{id}
+	</select>
+
+	<update id='updateEstadistica' parameterType="Estadistica">
+		UPDATE ESTADISTICAS SET
+		TOTALES= #{totales},
+		GANADAS = #{ganadas},
+		PERDIDAS = #{perdidas},
+		PUNTUACION = #{puntuacion}
+		WHERE IDUSUARIO = #{idUsuario}
+	</update>
+
+</mapper>

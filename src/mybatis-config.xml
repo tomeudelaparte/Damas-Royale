@@ -4,6 +4,7 @@
 	<properties resource='jdbc.properties' />
 	<typeAliases>
 		<typeAlias type='com.damasroyale.modelo.pojo.Usuario' alias='Usuario'></typeAlias>
+		<typeAlias type='com.damasroyale.modelo.pojo.Estadistica' alias='Estadistica'></typeAlias>
 		<typeAlias type='com.damasroyale.modelo.pojo.Activacion' alias='Activacion'></typeAlias>
 	</typeAliases>
 	<environments default='development'>
@@ -19,6 +20,7 @@
 	</environments>
 	<mappers>
 		<mapper resource='com/damasroyale/modelo/dao/mappers/UsuarioMapper.xml' />
+		<mapper resource='com/damasroyale/modelo/dao/mappers/EstadisticaMapper.xml' />
 		<mapper resource='com/damasroyale/modelo/dao/mappers/ActivacionMapper.xml' />
 	</mappers>
 </configuration>

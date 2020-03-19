@@ -77,6 +77,8 @@ public class UsuarioEJB {
 		usuarioDAO.activateUsuario(usuario);
 
 		activacionEJB.delActivacion(usuario);
+		
+		
 
 		usuario.setEstado("S");
 	}
