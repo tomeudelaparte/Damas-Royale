@@ -22,23 +22,23 @@
 				<div class="container bg-dark rounded p-2">
 					<div class="jumbotron ">
 						<h3>Crear tu cuenta de Damas Royale</h3>
-						<form action="Registro" method="post">
+						<form action="Register" method="post" enctype="multipart/form-data">
 						 <div class="form-group">
 						    <label>Nombre de usuario</label>
-						    <input type="text" class="form-control" required="required">
+						    <input type="text" class="form-control" required="required" name="nombre">
 						  </div>
 						  <div class="form-group">
 						    <label>Correo electrónico</label>
-						    <input type="email" class="form-control" required="required">
+						    <input type="email" class="form-control" required="required" name="email">
 						  </div>
 						  <div class="form-group">
 						    <label>Contraseña</label>
-						    <input type="password" class="form-control"  required="required">
+						    <input type="password" class="form-control"  required="required" name="contrasenya">
 						  </div>
 							<div class="form-group">
 							<label>Imagen de usuario</label>
 								<div class="custom-file">
-								  <input type="file" class="custom-file-input">
+								  <input type="file" class="custom-file-input" name="imagen">
 								  <label class="custom-file-label" >Seleccionar Archivo</label>
 								</div>
 							</div>

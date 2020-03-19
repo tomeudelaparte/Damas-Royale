@@ -15,8 +15,8 @@
 <body>
 	<%
 		String error = (String) request.getAttribute("error");
-		String registro = (String) request.getAttribute("registro");
-		String activacion = (String) request.getAttribute("activacion");
+		String register = (String) request.getAttribute("register");
+		String activation = (String) request.getAttribute("activation");
 	%>
 	<div class="container d-flex h-100">
 		<div class="row align-self-center w-100">
@@ -46,25 +46,25 @@
 									out.append(error);
 								}
 					
-								if (registro != null) {
+								if (register != null) {
 					
-									registro = "<p class='text-danger text-center'>SE HA REGISTRADO, COMPRUEBE SU CORREO PARA ACTIVAR LA CUENTA</p>";
+									register = "<p class='text-danger text-center'>SE HA REGISTRADO, COMPRUEBE SU CORREO PARA ACTIVAR LA CUENTA</p>";
 					
-									out.append(registro);
+									out.append(register);
 								}
 					
-								if (activacion != null) {
+								if (activation != null) {
 					
-									activacion = "<p class='text-danger text-center'>SU CUENTA HA SIDO ACTIVADA</p>";
+									activation = "<p class='text-danger text-center'>SU CUENTA HA SIDO ACTIVADA</p>";
 					
-									out.append(activacion);
+									out.append(activation);
 								}
 							%>
 							<button type="submit" class="btn btn-secondary d-flex mx-auto ">Iniciar sesión en Damas Royale</button>
 								<p class="divider-text">
 							        <span class="font-weight-bold text-dark">O</span>
 							    </p>
-							<a href="Registro" class="text-decoration-none"><button type="button" class="btn btn-secondary d-flex mx-auto">Crear una nueva cuenta</button></a>
+							<a href="Register" class="text-decoration-none"><button type="button" class="btn btn-secondary d-flex mx-auto">Crear una nueva cuenta</button></a>
 						</form>
 					</div>
 				</div>

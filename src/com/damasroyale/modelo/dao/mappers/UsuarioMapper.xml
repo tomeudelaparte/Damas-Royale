@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
-  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 
 <mapper namespace='com.damasroyale.modelo.dao.mappers.UsuarioMapper'>
 
@@ -11,7 +10,7 @@
 	<select id='getUsuarioByID' resultType="Usuario">
 		SELECT * FROM USUARIOS
 		WHERE
-		IDUSUARIO = #{idUsuario}
+		ID = #{id}
 	</select>
 
 	<select id='getUsuarioLogin' resultType="Usuario">
@@ -20,10 +19,11 @@
 		EMAIL = #{email} AND
 		CONTRASENYA = #{contrasenya}
 	</select>
-	
+
 	<select id='getExistUsuario' resultType='string'>
-		SELECT IDUSUARIO FROM
-		USUARIO WHERE NOMBRE = #{nombre} OR EMAIL = #{email}
+		SELECT ID FROM
+		USUARIOS
+		WHERE NOMBRE = #{nombre} OR EMAIL = #{email}
 	</select>
 
 	<insert id="addUsuario" parameterType="Usuario">
@@ -37,16 +37,16 @@
 		UPDATE USUARIOS SET
 		NOMBRE = #{nombre},
 		IMAGEN = #{imagen}
-		WHERE IDUSUARIO = #{idUsuario}
+		WHERE ID = #{id}
 	</update>
-	
+
 	<update id='activateUsuario' parameterType='Usuario'>
 		UPDATE USUARIOS SET
-		ESTADO = 'S' WHERE IDUSUARIO = #{idUsuario}
+		ESTADO = 'S' WHERE ID = #{id}
 	</update>
 
 	<delete id='delUsuario'>
-		DELETE FROM USUARIOS WHERE IDUSUARIO = #{idUsuario}
+		DELETE FROM USUARIOS WHERE ID = #{id}
 	</delete>
 
 </mapper>

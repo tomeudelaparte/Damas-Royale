@@ -29,8 +29,8 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 
 		String error = request.getParameter("error");
-		String registro = request.getParameter("registro");
-		String activacion = request.getParameter("activacion");
+		String register = request.getParameter("register");
+		String activation = request.getParameter("activation");
 
 		HttpSession session = request.getSession(false);
 
@@ -44,8 +44,8 @@ public class Login extends HttpServlet {
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Login.jsp");
 
 		request.setAttribute("error", error);
-		request.setAttribute("registro", registro);
-		request.setAttribute("activacion", activacion);
+		request.setAttribute("register", register);
+		request.setAttribute("activation", activation);
 
 		rs.forward(request, response);
 	}

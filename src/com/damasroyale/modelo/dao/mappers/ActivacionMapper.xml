@@ -7,18 +7,18 @@
 
 	<insert id='addActivacion' parameterType='Activacion'
 		useGeneratedKeys='true' keyProperty='id'>
-		INSERT INTO ACTIVACION(IDUSUARIO,
+		INSERT INTO ACTIVACIONES(IDUSUARIO,
 		CODIGO) VALUES (#{idUsuario}, #{codigo})
 	</insert>
 
 	<delete id='delActivacion' parameterType='Activacion'>
-		DELETE FROM ACTIVACION
+		DELETE FROM ACTIVACIONES
 		WHERE IDUSUARIO = #{id}
 	</delete>
 
 	<select id='checkActivacion' resultType='Usuario'>
 		SELECT USUARIOS.* FROM USUARIOS, ACTIVACIONES WHERE
-		USUARIOS.IDUSUARIO = ACTIVACIONES.IDUSUARIO AND ACTIVACIONES.CODIGO =
+		USUARIOS.ID = ACTIVACIONES.IDUSUARIO AND ACTIVACIONES.CODIGO =
 		#{codigo}
 	</select>
 
