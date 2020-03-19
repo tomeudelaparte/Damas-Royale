@@ -32,8 +32,3 @@ body {
 	left: 0;
 	z-index: 1;
 }
-
-#warn {
-	text-align: center;
-	color: red;
-}

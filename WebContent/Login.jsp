@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Inicio - Damas Royale</title>
+	<title>Portal - Damas Royale</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -41,21 +41,21 @@
 							<%
 								if (error != null) {
 					
-									error = "<p id='warn'>*ERROR AL INICIAR SESIÓN*</p>";
+									error = "<p class='text-danger text-center'>*ERROR AL INICIAR SESIÓN*</p>";
 					
 									out.append(error);
 								}
 					
 								if (registro != null) {
 					
-									registro = "<p id='hwarn'>SE HA REGISTRADO, COMPRUEBE SU CORREO PARA ACTIVAR LA CUENTA</p>";
+									registro = "<p class='text-danger text-center'>SE HA REGISTRADO, COMPRUEBE SU CORREO PARA ACTIVAR LA CUENTA</p>";
 					
 									out.append(registro);
 								}
 					
 								if (activacion != null) {
 					
-									activacion = "<p id='hwarn'>SU CUENTA HA SIDO ACTIVADA</p>";
+									activacion = "<p class='text-danger text-center'>SU CUENTA HA SIDO ACTIVADA</p>";
 					
 									out.append(activacion);
 								}

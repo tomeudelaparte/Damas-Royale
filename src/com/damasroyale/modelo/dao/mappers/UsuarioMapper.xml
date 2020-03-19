@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
   'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 
-<mapper namespace='com.modelo.dao.mappers.UsuarioMapper'>
+<mapper namespace='com.damasroyale.modelo.dao.mappers.UsuarioMapper'>
 
 	<select id='getAllUsuario' resultType="Usuario">
 		SELECT * FROM USUARIOS
