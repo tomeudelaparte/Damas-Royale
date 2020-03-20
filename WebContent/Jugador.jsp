@@ -1,9 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="com.damasroyale.modelo.pojo.Usuario" %>
+<%@ page import="com.damasroyale.modelo.pojo.Estadistica" %>
+<%@ page import="org.joda.time.DateTime" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Mayorhkiin - Damas Royale</title>
+<%
+
+	Usuario usuario = (Usuario) request.getAttribute("usuario");
+	Usuario jugador = (Usuario) request.getAttribute("usuario");
+	Estadistica estadistica = (Estadistica) request.getAttribute("estadistica");
+	
+	DateTime fecha = new DateTime(usuario.getRegistro());
+	
+	String mes[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"};
+
+
+%>
+<title><%=jugador.getNombre() %> - Damas Royale</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -19,16 +33,16 @@
 		<img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item bg-secondary">
-				<img class="img-fluid mx-auto d-block" src="media/default.jpg" width="50">
+				<img class="img-fluid mx-auto d-block" src="media/<%= usuario.getImagen() %>" width="50">
 			</li>
 			<li class="nav-item dropdown bg-light">
-			<a class="nav-link navbar-brand text-dark font-weight-bold" href="#" id="navbardrop" data-toggle="dropdown"> 
-				<span class="align-middle">MAYORHKIIN <i class="fa fa-caret-down"></i></span>
+			<a class="nav-link navbar-brand text-dark font-weight-bold mr-5" href="#" id="navbardrop" data-toggle="dropdown"> 
+				<span class="align-middle"><%=usuario.getNombre().toUpperCase() %> <i class="fa fa-caret-down"></i></span>
 			</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#"><i class="fa fa-user"></i> Ver mi perfil </a>
+					<a class="dropdown-item" href="Jugador?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
 					<a class="dropdown-item" href="#"><i class="fa fa-gear"></i> Editar mi perfil</a> 
-					<a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+					<a class="dropdown-item" href="Login"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
 				</div>
 			</li>
 		</ul>
@@ -47,13 +61,13 @@
 		<div class="row">
 			<div class="col-4">
 				<div class="row">
-					<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="250">
+					<img class="img-fluid mx-auto d-block border" src="media/<%=jugador.getImagen() %>" width="250">
 				</div>
 				<div class="row ml-5 mt-3">
-					<h3>MAYORHKIIN</h3>
+					<h3><%=jugador.getNombre() %></h3>
 				</div>
 				<div class="row ml-5">
-					<p>Se unió el 20 de Marzo de 2020</p>
+					<p>Se unió el <%=fecha.getDayOfMonth() %> de <%= mes[fecha.getMonthOfYear()-1] %> de <%= fecha.getYear()%></p>
 				</div>
 			</div>
 			<div class="col-8">
@@ -62,24 +76,24 @@
 					<div class="col-5 shadow-sm mr-5">
 						<i class="fa fa-certificate float-left pr-4" style="font-size: 50px;"></i>
 						<h5>PUNTUACIÓN</h5>
-						<h5>0</h5>
+						<h5><%=estadistica.getPuntuacion() %></h5>
 					</div>
 					<div class="col-5 shadow-sm">
 						<i class="fa fa-dot-circle-o float-left pr-4" style="font-size: 50px;"></i>
 						<h5>PARTIDAS JUGADAS</h5>
-						<h5>0</h5>
+						<h5><%=estadistica.getTotales() %></h5>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-5 shadow-sm mr-5">
 						<i class="fa fa-check-circle float-left pr-4" style="font-size: 50px;"></i>
 						<h5>PARTIDAS GANADAS</h5>
-						<h5>0</h5>
+						<h5><%=estadistica.getGanadas() %></h5>
 					</div>
 					<div class="col-5 shadow-sm">
 						<i class="fa fa-times-circle float-left pr-4" style="font-size: 50px;"></i>
 						<h5>PARTIDAS PERDIDAS</h5>
-						<h5>0</h5>
+						<h5><%=estadistica.getPerdidas() %></h5>
 					</div>
 				</div>
 			</div>

@@ -30,11 +30,11 @@ public class UsuarioEJB {
 		return usuarioDAO.getAllUsuario();
 	}
 
-	public Usuario getUsuarioByID(Usuario usuario) {
+	public Usuario getUsuarioByID(Integer id) {
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-		return usuarioDAO.getUsuarioByID(usuario);
+		return usuarioDAO.getUsuarioByID(id);
 	}
 
 	public Usuario getUsuarioLogin(String email, String contrasenya) {

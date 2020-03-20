@@ -20,12 +20,12 @@ public class UsuarioDAO {
 		}
 	}
 
-	public Usuario getUsuarioByID(Usuario usuario) {
+	public Usuario getUsuarioByID(Integer id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			UsuarioMapper usuarioMapper = sqlSession.getMapper(UsuarioMapper.class);
-			return usuarioMapper.getUsuarioByID(usuario.getId());
+			return usuarioMapper.getUsuarioByID(id);
 		} finally {
 			sqlSession.close();
 		}

@@ -1,7 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="com.damasroyale.modelo.pojo.Usuario" %>
+<%@ page import="com.damasroyale.modelo.pojo.Estadistica" %>
 <!DOCTYPE html>
 <html>
+<%
+	Usuario usuario = (Usuario) request.getAttribute("usuario");
+%>
 <head>
 <title>Ranking - Damas Royale</title>
 <meta charset="utf-8">
@@ -19,16 +23,16 @@
 		<img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item bg-secondary">
-				<img class="img-fluid mx-auto d-block" src="media/default.jpg" width="50">
+				<img class="img-fluid mx-auto d-block" src="media/<%= usuario.getImagen() %>" width="50">
 			</li>
 			<li class="nav-item dropdown bg-light">
-			<a class="nav-link navbar-brand text-dark font-weight-bold" href="#" id="navbardrop" data-toggle="dropdown"> 
-				<span class="align-middle">MAYORHKIIN <i class="fa fa-caret-down"></i></span>
+			<a class="nav-link navbar-brand text-dark font-weight-bold mr-5" href="#" id="navbardrop" data-toggle="dropdown"> 
+				<span class="align-middle"><%=usuario.getNombre().toUpperCase() %> <i class="fa fa-caret-down"></i></span>
 			</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#"><i class="fa fa-user"></i> Ver mi perfil </a>
+					<a class="dropdown-item" href="Jugador?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
 					<a class="dropdown-item" href="#"><i class="fa fa-gear"></i> Editar mi perfil</a> 
-					<a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+					<a class="dropdown-item" href="Login"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
 				</div>
 			</li>
 		</ul>
@@ -46,7 +50,7 @@
 	<div class="container bg-light border-left border-right pt-5 pb-5 shadow mh-100">
 		<h1 class="text-center">RANKING <i class="fa fa-line-chart" style="font-size:36px"></i></h1>
 		<h5 class="text-center">Top 10 jugadores de Damas Royale</h5>
-		<div class="row mt-5 pl-5 mx-auto">
+		<div class="row mt-5 pl-5 pb-5 mx-auto">
 			<table class="table">
 			  <thead>
 			    <tr>
