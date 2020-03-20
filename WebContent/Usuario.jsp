@@ -14,7 +14,7 @@
 <link rel="icon" href="media/favicon.png">
 </head>
 <body class="bg-light">
-	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow ">
+	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom">
 		<a class="navbar-brand p-4" href="Inicio">
 		<img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
 		<ul class="navbar-nav ml-auto">
@@ -33,8 +33,17 @@
 			</li>
 		</ul>
 	</nav>
-	<div
-		class="container bg-light border-left border-right pt-5 pb-5 shadow mh-100">
+	<nav class="navbar navbar-expand-sm bg-light justify-content-center navbar-dark shadow">
+	  <ul class="navbar-nav ">
+	    <li class="nav-item">
+	      <a class="nav-link text-dark font-weight-bold mr-5" href="Jugar">JUGAR <i class="fa fa-database"></i></a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link text-dark font-weight-bold" href="Ranking">RANKING <i class="fa fa-line-chart"></i></a>
+	    </li>
+	  </ul>
+	</nav>
+	<div class="container bg-light border-left border-right pt-5 pb-5 mt-5 shadow mh-100">
 		<div class="row">
 			<div class="col-4">
 				<div class="row">
