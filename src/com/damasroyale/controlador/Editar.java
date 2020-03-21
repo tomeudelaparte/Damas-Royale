@@ -4,17 +4,20 @@ import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.damasroyale.modelo.ejb.ImagenEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Usuario;
 
 @WebServlet("/Editar")
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
 public class Editar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,6 +26,9 @@ public class Editar extends HttpServlet {
 
 	@EJB
 	UsuarioEJB usuarioEJB;
+
+	@EJB
+	ImagenEJB imagenEJB;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -60,12 +66,20 @@ public class Editar extends HttpServlet {
 		} else {
 
 			String nombre = request.getParameter("nombre");
-			String email = request.getParameter("email");
 			String contrasenya = request.getParameter("contrasenya");
+			String imagen = imagenEJB.uploadImage(request);
 
-			usuario.setNombre(nombre);
-			usuario.setContrasenya(contrasenya);
-			usuario.setEmail(email);
+			if (nombre != null && !nombre.equals("")) {
+				usuario.setNombre(nombre);
+			}
+
+			if (contrasenya != null && !contrasenya.equals("")) {
+				usuario.setContrasenya(contrasenya);
+			}
+
+			if (imagen != null && !imagen.equals("")) {
+				usuario.setImagen(imagen);
+			}
 
 			usuarioEJB.updateUsuario(usuario);
 

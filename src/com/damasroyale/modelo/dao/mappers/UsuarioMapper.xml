@@ -36,6 +36,7 @@
 	<update id='updateUsuario' parameterType="Usuario">
 		UPDATE USUARIOS SET
 		NOMBRE = #{nombre},
+		CONTRASENYA = #{contrasenya},
 		IMAGEN = #{imagen}
 		WHERE ID = #{id}
 	</update>

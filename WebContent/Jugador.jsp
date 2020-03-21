@@ -94,6 +94,9 @@
 					</div>
 				</div>
 			</div>
+			<% if(jugador.getId()==usuario.getId()){ %>
+			<a href="Editar" class="text-decoration-none d-flex ml-auto mr-5 pr-4"><button type="button" class="btn btn-secondary ">Editar mi perfil</button></a>
+			<%} %>
 		</div>
 	</div>
 	<footer
