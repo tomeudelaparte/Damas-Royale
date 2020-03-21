@@ -25,7 +25,7 @@
 </head>
 <body class="bg-light">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom">
-		<a class="navbar-brand p-4" href="Inicio">
+		<a class="navbar-brand p-4" href="Jugar">
 		<img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item bg-secondary">
@@ -37,7 +37,7 @@
 			</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="Jugador?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
-					<a class="dropdown-item" href="#"><i class="fa fa-gear"></i> Editar mi perfil</a> 
+					<a class="dropdown-item" href="Editar"><i class="fa fa-gear"></i> Editar mi perfil</a> 
 					<a class="dropdown-item" href="Login"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
 				</div>
 			</li>

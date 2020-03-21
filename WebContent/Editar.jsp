@@ -7,14 +7,12 @@
 <head>
 <%
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
-	Usuario jugador = (Usuario) request.getAttribute("jugador");
-	Estadistica estadistica = (Estadistica) request.getAttribute("estadistica");
-	
+
 	DateTime fecha = new DateTime(usuario.getRegistro());
 	
 	String mes[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"};
 %>
-<title><%=jugador.getNombre() %> - Damas Royale</title>
+<title>Editar - Damas Royale</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -56,44 +54,7 @@
 	</nav>
 	<div class="container bg-light border-left border-right pt-5 pb-5 mt-5 shadow mh-100">
 		<div class="row">
-			<div class="col-4">
-				<div class="row">
-					<img class="img-fluid mx-auto d-block border" src="media/<%=jugador.getImagen() %>" width="250">
-				</div>
-				<div class="row ml-5 mt-3">
-					<h3><%=jugador.getNombre() %></h3>
-				</div>
-				<div class="row ml-5">
-					<p>Se unió el <%=fecha.getDayOfMonth() %> de <%= mes[fecha.getMonthOfYear()-1] %> de <%= fecha.getYear()%></p>
-				</div>
-			</div>
-			<div class="col-8">
-				<h2 class="mb-5">Estadísticas del jugador</h2>
-				<div class="row mb-5">
-					<div class="col-5 shadow-sm mr-5">
-						<i class="fa fa-certificate float-left pr-4" style="font-size: 50px;"></i>
-						<h5>PUNTUACIÓN</h5>
-						<h5><%=estadistica.getPuntuacion() %></h5>
-					</div>
-					<div class="col-5 shadow-sm">
-						<i class="fa fa-dot-circle-o float-left pr-4" style="font-size: 50px;"></i>
-						<h5>PARTIDAS JUGADAS</h5>
-						<h5><%=estadistica.getTotales() %></h5>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-5 shadow-sm mr-5">
-						<i class="fa fa-check-circle float-left pr-4" style="font-size: 50px;"></i>
-						<h5>PARTIDAS GANADAS</h5>
-						<h5><%=estadistica.getGanadas() %></h5>
-					</div>
-					<div class="col-5 shadow-sm">
-						<i class="fa fa-times-circle float-left pr-4" style="font-size: 50px;"></i>
-						<h5>PARTIDAS PERDIDAS</h5>
-						<h5><%=estadistica.getPerdidas() %></h5>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 	<footer
