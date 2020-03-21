@@ -6,16 +6,13 @@
 <html>
 <head>
 <%
-
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
-	Usuario jugador = (Usuario) request.getAttribute("usuario");
+	Usuario jugador = (Usuario) request.getAttribute("jugador");
 	Estadistica estadistica = (Estadistica) request.getAttribute("estadistica");
 	
 	DateTime fecha = new DateTime(usuario.getRegistro());
 	
 	String mes[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"};
-
-
 %>
 <title><%=jugador.getNombre() %> - Damas Royale</title>
 <meta charset="utf-8">

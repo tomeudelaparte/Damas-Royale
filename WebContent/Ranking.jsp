@@ -1,10 +1,16 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.damasroyale.modelo.pojo.Usuario" %>
-<%@ page import="com.damasroyale.modelo.pojo.Estadistica" %>
+<%@ page import="com.damasroyale.modelo.pojo.Rank" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <%
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
+
+	ArrayList<Rank> ranking = (ArrayList<Rank>) request.getAttribute("ranking");
+	
+	int index = 1;
 %>
 <head>
 <title>Ranking - Damas Royale</title>
@@ -60,56 +66,13 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr>
-			      <th class="text-center" scope="row">1</th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/default.jpg" width="50"> <a href="#" class="text-dark"><h5 class="mt-2">Mayorhkiin</h5></a></td>
-			      <td class="text-dark font-weight-bold">12345 PTS</td>
+			    <% for(Rank rank : ranking) {%>
+			   <tr>
+			      <th class="text-center" scope="row"><%=index++ %></th>
+			      <td><img class="rounded-circle float-left mr-2" src="media/<%=rank.getImagen() %>" width="50"> <a href="Jugador?id=<%=rank.getId() %>" class="text-dark"><h5 class="mt-2"><%=rank.getNombre() %></h5></a></td>
+			      <td class="text-dark font-weight-bold"><%=rank.getPuntuacion() %> PTS</td>
 			    </tr>
-			    <tr>
-			      <th class="text-center" scope="row">2</th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/default.jpg" width="50"> <a href="#" class="text-dark"><h5 class="mt-2">Mayorhkiin</h5></a></td>
-			      <td class="text-dark font-weight-bold">12345 PTS</td>
-			    </tr>
-			    <tr>
-			      <th class="text-center" scope="row">3</th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/default.jpg" width="50"> <a href="#" class="text-dark"><h5 class="mt-2">Mayorhkiin</h5></a></td>
-			      <td class="text-dark font-weight-bold">12345 PTS</td>
-			    </tr>
-			    <tr>
-			      <th class="text-center" scope="row">4</th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/default.jpg" width="50"> <a href="#" class="text-dark"><h5 class="mt-2">Mayorhkiin</h5></a></td>
-			      <td class="text-dark font-weight-bold">12345 PTS</td>
-			    </tr>
-			    <tr>
-			      <th class="text-center" scope="row">5</th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/default.jpg" width="50"> <a href="#" class="text-dark"><h5 class="mt-2">Mayorhkiin</h5></a></td>
-			      <td class="text-dark font-weight-bold">12345 PTS</td>
-			    </tr>
-			    <tr>
-			      <th class="text-center" scope="row">6</th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/default.jpg" width="50"> <a href="#" class="text-dark"><h5 class="mt-2">Mayorhkiin</h5></a></td>
-			      <td class="text-dark font-weight-bold">12345 PTS</td>
-			    </tr>
-			    <tr>
-			      <th class="text-center" scope="row">7</th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/default.jpg" width="50"> <a href="#" class="text-dark"><h5 class="mt-2">Mayorhkiin</h5></a></td>
-			      <td class="text-dark font-weight-bold">12345 PTS</td>
-			    </tr>
-			    <tr>
-			      <th class="text-center" scope="row">8</th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/default.jpg" width="50"> <a href="#" class="text-dark"><h5 class="mt-2">Mayorhkiin</h5></a></td>
-			      <td class="text-dark font-weight-bold">12345 PTS</td>
-			    </tr>
-			    <tr>
-			      <th class="text-center" scope="row">9</th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/default.jpg" width="50"> <a href="#" class="text-dark"><h5 class="mt-2">Mayorhkiin</h5></a></td>
-			      <td class="text-dark font-weight-bold">12345 PTS</td>
-			    </tr>
-			    <tr>
-			      <th class="text-center" scope="row">10</th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/default.jpg" width="50"> <a href="#" class="text-dark"><h5 class="mt-2">Mayorhkiin</h5></a></td>
-			      <td class="text-dark font-weight-bold">12345 PTS</td>
-			    </tr>
+			    <%} %>
 			  </tbody>
 			</table>
 		</div>

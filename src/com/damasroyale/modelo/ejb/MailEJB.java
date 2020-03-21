@@ -68,7 +68,7 @@ public class MailEJB {
 		MailEJB mail = new MailEJB();
 
 		String asunto = "Activar cuenta - Damas Royale";
-		String mensaje = "Hola " + usuario.getNombre()
+		String mensaje = "<img src='media/banner.png'><br><br>Hola " + usuario.getNombre()
 				+ ", pulse el enlace para activar la cuenta: http://localhost:8080/Damas_Royale/Login?activation="
 				+ codigo;
 

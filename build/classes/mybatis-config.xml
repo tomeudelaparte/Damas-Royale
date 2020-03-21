@@ -5,6 +5,7 @@
 	<typeAliases>
 		<typeAlias type='com.damasroyale.modelo.pojo.Usuario' alias='Usuario'></typeAlias>
 		<typeAlias type='com.damasroyale.modelo.pojo.Estadistica' alias='Estadistica'></typeAlias>
+		<typeAlias type='com.damasroyale.modelo.pojo.Rank' alias='Rank'></typeAlias>
 		<typeAlias type='com.damasroyale.modelo.pojo.Activacion' alias='Activacion'></typeAlias>
 	</typeAliases>
 	<environments default='development'>
