@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="icon" href="media/favicon.png">
 </head>
-<body>
+<body class="bg-secondary">
 	<%
 		String error = (String) request.getAttribute("error");
 		String register = (String) request.getAttribute("register");
@@ -22,51 +22,46 @@
 	<div class="container d-flex h-100">
 		<div class="row align-self-center w-100">
 			<div class="col-6 mx-auto">
-				<div class="container bg-dark rounded p-2">
-					<div class="jumbotron ">
-						<img class="img-fluid mx-auto d-block mb-5" src="media/logo.png" width="350">
-						<form action="Login" method="post">
-							<div class="form-group input-group">
-								<input type="email" class="form-control" name="email" placeholder="Correo electrónico" required="required">
-								<div class="input-group-append">
-									<span class="input-group-text"><i class="fa fa-envelope"></i></span>
-								</div>
+				<div class="jumbotron shadow pb-4">
+					<img class="img-fluid mx-auto d-block mb-5" src="media/logo.png" width="350">
+					<form action="Login" method="post">
+						<div class="form-group input-group">
+							<input type="email" class="form-control" name="email" placeholder="Correo electrónico" required="required">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-envelope"></i></span>
 							</div>
-							<div class="form-group input-group mb-5">
-								<input type="password" class="form-control" name="contrasenya" placeholder="Contraseña" required="required">
-								<div class="input-group-append">
-									<span class="input-group-text"><i class="fa fa-lock"></i></span>
-								</div>
+						</div>
+						<div class="form-group input-group mb-5">
+							<input type="password" class="form-control" name="contrasenya" placeholder="Contraseña" required="required">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-lock"></i></span>
 							</div>
-							<%
-								if (error != null) {
-					
-									error = "<p class='text-danger text-center'>*ERROR AL INICIAR SESIÓN*</p>";
-					
-									out.append(error);
-								}
-					
-								if (register != null) {
-					
-									register = "<p class='text-danger text-center'>SE HA REGISTRADO, COMPRUEBE SU CORREO PARA ACTIVAR LA CUENTA</p>";
-					
-									out.append(register);
-								}
-					
-								if (activation != null) {
-					
-									activation = "<p class='text-danger text-center'>SU CUENTA HA SIDO ACTIVADA</p>";
-					
-									out.append(activation);
-								}
-							%>
-								<button type="submit" class="btn btn-secondary d-flex mx-auto">Iniciar sesión en Damas Royale<i class="fa fa-sign-out ml-2" style="font-size:24px"></i></button>
-								<p class="divider-text">
-							        <span class="font-weight-bold text-dark">O</span>
-							    </p>
-							<a href="Register" class="text-decoration-none"><button type="button" class="btn btn-secondary d-flex mx-auto">Crear una nueva cuenta </button></a>
-						</form>
-					</div>
+						</div>
+						<%
+							if (error != null) {
+				
+								error = "<p class='text-danger text-center'>*ERROR AL INICIAR SESIÓN*</p>";
+				
+								out.append(error);
+							}
+				
+							if (register != null) {
+				
+								register = "<p class='text-danger text-center'>COMPRUEBE SU CORREO PARA ACTIVAR LA CUENTA</p>";
+				
+								out.append(register);
+							}
+				
+							if (activation != null) {
+				
+								activation = "<p class='text-danger text-center'>SU CUENTA HA SIDO ACTIVADA</p>";
+				
+								out.append(activation);
+							}
+						%>
+							<button type="submit" class="btn btn-secondary d-flex mx-auto mb-5">Iniciar sesión en Damas Royale<i class="fa fa-sign-out ml-2" style="font-size:24px"></i></button>
+							<p class="mb-0">¿No tienes un cuenta de Damas Royale? <a href="Register" class="text-decoration-none">Crear una nueva cuenta</a></p>
+					</form>
 				</div>
 			</div>
 		</div>

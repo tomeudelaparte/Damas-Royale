@@ -1,13 +1,12 @@
 package com.damasroyale.controlador;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,6 @@ import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Usuario;
 
 @WebServlet("/Register")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -73,10 +71,8 @@ public class Register extends HttpServlet {
 			String nombre = request.getParameter("nombre");
 			String contrasenya = request.getParameter("contrasenya");
 			String email = request.getParameter("email");
-			String imagen = imagenEJB.uploadImage(request);
 
-			if (nombre == null || contrasenya == null || email == null || imagen == null || nombre.length() > 32
-					|| contrasenya.length() > 64 || email.length() > 64) {
+			if (nombre == null || contrasenya == null || email == null || nombre.length() > 32 || contrasenya.length() > 64 || email.length() > 64) {
 
 				response.sendRedirect("Register?error=true");
 
@@ -94,7 +90,7 @@ public class Register extends HttpServlet {
 
 					Timestamp registro = new Timestamp(date.getTime());
 
-					Usuario newUsuario = new Usuario(0, nombre, email, contrasenya, imagen, registro, "N");
+					Usuario newUsuario = new Usuario(0, nombre, email, contrasenya, "default.jpg", registro, "N");
 
 					usuarioEJB.addUsuario(newUsuario);
 
