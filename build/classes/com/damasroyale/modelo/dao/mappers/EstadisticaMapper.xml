@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.damasroyale.modelo.dao.mappers.EstadisticaMapper'>
+
+	<select id='getAllEstadistica' resultType="Estadistica">
+		SELECT * FROM ESTADISTICAS
+	</select>
+	
+	<select id='getRanking' resultType="Rank">
+		SELECT USUARIOS.ID, USUARIOS.NOMBRE, USUARIOS.IMAGEN, ESTADISTICAS.PUNTUACION 
+		FROM ESTADISTICAS INNER JOIN USUARIOS ON ESTADISTICAS.IDUSUARIO = USUARIOS.ID 
+		ORDER BY PUNTUACION DESC;
+	</select>
+
+	<select id='getEstadisticaByUsuarioID' resultType="Estadistica">
+		SELECT * FROM ESTADISTICAS
+		WHERE IDUSUARIO = #{id}
+	</select>
+
+	<insert id='addEstadistica' parameterType="Estadistica">
+		INSERT INTO ESTADISTICAS
+		(IDUSUARIO, TOTALES, GANADAS, PERDIDAS, PUNTUACION)
+		VALUES
+		(#{idUsuario}, #{totales}, #{ganadas}, #{perdidas}, #{puntuacion})
+	</insert>
+
+	<update id='updateEstadistica' parameterType="Estadistica">
+		UPDATE ESTADISTICAS SET
+		TOTALES= #{totales},
+		GANADAS = #{ganadas},
+		PERDIDAS = #{perdidas},
+		PUNTUACION = #{puntuacion}
+		WHERE IDUSUARIO = #{idUsuario}
+	</update>
+
+</mapper>

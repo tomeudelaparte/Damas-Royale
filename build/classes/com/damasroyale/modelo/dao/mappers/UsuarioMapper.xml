@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.damasroyale.modelo.dao.mappers.UsuarioMapper'>
+
+	<select id='getAllUsuario' resultType="Usuario">
+		SELECT * FROM USUARIOS
+	</select>
+
+	<select id='getUsuarioByID' resultType="Usuario">
+		SELECT * FROM USUARIOS
+		WHERE
+		ID = #{id}
+	</select>
+
+	<select id='getUsuarioLogin' resultType="Usuario">
+		SELECT * FROM USUARIOS
+		WHERE
+		EMAIL = #{email} AND
+		CONTRASENYA = #{contrasenya}
+	</select>
+
+	<select id='getExistUsuario' resultType='string'>
+		SELECT ID FROM
+		USUARIOS
+		WHERE NOMBRE = #{nombre} OR EMAIL = #{email}
+	</select>
+
+	<insert id="addUsuario" parameterType="Usuario">
+		INSERT INTO USUARIOS
+		(NOMBRE, EMAIL, CONTRASENYA, IMAGEN, REGISTRO ,ESTADO)
+		VALUES
+		(#{nombre},#{email},#{contrasenya},#{imagen},#{registro},#{estado});
+	</insert>
+
+	<update id='updateUsuario' parameterType="Usuario">
+		UPDATE USUARIOS SET
+		NOMBRE = #{nombre},
+		CONTRASENYA = #{contrasenya},
+		IMAGEN = #{imagen}
+		WHERE ID = #{id}
+	</update>
+
+	<update id='activateUsuario' parameterType='Usuario'>
+		UPDATE USUARIOS SET
+		ESTADO = 'S' WHERE ID = #{id}
+	</update>
+
+	<delete id='delUsuario'>
+		DELETE FROM USUARIOS WHERE ID = #{id}
+	</delete>
+
+</mapper>
