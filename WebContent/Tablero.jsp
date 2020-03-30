@@ -36,7 +36,7 @@
 						<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
 					</div>
 					<div class="col-7 mt-3">	
-						<h1 class="text-center">Detroiton</h1>
+						<h1 class="text-center">Tomàs</h1>
 						<p class="text-center">1200 PTS</p>
 					</div>
 				</div>
@@ -48,7 +48,7 @@
 						<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
 					</div>
 					<div class="col-7 mt-3">	
-						<h1 class="text-center">Mayorhkiin</h1>
+						<h1 class="text-center">Tomeu</h1>
 						<p class="text-center">750 PTS</p>
 					</div>
 				</div>

@@ -22,6 +22,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="js/plugins/InputFileDisplayName.js"></script>
+<script>
+function confirmar() {
+	  if (confirm("¿Estás seguro de eliminar tu cuenta de Damas Royale?")) {
+		    location.replace("Eliminar");
+		  }
+}
+</script>
 </head>
 <body class="bg-light">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom">
@@ -56,6 +63,7 @@
 	<div class="container bg-light border-left border-right pt-5 pb-5 mt-5 shadow mh-100">
 		<div class="row ml-5 mb-5">
 			<h2>Editar perfil</h2>
+			<a class="text-decoration-none d-flex ml-auto mr-5" onclick="confirmar()"><button type="button" class="btn btn-danger">Eliminar cuenta</button></a>
 		</div>
 		<div class="row ml-5">
 			<div class="col-4">
