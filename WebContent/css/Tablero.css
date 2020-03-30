@@ -16,3 +16,7 @@
 .bg-dark.casilla img:hover {
 	cursor: pointer;
 }
+
+.selected {
+	background-color: green !important;
+}

@@ -14,21 +14,42 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script src="js/TextareaAutoHeight.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="js/websocketclient/ChatClient.js"></script>
+<script src="js/Tablero.js"></script>
+<script src="js/plugins/TextareaAutoHeight.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="media/favicon.png">
 <link rel="stylesheet" href="css/Tablero.css">
 </head>
 <body class="bg-light">
-	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom">
-		<a class="navbar-brand p-4"> <img
-			class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
+	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow-sm">
+		<a class="navbar-brand p-4"> <img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
 	</nav>
 	<div class="container-fluid bg-light pt-3 mb-3">
 		<div class="row">
-			<div class="col-3 bg-dark">
-				<div class="row ">
-					<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
+			<div class="col-3 border shadow ml-4">
+				<h2 class="p-2 text-dark">Oponente</h2>
+				<hr>
+				<div class="row mx-auto shadow m-3 p-2">
+					<div class="col-5">
+						<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
+					</div>
+					<div class="col-7 mt-3">	
+						<h1 class="text-center">Detroiton</h1>
+						<p class="text-center">1200 PTS</p>
+					</div>
+				</div>
+				<h2 class="p-2 text-dark">Tú</h2>
+				<hr>
+				<div class="row mx-auto shadow m-3 p-2">
+					<div class="col-5">
+						<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
+					</div>
+					<div class="col-7 mt-3">	
+						<h1 class="text-center">Mayorhkiin</h1>
+						<p class="text-center">750 PTS</p>
+					</div>
 				</div>
 			</div>
 			<div class="col-5 border shadow mx-auto m-0 tablero">
@@ -83,45 +104,45 @@
 					<div class="col bg-dark casilla"></div>
 				</div>
 				<div class="row">
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 					<div class="col bg-light casilla"></div>
 				</div>
 				<div class="row">
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 				</div>
 				<div class="row">
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza01.png"></div>
+					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
 					<div class="col bg-light casilla"></div>
 				</div>
 			</div>
 			<div class="col-3 border shadow mr-4">
 				<h2 class="p-2 text-dark">Chat</h2>
 				<hr>
-				<form class="mx-auto" action="">
+				<form class="mx-auto">
 					<div class="form-group">
-					  <textarea class="form-control mt-2 mb-2 border-0"  readonly disabled style="resize: none"></textarea>
+					  <textarea id="chat" class="form-control mt-2 mb-2 border-0 bg-light" readonly disabled style="resize: none"></textarea>
 					</div>
 					<div class="form-group">
-					  <input class="form-control bg-white pl-2 text-bold font-weight-bold" name="mensaje" type="text" placeholder=" Envía un mensaje a tu oponente.">
+					  <input id="message" class="form-control bg-white pl-2 text-bold font-weight-bold" name="mensaje" type="text" placeholder=" Envía un mensaje a tu oponente.">
 					</div>
 				</form>
 			</div>
