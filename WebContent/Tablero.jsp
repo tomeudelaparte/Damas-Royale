@@ -40,6 +40,7 @@
 						<p class="text-center">1200 PTS</p>
 					</div>
 				</div>
+				
 				<h2 class="p-2 text-dark">Tú</h2>
 				<hr>
 				<div class="row mx-auto shadow m-3 p-2">
