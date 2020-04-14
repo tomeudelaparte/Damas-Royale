@@ -1,6 +1,6 @@
 package com.damasroyale.modelo.ejb;
 
-import javax.ejb.LocalBean;
+import javax.ejb.LocalBean; 
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpSession;
 

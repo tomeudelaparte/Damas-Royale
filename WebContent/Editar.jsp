@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.damasroyale.modelo.pojo.Usuario" %>
-<%@ page import="com.damasroyale.modelo.pojo.Estadistica" %>
 <%@ page import="org.joda.time.DateTime" %>
 <!DOCTYPE html>
 <html>
@@ -43,7 +42,7 @@ function confirmar() {
 				<span class="align-middle"><%=usuario.getNombre().toUpperCase() %> <i class="fa fa-caret-down"></i></span>
 			</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="Jugador?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
+					<a class="dropdown-item" href="Ficha?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
 					<a class="dropdown-item" href="Editar"><i class="fa fa-gear"></i> Editar mi perfil</a> 
 					<a class="dropdown-item" href="Login"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
 				</div>
@@ -93,7 +92,7 @@ function confirmar() {
 					  <label class="custom-file-label" >Seleccionar imagen</label>
 					</div>
 				</div>
-				<a href="Jugador?id=<%=usuario.getId() %>" class="text-decoration-none float-left"><button type="button" class="btn btn-danger d-flex ">Cancelar</button></a>
+				<a href="Ficha?id=<%=usuario.getId() %>" class="text-decoration-none float-left"><button type="button" class="btn btn-danger d-flex ">Cancelar</button></a>
 				<button type="submit" class="btn btn-primary d-flex ml-auto ">Guardar cambios</button>
 			</form>
 		</div>

@@ -10,7 +10,6 @@ import com.damasroyale.modelo.pojo.Usuario;
 public class UsuarioDAO {
 
 	public ArrayList<Usuario> getAllUsuario() {
-
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			UsuarioMapper usuarioMapper = sqlSession.getMapper(UsuarioMapper.class);

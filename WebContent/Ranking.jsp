@@ -36,7 +36,7 @@
 				<span class="align-middle"><%=usuario.getNombre().toUpperCase() %> <i class="fa fa-caret-down"></i></span>
 			</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="Jugador?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
+					<a class="dropdown-item" href="Ficha?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
 					<a class="dropdown-item" href="Editar"><i class="fa fa-gear"></i> Editar mi perfil</a> 
 					<a class="dropdown-item" href="Login"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
 				</div>
@@ -69,7 +69,7 @@
 			    <% for(Rank rank : ranking) {%>
 			   <tr>
 			      <th class="text-center" scope="row"><%=index++ %></th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/<%=rank.getImagen() %>" width="50"> <a href="Jugador?id=<%=rank.getId() %>" class="text-dark"><h5 class="mt-2"><%=rank.getNombre() %></h5></a></td>
+			      <td><img class="rounded-circle float-left mr-2" src="media/<%=rank.getImagen() %>" width="50"> <a href="Ficha?id=<%=rank.getId() %>" class="text-dark"><h5 class="mt-2"><%=rank.getNombre() %></h5></a></td>
 			      <td class="text-dark font-weight-bold"><%=rank.getPuntuacion() %> PTS</td>
 			    </tr>
 			    <%} %>
@@ -77,10 +77,11 @@
 			</table>
 		</div>
 	</div>	
-	<footer
-		class="fixed-bottom p-4 bg-light text-dark border-top shadow-lg">
+	<footer id="sticky-footer"
+		class=" p-3 bg-light text-dark border-top shadow-lg">
 		<div class="container text-center">
-			<small>Copyright &copy; 2020 Damas Royale by Tomeu de la Parte</small>
+			<small>Copyright &copy; 2020 Damas Royale by Tomeu de la
+				Parte</small>
 		</div>
 	</footer>
 </body>

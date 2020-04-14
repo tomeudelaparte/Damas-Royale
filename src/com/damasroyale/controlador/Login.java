@@ -73,7 +73,7 @@ public class Login extends HttpServlet {
 		String email = request.getParameter("email");
 		String contrasenya = request.getParameter("contrasenya");
 
-		if (email == null || email.equals("") || contrasenya == null || contrasenya.equals("")) {
+		if (email == null || email.equals("") || contrasenya == null || contrasenya.equals("") || email.length() > 64 || contrasenya.length() > 64) {
 
 			response.sendRedirect("Login?error=true");
 
@@ -81,7 +81,7 @@ public class Login extends HttpServlet {
 
 			Usuario usuario = usuarioEJB.getUsuarioLogin(email.toLowerCase(), contrasenya);
 
-			if (usuario == null || usuario.getEstado().equals("N")) {
+			if (usuario == null || usuario.isEstado() == false) {
 
 				response.sendRedirect("Login?error=true");
 
@@ -89,7 +89,7 @@ public class Login extends HttpServlet {
 
 				sessionEJB.usuarioLogin(session, usuario);
 
-				response.sendRedirect("Jugador?id="+usuario.getId());
+				response.sendRedirect("Ficha?id="+usuario.getId());
 			}
 		}
 

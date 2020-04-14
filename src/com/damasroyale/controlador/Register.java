@@ -90,7 +90,7 @@ public class Register extends HttpServlet {
 
 					Timestamp registro = new Timestamp(date.getTime());
 
-					Usuario newUsuario = new Usuario(0, nombre, email, contrasenya, "default.jpg", registro, "N");
+					Usuario newUsuario = new Usuario(0, nombre, email, contrasenya, "default.jpg", registro, false);
 
 					usuarioEJB.addUsuario(newUsuario);
 

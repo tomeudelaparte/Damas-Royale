@@ -43,7 +43,7 @@
 
 	<update id='activateUsuario' parameterType='Usuario'>
 		UPDATE USUARIOS SET
-		ESTADO = 'S' WHERE ID = #{id}
+		ESTADO = '1' WHERE ID = #{id}
 	</update>
 
 	<delete id='delUsuario'>

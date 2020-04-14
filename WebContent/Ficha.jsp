@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.damasroyale.modelo.pojo.Usuario" %>
-<%@ page import="com.damasroyale.modelo.pojo.Estadistica" %>
 <%@ page import="org.joda.time.DateTime" %>
 <!DOCTYPE html>
 <html>
@@ -8,7 +7,11 @@
 <%
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
 	Usuario jugador = (Usuario) request.getAttribute("jugador");
-	Estadistica estadistica = (Estadistica) request.getAttribute("estadistica");
+	int puntuacion = (int) request.getAttribute("puntuacion");
+	int partidasJugadas = (int) request.getAttribute("jugadas");
+	int partidasGanadas = (int) request.getAttribute("ganadas");
+	int partidasPerdidas = (int) request.getAttribute("perdidas");
+	int partidasTablas = (int) request.getAttribute("tablas");
 	
 	DateTime fecha = new DateTime(usuario.getRegistro());
 	
@@ -25,7 +28,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body class="bg-light">
-	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom">
+	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow">
 		<a class="navbar-brand p-4" href="Jugar">
 		<img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
 		<ul class="navbar-nav ml-auto">
@@ -37,7 +40,7 @@
 				<span class="align-middle"><%=usuario.getNombre().toUpperCase() %> <i class="fa fa-caret-down"></i></span>
 			</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="Jugador?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
+					<a class="dropdown-item" href="Ficha?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
 					<a class="dropdown-item" href="Editar"><i class="fa fa-gear"></i> Editar mi perfil</a> 
 					<a class="dropdown-item" href="Login"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
 				</div>
@@ -68,29 +71,36 @@
 				</div>
 			</div>
 			<div class="col-8">
-				<h2 class="mb-5">Estadísticas del jugador</h2>
+				<h2 class="mb-5">Información del jugador</h2>
 				<div class="row mb-5">
 					<div class="col-5 shadow-sm mr-5">
 						<i class="fa fa-certificate float-left pr-4" style="font-size: 50px;"></i>
 						<h5>PUNTUACIÓN</h5>
-						<h5><%=estadistica.getPuntuacion() %></h5>
+						<h5><%=puntuacion%> PTS</h5>
 					</div>
 					<div class="col-5 shadow-sm">
 						<i class="fa fa-dot-circle-o float-left pr-4" style="font-size: 50px;"></i>
 						<h5>PARTIDAS JUGADAS</h5>
-						<h5><%=estadistica.getTotales() %></h5>
+						<h5><%=partidasJugadas%></h5>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row mb-5">
 					<div class="col-5 shadow-sm mr-5">
 						<i class="fa fa-check-circle float-left pr-4" style="font-size: 50px;"></i>
 						<h5>PARTIDAS GANADAS</h5>
-						<h5><%=estadistica.getGanadas() %></h5>
+						<h5><%=partidasGanadas%></h5>
 					</div>
 					<div class="col-5 shadow-sm">
 						<i class="fa fa-times-circle float-left pr-4" style="font-size: 50px;"></i>
 						<h5>PARTIDAS PERDIDAS</h5>
-						<h5><%=estadistica.getPerdidas() %></h5>
+						<h5><%=partidasPerdidas%></h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-5 shadow-sm mr-5">
+						<i class="fa fa-circle-o float-left pr-4" style="font-size: 50px;"></i>
+						<h5>TABLAS</h5>
+						<h5><%=partidasTablas%></h5>
 					</div>
 				</div>
 			</div>

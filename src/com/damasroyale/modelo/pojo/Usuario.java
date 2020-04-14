@@ -10,13 +10,13 @@ public class Usuario {
 	private String contrasenya;
 	private String imagen;
 	private Timestamp registro;
-	private String estado;
+	private boolean estado;
 
 	public Usuario() {
 
 	}
 
-	public Usuario(Integer id, String nombre, String email, String contrasenya, String imagen, Timestamp registro, String estado) {
+	public Usuario(Integer id, String nombre, String email, String contrasenya, String imagen, Timestamp registro, boolean estado) {
 		
 		this.id = id;
 		this.nombre = nombre;
@@ -75,11 +75,11 @@ public class Usuario {
 		this.registro = registro;
 	}
 
-	public String getEstado() {
+	public boolean isEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

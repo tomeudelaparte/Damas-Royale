@@ -69,21 +69,21 @@ public class Editar extends HttpServlet {
 			String contrasenya = request.getParameter("contrasenya");
 			String imagen = imagenEJB.uploadImage(request);
 
-			if (nombre != null && !nombre.equals("")) {
+			if (nombre != null && !nombre.equals("") && nombre.length() <= 32) {
 				usuario.setNombre(nombre);
 			}
 
-			if (contrasenya != null && !contrasenya.equals("")) {
+			if (contrasenya != null && !contrasenya.equals("") && contrasenya.length() <= 64) {
 				usuario.setContrasenya(contrasenya);
 			}
 
-			if (imagen != null && !imagen.equals("")) {
+			if (imagen != null && !imagen.equals("") && imagen.length() <= 64) {
 				usuario.setImagen(imagen);
 			}
 
 			usuarioEJB.updateUsuario(usuario);
 
-			response.sendRedirect("Jugador?id=" + usuario.getId());
+			response.sendRedirect("Ficha?id=" + usuario.getId());
 		}
 
 	}

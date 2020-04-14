@@ -12,10 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.damasroyale.modelo.ejb.EstadisticaEJB;
+import com.damasroyale.modelo.ejb.PartidaEJB;
+import com.damasroyale.modelo.ejb.PuntuacionEJB;
+import com.damasroyale.modelo.ejb.RankingEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Rank;
+import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Usuario;
 
 @WebServlet("/Ranking")
@@ -27,9 +30,15 @@ public class Ranking extends HttpServlet {
 
 	@EJB
 	UsuarioEJB usuarioEJB;
-
+	
 	@EJB
-	EstadisticaEJB estadisticaEJB;
+	PartidaEJB partidaEJB;
+	
+	@EJB
+	PuntuacionEJB puntuacionEJB;
+	
+	@EJB
+	RankingEJB rankingEJB;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -45,8 +54,29 @@ public class Ranking extends HttpServlet {
 		} else {
 
 			RequestDispatcher rs = getServletContext().getRequestDispatcher("/Ranking.jsp");
-
-			ArrayList<Rank> ranking = estadisticaEJB.getRanking();
+			
+			ArrayList<Usuario> usuarios = usuarioEJB.getAllUsuario();
+						
+			ArrayList<Rank> ranking = new ArrayList<Rank>();
+			
+			for (Usuario listaUsuario : usuarios) {
+				
+				ArrayList<Resultado> resultados =  partidaEJB.getAllResultadoByIdUsuario(Integer.valueOf(listaUsuario.getId()));
+				
+				int puntuacion = puntuacionEJB.getPuntuacion(listaUsuario.getId(), resultados);
+				
+				System.out.println(puntuacion);
+				
+				Rank rank = new Rank(listaUsuario.getId(), listaUsuario.getNombre(), listaUsuario.getImagen(), puntuacion);
+				
+				System.out.println(rank.getPuntuacion());
+				
+				ranking.add(rank);
+				
+			}
+			
+			ranking.sort(rankingEJB);
+			ranking.subList(10, ranking.size()).clear();
 
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("ranking", ranking);
