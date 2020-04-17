@@ -1,15 +1,10 @@
-package com.damasroyale.modelo.ejb;
+package com.damasroyale.modelo.utils;
 
-import java.util.Comparator;
-
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import java.util.Comparator; 
 
 import com.damasroyale.modelo.pojo.Rank;
 
-@Stateless
-@LocalBean
-public class RankingEJB implements Comparator<Rank> {
+public class RankingDSC implements Comparator<Rank> {
 
     @Override
     public int compare(Rank r01, Rank r02) {
