@@ -4,6 +4,7 @@
 <%@ page import="com.damasroyale.modelo.pojo.Partida" %>
 <%@ page import="com.damasroyale.modelo.pojo.Resultado" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +13,12 @@
 	Usuario jugador = (Usuario) request.getAttribute("jugador");
 	ArrayList<Partida> partidas = (ArrayList<Partida>) request.getAttribute("partidas");
 	ArrayList<Resultado> resultados = (ArrayList<Resultado>) request.getAttribute("resultados");
+	ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuarios");
 	
-	int index = 0;
+	SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy"); 
+  	SimpleDateFormat hora = new SimpleDateFormat("hh:mm");
+	
+	int index = 1;
 %>
 <title><%=jugador.getNombre() %> - Damas Royale</title>
 <meta charset="utf-8">
@@ -27,7 +32,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="js/plugins/ScrollableTable.js"></script>
+<script src="js/plugins/DataTables.js"></script>
 </head>
 <body class="bg-light">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow">
@@ -78,7 +83,7 @@
 		<div class="row bg-light border shadow pt-5 pl-5 pr-5 pb-4">
 			<div class="col">
 				<h2 class="mb-4">Historial de partidas</h2>
-				<table class="display">
+				<table class="row-border">
 			  <thead>
 			    <tr>
 			      <th class="text-center" scope="col">#</th>
@@ -86,22 +91,48 @@
 			      <th>HORA</th>
 			      <th>JUGADOR 1</th>
 			      <th>JUGADOR 2</th>
-			      <th>TABLAS</th>
 			      <th>REPETICIÓN</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <% for(Partida partida : partidas) {%>
-			   <tr>
+			  <% for(Resultado resultado : resultados) {
+				  
+				  for(Partida partida : partidas) {
+					  
+					  if(partida.getId() == resultado.getIdPartida()) {
+						  
+						  if(resultado.getGanador() == jugador.getId()) {
+						  
+			    %>
+			   <tr class="bg-success text-light">
+
+			   <%} else if(resultado.getGanador() != jugador.getId()) {%>
+			   
+			   <tr class="bg-danger text-light">
+			   
+			   <%} else if(resultado.isTablas()) {%>
+			   
+			    <tr class="bg-warning text-light">
+			    
+			    <%} %>
 			      <th class="text-center"><%=index++%></th>
-			      <td class="text-dark font-weight-bold"></td>
-			      <td class="text-dark font-weight-bold">12:38</td>
-			      <td class="text-dark font-weight-bold">Usuario A</td>
-			      <td class="text-dark font-weight-bold">Usuario B</td>
-			      <td class="text-dark font-weight-bold">No</td>
-			      <td class="text-dark font-weight-bold text-center"><a href="Repeticion?id=<% %>" class="text-dark"><i class="fa fa-desktop"></i></a></td>
+
+			      <td class="font-weight-bold"><%=fecha.format(resultado.getFecha_hora()) %></td>
+			      <td class="font-weight-bold"><%=hora.format(resultado.getFecha_hora()) %></td>
+			      
+			      <% for(Usuario listaUsuarios : usuarios) { 
+			    	  
+			    	  if(partida.getIdUsuario_A() == listaUsuarios.getId()) { %>
+			    	  		<td class="font-weight-bold"><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
+			    	  <%}
+			    	  
+			    	 if(partida.getIdUsuario_B() == listaUsuarios.getId()) { %>
+			    	  		<td class="font-weight-bold"><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
+			    	  <%}}%>
+
+			      <td class="font-weight-bold text-center"><a href="Repeticion?id=<%=partida.getId() %>" class="text-light"><i class="fa fa-desktop"></i></a></td>
 			    </tr>
-			   <% }%>	  
+			   <% }}}%>	  
 			  </tbody>
 			</table>
 			</div>

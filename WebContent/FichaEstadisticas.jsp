@@ -93,14 +93,14 @@
 	    data: {
 	        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 	        datasets: [{
-	            label: 'Ganadas',
+	            label: 'Partidas ganadas',
 	            backgroundColor: 'rgb(255,255,255,0)',
 	            borderColor: 'darkgreen',
 	            data: [0, 1, 2, 0, 3, 1, 2, 0, 2, 0, 1, 3]
 	        }, 
 	        
 	        {
-	            label: 'Perdidas',
+	            label: 'Partidas perdidas',
 	            backgroundColor: 'rgb(255,255,255,0)',
 	            borderColor: 'darkred',
 	            data: [1, 3, 2, 1, 1, 2, 4, 2, 3, 2, 1, 0]
@@ -109,7 +109,7 @@
 	        {
 	            label: 'Tablas',
 	            backgroundColor: 'rgb(255,255,255,0)',
-	            borderColor: 'darkgray',
+	            borderColor: 'rgb(255, 193, 7)',
 	            data: [0, 1, 0, 1, 0, 0, 0, 2, 1, 0, 1, 1]
 	        }]
 	    },

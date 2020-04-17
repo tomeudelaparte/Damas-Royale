@@ -1,8 +1,6 @@
 package com.damasroyale.controlador;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
+import java.io.IOException; 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,11 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.damasroyale.modelo.ejb.PartidaEJB;
-import com.damasroyale.modelo.ejb.PuntuacionEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
-import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Usuario;
 
 @WebServlet("/Estadisticas")
@@ -28,12 +23,6 @@ public class Estadisticas extends HttpServlet {
 
 	@EJB
 	UsuarioEJB usuarioEJB;
-
-	@EJB
-	PartidaEJB partidaEJB;
-
-	@EJB
-	PuntuacionEJB puntuacionEJB;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -69,22 +58,8 @@ public class Estadisticas extends HttpServlet {
 
 					RequestDispatcher rs = getServletContext().getRequestDispatcher("/FichaEstadisticas.jsp");
 
-					ArrayList<Resultado> resultados = partidaEJB
-							.getAllResultadoByIdUsuario(Integer.valueOf(jugador.getId()));
-					
-					int puntuacion = puntuacionEJB.getPuntuacion(jugador.getId(), resultados);
-					int partidasJugadas = resultados.size();
-					int partidasGanadas = puntuacionEJB.getPartidasGanadas(jugador.getId(), resultados);
-					int partidasPerdidas = puntuacionEJB.getPartidasPerdidas(jugador.getId(), resultados);
-					int partidasTablas = puntuacionEJB.getPartidasTablas(resultados);
-
 					request.setAttribute("usuario", usuario);
 					request.setAttribute("jugador", jugador);
-					request.setAttribute("puntuacion", puntuacion);
-					request.setAttribute("jugadas", partidasJugadas);
-					request.setAttribute("ganadas", partidasGanadas);
-					request.setAttribute("perdidas", partidasPerdidas);
-					request.setAttribute("tablas", partidasTablas);
 
 					rs.forward(request, response);
 				}

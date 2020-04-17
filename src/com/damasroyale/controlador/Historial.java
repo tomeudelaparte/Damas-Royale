@@ -1,6 +1,6 @@
 package com.damasroyale.controlador;
 
-import java.io.IOException; 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.ejb.EJB;
@@ -65,14 +65,17 @@ public class Historial extends HttpServlet {
 				} else {
 
 					RequestDispatcher rs = getServletContext().getRequestDispatcher("/FichaHistorial.jsp");
-
+					
+					ArrayList<Usuario> usuarios = usuarioEJB.getAllUsuario();
+					
 					ArrayList<Partida> partidas = partidaEJB.getAllPartidaByIdUsuario(Integer.valueOf(jugador.getId()));
 					ArrayList<Resultado> resultados = partidaEJB.getAllResultadoByIdUsuario(Integer.valueOf(jugador.getId()));
-
+					
 					request.setAttribute("usuario", usuario);
 					request.setAttribute("jugador", jugador);
 					request.setAttribute("partidas", partidas);
 					request.setAttribute("resultados", resultados);
+					request.setAttribute("usuarios", usuarios);
 
 					rs.forward(request, response);
 				}

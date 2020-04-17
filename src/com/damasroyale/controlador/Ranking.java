@@ -14,12 +14,12 @@ import javax.servlet.http.HttpSession;
 
 import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.PuntuacionEJB;
-import com.damasroyale.modelo.ejb.RankingEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Rank;
 import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Usuario;
+import com.damasroyale.modelo.utils.RankingDSC;
 
 @WebServlet("/Ranking")
 public class Ranking extends HttpServlet {
@@ -37,9 +37,6 @@ public class Ranking extends HttpServlet {
 	@EJB
 	PuntuacionEJB puntuacionEJB;
 	
-	@EJB
-	RankingEJB rankingEJB;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -71,7 +68,7 @@ public class Ranking extends HttpServlet {
 				
 			}
 			
-			ranking.sort(rankingEJB);
+			ranking.sort(new RankingDSC());
 			ranking.subList(10, ranking.size()).clear();
 
 			request.setAttribute("usuario", usuario);
