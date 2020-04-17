@@ -39,8 +39,8 @@
 		<a class="navbar-brand p-4" href="Jugar">
 		<img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item bg-secondary">
-				<img class="img-fluid mx-auto d-block" src="media/<%= usuario.getImagen() %>" width="50">
+			<li class="nav-item">
+				<a href="Ficha?id=<%=usuario.getId()%>"><img class="img-thumbnail mx-auto d-block" src="media/<%= usuario.getImagen() %>" width="50"></a>
 			</li>
 			<li class="nav-item dropdown bg-light">
 			<a class="nav-link navbar-brand text-dark font-weight-bold mr-5" href="#" id="navbardrop" data-toggle="dropdown"> 

@@ -28,8 +28,8 @@
 		<a class="navbar-brand p-4" href="Jugar">
 		<img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item bg-secondary">
-				<img class="img-fluid mx-auto d-block" src="media/<%= usuario.getImagen() %>" width="50">
+			<li class="nav-item">
+				<a href="Ficha?id=<%=usuario.getId()%>"><img class="img-thumbnail mx-auto d-block" src="media/<%= usuario.getImagen() %>" width="50"></a>
 			</li>
 			<li class="nav-item dropdown bg-light">
 			<a class="nav-link navbar-brand text-dark font-weight-bold mr-5" href="#" id="navbardrop" data-toggle="dropdown"> 
@@ -56,7 +56,7 @@
 	<div class="container bg-light border-left border-right pt-5 pb-5 shadow mh-100">
 		<h1 class="text-center">RANKING <i class="fa fa-line-chart" style="font-size:36px"></i></h1>
 		<h5 class="text-center">Top 10 jugadores de Damas Royale</h5>
-		<div class="row mt-5 pl-5 pb-5 mx-auto">
+		<div class="row mt-5 pl-5 pb-2 mx-auto">
 			<table class="table">
 			  <thead>
 			    <tr>
@@ -69,7 +69,7 @@
 			    <% for(Rank rank : ranking) {%>
 			   <tr>
 			      <th class="text-center" scope="row"><%=index++ %></th>
-			      <td><img class="rounded-circle float-left mr-2" src="media/<%=rank.getImagen() %>" width="50"> <a href="Ficha?id=<%=rank.getId() %>" class="text-dark"><h5 class="mt-2"><%=rank.getNombre() %></h5></a></td>
+			      <td><img class="rounded-circle float-left mr-2 img-thumbnail shadow-sm" src="media/<%=rank.getImagen() %>" width="50"> <a href="Ficha?id=<%=rank.getId() %>" class="text-dark"><h5 class="mt-2"><%=rank.getNombre() %></h5></a></td>
 			      <td class="text-dark font-weight-bold"><%=rank.getPuntuacion() %> PTS</td>
 			    </tr>
 			    <%} %>
