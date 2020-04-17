@@ -1,21 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.damasroyale.modelo.pojo.Usuario" %>
-<%@ page import="org.joda.time.DateTime" %>
 <!DOCTYPE html>
 <html>
 <head>
 <%
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
 	Usuario jugador = (Usuario) request.getAttribute("jugador");
-	int puntuacion = (int) request.getAttribute("puntuacion");
-	int partidasJugadas = (int) request.getAttribute("jugadas");
-	int partidasGanadas = (int) request.getAttribute("ganadas");
-	int partidasPerdidas = (int) request.getAttribute("perdidas");
-	int partidasTablas = (int) request.getAttribute("tablas");
-	
-	DateTime fecha = new DateTime(usuario.getRegistro());
-	
-	String mes[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"};
 %>
 <title><%=jugador.getNombre() %> - Damas Royale</title>
 <meta charset="utf-8">
@@ -26,6 +16,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 </head>
 <body class="bg-light">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow">
@@ -57,56 +49,30 @@
 	    </li>
 	  </ul>
 	</nav>
-	<div class="container bg-light border-left border-right pt-5 pb-5 mt-5 shadow mh-100">
-		<div class="row">
-			<div class="col-4">
-				<div class="row">
-					<img class="img-fluid mx-auto d-block border" src="media/<%=jugador.getImagen() %>" width="250">
+	<div class="container mt-5 mh-100">
+	<div class="row">
+		<nav class="navbar navbar-expand-sm bg-light justify-content-center navbar-dark border-top border-right border-left">
+		  <ul class="navbar-nav ">
+		    <li class="nav-item">
+		      <a class="nav-link text-secondary font-weight-bold mr-3" href="Ficha?id=<%=jugador.getId()%>&page=info">INFORMACIÓN</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link text-dark font-weight-bold mr-3" href="Ficha?id=<%=jugador.getId()%>&page=stats">ESTADÍSTICAS</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link text-secondary font-weight-bold" href="Ficha?id=<%=jugador.getId()%>&page=history">HISTORIAL</a>
+		    </li>
+		  </ul>
+		</nav>
+		</div>
+		<div class="row bg-light border shadow pt-5 pl-5 pr-5 pb-2">
+			<div class="col">
+				<h2 class="mb-2">Estadísticas del usuario</h2>
+				<div class="row mb-3">
+					<canvas id="chart"></canvas>
 				</div>
-				<div class="row ml-5 mt-3">
-					<h3><%=jugador.getNombre() %></h3>
-				</div>
-				<div class="row ml-5">
-					<p>Se unió el <%=fecha.getDayOfMonth() %> de <%= mes[fecha.getMonthOfYear()-1] %> de <%= fecha.getYear()%></p>
-				</div>
+				<p class="text-secondary">* La información de las estadísticas se reduce a los últimos 12 meses de actividad del usuario.</p>
 			</div>
-			<div class="col-8">
-				<h2 class="mb-5">Información del jugador</h2>
-				<div class="row mb-5">
-					<div class="col-5 shadow-sm mr-5">
-						<i class="fa fa-certificate float-left pr-4" style="font-size: 50px;"></i>
-						<h5>PUNTUACIÓN</h5>
-						<h5><%=puntuacion%> PTS</h5>
-					</div>
-					<div class="col-5 shadow-sm">
-						<i class="fa fa-dot-circle-o float-left pr-4" style="font-size: 50px;"></i>
-						<h5>PARTIDAS JUGADAS</h5>
-						<h5><%=partidasJugadas%></h5>
-					</div>
-				</div>
-				<div class="row mb-5">
-					<div class="col-5 shadow-sm mr-5">
-						<i class="fa fa-check-circle float-left pr-4" style="font-size: 50px;"></i>
-						<h5>PARTIDAS GANADAS</h5>
-						<h5><%=partidasGanadas%></h5>
-					</div>
-					<div class="col-5 shadow-sm">
-						<i class="fa fa-times-circle float-left pr-4" style="font-size: 50px;"></i>
-						<h5>PARTIDAS PERDIDAS</h5>
-						<h5><%=partidasPerdidas%></h5>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-5 shadow-sm mr-5">
-						<i class="fa fa-circle-o float-left pr-4" style="font-size: 50px;"></i>
-						<h5>TABLAS</h5>
-						<h5><%=partidasTablas%></h5>
-					</div>
-				</div>
-			</div>
-			<% if(jugador.getId()==usuario.getId()){ %>
-			<a href="Editar" class="text-decoration-none d-flex ml-auto mr-5 pr-4"><button type="button" class="btn btn-secondary ">Editar mi perfil</button></a>
-			<%} %>
 		</div>
 	</div>
 	<footer
@@ -115,5 +81,41 @@
 			<small>Copyright &copy; 2020 Damas Royale by Tomeu de la Parte</small>
 		</div>
 	</footer>
+	<script>
+	var ctx = document.getElementById('chart');
+	ctx.getContext('2d');
+	ctx.width  = 20;
+	ctx.height = 8;
+
+	var chart = new Chart(ctx, {
+	    type: 'line',
+	
+	    data: {
+	        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+	        datasets: [{
+	            label: 'Ganadas',
+	            backgroundColor: 'rgb(255,255,255,0)',
+	            borderColor: 'darkgreen',
+	            data: [0, 1, 2, 0, 3, 1, 2, 0, 2, 0, 1, 3]
+	        }, 
+	        
+	        {
+	            label: 'Perdidas',
+	            backgroundColor: 'rgb(255,255,255,0)',
+	            borderColor: 'darkred',
+	            data: [1, 3, 2, 1, 1, 2, 4, 2, 3, 2, 1, 0]
+	        },
+	        
+	        {
+	            label: 'Tablas',
+	            backgroundColor: 'rgb(255,255,255,0)',
+	            borderColor: 'darkgray',
+	            data: [0, 1, 0, 1, 0, 0, 0, 2, 1, 0, 1, 1]
+	        }]
+	    },
+	
+	    options: {}
+	});
+</script>
 </body>
 </html>

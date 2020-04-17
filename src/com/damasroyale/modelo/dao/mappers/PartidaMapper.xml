@@ -10,18 +10,29 @@
 		ID = #{id}
 	</select>
 
-	<select id='getAllPartidaByIdUsuario' resultType="Partida">
-		SELECT * FROM
-		PARTIDAS
-		WHERE
-		IDUSUARIO = #{id}
-	</select>
+
 	
 	<select id='getResultadoByPartidaID' resultType="Resultado">
 		SELECT * FROM
 		RESULTADOS
 		WHERE
 		IDPARTIDA = #{id}
+	</select>
+	
+	<select id='getAllPartidaByIdUsuario' resultType="Partida">
+		(SELECT PARTIDAS.ID, PARTIDAS.IDUSUARIO_A, PARTIDAS.IDUSUARIO_B, PARTIDAS.FINALIZADA
+		FROM PARTIDAS
+		INNER JOIN
+		    USUARIOS ON PARTIDAS.IDUSUARIO_A = USUARIOS.ID
+			AND USUARIOS.ID =  #{id}) 
+		    
+		UNION 
+		    
+		(SELECT PARTIDAS.ID, PARTIDAS.IDUSUARIO_A, PARTIDAS.IDUSUARIO_B, PARTIDAS.FINALIZADA
+		FROM PARTIDAS
+		INNER JOIN
+		    USUARIOS ON PARTIDAS.IDUSUARIO_B = USUARIOS.ID
+			AND USUARIOS.ID =  #{id});
 	</select>
 
 	<select id='getAllResultadoByIdUsuario' resultType="Resultado">

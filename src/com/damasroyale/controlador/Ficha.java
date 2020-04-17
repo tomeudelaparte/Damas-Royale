@@ -1,8 +1,6 @@
 package com.damasroyale.controlador;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
+import java.io.IOException; 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,11 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.damasroyale.modelo.ejb.PartidaEJB;
-import com.damasroyale.modelo.ejb.PuntuacionEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
-import com.damasroyale.modelo.ejb.UsuarioEJB;
-import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Usuario;
 
 @WebServlet("/Ficha")
@@ -26,15 +20,6 @@ public class Ficha extends HttpServlet {
 	@EJB
 	SessionEJB sessionEJB;
 
-	@EJB
-	UsuarioEJB usuarioEJB;
-
-	@EJB
-	PartidaEJB partidaEJB;
-
-	@EJB
-	PuntuacionEJB puntuacionEJB;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -43,6 +28,7 @@ public class Ficha extends HttpServlet {
 		Usuario usuario = sessionEJB.usuarioLogueado(session);
 
 		String id = request.getParameter("id");
+		String page = request.getParameter("page");
 
 		if (usuario == null) {
 
@@ -50,46 +36,60 @@ public class Ficha extends HttpServlet {
 
 		} else {
 
-			if (id == null) {
+			if (id == null || id.equals("")) {
 
 				response.sendRedirect("Jugar");
 
 			} else {
+				
+				RequestDispatcher rs;
 
-				Usuario jugador = new Usuario();
 
-				jugador = usuarioEJB.getUsuarioByID(Integer.valueOf(id));
+				if (page == null) {
 
-				if (jugador == null) {
+					rs = getServletContext().getRequestDispatcher("/Informacion");
 
-					response.sendRedirect("Jugar");
+					request.setAttribute("page", "info");
+
+					rs.forward(request, response);
 
 				} else {
 
-					RequestDispatcher rs = getServletContext().getRequestDispatcher("/Ficha.jsp");
+					if (page.equals("info")) {
 
-					ArrayList<Resultado> resultados = partidaEJB
-							.getAllResultadoByIdUsuario(Integer.valueOf(jugador.getId()));
-					
-					int puntuacion = puntuacionEJB.getPuntuacion(jugador.getId(), resultados);
-					int partidasJugadas = resultados.size();
-					int partidasGanadas = puntuacionEJB.getPartidasGanadas(jugador.getId(), resultados);
-					int partidasPerdidas = puntuacionEJB.getPartidasPerdidas(jugador.getId(), resultados);
-					int partidasTablas = puntuacionEJB.getPartidasTablas(resultados);
+						rs = getServletContext().getRequestDispatcher("/Informacion");
 
-					request.setAttribute("usuario", usuario);
-					request.setAttribute("jugador", jugador);
-					request.setAttribute("puntuacion", puntuacion);
-					request.setAttribute("jugadas", partidasJugadas);
-					request.setAttribute("ganadas", partidasGanadas);
-					request.setAttribute("perdidas", partidasPerdidas);
-					request.setAttribute("tablas", partidasTablas);
+						request.setAttribute("page", "info");
 
-					rs.forward(request, response);
+						rs.forward(request, response);
+
+					} else if (page.equals("stats")) {
+
+						rs = getServletContext().getRequestDispatcher("/Estadisticas");
+
+						request.setAttribute("page", "info");
+
+						rs.forward(request, response);
+
+					} else if (page.equals("history")) {
+
+						rs = getServletContext().getRequestDispatcher("/Historial");
+
+						request.setAttribute("page", "history");
+
+						rs.forward(request, response);
+
+					} else {
+
+						rs = getServletContext().getRequestDispatcher("/Informacion");
+
+						request.setAttribute("page", "info");
+
+						rs.forward(request, response);
+					}
 				}
 			}
 		}
-
 	}
 
 }
