@@ -18,6 +18,6 @@ public interface PartidaMapper {
 
 	public ArrayList<Resultado> getAllResultadoByIdUsuario(@Param("id") Integer id);
 
-	public ArrayList<Stat> getEstadisticaByIdUsuario(Integer id);
+	public ArrayList<Stat> getEstadisticaByIdUsuario(@Param("id") Integer id);
 
 }
