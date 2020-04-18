@@ -65,7 +65,7 @@ public class Ficha extends HttpServlet {
 
 					} else if (page.equals("stats")) {
 
-						rs = getServletContext().getRequestDispatcher("/Estadisticas");
+						rs = getServletContext().getRequestDispatcher("/Estadistica");
 
 						request.setAttribute("page", "info");
 

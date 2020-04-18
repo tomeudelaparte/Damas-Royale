@@ -1,6 +1,8 @@
 package com.damasroyale.controlador;
 
-import java.io.IOException; 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,12 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
+import com.damasroyale.modelo.pojo.Stat;
 import com.damasroyale.modelo.pojo.Usuario;
 
-@WebServlet("/Estadisticas")
-public class Estadisticas extends HttpServlet {
+@WebServlet("/Estadistica")
+public class Estadistica extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -23,6 +27,9 @@ public class Estadisticas extends HttpServlet {
 
 	@EJB
 	UsuarioEJB usuarioEJB;
+
+	@EJB
+	PartidaEJB partidaEJB;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -40,7 +47,7 @@ public class Estadisticas extends HttpServlet {
 
 		} else {
 
-			if (id == null || page==null) {
+			if (id == null || page == null) {
 
 				response.sendRedirect("Jugar");
 
@@ -56,10 +63,13 @@ public class Estadisticas extends HttpServlet {
 
 				} else {
 
-					RequestDispatcher rs = getServletContext().getRequestDispatcher("/FichaEstadisticas.jsp");
+					RequestDispatcher rs = getServletContext().getRequestDispatcher("/FichaEstadistica.jsp");
+
+					ArrayList<Stat> estadistica = partidaEJB.getEstadisticaByIdUsuario(jugador.getId());
 
 					request.setAttribute("usuario", usuario);
 					request.setAttribute("jugador", jugador);
+					request.setAttribute("estadistica", estadistica);
 
 					rs.forward(request, response);
 				}

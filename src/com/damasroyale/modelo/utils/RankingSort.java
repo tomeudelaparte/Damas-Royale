@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import com.damasroyale.modelo.pojo.Rank;
 
-public class RankingDSC implements Comparator<Rank> {
+public class RankingSort implements Comparator<Rank> {
 
     @Override
     public int compare(Rank r01, Rank r02) {

@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.damasroyale.modelo.dao.mappers.PartidaMapper;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
-
+import com.damasroyale.modelo.pojo.Stat;
 
 public class PartidaDAO {
 
@@ -23,7 +23,7 @@ public class PartidaDAO {
 	}
 
 	public ArrayList<Partida> getAllPartidaByIdUsuario(Integer id) {
-		
+
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
@@ -53,5 +53,14 @@ public class PartidaDAO {
 		}
 	}
 
+	public ArrayList<Stat> getEstadisticaByIdUsuario(Integer id) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
+			return partidaMapper.getEstadisticaByIdUsuario(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
 
 }

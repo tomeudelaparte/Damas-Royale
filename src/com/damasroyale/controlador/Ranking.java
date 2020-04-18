@@ -19,7 +19,7 @@ import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Rank;
 import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Usuario;
-import com.damasroyale.modelo.utils.RankingDSC;
+import com.damasroyale.modelo.utils.RankingSort;
 
 @WebServlet("/Ranking")
 public class Ranking extends HttpServlet {
@@ -68,7 +68,7 @@ public class Ranking extends HttpServlet {
 				
 			}
 			
-			ranking.sort(new RankingDSC());
+			ranking.sort(new RankingSort());
 			ranking.subList(10, ranking.size()).clear();
 
 			request.setAttribute("usuario", usuario);

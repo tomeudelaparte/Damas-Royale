@@ -16,7 +16,7 @@
 	ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuarios");
 	
 	SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy"); 
-  	SimpleDateFormat hora = new SimpleDateFormat("hh:mm");
+  	SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
 	
 	int index = 1;
 %>

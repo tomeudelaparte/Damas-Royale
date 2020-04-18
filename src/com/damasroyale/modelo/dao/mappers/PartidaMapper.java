@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
+import com.damasroyale.modelo.pojo.Stat;
 
 public interface PartidaMapper {
 
@@ -16,5 +17,7 @@ public interface PartidaMapper {
 	public Resultado getResultadoByPartidaID(@Param("id") Integer id);
 
 	public ArrayList<Resultado> getAllResultadoByIdUsuario(@Param("id") Integer id);
+
+	public ArrayList<Stat> getEstadisticaByIdUsuario(Integer id);
 
 }

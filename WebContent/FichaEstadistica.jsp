@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.damasroyale.modelo.pojo.Usuario" %>
+<%@ page import="com.damasroyale.modelo.pojo.Stat" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
 <%
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
 	Usuario jugador = (Usuario) request.getAttribute("jugador");
+	ArrayList<Stat> estadistica = (ArrayList<Stat>) request.getAttribute("estadistica");
 %>
 <title><%=jugador.getNombre() %> - Damas Royale</title>
 <meta charset="utf-8">
