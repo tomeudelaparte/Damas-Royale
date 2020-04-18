@@ -53,4 +53,11 @@ public class Stat {
 		this.tablas = tablas;
 	}
 
+	@Override
+	public String toString() {
+		return "{fecha:'" + fecha + "', partidas_ganadas:'" + partidas_ganadas + "', partidas_perdidas:'"
+				+ partidas_perdidas + "', tablas:'" + tablas + "'}";
+	}
+	
+	
 }

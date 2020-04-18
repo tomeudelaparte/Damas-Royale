@@ -20,7 +20,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
+<script src="js/plugins/ChartEstadistica.js"></script>
 </head>
 <body class="bg-light">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow">
@@ -74,7 +74,6 @@
 				<div class="row mb-3">
 					<canvas id="chart"></canvas>
 				</div>
-				<p class="text-secondary">* La información de las estadísticas se reduce a los últimos 12 meses de actividad del usuario.</p>
 			</div>
 		</div>
 	</div>
@@ -85,40 +84,8 @@
 		</div>
 	</footer>
 	<script>
-	var ctx = document.getElementById('chart');
-	ctx.getContext('2d');
-	ctx.width  = 20;
-	ctx.height = 8;
-
-	var chart = new Chart(ctx, {
-	    type: 'line',
-	
-	    data: {
-	        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-	        datasets: [{
-	            label: 'Partidas ganadas',
-	            backgroundColor: 'rgb(255,255,255,0)',
-	            borderColor: 'darkgreen',
-	            data: [0, 1, 2, 0, 3, 1, 2, 0, 2, 0, 1, 3]
-	        }, 
-	        
-	        {
-	            label: 'Partidas perdidas',
-	            backgroundColor: 'rgb(255,255,255,0)',
-	            borderColor: 'darkred',
-	            data: [1, 3, 2, 1, 1, 2, 4, 2, 3, 2, 1, 0]
-	        },
-	        
-	        {
-	            label: 'Tablas',
-	            backgroundColor: 'rgb(255,255,255,0)',
-	            borderColor: 'rgb(255, 193, 7)',
-	            data: [0, 1, 0, 1, 0, 0, 0, 2, 1, 0, 1, 1]
-	        }]
-	    },
-	
-	    options: {}
-	});
-</script>
+		var estadisticas =<%=estadistica.toString()%>;
+		showEstadistica(estadisticas);
+	</script>	
 </body>
 </html>

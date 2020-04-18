@@ -76,7 +76,7 @@ public class Informacion extends HttpServlet {
 					int partidasJugadas = resultados.size();
 					int partidasGanadas = puntuacionEJB.getPartidasGanadas(jugador.getId(), resultados);
 					int partidasPerdidas = puntuacionEJB.getPartidasPerdidas(jugador.getId(), resultados);
-					int partidasTablas = puntuacionEJB.getPartidasTablas(resultados);
+					int partidasTablas = puntuacionEJB.getTablas(resultados);
 
 					request.setAttribute("usuario", usuario);
 					request.setAttribute("jugador", jugador);

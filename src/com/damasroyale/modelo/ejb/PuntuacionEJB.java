@@ -11,33 +11,33 @@ import com.damasroyale.modelo.pojo.Resultado;
 @LocalBean
 public class PuntuacionEJB {
 
+	private final int puntuacionPartidasGanadas = 9;
+	private final int puntuacionPartidasPerdidas = 4;
+	private final int puntuacionTablas = 3;
+
 	public int getPuntuacion(Integer idUsuario, ArrayList<Resultado> resultados) {
 
-		int puntuacion = 0;
-
-		int ganar = 10;
-		int perder = 5;
-		int tablas = 5;
+		int puntuacionTotal = 0;
 
 		for (Resultado resultado : resultados) {
 
 			if (resultado.getGanador() == idUsuario) {
 
-				puntuacion += ganar;
+				puntuacionTotal += puntuacionPartidasGanadas;
 			}
 
 			if (resultado.getPerdedor() == idUsuario) {
 
-				puntuacion += perder;
+				puntuacionTotal += puntuacionPartidasPerdidas;
 			}
 
 			if (resultado.isTablas() == true) {
 
-				puntuacion += tablas;
+				puntuacionTotal += puntuacionTablas;
 			}
 		}
 
-		return puntuacion;
+		return puntuacionTotal;
 
 	}
 
@@ -55,7 +55,7 @@ public class PuntuacionEJB {
 
 		return partidasGanadas;
 	}
-	
+
 	public int getPartidasPerdidas(Integer idUsuario, ArrayList<Resultado> resultados) {
 
 		int partidasPerdidas = 0;
@@ -70,19 +70,19 @@ public class PuntuacionEJB {
 
 		return partidasPerdidas;
 	}
-	
-	public int getPartidasTablas(ArrayList<Resultado> resultados) {
 
-		int partidasTablas = 0;
+	public int getTablas(ArrayList<Resultado> resultados) {
+
+		int tablas = 0;
 
 		for (Resultado resultado : resultados) {
 
 			if (resultado.isTablas() == true) {
 
-				partidasTablas += 1;
+				tablas += 1;
 			}
 		}
 
-		return partidasTablas;
+		return tablas;
 	}
 }

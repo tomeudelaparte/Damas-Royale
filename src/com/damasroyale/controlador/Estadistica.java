@@ -66,7 +66,7 @@ public class Estadistica extends HttpServlet {
 					RequestDispatcher rs = getServletContext().getRequestDispatcher("/FichaEstadistica.jsp");
 
 					ArrayList<Stat> estadistica = partidaEJB.getEstadisticaByIdUsuario(jugador.getId());
-
+					
 					request.setAttribute("usuario", usuario);
 					request.setAttribute("jugador", jugador);
 					request.setAttribute("estadistica", estadistica);
