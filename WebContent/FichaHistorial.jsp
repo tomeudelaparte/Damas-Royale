@@ -1,10 +1,10 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.damasroyale.modelo.pojo.Usuario" %>
 <%@ page import="com.damasroyale.modelo.pojo.Partida" %>
 <%@ page import="com.damasroyale.modelo.pojo.Resultado" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +31,7 @@
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="js/plugins/DataTables.js"></script>
+<script src="js/plugins/DataTablesHistorial.js"></script>
 </head>
 <body class="bg-light">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow">
@@ -66,7 +65,7 @@
 	</nav>
 	<div class="container mt-5 mh-100">
 	<div class="row">
-		<nav class="navbar navbar-expand-sm bg-light justify-content-center navbar-dark border-top border-right border-left">
+		<nav class="navbar navbar-expand-sm bg-light rounded-top justify-content-center navbar-dark border-top border-right border-left">
 		  <ul class="navbar-nav ">
 		    <li class="nav-item">
 		      <a class="nav-link text-secondary font-weight-bold mr-3" href="Ficha?id=<%=jugador.getId()%>&page=info">INFORMACIÓN</a>
@@ -80,7 +79,7 @@
 		  </ul>
 		</nav>
 		</div>
-		<div class="row bg-light border shadow pt-5 pl-5 pr-5 pb-4">
+		<div class="row bg-light border rounded-bottom rounded-right shadow pt-5 pl-5 pr-5 pb-4">
 			<div class="col">
 				<h2 class="mb-4">Historial de partidas</h2>
 				<table class="row-border">
@@ -115,7 +114,7 @@
 			    <tr class="bg-warning text-light">
 			    
 			    <%} %>
-			      <th class="text-center"><%=index++%></th>
+			      <td class="text-center font-weight-bold"><%=index++%></td>
 
 			      <td class="font-weight-bold"><%=fecha.format(resultado.getFecha_hora()) %></td>
 			      <td class="font-weight-bold"><%=hora.format(resultado.getFecha_hora()) %></td>
@@ -123,11 +122,11 @@
 			      <% for(Usuario listaUsuarios : usuarios) { 
 			    	  
 			    	  if(partida.getIdUsuario_A() == listaUsuarios.getId()) { %>
-			    	  		<td class="font-weight-bold"><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
+			    	  		<td class="font-weight-bold"><a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm" src="media/<%=listaUsuarios.getImagen() %>" width="50"></a><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
 			    	  <%}
 			    	  
 			    	 if(partida.getIdUsuario_B() == listaUsuarios.getId()) { %>
-			    	  		<td class="font-weight-bold"><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
+			    	  		<td class="font-weight-bold"><a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm" src="media/<%=listaUsuarios.getImagen() %>" width="50"></a><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
 			    	  <%}}%>
 
 			      <td class="font-weight-bold text-center"><a href="Repeticion?id=<%=partida.getId() %>" class="text-light"><i class="fa fa-desktop"></i></a></td>

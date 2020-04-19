@@ -34,6 +34,7 @@ public class PartidaDAO {
 	}
 
 	public Resultado getResultadoByPartidaID(Integer id) {
+		
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
@@ -44,6 +45,7 @@ public class PartidaDAO {
 	}
 
 	public ArrayList<Resultado> getAllResultadoByIdUsuario(Integer id) {
+		
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
@@ -54,10 +56,22 @@ public class PartidaDAO {
 	}
 
 	public ArrayList<Stat> getEstadisticaByIdUsuario(Integer id) {
+		
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
 			return partidaMapper.getEstadisticaByIdUsuario(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public ArrayList<Partida> getAllPartidaEnCurso() {
+		
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
+			return partidaMapper.getAllPartidaEnCurso();
 		} finally {
 			sqlSession.close();
 		}

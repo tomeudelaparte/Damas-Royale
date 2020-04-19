@@ -20,4 +20,6 @@ public interface PartidaMapper {
 
 	public ArrayList<Stat> getEstadisticaByIdUsuario(@Param("id") Integer id);
 
+	public ArrayList<Partida> getAllPartidaEnCurso();
+
 }

@@ -59,7 +59,7 @@ function confirmar() {
 	    </li>
 	  </ul>
 	</nav>
-	<div class="container bg-light border-left border-right pt-5 pb-5 mt-5 shadow mh-100">
+	<div class="container bg-light rounded border-left border-right pt-5 pb-5 mt-5 shadow mh-100">
 		<div class="row ml-5 mb-5">
 			<h2>Editar perfil</h2>
 			<a class="text-decoration-none d-flex ml-auto mr-5" onclick="confirmar()"><button type="button" class="btn btn-danger">Eliminar cuenta</button></a>

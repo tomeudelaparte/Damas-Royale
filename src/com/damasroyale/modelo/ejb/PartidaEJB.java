@@ -48,4 +48,11 @@ public class PartidaEJB {
 		return partidaDAO.getEstadisticaByIdUsuario(id);
 	}
 
+	public ArrayList<Partida> getAllPartidaEnCurso() {
+
+		PartidaDAO partidaDAO = new PartidaDAO();
+
+		return partidaDAO.getAllPartidaEnCurso();
+	}
+
 }

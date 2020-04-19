@@ -40,5 +40,12 @@
 		INNER JOIN RESULTADOS ON PARTIDAS.ID = RESULTADOS.IDPARTIDA
 		AND USUARIOS.ID = #{id} GROUP BY DATE(FECHA_HORA) ORDER BY DATE(FECHA_HORA) ASC;
 	</select>
+	
+	<select id='getAllPartidaEnCurso' resultType="Partida">
+		SELECT * FROM
+		PARTIDAS
+		WHERE
+		FINALIZADA = 0
+	</select>
 
 </mapper>

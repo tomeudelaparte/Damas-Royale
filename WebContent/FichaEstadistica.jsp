@@ -54,7 +54,7 @@
 	</nav>
 	<div class="container mt-5 mh-100">
 	<div class="row">
-		<nav class="navbar navbar-expand-sm bg-light justify-content-center navbar-dark border-top border-right border-left">
+		<nav class="navbar navbar-expand-sm bg-light rounded-top justify-content-center navbar-dark border-top border-right border-left">
 		  <ul class="navbar-nav ">
 		    <li class="nav-item">
 		      <a class="nav-link text-secondary font-weight-bold mr-3" href="Ficha?id=<%=jugador.getId()%>&page=info">INFORMACIÓN</a>
@@ -68,7 +68,7 @@
 		  </ul>
 		</nav>
 		</div>
-		<div class="row bg-light border shadow pt-5 pl-5 pr-5 pb-2">
+		<div class="row bg-light border  rounded-bottom rounded-right shadow pt-5 pl-5 pr-5 pb-2">
 			<div class="col">
 				<h2 class="mb-2">Estadísticas del usuario</h2>
 				<div class="row mb-3">

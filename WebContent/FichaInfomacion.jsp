@@ -59,7 +59,7 @@
 	</nav>
 	<div class="container mt-5 mh-100">
 	<div class="row">
-		<nav class="navbar navbar-expand-sm bg-light justify-content-center navbar-dark border-top border-right border-left">
+		<nav class="navbar navbar-expand-sm bg-light rounded-top justify-content-center navbar-dark border-top border-right border-left">
 		  <ul class="navbar-nav ">
 		    <li class="nav-item">
 		      <a class="nav-link text-dark font-weight-bold mr-3" href="Ficha?id=<%=jugador.getId()%>&page=info">INFORMACIÓN</a>
@@ -73,7 +73,7 @@
 		  </ul>
 		</nav>
 		</div>
-		<div class="row bg-light border shadow pt-5 pb-5">
+		<div class="row bg-light border rounded-bottom rounded-right shadow pt-5 pb-5">
 			<div class="col-4">
 				<div class="row">
 					<img class="img-thumbnail mx-auto d-block shadow-sm" src="media/<%=jugador.getImagen() %>" width="250">
