@@ -24,28 +24,34 @@ function showEstadistica(estadistica) {
 	    data: {
 	        labels: fecha,
 	        datasets: [{
-	            label: 'Partidas ganadas',
+	            label: 'PARTIDAS GANADAS',
 	            backgroundColor: 'rgb(255,255,255,0)',
 	            borderColor: 'darkgreen',
 	            data: partidasGanadas
 	        }, 
 	        
 	        {
-	            label: 'Partidas perdidas',
+	            label: 'PARTIDAS PERDIDAS',
 	            backgroundColor: 'rgb(255,255,255,0)',
 	            borderColor: 'darkred',
 	            data: partidasPerdidas
 	        },
 	        
 	        {
-	            label: 'Tablas',
+	            label: 'TABLAS',
 	            backgroundColor: 'rgb(255,255,255,0)',
 	            borderColor: 'rgb(255, 193, 7)',
 	            data: tablas
 	        }]
 	    },
 	
-	    options: {}
+	    options: {
+	        legend: {
+	            labels: {
+	            	fontStyle: "bold",
+	            }
+	        }
+	    }
 	});
 	
 }

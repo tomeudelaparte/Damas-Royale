@@ -136,3 +136,5 @@ VALUES
 (60,now(),8,7,0),(61,now(),8,7,0),(62,now(),8,7,0),
 (63,now(),9,10,0),(64,now(),9,10,0),
 (65,now(),10,9,0);
+
+INSERT INTO PARTIDAS (IDUSUARIO_A, IDUSUARIO_B, FINALIZADA) VALUES (2,null,0), (3,null,0), (4,5,0);

@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="css/General.css">
 <link rel="icon" href="media/favicon.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -33,7 +34,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="js/plugins/DataTablesHistorial.js"></script>
 </head>
-<body class="bg-light">
+<body class="bg-light font-weight-bold text-dark">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow">
 		<a class="navbar-brand p-4" href="Jugar">
 		<img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
@@ -43,7 +44,7 @@
 			</li>
 			<li class="nav-item dropdown bg-light">
 			<a class="nav-link navbar-brand text-dark font-weight-bold mr-5" href="#" id="navbardrop" data-toggle="dropdown"> 
-				<span class="align-middle"><%=usuario.getNombre().toUpperCase() %> <i class="fa fa-caret-down"></i></span>
+				<span class="align-middle"><%=usuario.getNombre()%> <i class="fa fa-caret-down"></i></span>
 			</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="Ficha?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
@@ -81,15 +82,15 @@
 		</div>
 		<div class="row bg-light border rounded-bottom rounded-right shadow pt-5 pl-5 pr-5 pb-4">
 			<div class="col">
-				<h2 class="mb-4">Historial de partidas</h2>
+				<h4 class="mb-4 text-dark">HISTORIAL DE PARTIDAS</h4>
 				<table class="row-border">
 			  <thead>
 			    <tr>
 			      <th class="text-center" scope="col">#</th>
 			      <th>FECHA</th>
 			      <th>HORA</th>
-			      <th>JUGADOR 1</th>
-			      <th>JUGADOR 2</th>
+			      <th>ANFITRIÓN</th>
+			      <th>JUGADOR</th>
 			      <th>REPETICIÓN</th>
 			    </tr>
 			  </thead>
@@ -122,11 +123,11 @@
 			      <% for(Usuario listaUsuarios : usuarios) { 
 			    	  
 			    	  if(partida.getIdUsuario_A() == listaUsuarios.getId()) { %>
-			    	  		<td class="font-weight-bold"><a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm" src="media/<%=listaUsuarios.getImagen() %>" width="50"></a><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
+			    	  		<td class="font-weight-bold"><a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm" src="media/<%=listaUsuarios.getImagen() %>" width="40"></a><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
 			    	  <%}
 			    	  
 			    	 if(partida.getIdUsuario_B() == listaUsuarios.getId()) { %>
-			    	  		<td class="font-weight-bold"><a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm" src="media/<%=listaUsuarios.getImagen() %>" width="50"></a><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
+			    	  		<td class="font-weight-bold"><a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm" src="media/<%=listaUsuarios.getImagen() %>" width="40"></a><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
 			    	  <%}}%>
 
 			      <td class="font-weight-bold text-center"><a href="Repeticion?id=<%=partida.getId() %>" class="text-light"><i class="fa fa-desktop"></i></a></td>

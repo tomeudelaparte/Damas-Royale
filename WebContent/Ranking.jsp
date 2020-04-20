@@ -18,6 +18,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/General.css">
+<link rel="stylesheet" href="css/Ranking.css">
 <link rel="icon" href="media/favicon.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -33,7 +35,7 @@
 			</li>
 			<li class="nav-item dropdown bg-light">
 			<a class="nav-link navbar-brand text-dark font-weight-bold mr-5" href="#" id="navbardrop" data-toggle="dropdown"> 
-				<span class="align-middle"><%=usuario.getNombre().toUpperCase() %> <i class="fa fa-caret-down"></i></span>
+				<span class="align-middle"><%=usuario.getNombre()%> <i class="fa fa-caret-down"></i></span>
 			</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="Ficha?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
@@ -53,11 +55,11 @@
 	    </li>
 	  </ul>
 	</nav>
-	<div class="container bg-light border-left border-right pt-5 pb-5 shadow mh-100">
-		<h1 class="text-center">RANKING <i class="fa fa-line-chart" style="font-size:36px"></i></h1>
-		<h5 class="text-center">Top 10 jugadores de Damas Royale</h5>
+	<div class="container bg-light text-dark border-left border-right pt-5 pb-5 shadow mh-100">
+		<h2 class="text-center font-weight-bold">RANKING <i class="fa fa-line-chart" style="font-size:36px"></i></h2>
+		<h5 class="text-center font-weight-bold">TOP 10 JUGADORES DE DAMAS ROYALE</h5>
 		<div class="row mt-5 pl-5 pb-2 mx-auto">
-			<table class="table">
+			<table class="table text-dark">
 			  <thead>
 			    <tr>
 			      <th class="text-center" scope="col">POSICIÓN</th>
@@ -68,7 +70,7 @@
 			  <tbody>
 			    <% for(Rank rank : ranking) {%>
 			   <tr>
-			      <th class="text-center" scope="row"><%=index++ %></th>
+			      <td class="text-center text-dark font-weight-bold" scope="row"><%=index++ %></td>
 			      <td><a href="Ficha?id=<%=rank.getId() %>"><img class="rounded-circle float-left mr-2 img-thumbnail shadow-sm" src="media/<%=rank.getImagen() %>" width="60"></a> <a href="Ficha?id=<%=rank.getId() %>" class="text-dark"><h5 class="mt-3"><%=rank.getNombre() %></h5></a></td>
 			      <td class="text-dark font-weight-bold"><%=rank.getPuntuacion() %> PTS</td>
 			    </tr>

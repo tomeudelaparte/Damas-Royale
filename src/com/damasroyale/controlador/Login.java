@@ -89,7 +89,7 @@ public class Login extends HttpServlet {
 
 				sessionEJB.usuarioLogin(session, usuario);
 
-				response.sendRedirect("Ficha?id="+usuario.getId());
+				response.sendRedirect("Jugar");
 			}
 		}
 

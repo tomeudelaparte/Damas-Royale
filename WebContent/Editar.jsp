@@ -16,6 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/General.css">
 <link rel="icon" href="media/favicon.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -39,7 +40,7 @@ function confirmar() {
 			</li>
 			<li class="nav-item dropdown bg-light">
 			<a class="nav-link navbar-brand text-dark font-weight-bold mr-5" href="#" id="navbardrop" data-toggle="dropdown"> 
-				<span class="align-middle"><%=usuario.getNombre().toUpperCase() %> <i class="fa fa-caret-down"></i></span>
+				<span class="align-middle"><%=usuario.getNombre()%> <i class="fa fa-caret-down"></i></span>
 			</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="Ficha?id=<%=usuario.getId()%>"><i class="fa fa-user"></i> Ver mi perfil </a>
@@ -61,7 +62,7 @@ function confirmar() {
 	</nav>
 	<div class="container bg-light rounded border-left border-right pt-5 pb-5 mt-5 shadow mh-100">
 		<div class="row ml-5 mb-5">
-			<h2>Editar perfil</h2>
+			<h3>EDITAR PERFIL</h3>
 			<a class="text-decoration-none d-flex ml-auto mr-5" onclick="confirmar()"><button type="button" class="btn btn-danger">Eliminar cuenta</button></a>
 		</div>
 		<div class="row ml-5">
@@ -77,23 +78,23 @@ function confirmar() {
 			</div>
 			</div>
 			<form class="ml-5" action="Editar" method="post" enctype="multipart/form-data">
-			 <div class="form-group">
+			 <div class="form-group font-weight-bold text-dark">
 			    <label>Nombre de usuario</label>
 			    <input type="text" class="form-control" required="required" name="nombre" value="<%= usuario.getNombre()%>">
 			  </div>
-			  <div class="form-group">
+			  <div class="form-group font-weight-bold text-dark">
 			    <label>Contraseña</label>
 			    <input type="password" class="form-control"  required="required" name="contrasenya" value="<%= usuario.getContrasenya()%>">
 			  </div>
-				<div class="form-group mb-5">
+				<div class="form-group mb-5 font-weight-bold text-dark">
 				<label>Imagen de perfil</label>
 					<div class="custom-file">
 					  <input type="file" class="custom-file-input" name="imagen" id="file">
 					  <label class="custom-file-label" >Seleccionar imagen</label>
 					</div>
 				</div>
-				<a href="Ficha?id=<%=usuario.getId() %>" class="text-decoration-none float-left"><button type="button" class="btn btn-danger d-flex ">Cancelar</button></a>
-				<button type="submit" class="btn btn-primary d-flex ml-auto ">Guardar cambios</button>
+				<a href="Ficha?id=<%=usuario.getId() %>" class="text-decoration-none float-left"><button type="button" class="btn btn-secondary d-flex ">Cancelar</button></a>
+				<button type="submit" class="btn btn-secondary d-flex ml-auto ">Guardar cambios</button>
 			</form>
 		</div>
 	</div>
