@@ -15,7 +15,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="js/logica/Tablero.js"></script>
+<script src="js/logica/Damas.js"></script>
 <script src="js/plugins/TextareaAutoHeight.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="media/favicon.png">
@@ -27,10 +27,10 @@
 	</nav>
 	<div class="container-fluid bg-light pt-3 mb-3">
 		<div class="row">
-			<div class="col-3 border shadow ml-4">
+			<div class="col-3 border shadow ml-4 rounded">
 				<h2 class="p-2 text-dark">Oponente</h2>
 				<hr>
-				<div class="row mx-auto shadow m-3 p-2">
+				<div class="row mx-auto shadow m-3 p-2 rounded">
 					<div class="col-5">
 						<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
 					</div>
@@ -42,7 +42,7 @@
 				
 				<h2 class="p-2 text-dark">Tú</h2>
 				<hr>
-				<div class="row mx-auto shadow m-3 p-2">
+				<div class="row mx-auto shadow m-3 p-2 rounded">
 					<div class="col-5">
 						<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
 					</div>
@@ -52,89 +52,89 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-5 border shadow mx-auto m-0 tablero">
-				<div class="row">
+			<div class="col-5 border shadow mx-auto m-0 tablero rounded">
+				<div class="row fila">
+					<div class="col bg-light casilla round-top-left"></div>
+					<div id="29" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"> <img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
+					<div id="30" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
+					<div id="31" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
-					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
+					<div id="32"class="col bg-dark casilla round-top-right"></div>
 				</div>
-				<div class="row">
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
+				<div class="row fila">
+					<div id="25" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
+					<div id="26" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
+					<div id="27" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
-					<div class="col bg-light casilla"></div>
-				</div>
-				<div class="row">
-					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
-					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
-					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
-					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2" src="media/pieza02.png"></div>
-				</div>
-				<div class="row">
-					<div class="col bg-dark casilla"></div>
-					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"></div>
-					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"></div>
-					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"></div>
+					<div id="28" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
 				</div>
-				<div class="row">
+				<div class="row fila">
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"></div>
+					<div id="21" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"></div>
+					<div id="22" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"></div>
+					<div id="23" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"></div>
+					<div id="24" class="col bg-dark casilla"></div>
 				</div>
-				<div class="row">
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+				<div class="row fila">
+					<div id="17" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+					<div id="18" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+					<div id="19" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+					<div id="20" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
 				</div>
-				<div class="row">
+				<div class="row fila">
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+					<div id="13" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+					<div id="14" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+					<div id="15" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+					<div id="16" class="col bg-dark casilla"></div>
 				</div>
-				<div class="row">
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+				<div class="row fila">
+					<div id="9" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+					<div id="10" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+					<div id="11" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
-					<div class="col bg-dark casilla"><img class="img-fluid mx-auto mt-2 ficha" src="media/pieza01.png"></div>
+					<div id="12" class="col bg-dark casilla"></div>
 					<div class="col bg-light casilla"></div>
+				</div>
+				<div class="row fila">
+					<div class="col bg-light casilla"></div>
+					<div id="5" class="col bg-dark casilla"></div>
+					<div class="col bg-light casilla"></div>
+					<div id="6" class="col bg-dark casilla"></div>
+					<div class="col bg-light casilla"></div>
+					<div id="7" class="col bg-dark casilla"></div>
+					<div class="col bg-light casilla"></div>
+					<div id="8" class="col bg-dark casilla"></div>
+				</div>
+				<div class="row fila">
+					<div id="1" class="col bg-dark casilla round-bottom-left"></div>
+					<div class="col bg-light casilla"></div>
+					<div id="2" class="col bg-dark casilla"></div>
+					<div class="col bg-light casilla"></div>
+					<div id="3" class="col bg-dark casilla"></div>
+					<div class="col bg-light casilla"></div>
+					<div id="4" class="col bg-dark casilla"></div>
+					<div class="col bg-light casilla round-bottom-right"></div>
 				</div>
 			</div>
-			<div class="col-3 border shadow mr-4">
+			<div class="col-3 border shadow mr-4 rounded">
 				<h2 class="p-2 text-dark">Chat</h2>
 				<hr>
 				<form class="mx-auto">

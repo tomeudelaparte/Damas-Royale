@@ -9,14 +9,31 @@
 	width: 6vw;
 }
 
-.bg-dark.casilla:hover {
-	box-shadow: inset 0px 0px 5px 3px darkred;
-}
-
 .bg-dark.casilla img:hover {
 	cursor: pointer;
 }
 
 .selected {
-	background-color: green !important;
+	box-shadow: inset 0px 0px 40px 3px darkred;
 }
+
+.move:hover {
+	box-shadow: inset 0px 0px 40px 3px green;
+}
+
+.round-top-left{
+    border-top-left-radius: .25rem;
+}
+
+.round-top-right{
+    border-top-right-radius: .25rem;
+}
+
+.round-bottom-left{
+    border-bottom-left-radius: .25rem;
+}
+
+.round-bottom-right{
+    border-bottom-right-radius: .25rem;
+}
+
