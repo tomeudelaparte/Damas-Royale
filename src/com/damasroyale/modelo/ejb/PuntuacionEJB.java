@@ -6,6 +6,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.damasroyale.modelo.pojo.Resultado;
+import com.damasroyale.modelo.pojo.Usuario;
 
 @Stateless
 @LocalBean
@@ -15,18 +16,18 @@ public class PuntuacionEJB {
 	private final int puntuacionPartidasPerdidas = 4;
 	private final int puntuacionTablas = 3;
 
-	public int getPuntuacion(Integer idUsuario, ArrayList<Resultado> resultados) {
+	public int getPuntuacion(Usuario usuario, ArrayList<Resultado> resultados) {
 
 		int puntuacionTotal = 0;
 
 		for (Resultado resultado : resultados) {
 
-			if (resultado.getGanador() == idUsuario) {
+			if (resultado.getGanador() == usuario.getId()) {
 
 				puntuacionTotal += puntuacionPartidasGanadas;
 			}
 
-			if (resultado.getPerdedor() == idUsuario) {
+			if (resultado.getPerdedor() == usuario.getId()) {
 
 				puntuacionTotal += puntuacionPartidasPerdidas;
 			}
@@ -41,13 +42,13 @@ public class PuntuacionEJB {
 
 	}
 
-	public int getPartidasGanadas(Integer idUsuario, ArrayList<Resultado> resultados) {
+	public int getPartidasGanadas(Usuario usuario, ArrayList<Resultado> resultados) {
 
 		int partidasGanadas = 0;
 
 		for (Resultado resultado : resultados) {
 
-			if (resultado.getGanador() == idUsuario) {
+			if (resultado.getGanador() == usuario.getId()) {
 
 				partidasGanadas += 1;
 			}
@@ -56,13 +57,13 @@ public class PuntuacionEJB {
 		return partidasGanadas;
 	}
 
-	public int getPartidasPerdidas(Integer idUsuario, ArrayList<Resultado> resultados) {
+	public int getPartidasPerdidas(Usuario usuario, ArrayList<Resultado> resultados) {
 
 		int partidasPerdidas = 0;
 
 		for (Resultado resultado : resultados) {
 
-			if (resultado.getPerdedor() == idUsuario) {
+			if (resultado.getPerdedor() == usuario.getId()) {
 
 				partidasPerdidas += 1;
 			}

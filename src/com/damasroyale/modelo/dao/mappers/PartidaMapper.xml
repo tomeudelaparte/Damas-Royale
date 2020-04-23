@@ -6,18 +6,15 @@
 
 	<select id='getPartidaByID' resultType="Partida">
 		SELECT * FROM PARTIDAS
-		WHERE
-		ID = #{id}
+		WHERE ID = #{id}
 	</select>
 
 	<select id='getResultadoByPartidaID' resultType="Resultado">
-		SELECT * FROM
-		RESULTADOS
-		WHERE
-		IDPARTIDA = #{id}
+		SELECT * FROM RESULTADOS
+		WHERE IDPARTIDA = #{id}
 	</select>
 	
-	<select id='getAllPartidaByIdUsuario' resultType="Partida">
+	<select id='getAllPartidaByUsuario' resultType="Partida">
 		SELECT PARTIDAS.ID, PARTIDAS.IDUSUARIO_A, PARTIDAS.IDUSUARIO_B, PARTIDAS.FINALIZADA
 		FROM PARTIDAS
 		INNER JOIN USUARIOS ON (PARTIDAS.IDUSUARIO_A  = USUARIOS.ID || PARTIDAS.IDUSUARIO_B  = USUARIOS.ID)
@@ -25,7 +22,7 @@
 		AND USUARIOS.ID = #{id} ORDER BY ID DESC;
 	</select>
 
-	<select id='getAllResultadoByIdUsuario' resultType="Resultado">
+	<select id='getAllResultadoByUsuario' resultType="Resultado">
 		SELECT RESULTADOS.ID, RESULTADOS.IDPARTIDA, RESULTADOS.FECHA_HORA, RESULTADOS.TABLAS, RESULTADOS.GANADOR, RESULTADOS.PERDEDOR
 		FROM PARTIDAS
 		INNER JOIN USUARIOS ON (PARTIDAS.IDUSUARIO_A  = USUARIOS.ID || PARTIDAS.IDUSUARIO_B  = USUARIOS.ID)
@@ -42,10 +39,23 @@
 	</select>
 	
 	<select id='getAllPartidaEnCurso' resultType="Partida">
-		SELECT * FROM
-		PARTIDAS
-		WHERE
-		FINALIZADA = 0
+		SELECT * FROM PARTIDAS
+		WHERE FINALIZADA = 0
+	</select>
+	
+	<insert id="addPartida" parameterType="Usuario">
+		INSERT INTO PARTIDAS
+		(IDUSUARIO_A, IDUSUARIO_B, FINALIZADA)
+		VALUES
+		(#{id},null,0);
+	</insert>
+	
+	<select id='getPartidaCreadaByIdUsuario' resultType="Partida">
+		SELECT PARTIDAS.ID, PARTIDAS.IDUSUARIO_A, PARTIDAS.IDUSUARIO_B, FINALIZADA FROM PARTIDAS
+		INNER JOIN USUARIOS ON PARTIDAS.IDUSUARIO_A = USUARIOS.ID 
+		AND USUARIOS.ID= #{id} 
+		AND PARTIDAS.FINALIZADA = 0 
+		ORDER BY ID DESC;
 	</select>
 
 </mapper>

@@ -1,13 +1,28 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ page import="com.damasroyale.modelo.pojo.Usuario"%>
-<%@ page import="com.damasroyale.modelo.pojo.Rank"%>
-<%@ page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="com.damasroyale.modelo.pojo.Usuario"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.damasroyale.modelo.pojo.Partida"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sala 01 - Damas Royale</title>
+<%
+	int sala = (int) request.getAttribute("sala");
+	Partida partida = (Partida) request.getAttribute("partida");
+	ArrayList<Usuario> listaUsuarios = (ArrayList<Usuario>) request.getAttribute("listaUsuarios");
+	Usuario usuario = (Usuario) request.getAttribute("usuario");
+	int usuarioPuntuacion = (int) request.getAttribute("usuarioPuntuacion");
+	
+	Usuario oponente = new Usuario();
+	int oponentePuntuacion = 0;
+	
+	if (request.getAttribute("oponente") != null) {
+		oponente = (Usuario) request.getAttribute("oponente");
+		oponentePuntuacion = (int) request.getAttribute("oponentePuntuacion");
+	}
+	
+
+%>
+<title>Sala <%=sala%> - Damas Royale</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -28,27 +43,59 @@
 	<div class="container-fluid bg-light pt-3 mb-3">
 		<div class="row">
 			<div class="col-3 border shadow ml-4 rounded">
+			
+				<%
+				
+				if (partida.getIdUsuario_A() == oponente.getId()) {
+					
+				%>
+				<h2 class="p-2 text-dark">Oponente (Anfitrión)</h2>
+				
+				<% } else { %>
+				
 				<h2 class="p-2 text-dark">Oponente</h2>
+				
+				<%} %>
 				<hr>
 				<div class="row mx-auto shadow m-3 p-2 rounded">
+				
+				<% if(oponente.getId() == null) { %>
+				
+					<h3 class="text-center ml-5 mt-5 mb-5 pt-3 pb-3">Esperando un jugador...</h3>
+
+				<% } else { %>
 					<div class="col-5">
 						<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
 					</div>
 					<div class="col-7 mt-3">	
-						<h1 class="text-center">Tomàs</h1>
-						<p class="text-center">1200 PTS</p>
+						<h1 class="text-center"><%=oponente.getNombre() %></h1>
+						<p class="text-center"><%=oponentePuntuacion %></p>
 					</div>
+				<%}%>
+				
 				</div>
 				
-				<h2 class="p-2 text-dark">Tú</h2>
+				<%
+				
+				if (partida.getIdUsuario_A() == usuario.getId()) {
+					
+				%>
+				<h2 class="p-2 text-dark">Tú (Anfitrión)</h2>
+				
+				<% } else { %>
+				
+				<h2 class="p-2 text-dark">Tú (Anfitrión)</h2>
+				
+				<%} %>
+				
 				<hr>
 				<div class="row mx-auto shadow m-3 p-2 rounded">
 					<div class="col-5">
 						<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
 					</div>
 					<div class="col-7 mt-3">	
-						<h1 class="text-center">Tomeu</h1>
-						<p class="text-center">750 PTS</p>
+						<a href="#" class="text-dark"><h1 class="text-center"><%=usuario.getNombre() %></a></h1>
+						<p class="text-center"><%=usuarioPuntuacion%> PTS</p>
 					</div>
 				</div>
 			</div>

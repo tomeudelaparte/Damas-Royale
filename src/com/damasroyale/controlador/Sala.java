@@ -16,13 +16,12 @@ import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.PuntuacionEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
-import com.damasroyale.modelo.pojo.Rank;
+import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Usuario;
-import com.damasroyale.modelo.utils.RankingSort;
 
-@WebServlet("/Ranking")
-public class Ranking extends HttpServlet {
+@WebServlet("/Sala")
+public class Sala extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -32,16 +31,17 @@ public class Ranking extends HttpServlet {
 	UsuarioEJB usuarioEJB;
 	
 	@EJB
-	PartidaEJB partidaEJB;
-	
-	@EJB
 	PuntuacionEJB puntuacionEJB;
-	
+
+	@EJB
+	PartidaEJB partidaEJB;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
 
+		String id = request.getParameter("id");
 		Usuario usuario = sessionEJB.usuarioLogueado(session);
 
 		if (usuario == null) {
@@ -50,32 +50,30 @@ public class Ranking extends HttpServlet {
 
 		} else {
 
-			RequestDispatcher rs = getServletContext().getRequestDispatcher("/Ranking.jsp");
-			
-			ArrayList<Usuario> usuarios = usuarioEJB.getAllUsuario();
-						
-			ArrayList<Rank> ranking = new ArrayList<Rank>();
-			
-			for (Usuario listaUsuario : usuarios) {
+			if (id == null) {
+
+				response.sendRedirect("Jugar");
+
+			} else {
+				RequestDispatcher rs = getServletContext().getRequestDispatcher("/Partida.jsp");
+
+				ArrayList<Usuario> usuarios = usuarioEJB.getAllUsuario();
+				Partida partida = partidaEJB.getPartidaByID(Integer.valueOf(id));
+				ArrayList<Resultado> resultados = partidaEJB.getAllResultadoByUsuario(usuario);
+				int puntuacion = puntuacionEJB.getPuntuacion(usuario, resultados);
 				
-				ArrayList<Resultado> resultados =  partidaEJB.getAllResultadoByUsuario(listaUsuario);
-				
-				int puntuacion = puntuacionEJB.getPuntuacion(listaUsuario, resultados);
-								
-				Rank rank = new Rank(listaUsuario.getId(), listaUsuario.getNombre(), listaUsuario.getImagen(), puntuacion);
-								
-				ranking.add(rank);
-				
+				int sala = partidaEJB.getAllPartidaEnCurso().size() +1;
+
+				request.setAttribute("sala", sala);
+				request.setAttribute("partida", partida);
+				request.setAttribute("usuario", usuario);
+				request.setAttribute("usuarioPuntuacion", puntuacion);
+				request.setAttribute("listaUsuarios", usuarios);
+
+				rs.forward(request, response);
 			}
-			
-			ranking.sort(new RankingSort());
-			ranking.subList(10, ranking.size()).clear();
-
-			request.setAttribute("usuario", usuario);
-			request.setAttribute("ranking", ranking);
-
-			rs.forward(request, response);
 		}
+
 	}
 
 }

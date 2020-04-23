@@ -68,8 +68,8 @@ public class Historial extends HttpServlet {
 					
 					ArrayList<Usuario> usuarios = usuarioEJB.getAllUsuario();
 					
-					ArrayList<Partida> partidas = partidaEJB.getAllPartidaByIdUsuario(Integer.valueOf(jugador.getId()));
-					ArrayList<Resultado> resultados = partidaEJB.getAllResultadoByIdUsuario(Integer.valueOf(jugador.getId()));
+					ArrayList<Partida> partidas = partidaEJB.getAllPartidaByUsuario(jugador);
+					ArrayList<Resultado> resultados = partidaEJB.getAllResultadoByUsuario(jugador);
 					
 					request.setAttribute("usuario", usuario);
 					request.setAttribute("jugador", jugador);

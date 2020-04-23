@@ -5,20 +5,25 @@ public class Movimiento {
 	private Integer id;
 	private Integer idPartida;
 	private Integer idUsuario;
-	private int pos_inicial;
-	private int pos_final;
+	private int filaInicial;
+	private int filaFinal;
+	private int columnaInicial;
+	private int columnaFinal;
 
 	public Movimiento() {
-	
+
 	}
 
-	public Movimiento(Integer id, Integer idPartida, Integer idUsuario, int pos_inicial, int pos_final) {
-		
+	public Movimiento(Integer id, Integer idPartida, Integer idUsuario, int filaInicial, int filaFinal,
+			int columnaInicial, int columnaFinal) {
+
 		this.id = id;
 		this.idPartida = idPartida;
 		this.idUsuario = idUsuario;
-		this.pos_inicial = pos_inicial;
-		this.pos_final = pos_final;
+		this.filaInicial = filaInicial;
+		this.filaFinal = filaFinal;
+		this.columnaInicial = columnaInicial;
+		this.columnaFinal = columnaFinal;
 	}
 
 	public Integer getId() {
@@ -45,20 +50,36 @@ public class Movimiento {
 		this.idUsuario = idUsuario;
 	}
 
-	public int getPos_inicial() {
-		return pos_inicial;
+	public int getFilaInicial() {
+		return filaInicial;
 	}
 
-	public void setPos_inicial(int pos_inicial) {
-		this.pos_inicial = pos_inicial;
+	public void setFilaInicial(int filaInicial) {
+		this.filaInicial = filaInicial;
 	}
 
-	public int getPos_final() {
-		return pos_final;
+	public int getFilaFinal() {
+		return filaFinal;
 	}
 
-	public void setPos_final(int pos_final) {
-		this.pos_final = pos_final;
+	public void setFilaFinal(int filaFinal) {
+		this.filaFinal = filaFinal;
+	}
+
+	public int getColumnaInicial() {
+		return columnaInicial;
+	}
+
+	public void setColumnaInicial(int columnaInicial) {
+		this.columnaInicial = columnaInicial;
+	}
+
+	public int getColumnaFinal() {
+		return columnaFinal;
+	}
+
+	public void setColumnaFinal(int columnaFinal) {
+		this.columnaFinal = columnaFinal;
 	}
 
 }

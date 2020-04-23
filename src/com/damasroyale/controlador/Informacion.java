@@ -70,12 +70,12 @@ public class Informacion extends HttpServlet {
 					RequestDispatcher rs = getServletContext().getRequestDispatcher("/FichaInfomacion.jsp");
 
 					ArrayList<Resultado> resultados = partidaEJB
-							.getAllResultadoByIdUsuario(Integer.valueOf(jugador.getId()));
+							.getAllResultadoByUsuario(jugador);
 					
-					int puntuacion = puntuacionEJB.getPuntuacion(jugador.getId(), resultados);
+					int puntuacion = puntuacionEJB.getPuntuacion(jugador, resultados);
 					int partidasJugadas = resultados.size();
-					int partidasGanadas = puntuacionEJB.getPartidasGanadas(jugador.getId(), resultados);
-					int partidasPerdidas = puntuacionEJB.getPartidasPerdidas(jugador.getId(), resultados);
+					int partidasGanadas = puntuacionEJB.getPartidasGanadas(jugador, resultados);
+					int partidasPerdidas = puntuacionEJB.getPartidasPerdidas(jugador, resultados);
 					int partidasTablas = puntuacionEJB.getTablas(resultados);
 
 					request.setAttribute("usuario", usuario);

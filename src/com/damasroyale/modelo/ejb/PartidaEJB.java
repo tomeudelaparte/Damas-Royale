@@ -9,6 +9,7 @@ import com.damasroyale.modelo.dao.PartidaDAO;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Stat;
+import com.damasroyale.modelo.pojo.Usuario;
 
 @Stateless
 @LocalBean
@@ -28,18 +29,18 @@ public class PartidaEJB {
 		return partidaDAO.getResultadoByPartidaID(id);
 	}
 
-	public ArrayList<Partida> getAllPartidaByIdUsuario(Integer id) {
+	public ArrayList<Partida> getAllPartidaByUsuario(Usuario usuario) {
 
 		PartidaDAO partidaDAO = new PartidaDAO();
 
-		return partidaDAO.getAllPartidaByIdUsuario(id);
+		return partidaDAO.getAllPartidaByUsuario(usuario);
 	}
 
-	public ArrayList<Resultado> getAllResultadoByIdUsuario(Integer id) {
+	public ArrayList<Resultado> getAllResultadoByUsuario(Usuario usuario) {
 
 		PartidaDAO partidaDAO = new PartidaDAO();
 
-		return partidaDAO.getAllResultadoByIdUsuario(id);
+		return partidaDAO.getAllResultadoByUsuario(usuario);
 	}
 
 	public ArrayList<Stat> getEstadisticaByIdUsuario(Integer id) {
@@ -53,6 +54,16 @@ public class PartidaEJB {
 		PartidaDAO partidaDAO = new PartidaDAO();
 
 		return partidaDAO.getAllPartidaEnCurso();
+	}
+
+	public Partida createPartida(Usuario usuario) {
+
+		PartidaDAO partidaDAO = new PartidaDAO();
+
+		partidaDAO.addPartida(usuario);
+
+		return partidaDAO.getPartidaCreadaByUsuario(usuario);
+
 	}
 
 }

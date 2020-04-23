@@ -14,7 +14,7 @@
 }
 
 .selected {
-	box-shadow: inset 0px 0px 40px 3px darkred;
+	box-shadow: inset 0px 0px 20px 3px darkblue;
 }
 
 .move:hover {
