@@ -9,7 +9,6 @@ import com.damasroyale.modelo.dao.PartidaDAO;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Stat;
-import com.damasroyale.modelo.pojo.Usuario;
 
 @Stateless
 @LocalBean
@@ -29,21 +28,22 @@ public class PartidaEJB {
 		return partidaDAO.getResultadoByPartidaID(id);
 	}
 
-	public ArrayList<Partida> getAllPartidaByUsuario(Usuario usuario) {
+	public ArrayList<Partida> getAllPartidaByIdUsuario(Integer id) {
 
 		PartidaDAO partidaDAO = new PartidaDAO();
 
-		return partidaDAO.getAllPartidaByUsuario(usuario);
+		return partidaDAO.getAllPartidaByIdUsuario(id);
 	}
 
-	public ArrayList<Resultado> getAllResultadoByUsuario(Usuario usuario) {
+	public ArrayList<Resultado> getAllResultadoByIdUsuario(Integer id) {
 
 		PartidaDAO partidaDAO = new PartidaDAO();
 
-		return partidaDAO.getAllResultadoByUsuario(usuario);
+		return partidaDAO.getAllResultadoByIdUsuario(id);
 	}
 
 	public ArrayList<Stat> getEstadisticaByIdUsuario(Integer id) {
+
 		PartidaDAO partidaDAO = new PartidaDAO();
 
 		return partidaDAO.getEstadisticaByIdUsuario(id);
@@ -56,13 +56,20 @@ public class PartidaEJB {
 		return partidaDAO.getAllPartidaEnCurso();
 	}
 
-	public Partida createPartida(Usuario usuario) {
+	public Partida createPartida(Integer id) {
 
 		PartidaDAO partidaDAO = new PartidaDAO();
 
-		partidaDAO.addPartida(usuario);
+		partidaDAO.addPartidaByIdUsuario(id);
 
-		return partidaDAO.getPartidaCreadaByUsuario(usuario);
+		return partidaDAO.getPartidaCreadaByIdUsuario(id);
+	}
+
+	public void updatePartida(Partida partida) {
+
+		PartidaDAO partidaDAO = new PartidaDAO();
+
+		partidaDAO.updatePartida(partida);
 
 	}
 

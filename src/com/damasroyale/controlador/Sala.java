@@ -55,22 +55,42 @@ public class Sala extends HttpServlet {
 				response.sendRedirect("Jugar");
 
 			} else {
-				RequestDispatcher rs = getServletContext().getRequestDispatcher("/Partida.jsp");
-
-				ArrayList<Usuario> usuarios = usuarioEJB.getAllUsuario();
-				Partida partida = partidaEJB.getPartidaByID(Integer.valueOf(id));
-				ArrayList<Resultado> resultados = partidaEJB.getAllResultadoByUsuario(usuario);
-				int puntuacion = puntuacionEJB.getPuntuacion(usuario, resultados);
 				
-				int sala = partidaEJB.getAllPartidaEnCurso().size() +1;
+				RequestDispatcher rs = getServletContext().getRequestDispatcher("/Partida.jsp");
+				
+				Partida partida = partidaEJB.getPartidaByID(Integer.valueOf(id));
 
-				request.setAttribute("sala", sala);
-				request.setAttribute("partida", partida);
-				request.setAttribute("usuario", usuario);
-				request.setAttribute("usuarioPuntuacion", puntuacion);
-				request.setAttribute("listaUsuarios", usuarios);
+				if(partida.getIdUsuario_A() != usuario.getId() && partida.getIdUsuario_B() == null) {
+					
+					partida.setIdUsuario_B(usuario.getId());
+					
+					partidaEJB.updatePartida(partida);
+					
+					Usuario oponente = usuarioEJB.getUsuarioByID(partida.getIdUsuario_A());
+					ArrayList<Resultado> resultadosOponente = partidaEJB.getAllResultadoByIdUsuario(oponente.getId());
 
-				rs.forward(request, response);
+					int oponentePuntuacion = puntuacionEJB.getPuntuacion(oponente.getId(), resultadosOponente);
+
+					request.setAttribute("oponente", oponente);
+					request.setAttribute("oponentePuntuacion", oponentePuntuacion);
+				} 
+				
+				if(partida.getIdUsuario_A() == usuario.getId() || partida.getIdUsuario_B() == usuario.getId()) {
+					ArrayList<Resultado> resultados = partidaEJB.getAllResultadoByIdUsuario(usuario.getId());
+					int usuarioPuntuacion = puntuacionEJB.getPuntuacion(usuario.getId(), resultados);
+					
+					int sala = partidaEJB.getAllPartidaEnCurso().size() +1;
+	
+					request.setAttribute("sala", sala);
+					request.setAttribute("partida", partida);
+					request.setAttribute("usuario", usuario);
+					request.setAttribute("usuarioPuntuacion", usuarioPuntuacion);
+	
+					rs.forward(request, response);
+
+				} else {
+					response.sendRedirect("Jugar");
+				}
 			}
 		}
 

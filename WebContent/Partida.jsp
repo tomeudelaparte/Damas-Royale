@@ -8,7 +8,6 @@
 <%
 	int sala = (int) request.getAttribute("sala");
 	Partida partida = (Partida) request.getAttribute("partida");
-	ArrayList<Usuario> listaUsuarios = (ArrayList<Usuario>) request.getAttribute("listaUsuarios");
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
 	int usuarioPuntuacion = (int) request.getAttribute("usuarioPuntuacion");
 	
@@ -30,8 +29,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="js/logica/Damas.js"></script>
 <script src="js/plugins/TextareaAutoHeight.js"></script>
+<script src="js/ajax/actualizarPartida.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="media/favicon.png">
 <link rel="stylesheet" href="css/Tablero.css">
@@ -61,15 +60,15 @@
 				
 				<% if(oponente.getId() == null) { %>
 				
-					<h3 class="text-center ml-5 mt-5 mb-5 pt-3 pb-3">Esperando un jugador...</h3>
+					<h3 id="oponenteNombre" class="text-center ml-5 mt-5 mb-5 pt-3 pb-3">Esperando un jugador...</h3>
 
 				<% } else { %>
 					<div class="col-5">
-						<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
+						<img id="oponenteImagen" class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
 					</div>
 					<div class="col-7 mt-3">	
 						<h1 class="text-center"><%=oponente.getNombre() %></h1>
-						<p class="text-center"><%=oponentePuntuacion %></p>
+						<p class="text-center"><%=oponentePuntuacion %> PTS</p>
 					</div>
 				<%}%>
 				
@@ -84,7 +83,7 @@
 				
 				<% } else { %>
 				
-				<h2 class="p-2 text-dark">Tú (Anfitrión)</h2>
+				<h2 class="p-2 text-dark">Tú</h2>
 				
 				<%} %>
 				
@@ -202,5 +201,8 @@
 				Parte</small>
 		</div>
 	</footer>
+	<script>
+	getPartida(<%=partida.getId()%>);
+	</script>
 </body>
 </html>

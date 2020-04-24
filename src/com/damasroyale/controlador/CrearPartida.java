@@ -37,7 +37,7 @@ public class CrearPartida extends HttpServlet {
 			response.sendRedirect("Login");
 
 		} else {
-			Partida partida = partidaEJB.createPartida(usuario);
+			Partida partida = partidaEJB.createPartida(usuario.getId());
 
 			response.sendRedirect("Sala?id=" + partida.getId());
 		}

@@ -2,6 +2,9 @@ package com.damasroyale.modelo.pojo;
 
 import java.sql.Time;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Mensaje {
 
 	private Integer id;

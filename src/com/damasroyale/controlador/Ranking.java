@@ -58,9 +58,9 @@ public class Ranking extends HttpServlet {
 			
 			for (Usuario listaUsuario : usuarios) {
 				
-				ArrayList<Resultado> resultados =  partidaEJB.getAllResultadoByUsuario(listaUsuario);
+				ArrayList<Resultado> resultados =  partidaEJB.getAllResultadoByIdUsuario(listaUsuario.getId());
 				
-				int puntuacion = puntuacionEJB.getPuntuacion(listaUsuario, resultados);
+				int puntuacion = puntuacionEJB.getPuntuacion(listaUsuario.getId(), resultados);
 								
 				Rank rank = new Rank(listaUsuario.getId(), listaUsuario.getNombre(), listaUsuario.getImagen(), puntuacion);
 								

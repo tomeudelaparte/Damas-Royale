@@ -8,7 +8,6 @@ import com.damasroyale.modelo.dao.mappers.PartidaMapper;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Stat;
-import com.damasroyale.modelo.pojo.Usuario;
 
 public class PartidaDAO {
 
@@ -23,12 +22,12 @@ public class PartidaDAO {
 		}
 	}
 
-	public ArrayList<Partida> getAllPartidaByUsuario(Usuario usuario) {
+	public ArrayList<Partida> getAllPartidaByIdUsuario(Integer id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
-			return partidaMapper.getAllPartidaByUsuario(usuario);
+			return partidaMapper.getAllPartidaByIdUsuario(id);
 		} finally {
 			sqlSession.close();
 		}
@@ -45,12 +44,12 @@ public class PartidaDAO {
 		}
 	}
 
-	public ArrayList<Resultado> getAllResultadoByUsuario(Usuario usuario) {
+	public ArrayList<Resultado> getAllResultadoByIdUsuario(Integer id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
-			return partidaMapper.getAllResultadoByUsuario(usuario);
+			return partidaMapper.getAllResultadoByIdUsuario(id);
 		} finally {
 			sqlSession.close();
 		}
@@ -78,25 +77,37 @@ public class PartidaDAO {
 		}
 	}
 
-	public void addPartida(Usuario usuario) {
+	public void addPartidaByIdUsuario(Integer id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
-			partidaMapper.addPartida(usuario);
+			partidaMapper.addPartidaByIdUsuario(id);
 			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
 	}
 
-	public Partida getPartidaCreadaByUsuario(Usuario usuario) {
+	public Partida getPartidaCreadaByIdUsuario(Integer id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
-			return partidaMapper.getPartidaCreadaByUsuario(usuario);
+			return partidaMapper.getPartidaCreadaByIdUsuario(id);
 		} finally {
 			sqlSession.close();
 		}
+	}
+
+	public void updatePartida(Partida partida) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
+			partidaMapper.updatePartida(partida);
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
+
 	}
 
 }

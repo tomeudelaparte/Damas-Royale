@@ -1,5 +1,8 @@
 package com.damasroyale.modelo.pojo;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Movimiento {
 
 	private Integer id;

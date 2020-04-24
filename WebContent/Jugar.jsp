@@ -106,7 +106,7 @@
 					if(jugador02==false) {%>
 					
 					<td class="text-dark font-weight-bold">No hay jugador.</td>
-					<td><a href="Partida?id=<%=partida.getId() %>" class="text-dark text-center"><button type="button" class="btn btn-secondary font-weight-bold">UNIRSE</button></a></td>					
+					<td><a href="Sala?id=<%=partida.getId() %>" class="text-dark text-center"><button type="button" class="btn btn-secondary font-weight-bold">UNIRSE</button></a></td>					
 					</tr>
 									
 				<%} else {%>

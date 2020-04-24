@@ -14,7 +14,7 @@
 		WHERE IDPARTIDA = #{id}
 	</select>
 	
-	<select id='getAllPartidaByUsuario' resultType="Partida">
+	<select id='getAllPartidaByIdUsuario' resultType="Partida">
 		SELECT PARTIDAS.ID, PARTIDAS.IDUSUARIO_A, PARTIDAS.IDUSUARIO_B, PARTIDAS.FINALIZADA
 		FROM PARTIDAS
 		INNER JOIN USUARIOS ON (PARTIDAS.IDUSUARIO_A  = USUARIOS.ID || PARTIDAS.IDUSUARIO_B  = USUARIOS.ID)
@@ -22,7 +22,7 @@
 		AND USUARIOS.ID = #{id} ORDER BY ID DESC;
 	</select>
 
-	<select id='getAllResultadoByUsuario' resultType="Resultado">
+	<select id='getAllResultadoByIdUsuario' resultType="Resultado">
 		SELECT RESULTADOS.ID, RESULTADOS.IDPARTIDA, RESULTADOS.FECHA_HORA, RESULTADOS.TABLAS, RESULTADOS.GANADOR, RESULTADOS.PERDEDOR
 		FROM PARTIDAS
 		INNER JOIN USUARIOS ON (PARTIDAS.IDUSUARIO_A  = USUARIOS.ID || PARTIDAS.IDUSUARIO_B  = USUARIOS.ID)
@@ -43,7 +43,7 @@
 		WHERE FINALIZADA = 0
 	</select>
 	
-	<insert id="addPartida" parameterType="Usuario">
+	<insert id="addPartidaByIdUsuario">
 		INSERT INTO PARTIDAS
 		(IDUSUARIO_A, IDUSUARIO_B, FINALIZADA)
 		VALUES
@@ -57,5 +57,9 @@
 		AND PARTIDAS.FINALIZADA = 0 
 		ORDER BY ID DESC;
 	</select>
+	
+	<update id='updatePartida'>
+		UPDATE PARTIDAS SET IDUSUARIO_A = #{idUsuario_A}, IDUSUARIO_B = #{idUsuario_B}, FINALIZADA = #{finalizada} WHERE PARTIDAS.ID = #{id};
+	</update>
 
 </mapper>
