@@ -23,16 +23,16 @@ import com.damasroyale.modelo.utils.Damas;
 
 @Path("/Rest")
 public class ServidorRest {
-	
+
 	@Context
 	HttpServletRequest request;
 
 	@EJB
 	PartidaEJB partidaEJB;
-	
+
 	@EJB
 	UsuarioEJB usuarioEJB;
-	
+
 	@EJB
 	PuntuacionEJB puntuacionEJB;
 
@@ -42,31 +42,31 @@ public class ServidorRest {
 	@Path("/getPartida/{idPartida}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Partida actualizarInformacion(@PathParam("idPartida") Integer idPartida) {
-		
-		System.out.println("ME HA LLAMAO");
 
 		return partidaEJB.getPartidaByID(idPartida);
 
 	}
-	
+
 	@GET
 	@Path("/getUsuario/{idUsuario}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Usuario getUsuario(@PathParam("idUsuario") Integer idUsuario) {
-		
-		System.out.println("ME HA LLAMAO 2");
 
-		return usuarioEJB.getUsuarioByID(idUsuario);
+		Usuario usuario = usuarioEJB.getUsuarioByID(idUsuario);
+
+		usuario.setContrasenya(null);
+		usuario.setEmail(null);
+		usuario.setRegistro(null);
+
+		return usuario;
 
 	}
-	
+
 	@GET
 	@Path("/getPuntuacionUsuario/{idUsuario}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public int getPuntuacionUsuario(@PathParam("idUsuario") Integer idUsuario) {
-		
-		System.out.println("ME HA LLAMAO 3");
-		
+
 		ArrayList<Resultado> resultados = partidaEJB.getAllResultadoByIdUsuario(idUsuario);
 
 		return puntuacionEJB.getPuntuacion(idUsuario, resultados);

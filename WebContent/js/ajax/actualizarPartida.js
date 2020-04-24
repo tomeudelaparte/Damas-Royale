@@ -2,11 +2,12 @@ var start = false;
 var id;
 
 var partida;
+
 var jugador01;
 var jugador02;
 
-var puntuacionJugador01 = 0;
-var puntuacionJugador02 = 0;
+var puntuacion01 = 0;
+var puntuacion02 = 0;
 
 function getPartida(idPartida) {
 
@@ -19,10 +20,10 @@ function getPartida(idPartida) {
 		success : function(result) {
 
 			jugador01 = getUsuario(result.idUsuario_A);
-			puntuacionJugador01 = getPuntuacionUsuario(result.idUsuario_A);
+			puntuacion01 = getPuntuacionUsuario(result.idUsuario_A);
 			
 			jugador02 = getUsuario(result.idUsuario_B);
-			puntuacionJugador02 = getPuntuacionUsuario(result.idUsuario_B);
+			puntuacion02 = getPuntuacionUsuario(result.idUsuario_B);
 
 		}
 	});
