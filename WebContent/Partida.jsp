@@ -56,18 +56,18 @@
 				
 				<%} %>
 				<hr>
-				<div class="row mx-auto shadow m-3 p-2 rounded">
+				<div id="oponente" class="row mx-auto shadow m-3 p-2 rounded">
 				
 				<% if(oponente.getId() == null) { %>
 				
-					<h3 id="oponenteNombre" class="text-center ml-5 mt-5 mb-5 pt-3 pb-3">Esperando un jugador...</h3>
+					<h3 class="text-center ml-5 mt-5 mb-5 pt-3 pb-3">Esperando un jugador...</h3>
 
 				<% } else { %>
 					<div class="col-5">
-						<img id="oponenteImagen" class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
+						<img id="opImagen" class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
 					</div>
 					<div class="col-7 mt-3">	
-						<h1 class="text-center"><%=oponente.getNombre() %></h1>
+						<a href="Ficha?id=<%=oponente.getId() %>" class="text-dark nav-link p-0" target="_blank"><h1 class="text-center"><%=oponente.getNombre() %></h1></a>
 						<p class="text-center"><%=oponentePuntuacion %> PTS</p>
 					</div>
 				<%}%>
@@ -93,7 +93,7 @@
 						<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
 					</div>
 					<div class="col-7 mt-3">	
-						<a href="#" class="text-dark"><h1 class="text-center"><%=usuario.getNombre() %></a></h1>
+						<a href="Ficha?id=<%=usuario.getId() %>" class="text-dark nav-link p-0" target="_blank"><h1 class="text-center"><%=usuario.getNombre() %></a></h1>
 						<p class="text-center"><%=usuarioPuntuacion%> PTS</p>
 					</div>
 				</div>
@@ -185,7 +185,7 @@
 				<hr>
 				<form class="mx-auto">
 					<div class="form-group">
-					  <textarea id="chat" class="form-control mt-2 mb-2 border-0 bg-light" readonly disabled style="resize: none"></textarea>
+					  <div id="chat" class="mt-2 mb-2 border-0 bg-light" style="overflow-y:scroll"></div>
 					</div>
 					<div class="form-group">
 					  <input id="message" class="form-control bg-white pl-2 text-bold font-weight-bold" name="mensaje" type="text" placeholder=" Envía un mensaje a tu oponente.">
@@ -202,7 +202,7 @@
 		</div>
 	</footer>
 	<script>
-	getPartida(<%=partida.getId()%>);
+	getPartida(<%=partida.getId()%>,<%=usuario.getId()%>);
 	</script>
 </body>
 </html>

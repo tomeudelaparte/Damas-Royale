@@ -71,7 +71,7 @@
 			    <% for(Rank rank : ranking) {%>
 			   <tr>
 			      <td class="text-center text-dark font-weight-bold" scope="row"><%=index++ %></td>
-			      <td><a href="Ficha?id=<%=rank.getId() %>"><img class="rounded-circle float-left mr-2 img-thumbnail shadow-sm" src="media/<%=rank.getImagen() %>" width="60"></a> <a href="Ficha?id=<%=rank.getId() %>" class="text-dark"><h5 class="mt-3"><%=rank.getNombre() %></h5></a></td>
+			      <td><a href="Ficha?id=<%=rank.getId() %>"><img class="rounded-circle float-left mr-2 img-thumbnail shadow-sm" src="media/<%=rank.getImagen() %>" width="60"></a> <a href="Ficha?id=<%=rank.getId() %>" class="text-dark nav-link p-0"><h5 class="mt-3"><%=rank.getNombre() %></h5></a></td>
 			      <td class="text-dark font-weight-bold"><%=rank.getPuntuacion() %> PTS</td>
 			    </tr>
 			    <%} %>

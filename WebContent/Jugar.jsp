@@ -76,7 +76,6 @@
 				  <tbody>
 				<% for(Partida partida : partidas) { 
 				
-					boolean jugador02 = false;
 				%>
 					
 					<tr>
@@ -87,32 +86,30 @@
 						 if(partida.getIdUsuario_A() == listaUsuarios.getId()) { %>
 				    	  		<td class="font-weight-bold">
 					    	  		<a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm" src="media/<%=listaUsuarios.getImagen() %>" width="50"></a>
-					    	  		<a class="nav-link text-dark font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><h5 class="mt-1"><%=listaUsuarios.getNombre() %></h5></a>
+					    	  		<a class="nav-link p-0 text-dark font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><h5 class="mt-3"><%=listaUsuarios.getNombre() %></h5></a>
 				    	  		</td>
-				    	  <%}
-				    	  
+				    	  <%}}
+					for (Usuario listaUsuarios : usuarios) {	  
 						 if(partida.getIdUsuario_B() == listaUsuarios.getId()) { %>
 			    	  		<td class="font-weight-bold">
 				    	  		<a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm" src="media/<%=listaUsuarios.getImagen() %>" width="50"></a>
-				    	  		<a class="nav-link text-dark font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><h5 class="mt-1"><%=listaUsuarios.getNombre() %></h5></a>
+				    	  		<a class="nav-link p-0 text-dark font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><h5 class="mt-3"><%=listaUsuarios.getNombre() %></h5></a>
 			    	  		</td>
 			    	  	<%
-			    	  
-			    	 	 jugador02 = true;
-						 
+			    						 
 					}}
 			    	
 					
-					if(jugador02==false) {%>
+					if(partida.getIdUsuario_B() == null) {%>
 					
 					<td class="text-dark font-weight-bold">No hay jugador.</td>
 					<td><a href="Sala?id=<%=partida.getId() %>" class="text-dark text-center"><button type="button" class="btn btn-secondary font-weight-bold">UNIRSE</button></a></td>					
-					</tr>
+					
 									
 				<%} else {%>
 					
 					<td><button type="button" class="btn btn-secondary disabled font-weight-bold"  style="cursor:default">UNIRSE</button></td>
-					</tr>
+					
 					
 					
 					<%}}%>

@@ -1,8 +1,6 @@
 package com.damasroyale.controlador.rest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import java.util.ArrayList; 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
@@ -15,11 +13,9 @@ import javax.ws.rs.core.MediaType;
 import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.PuntuacionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
-import com.damasroyale.modelo.pojo.Movimiento;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Usuario;
-import com.damasroyale.modelo.utils.Damas;
 
 @Path("/Rest")
 public class ServidorRest {
@@ -36,23 +32,23 @@ public class ServidorRest {
 	@EJB
 	PuntuacionEJB puntuacionEJB;
 
-	private HashMap<Integer, Damas> listaPartidas = new HashMap<Integer, Damas>();
+//	private HashMap<Integer, Damas> listaPartidas = new HashMap<Integer, Damas>();
 
 	@GET
 	@Path("/getPartida/{idPartida}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Partida actualizarInformacion(@PathParam("idPartida") Integer idPartida) {
+	public Partida actualizarInformacion(@PathParam("idPartida") String idPartida) {
 
-		return partidaEJB.getPartidaByID(idPartida);
+		return partidaEJB.getPartidaByID(Integer.valueOf(idPartida));
 
 	}
 
 	@GET
 	@Path("/getUsuario/{idUsuario}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Usuario getUsuario(@PathParam("idUsuario") Integer idUsuario) {
+	public Usuario getUsuario(@PathParam("idUsuario") String idUsuario) {
 
-		Usuario usuario = usuarioEJB.getUsuarioByID(idUsuario);
+		Usuario usuario = usuarioEJB.getUsuarioByID(Integer.valueOf(idUsuario));
 
 		usuario.setContrasenya(null);
 		usuario.setEmail(null);
@@ -65,23 +61,23 @@ public class ServidorRest {
 	@GET
 	@Path("/getPuntuacionUsuario/{idUsuario}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public int getPuntuacionUsuario(@PathParam("idUsuario") Integer idUsuario) {
+	public int getPuntuacionUsuario(@PathParam("idUsuario") String idUsuario) {
 
-		ArrayList<Resultado> resultados = partidaEJB.getAllResultadoByIdUsuario(idUsuario);
+		ArrayList<Resultado> resultados = partidaEJB.getAllResultadoByIdUsuario(Integer.valueOf(idUsuario));
 
-		return puntuacionEJB.getPuntuacion(idUsuario, resultados);
-
-	}
-
-	@GET
-	@Path("/createPartida/{idPartida}")
-	public void createPartida(@PathParam("idPartida") Integer idPartida) {
-
-		Damas damas = new Damas();
-
-		listaPartidas.put(idPartida, damas);
+		return puntuacionEJB.getPuntuacion(Integer.valueOf(idUsuario), resultados);
 
 	}
+
+//	@GET
+//	@Path("/createPartida/{idPartida}")
+//	public void createPartida(@PathParam("idPartida") Integer idPartida) {
+//
+//		Damas damas = new Damas();
+//
+//		listaPartidas.put(idPartida, damas);
+//
+//	}
 
 //	@GET
 //	@Path("/makeMovimiento/{idPartida}/{idJugador}/{filaInicial}/{filaFinal}/{columnaInicial}/{columnaFinal}")
