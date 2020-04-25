@@ -3,8 +3,8 @@ var id;
 
 var partida;
 
-var usuario;
-var oponente;
+var usuario = [];
+var oponente = [];
 
 var puntuacionUsuario = [];
 var puntuacionOponente = [];
@@ -42,24 +42,27 @@ function setJugadores(idUsuario, result) {
 
 			oponente = getUsuario(result.idUsuario_B);
 			puntuacionOponente = getPuntuacionUsuario(result.idUsuario_B);
-			
-			usuarioConectado(oponente["0"]["nombre"])
+
 		}
 
-	} else if (idUsuario == result.idUsuario_B && idUsuario != result.idUsuario_A) {
+	} else if (idUsuario == result.idUsuario_B
+			&& idUsuario != result.idUsuario_A) {
 
 		if (result.idUsuario_B > 0) {
 
 			usuario = getUsuario(result.idUsuario_B);
 			puntuacionUsuario = getPuntuacionUsuario(result.idUsuario_B);
-			
-			usuarioConectado(usuario["0"]["nombre"])
+
+			usuarioConectado(usuario["0"]["nombre"]);
 		}
 
 		oponente = getUsuario(result.idUsuario_A);
 		puntuacionOponente = getPuntuacionUsuario(result.idUsuario_A);
 
 	}
+
+	usuarioConectado(oponente["0"]["nombre"]);
+
 }
 
 function getUsuario(idUsuario) {
@@ -83,7 +86,7 @@ function getUsuario(idUsuario) {
 
 function getPuntuacionUsuario(idUsuario) {
 
-	var resultado = "";
+	var resultado = [];
 
 	var url = 'http://localhost:8080/Damas-Royale/Rest/getPuntuacionUsuario/'
 
@@ -92,7 +95,8 @@ function getPuntuacionUsuario(idUsuario) {
 		contentType : "application/json",
 		dataType : 'json',
 		success : function(result) {
-			resultado = result;
+
+			resultado.push(result);
 		}
 
 	});
@@ -108,6 +112,7 @@ function usuarioConectado(jugador) {
 					+ " se ha unido a la partida.</p>");
 
 	$('#chat').scrollTop($('#chat')[0].scrollHeight);
+
 }
 
 function recibirMensaje(jugador, mensaje) {
