@@ -45,16 +45,10 @@ function setJugadores(idUsuario, result) {
 
 		}
 
-	} else if (idUsuario == result.idUsuario_B
-			&& idUsuario != result.idUsuario_A) {
+	} else if (idUsuario == result.idUsuario_B && idUsuario != result.idUsuario_A) {
 
-		if (result.idUsuario_B > 0) {
-
-			usuario = getUsuario(result.idUsuario_B);
-			puntuacionUsuario = getPuntuacionUsuario(result.idUsuario_B);
-
-			usuarioConectado(usuario["0"]["nombre"]);
-		}
+		usuario = getUsuario(result.idUsuario_B);
+		puntuacionUsuario = getPuntuacionUsuario(result.idUsuario_B);
 
 		oponente = getUsuario(result.idUsuario_A);
 		puntuacionOponente = getPuntuacionUsuario(result.idUsuario_A);

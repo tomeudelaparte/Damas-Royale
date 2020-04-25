@@ -70,12 +70,16 @@ public class Sala extends HttpServlet {
 				if (partida.getIdUsuario_A() == usuario.getId()) {
 
 					Usuario oponente = usuarioEJB.getUsuarioByID(partida.getIdUsuario_B());
-					ArrayList<Resultado> resultadosOponente = partidaEJB.getAllResultadoByIdUsuario(oponente.getId());
 
-					int oponentePuntuacion = puntuacionEJB.getPuntuacion(oponente.getId(), resultadosOponente);
+					if (oponente != null) {
+						ArrayList<Resultado> resultadosOponente = partidaEJB.getAllResultadoByIdUsuario(oponente.getId());
 
-					request.setAttribute("oponente", oponente);
-					request.setAttribute("oponentePuntuacion", oponentePuntuacion);
+						int oponentePuntuacion = puntuacionEJB.getPuntuacion(oponente.getId(), resultadosOponente);
+
+						request.setAttribute("oponente", oponente);
+						request.setAttribute("oponentePuntuacion", oponentePuntuacion);
+
+					}
 				}
 
 				if (partida.getIdUsuario_B() == usuario.getId()) {
