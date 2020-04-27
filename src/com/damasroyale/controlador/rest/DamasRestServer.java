@@ -1,6 +1,7 @@
 package com.damasroyale.controlador.rest;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
+
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
@@ -10,15 +11,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import com.damasroyale.modelo.ejb.ListaPartidasEJB;
 import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.PuntuacionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
+import com.damasroyale.modelo.pojo.Damas;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Usuario;
 
 @Path("/Rest")
-public class ServidorRest {
+public class DamasRestServer {
 
 	@Context
 	HttpServletRequest request;
@@ -32,7 +35,8 @@ public class ServidorRest {
 	@EJB
 	PuntuacionEJB puntuacionEJB;
 
-//	private HashMap<Integer, Damas> listaPartidas = new HashMap<Integer, Damas>();
+	@EJB
+	ListaPartidasEJB<Damas> listaPartidasEJB;
 
 	@GET
 	@Path("/getPartida/{idPartida}")
@@ -69,15 +73,22 @@ public class ServidorRest {
 
 	}
 
-//	@GET
-//	@Path("/createPartida/{idPartida}")
-//	public void createPartida(@PathParam("idPartida") Integer idPartida) {
-//
-//		Damas damas = new Damas();
-//
-//		listaPartidas.put(idPartida, damas);
-//
-//	}
+	@GET
+	@Path("/createPartida/{idPartida}")
+	public void createPartida(@PathParam("idPartida") Integer idPartida) {
+
+		Damas partida = new Damas(idPartida);
+
+		listaPartidasEJB.add(partida);
+	}
+
+	@GET
+	@Path("/getTablero/{idPartida}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public int[][] getTablero(@PathParam("idPartida") Integer idPartida) {
+
+		return listaPartidasEJB.getPartida(idPartida).getTablero();
+	}
 
 //	@GET
 //	@Path("/makeMovimiento/{idPartida}/{idJugador}/{filaInicial}/{filaFinal}/{columnaInicial}/{columnaFinal}")
