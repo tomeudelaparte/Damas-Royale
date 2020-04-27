@@ -25,15 +25,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="media/favicon.png">
+<link rel="stylesheet" href="css/Tablero.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="js/plugins/TextareaAutoHeight.js"></script>
-<script src="js/ajax/actualizarPartida.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="icon" href="media/favicon.png">
-<link rel="stylesheet" href="css/Tablero.css">
+<script src="js/jquery/DamasJQuery.js"></script>
+<script src="js/ajax/DamasRestClient.js"></script>
+<script src="js/main/Controlador.js"></script>
 </head>
 <body class="bg-light">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow-sm">
@@ -48,7 +50,7 @@
 				if (partida.getIdUsuario_A() == oponente.getId()) {
 					
 				%>
-				<h2 class="p-2 text-dark">Oponente (Anfitrión)</h2>
+				<h2 class="p-2 text-dark">Oponente <span class="font-weight-light">(Anfitrión)</span></h2>
 				
 				<% } else { %>
 				
@@ -79,7 +81,7 @@
 				if (partida.getIdUsuario_A() == usuario.getId()) {
 					
 				%>
-				<h2 class="p-2 text-dark">Tú (Anfitrión)</h2>
+				<h2 class="p-2 text-dark">Tú <span class="font-weight-light">(Anfitrión)</span></h2>
 				
 				<% } else { %>
 				
@@ -202,7 +204,7 @@
 		</div>
 	</footer>
 	<script>
-	getPartida(<%=partida.getId()%>,<%=usuario.getId()%>);
+		cargarPartida(<%=partida.getId()%>,<%=usuario.getId()%>);
 	</script>
 </body>
 </html>
