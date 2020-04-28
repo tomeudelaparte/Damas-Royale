@@ -1,4 +1,4 @@
-class Damas {
+class DamasJQuery {
 
 	setTablero(tablero) {
 		
@@ -35,7 +35,7 @@ class Damas {
 //		$(".usuario").click(mover);
 	}
 	
-	usuarioConectado(jugador) {
+	jugadorConectado(jugador) {
 
 		$("#chat").append(
 				"<p class='text-danger font-weight-bold'> El jugador " + jugador

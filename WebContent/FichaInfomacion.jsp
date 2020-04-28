@@ -88,7 +88,7 @@
 			</div>
 			<div class="col-8">
 				<h4 class="mb-5">INFORMACIÓN DEL USUARIO</h4>
-				<div class="row mb-5">
+				<div class="row mb-5 ml-1">
 					<div class="col-5 shadow-sm mr-5">
 						<i class="fa fa-certificate float-left pr-4" style="font-size: 50px;"></i>
 						<h5>PUNTUACIÓN</h5>
@@ -100,7 +100,7 @@
 						<h5><%=partidasJugadas%></h5>
 					</div>
 				</div>
-				<div class="row mb-5">
+				<div class="row ml-1 mb-5">
 					<div class="col-5 shadow-sm mr-5">
 						<i class="fa fa-check-circle float-left pr-4" style="font-size: 50px;"></i>
 						<h5>PARTIDAS GANADAS</h5>
@@ -112,7 +112,7 @@
 						<h5><%=partidasPerdidas%></h5>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row ml-1">
 					<div class="col-5 shadow-sm mr-5">
 						<i class="fa fa-circle-o float-left pr-4" style="font-size: 50px;"></i>
 						<h5>TABLAS</h5>
