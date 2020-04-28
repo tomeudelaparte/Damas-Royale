@@ -23,8 +23,6 @@ class DamasJQuery {
 						
 						$(filas[i]).children().eq(j).append(oponente);
 					}
-
-
 				}
 			}
 		}
@@ -35,13 +33,19 @@ class DamasJQuery {
 //		$(".usuario").click(mover);
 	}
 	
-	jugadorConectado(jugador) {
-
-		$("#chat").append(
-				"<p class='text-danger font-weight-bold'> El jugador " + jugador
-						+ " se ha unido a la partida.</p>");
+	jugadorConectado(jugador, puntuacion) {
+		
+		$("#chat").append("<p class='text-danger font-weight-bold'> El jugador " + jugador.nombre + " se ha unido a la partida.</p>");
 
 		$('#chat').scrollTop($('#chat')[0].scrollHeight);
+		
+		$('#oponente').html("<div class='col-5'>" +
+								"<img class='img-fluid mx-auto d-block border' src='media/" + jugador.imagen + "' width='150'>" +
+							"</div>" +
+							"<div class='col-7 mt-3'><a href='Ficha?id=" + jugador.id + "' class='text-dark nav-link p-0' target='_blank'>" +
+								"<h1 class='text-center'>" + jugador.nombre + "</h1></a><p class='text-center'>" + puntuacion + " PTS</p>" +
+							"</div>");
+		
 
 	}
 

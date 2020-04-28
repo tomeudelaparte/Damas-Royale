@@ -39,7 +39,7 @@ function setJugadorConectado() {
 	
 	if (jugador === false && damasRestClient.oponente !== undefined) {
 				
-		damasJQuery.jugadorConectado(damasRestClient.oponente.nombre);
+		damasJQuery.jugadorConectado(damasRestClient.oponente, damasRestClient.puntuacionOponente);
 		
 		jugador = true;
 	}

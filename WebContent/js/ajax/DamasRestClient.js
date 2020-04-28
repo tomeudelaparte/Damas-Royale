@@ -42,7 +42,6 @@ class DamasRestClient {
 		
 		this.partida = tmp;
 	}
-
  
 	getUsuario(idUsuario) {
 		
@@ -58,12 +57,10 @@ class DamasRestClient {
 			success : function(data) {
 				
 				tmp =  data;
-				
 			}
 		});
 		
 		return tmp;
-
 	}
 
 	getPuntuacionUsuario(idUsuario) {
@@ -82,7 +79,7 @@ class DamasRestClient {
 				tmp = data;
 			}
 		});
-	
+		
 		return tmp;
 	}
 	
@@ -127,7 +124,6 @@ class DamasRestClient {
 			this.oponente = this.getUsuario(this.partida.idUsuario_A);
 			this.puntuacionOponente = this.getPuntuacionUsuario(this.partidas.idUsuario_A);
 		}
-		
 	}
 
 }

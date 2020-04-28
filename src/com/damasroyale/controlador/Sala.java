@@ -98,7 +98,7 @@ public class Sala extends HttpServlet {
 					ArrayList<Resultado> resultadosUsuario = partidaEJB.getAllResultadoByIdUsuario(usuario.getId());
 					int usuarioPuntuacion = puntuacionEJB.getPuntuacion(usuario.getId(), resultadosUsuario);
 
-					int sala = partidaEJB.getAllPartidaEnCurso().size() + 1;
+					int sala = partidaEJB.getAllPartidaEnCurso().size();
 
 					request.setAttribute("sala", sala);
 					request.setAttribute("partida", partida);

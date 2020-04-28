@@ -62,7 +62,7 @@
 				
 				<% if(oponente.getId() == null) { %>
 				
-					<h3 class="text-center m-5 pt-1 pb-1">Esperando un jugador...</h3>
+					<h3 class="text-center m-5 pt-2 pb-2">Esperando un jugador...</h3>
 
 				<% } else { %>
 					<div class="col-5">
