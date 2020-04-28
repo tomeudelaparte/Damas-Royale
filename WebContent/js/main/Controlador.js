@@ -37,8 +37,8 @@ function setTablero() {
 
 function setJugadorConectado() {
 	
-	if (jugador === false && damasRestClient.oponente !== null) {
-		
+	if (jugador === false && damasRestClient.oponente !== undefined) {
+				
 		damasJQuery.jugadorConectado(damasRestClient.oponente.nombre);
 		
 		jugador = true;
