@@ -16,6 +16,7 @@ import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.PuntuacionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Damas;
+import com.damasroyale.modelo.pojo.Movimiento;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Usuario;
@@ -41,7 +42,7 @@ public class DamasRestServer {
 	@GET
 	@Path("/getPartida/{idPartida}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Partida actualizarInformacion(@PathParam("idPartida") String idPartida) {
+	public Partida getPartida(@PathParam("idPartida") String idPartida) {
 
 		return partidaEJB.getPartidaByID(Integer.valueOf(idPartida));
 
@@ -74,34 +75,34 @@ public class DamasRestServer {
 	}
 
 	@GET
-	@Path("/createPartida/{idPartida}")
-	public void createPartida(@PathParam("idPartida") Integer idPartida) {
+	@Path("/createPartida/{idPartida}/{idUsuario}")
+	public void createPartida(@PathParam("idPartida") Integer idPartida, @PathParam("idUsuario") Integer idUsuario) {
 
-		Damas partida = new Damas(idPartida);
+		Damas partida = new Damas(idPartida, idUsuario);
 
 		listaPartidasEJB.add(partida);
 	}
 
 	@GET
-	@Path("/getTablero/{idPartida}")
+	@Path("/getTablero/{idPartida}/{idUsuario}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public int[][] getTablero(@PathParam("idPartida") Integer idPartida) {
+	public int[][] getTablero(@PathParam("idPartida") Integer idPartida, @PathParam("idUsuario") Integer idUsuario) {
 
-		return listaPartidasEJB.getPartida(idPartida).getTablero();
+		return listaPartidasEJB.getPartida(idPartida).getTablero(idUsuario);
 	}
 
-//	@GET
-//	@Path("/makeMovimiento/{idPartida}/{idJugador}/{filaInicial}/{filaFinal}/{columnaInicial}/{columnaFinal}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Movimiento makeMovimiento(@PathParam("idPartida") Integer idPartida,
-//			@PathParam("idJugador") Integer idJugador, @PathParam("filaInicial") int filaInicial,
-//			@PathParam("filaFinal") int filaFinal, @PathParam("columnaInicial") int columnaInicial,
-//			@PathParam("columnaFinal") int columnaFinal) {
-//
-//		Damas damas = listaPartidas.get(idPartida);
-//
-//		Movimiento movimiento = damas.mover(idPartida, idJugador, filaInicial, filaFinal, columnaInicial, columnaFinal);
-//
-//		return movimiento;
-//	}
+	@GET
+	@Path("/makeMovimiento/{idPartida}/{idJugador}/{filaOrigen}/{filaDestino}/{columnaOrigen}/{columnaDestino}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Movimiento makeMovimiento(@PathParam("idPartida") Integer idPartida,
+			@PathParam("idJugador") Integer idJugador, @PathParam("filaOrigen") int filaInicial,
+			@PathParam("filaDestino") int filaFinal, @PathParam("columnaOrigen") int columnaInicial,
+			@PathParam("columnaDestino") int columnaFinal) {
+
+		Damas damas = listaPartidasEJB.getPartida(idPartida);
+
+		Movimiento movimiento = damas.mover(idPartida, idJugador, filaInicial, filaFinal, columnaInicial, columnaFinal);
+
+		return movimiento;
+	}
 }

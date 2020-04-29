@@ -195,6 +195,17 @@
 				</form>
 			</div>
 		</div>
+		<div class="modal" id="incorrecto">
+		    <div class="modal-dialog modal-dialog-centered modal-lg">
+		      <div class="modal-content">
+		        <div class="modal-header rounded">
+		          <h4 class="modal-title font-weight-bold text-danger">Movimiento incorrecto</h4>
+		          <button type="button" class="close text-danger font-weight-bold" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>   
+      </div>
 	</div>
 	<footer id="sticky-footer"
 		class=" p-3 bg-light text-dark border-top shadow-lg">
@@ -204,7 +215,7 @@
 		</div>
 	</footer>
 	<script>
-		cargarPartida(<%=partida.getId()%>,<%=usuario.getId()%>);
+		crearPartida(<%=partida.getId()%>,<%=usuario.getId()%>);
 	</script>
 </body>
 </html>

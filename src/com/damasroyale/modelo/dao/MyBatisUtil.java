@@ -37,7 +37,7 @@ public class MyBatisUtil {
 		try {
 			reader = Resources.getResourceAsReader("mybatis-config.xml");
 		} catch (IOException e) {
-			logger.error(e.getMessage());
+			logger.debug(e.getMessage());
 		}
 		factory = new SqlSessionFactoryBuilder().build(reader);
 	}

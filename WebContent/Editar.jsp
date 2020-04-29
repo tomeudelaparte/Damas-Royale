@@ -22,13 +22,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="js/plugins/InputFileDisplayName.js"></script>
-<script>
-function confirmar() {
-	  if (confirm("¿Estás seguro de eliminar tu cuenta de Damas Royale?")) {
-		    location.replace("Eliminar");
-		  }
-}
-</script>
 </head>
 <body class="bg-light">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom">
@@ -61,9 +54,27 @@ function confirmar() {
 	  </ul>
 	</nav>
 	<div class="container bg-light rounded border pt-5 pb-5 mt-5 shadow mh-100">
-		<div class="row ml-5 mb-5">
-			<h3>EDITAR PERFIL</h3>
-			<a class="text-decoration-none d-flex ml-auto mr-5" onclick="confirmar()"><button type="button" class="btn btn-danger">Eliminar cuenta</button></a>
+	<div class="row ml-5 mb-5">
+		<h3>EDITAR PERFIL</h3>
+		<button type="button" class="btn btn-danger d-flex ml-auto mr-5" data-toggle="modal" data-target="#eliminarCuenta">Eliminar cuenta</button>
+		  <div class="modal fade" id="eliminarCuenta">
+		    <div class="modal-dialog modal-dialog-centered modal-lg">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <h4 class="modal-title">¿Estás seguro de eliminar tu cuenta de Damas Royale?</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        <div class="modal-body">
+		        <p class="mb-4">Al pulsar el botón <span class="badge badge-danger">Eliminar cuenta</span>, se eliminará, de forma automática, la cuenta y todos los datos asociados. <br><br>· Al realizar esta acción, no habrá vuelta atrás y no podrás acceder a Damas Royale mediante esta cuenta.<br>· Si quieres volver a acceder a Damas Royale, deberás crear una cuenta nueva.</p>
+				<p>¿Estás seguro de eliminar tu cuenta de Damas Royale?</p>
+				<a class="text-decoration-none" href="Eliminar"><button type="button" class="btn btn-outline-danger pl-5 pr-5">Eliminar cuenta</button></a>
+		        <div class="modal-footer mt-3">
+		          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>   
+      </div>
 		</div>
 		<div class="row ml-5">
 			<div class="col-4">

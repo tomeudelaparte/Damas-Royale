@@ -13,15 +13,6 @@ class DamasRestClient {
 		this.puntuacionUsuario;
 		this.puntuacionOponente;
 	}
-	
-	createPartida() {
-
-		var url = 'http://localhost:8080/Damas-Royale/Rest/createPartida/';
-		
-		$.ajax({
-			url : url + this.idPartida
-		});
-	}
 
 	getPartida() {
 		
@@ -90,7 +81,27 @@ class DamasRestClient {
 		var url = 'http://localhost:8080/Damas-Royale/Rest/getTablero/';
 			
 		$.ajax({
-			url : url + this.idPartida,
+			url : url + this.idPartida + "/"+ this.idUsuario,
+			async: false,
+			contentType : "application/json",
+			dataType : 'json',
+			success : function(data) {
+	
+				tmp = data;
+			}
+		});
+				
+		return tmp;
+	}
+	
+	makeMovimiento(idPartida, idJugador, filaOrigen, filaDestino, columnaOrigen, columnaDestino) {
+		
+		var tmp;
+	
+		var url = "http://localhost:8080/Damas-Royale/Rest/makeMovimiento/"+idPartida+"/"+idJugador+"/"+filaOrigen+"/"+filaDestino+"/"+columnaOrigen+"/"+columnaDestino;
+			
+		$.ajax({
+			url : url,
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
@@ -105,7 +116,7 @@ class DamasRestClient {
 	
 	getJugadores() {
 		
-		if (this.idUsuario === this.partida.idUsuario_A && this.idUsuario !== this.partida.idUsuario_B) {
+		if (this.idUsuario === this.partida.idUsuario_A) {
 			
 			this.usuario = this.getUsuario(this.partida.idUsuario_A);
 			this.puntuacionUsuario = this.getPuntuacionUsuario(this.partida.idUsuario_A);
@@ -116,13 +127,13 @@ class DamasRestClient {
 				this.puntuacionOponente = this.getPuntuacionUsuario(this.partida.idUsuario_B);
 			}
 	
-		} else if (this.idUsuario === this.partida.idUsuario_B && this.idUsuario !== this.partida.idUsuario_A) {
+		} else if (this.idUsuario === this.partida.idUsuario_B) {
 	
 			this.usuario = this.getUsuario(this.partida.idUsuario_B);
 			this.puntuacionUsuario = this.getPuntuacionUsuario(this.partida.idUsuario_B);
 
 			this.oponente = this.getUsuario(this.partida.idUsuario_A);
-			this.puntuacionOponente = this.getPuntuacionUsuario(this.partidas.idUsuario_A);
+			this.puntuacionOponente = this.getPuntuacionUsuario(this.partida.idUsuario_A);
 		}
 	}
 

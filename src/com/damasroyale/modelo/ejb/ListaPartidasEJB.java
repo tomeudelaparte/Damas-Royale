@@ -1,13 +1,14 @@
 package com.damasroyale.modelo.ejb;
 
-import java.util.Hashtable;
+import java.util.Hashtable;  
 
 import javax.ejb.LocalBean;
+import javax.ejb.Startup;
 import javax.ejb.Stateless;
-
 import com.damasroyale.modelo.pojo.Damas;
 
 @Stateless
+@Startup
 @LocalBean
 public class ListaPartidasEJB<P extends Damas> {
 
