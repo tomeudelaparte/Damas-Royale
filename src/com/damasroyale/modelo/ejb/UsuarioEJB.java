@@ -79,11 +79,11 @@ public class UsuarioEJB {
 		activacionEJB.delActivacion(usuario);
 	}
 
-	public void delUsuario(Usuario usuario) {
+	public void delUsuarioByID(Integer id) {
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-		usuarioDAO.delUsuario(usuario);
+		usuarioDAO.delUsuarioByID(id);
 	}
 
 }

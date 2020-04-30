@@ -89,12 +89,12 @@ public class UsuarioDAO {
 
 	}
 
-	public void delUsuario(Usuario usuario) {
+	public void delUsuarioByID(Integer id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			UsuarioMapper usuarioMapper = sqlSession.getMapper(UsuarioMapper.class);
-			usuarioMapper.delUsuario(usuario);
+			usuarioMapper.delUsuarioByID(id);
 			sqlSession.commit();
 		} finally {
 			sqlSession.close();

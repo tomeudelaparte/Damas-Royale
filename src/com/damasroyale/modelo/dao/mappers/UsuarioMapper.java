@@ -22,6 +22,6 @@ public interface UsuarioMapper {
 
 	public void activateUsuario(Usuario usuario);
 
-	public void delUsuario(Usuario usuario);
+	public void delUsuarioByID(@Param("id") Integer id);
 
 }

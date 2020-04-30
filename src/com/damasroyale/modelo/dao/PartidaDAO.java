@@ -110,4 +110,26 @@ public class PartidaDAO {
 
 	}
 
+	public void addResultadoPartida(Resultado resultado) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
+			partidaMapper.addResultadoPartida(resultado);
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public void delPartidaByIdPartida(Integer id) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
+			partidaMapper.delPartidaByIdPartida(id);
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}		
+	}
+
 }

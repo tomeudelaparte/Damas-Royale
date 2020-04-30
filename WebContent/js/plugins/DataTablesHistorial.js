@@ -15,6 +15,7 @@ $(document).ready(function() {
 	         "language": {
 	        	"emptyTable": "No hay partidas realizadas.",
 	        	"info": "Mostrando _START_ a _END_ de un total de _TOTAL_ partidas.",
+	        	"infoEmpty": "No se han encontrado partidas realizadas.",
 	            "lengthMenu": "Mostrar _MENU_ partidas",
 	            "paginate": {
 	                "next": "Siguiente",

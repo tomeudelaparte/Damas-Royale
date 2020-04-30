@@ -39,7 +39,7 @@ public class Eliminar extends HttpServlet {
 
 			sessionEJB.usuarioLogout(session);
 
-			usuarioEJB.delUsuario(usuario);
+			usuarioEJB.delUsuarioByID(usuario.getId());
 
 			response.sendRedirect("Login");
 		}

@@ -94,6 +94,59 @@ class DamasRestClient {
 		return tmp;
 	}
 	
+	getEstadoPartida() {
+		
+		var tmp;
+	
+		var url = 'http://localhost:8080/Damas-Royale/Rest/getEstadoPartida/';
+			
+		$.ajax({
+			url : url + this.idPartida,
+			async: false,
+			contentType : "application/json",
+			dataType : 'json',
+			success : function(data) {
+	
+				tmp = data;
+			}
+		});
+				
+		return tmp;
+	}
+	
+	getResultadoPartida() {
+		
+		var tmp;
+	
+		var url = 'http://localhost:8080/Damas-Royale/Rest/getResultadoPartida/';
+			
+		$.ajax({
+			url : url + this.idPartida,
+			async: false,
+			contentType : "application/json",
+			dataType : 'json',
+			success : function(data) {
+	
+				tmp = data;
+			}
+		});
+				
+		return tmp;
+	}
+	
+	abandonarPartida() {
+			
+		var url = 'http://localhost:8080/Damas-Royale/Rest/abandonarPartida/';
+			
+		$.ajax({
+			url : url + this.idPartida +"/"+ this.idUsuario +"/"+ this.oponente.id,
+			async: false,
+			contentType : "application/json",
+			dataType : 'json',
+
+		});	
+	}
+	
 	makeMovimiento(idPartida, idJugador, filaOrigen, filaDestino, columnaOrigen, columnaDestino) {
 		
 		var tmp;

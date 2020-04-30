@@ -46,7 +46,7 @@
 		ESTADO = '1' WHERE ID = #{id}
 	</update>
 
-	<delete id='delUsuario'>
+	<delete id='delUsuarioByID'>
 		DELETE FROM USUARIOS WHERE ID = #{id}
 	</delete>
 

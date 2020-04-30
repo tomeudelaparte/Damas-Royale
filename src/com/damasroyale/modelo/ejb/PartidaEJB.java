@@ -56,13 +56,18 @@ public class PartidaEJB {
 		return partidaDAO.getAllPartidaEnCurso();
 	}
 
-	public Partida createPartida(Integer id) {
+	public Partida getPartidaCreadaByIdUsuario(Integer id) {
+
+		PartidaDAO partidaDAO = new PartidaDAO();
+
+		return partidaDAO.getPartidaCreadaByIdUsuario(id);
+	}
+
+	public void addPartidaByIdUsuario(Integer id) {
 
 		PartidaDAO partidaDAO = new PartidaDAO();
 
 		partidaDAO.addPartidaByIdUsuario(id);
-
-		return partidaDAO.getPartidaCreadaByIdUsuario(id);
 	}
 
 	public void updatePartida(Partida partida) {
@@ -71,6 +76,17 @@ public class PartidaEJB {
 
 		partidaDAO.updatePartida(partida);
 
+	}
+
+	public void addResultadoPartida(Resultado resultado) {
+		PartidaDAO partidaDAO = new PartidaDAO();
+		partidaDAO.addResultadoPartida(resultado);
+	}
+
+	public void delPartidaByIdPartida(Integer id) {
+
+		PartidaDAO partidaDAO = new PartidaDAO();
+		partidaDAO.delPartidaByIdPartida(id);		
 	}
 
 }

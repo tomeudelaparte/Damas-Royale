@@ -2,7 +2,7 @@
 <!DOCTYPE xml>
 <configuration>
 
-	<appender name="GESPOL" class="ch.qos.logback.core.FileAppender">
+	<appender name="DEBUG" class="ch.qos.logback.core.FileAppender">
 		<file> damasroyale_debug.log </file>
 		<append>true</append>
 		<encoder>
@@ -11,7 +11,7 @@
 	</appender>
 
 	<root level="debug">
-		<appender-ref ref="GESPOL" />
+		<appender-ref ref="DEBUG" />
 	</root>
 
 </configuration>

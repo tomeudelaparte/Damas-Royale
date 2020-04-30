@@ -45,17 +45,29 @@ public class CrearPartida extends HttpServlet {
 			response.sendRedirect("Login");
 
 		} else {
-			Partida partida = partidaEJB.createPartida(usuario.getId());
 
-			Client cliente = ClientBuilder.newClient();
+			Partida partida = partidaEJB.getPartidaCreadaByIdUsuario(usuario.getId());
 
-			WebTarget target = cliente.target("http://localhost:8080/Damas-Royale/Rest/createPartida/" + partida.getId()+"/"+usuario.getId());
+			if (partida == null) {
 
-			target.request().get();
-			
-			response.sendRedirect("Sala?id=" + partida.getId());
+				partidaEJB.addPartidaByIdUsuario(usuario.getId());
+
+				partida = partidaEJB.getPartidaCreadaByIdUsuario(usuario.getId());
+
+				Client cliente = ClientBuilder.newClient();
+
+				WebTarget target = cliente.target("http://localhost:8080/Damas-Royale/Rest/createPartida/"
+						+ partida.getId() + "/" + usuario.getId());
+
+				target.request().get();
+
+				response.sendRedirect("Sala?id=" + partida.getId());
+
+			} else {
+				
+				response.sendRedirect("Jugar");
+			}
 		}
-
 	}
 
 }

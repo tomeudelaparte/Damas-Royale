@@ -72,7 +72,8 @@ public class Sala extends HttpServlet {
 					Usuario oponente = usuarioEJB.getUsuarioByID(partida.getIdUsuario_B());
 
 					if (oponente != null) {
-						ArrayList<Resultado> resultadosOponente = partidaEJB.getAllResultadoByIdUsuario(oponente.getId());
+						ArrayList<Resultado> resultadosOponente = partidaEJB
+								.getAllResultadoByIdUsuario(oponente.getId());
 
 						int oponentePuntuacion = puntuacionEJB.getPuntuacion(oponente.getId(), resultadosOponente);
 
@@ -91,6 +92,7 @@ public class Sala extends HttpServlet {
 
 					request.setAttribute("oponente", oponente);
 					request.setAttribute("oponentePuntuacion", oponentePuntuacion);
+
 				}
 
 				if (partida.getIdUsuario_A() == usuario.getId() || partida.getIdUsuario_B() == usuario.getId()) {
@@ -108,8 +110,10 @@ public class Sala extends HttpServlet {
 					rs.forward(request, response);
 
 				} else {
+					
 					response.sendRedirect("Jugar");
 				}
+
 			}
 		}
 

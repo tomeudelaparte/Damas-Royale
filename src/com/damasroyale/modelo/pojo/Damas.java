@@ -5,25 +5,21 @@ public class Damas {
 	private Integer id;
 	private Integer anfitrion;
 
+	private boolean finalizada = false;
+
 	private int turno = 1;
 
 	private int fichas01 = 12;
 	private int fichas02 = 12;
 
-	private int tablero[][] = { 
-			{ 0, 2, 0, 2, 0, 2, 0, 2 }, 
-			{ 2, 0, 2, 0, 2, 0, 2, 0 }, 
-			{ 0, 2, 0, 2, 0, 2, 0, 2 },
-			{ 0, 0, 0, 0, 0, 0, 0, 0 }, 
-			{ 0, 0, 0, 0, 0, 0, 0, 0 }, 
-			{ 1, 0, 1, 0, 1, 0, 1, 0 },
-			{ 0, 1, 0, 1, 0, 1, 0, 1 }, 
-			{ 1, 0, 1, 0, 1, 0, 1, 0 } };
+	private int tablero[][] = { { 0, 2, 0, 2, 0, 2, 0, 2 }, { 2, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 2, 0, 2, 0, 2 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 }, { 1, 0, 1, 0, 1, 0, 1, 0 },
+			{ 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0 } };
 
 	private int[] fichaEliminada = new int[2];
 
 	public Damas(Integer id, Integer anfitrion) {
-		
+
 		this.id = id;
 		this.anfitrion = anfitrion;
 	}
@@ -34,6 +30,14 @@ public class Damas {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public boolean isFinalizada() {
+		return finalizada;
+	}
+
+	public void setFinalizada(boolean finalizada) {
+		this.finalizada = finalizada;
 	}
 
 	public int[][] getTablero(Integer idUsuario) {
@@ -48,7 +52,8 @@ public class Damas {
 		}
 	}
 
-	public Movimiento mover(Integer idPartida, Integer idUsuario, int filaInicial, int filaFinal, int columnaInicial, int columnaFinal) {
+	public Movimiento mover(Integer idPartida, Integer idUsuario, int filaInicial, int filaFinal, int columnaInicial,
+			int columnaFinal) {
 
 		if (!anfitrion.equals(idUsuario)) {
 
@@ -67,23 +72,24 @@ public class Damas {
 			eliminar(fichaEliminada[0], fichaEliminada[1]);
 			cambiarTurno(idUsuario);
 
-			Movimiento movimiento = new Movimiento(0, idPartida, idUsuario, filaInicial, filaFinal, columnaInicial, columnaFinal);
+			Movimiento movimiento = new Movimiento(0, idPartida, idUsuario, filaInicial, filaFinal, columnaInicial,
+					columnaFinal);
 
 			return movimiento;
-			
+
 		} else {
 
 			return null;
 		}
 	}
 
-	private boolean verificarMovimiento(Integer idUsuario, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
+	private boolean verificarMovimiento(Integer idUsuario, int filaOrigen, int columnaOrigen, int filaDestino,
+			int columnaDestino) {
 
 		int origen = this.tablero[filaOrigen][columnaOrigen];
 		int destino = this.tablero[filaDestino][columnaDestino];
 
-		if (comprobarOrigen(origen) 
-				&& comprobarDestino(destino)
+		if (comprobarOrigen(origen) && comprobarDestino(destino)
 				&& comprobarDireccion(idUsuario, filaOrigen, filaDestino)
 				&& comprobarDistancia(filaOrigen, columnaOrigen, filaDestino, columnaDestino)) {
 
@@ -144,7 +150,8 @@ public class Damas {
 
 			return true;
 
-		} else if (saltoFila == 2 && saltoCasilla == 2 && (eliminarFicha(filaOrigen, columnaOrigen, filaDestino, columnaDestino).length > 0)) {
+		} else if (saltoFila == 2 && saltoCasilla == 2
+				&& (eliminarFicha(filaOrigen, columnaOrigen, filaDestino, columnaDestino).length > 0)) {
 
 			return true;
 

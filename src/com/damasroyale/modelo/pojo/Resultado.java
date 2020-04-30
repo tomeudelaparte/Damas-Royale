@@ -2,6 +2,9 @@ package com.damasroyale.modelo.pojo;
 
 import java.sql.Timestamp;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Resultado {
 
 	private Integer id;

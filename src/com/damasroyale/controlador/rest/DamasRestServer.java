@@ -1,6 +1,8 @@
 package com.damasroyale.controlador.rest;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -40,11 +42,69 @@ public class DamasRestServer {
 	ListaPartidasEJB<Damas> listaPartidasEJB;
 
 	@GET
+	@Path("/createPartida/{idPartida}/{idUsuario}")
+	public void createPartida(@PathParam("idPartida") Integer idPartida, @PathParam("idUsuario") Integer idUsuario) {
+
+		Damas partida = new Damas(idPartida, idUsuario);
+
+		listaPartidasEJB.add(partida);
+	}
+
+	@GET
 	@Path("/getPartida/{idPartida}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Partida getPartida(@PathParam("idPartida") String idPartida) {
 
 		return partidaEJB.getPartidaByID(Integer.valueOf(idPartida));
+
+	}
+
+	@GET
+	@Path("/getEstadoPartida/{idPartida}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean getEstadoPartida(@PathParam("idPartida") String idPartida) {
+
+		return partidaEJB.getPartidaByID(Integer.valueOf(idPartida)).isFinalizada();
+
+	}
+
+	@GET
+	@Path("/getResultadoPartida/{idPartida}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Resultado getResultadoPartida(@PathParam("idPartida") String idPartida) {
+
+		return partidaEJB.getResultadoByPartidaID(Integer.valueOf(idPartida));
+	}
+
+	@GET
+	@Path("/abandonarPartida/{idPartida}/{idUsuario}/{idOponente}")
+	public void finalizarPartida(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario,
+			@PathParam("idOponente") String idOponente) {
+
+		partidaEJB.getPartidaByID(Integer.valueOf(idPartida)).setFinalizada(true);
+
+		if (idOponente == null) {
+
+			partidaEJB.delPartidaByIdPartida(Integer.valueOf(idPartida));
+
+		} else {
+
+			Partida partida = partidaEJB.getPartidaByID(Integer.valueOf(idPartida));
+
+			Date date = new Date();
+
+			Timestamp fecha_hora = new Timestamp(date.getTime());
+
+			Resultado resultado = new Resultado(0, Integer.valueOf(idPartida), fecha_hora, false,
+					Integer.valueOf(idOponente), Integer.valueOf(idUsuario));
+
+			partidaEJB.addResultadoPartida(resultado);
+
+			partida.setFinalizada(true);
+
+			partidaEJB.updatePartida(partida);
+
+		}
 
 	}
 
@@ -72,15 +132,6 @@ public class DamasRestServer {
 
 		return puntuacionEJB.getPuntuacion(Integer.valueOf(idUsuario), resultados);
 
-	}
-
-	@GET
-	@Path("/createPartida/{idPartida}/{idUsuario}")
-	public void createPartida(@PathParam("idPartida") Integer idPartida, @PathParam("idUsuario") Integer idUsuario) {
-
-		Damas partida = new Damas(idPartida, idUsuario);
-
-		listaPartidasEJB.add(partida);
 	}
 
 	@GET

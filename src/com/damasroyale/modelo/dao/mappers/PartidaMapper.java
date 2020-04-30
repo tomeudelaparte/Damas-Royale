@@ -28,4 +28,8 @@ public interface PartidaMapper {
 
 	public void updatePartida(Partida partida);
 
+	public void addResultadoPartida(Resultado resultado);
+
+	public void delPartidaByIdPartida(@Param("id") Integer id);
+
 }

@@ -8,17 +8,28 @@ function crearPartida(idPartida, idUsuario) {
 		
 	controlSetTablero();
 	
-	setInterval("checkPartida()", 2000);
+	$("#abandonarPartida").click(function() {
+		
+		damasRestClient.abandonarPartida();
+		
+		$("#abandonar").modal("hide");
+	});
+	
+	setInterval("checkPartida()", 300);
 
 }
 
 function empezarPartida() {
 	
 	if (jugador === false && damasRestClient.oponente !== undefined) {
-				
-		jugadorConectado(damasRestClient.oponente, damasRestClient.puntuacionOponente);
-				
-		jugador = true;
+		
+		if(damasRestClient.partida.idUsuario_B != damasRestClient.idUsuario) {
+			
+			jugadorConectado(damasRestClient.oponente, damasRestClient.puntuacionOponente);
+			
+			jugador = true;
+		}
+
 	}
 
 }
@@ -27,8 +38,23 @@ function checkPartida() {
 
 	damasRestClient.getPartida();
 	damasRestClient.getJugadores();
+	controlSetTablero();
+	controlEstadoPartida();
 	
 	empezarPartida();
+}
+
+function controlEstadoPartida(){
+	
+	var estado = damasRestClient.getEstadoPartida();
+		
+	if(estado === true) {
+		var resultado = damasRestClient.getResultadoPartida();
+		
+		$("#partidaFinalizada").find('.modal-body').html("<p>El usuario"+resultado.ganador+" ha ganado la partida.</p>");
+		
+		$("#partidaFinalizada").modal('show');
+	} 
 }
 
 function controlSetTablero() {

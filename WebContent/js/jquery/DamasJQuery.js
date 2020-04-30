@@ -4,23 +4,27 @@ function setTablero(tablero) {
 
 	var usuario = "<img class='img-fluid mx-auto mt-2 ficha usuario' src='media/pieza01.png'>";
 	var oponente = "<img class='img-fluid mx-auto mt-2 ficha' src='media/pieza02.png'>";
-
+	
 	for (var i = 0; i < 8; i++) {
 
 		for (var j = 0; j < 8; j++) {
 
-			if (tablero[i][j] !== 0) {
+				if (tablero[i][j] === 0) {
 
+					$(filas[i]).children().eq(j).empty();
+				}
+				
 				if (tablero[i][j] === 1) {
 
-					$(filas[i]).children().eq(j).append(usuario);
+					$(filas[i]).children().eq(j).html(usuario);
 				}
 
 				if (tablero[i][j] === 2) {
 
-					$(filas[i]).children().eq(j).append(oponente);
+					$(filas[i]).children().eq(j).html(oponente);
 				}
-			}
+
+			
 		}
 	}
 
@@ -30,13 +34,13 @@ function setTablero(tablero) {
 
 function seleccionar(casilla) {
 	$(casilla).addClass("selected");
-	$(".casilla").addClass("move");
-
-	$(".casilla").css("cursor", "pointer");
+	$(".casilla.bg-dark:not(:has(img))").addClass("move");
+	$(".casilla.bg-dark:not(:has(img))").css("cursor", "pointer");
 }
 
 function mover(casilla) {
 	$(casilla).removeClass("selected");
+	$(casilla).empty();
 	$(".casilla").removeClass("move");
 	$(".casilla").unbind();
 }
@@ -68,15 +72,17 @@ function recibirMensaje(jugador, mensaje) {
 	var date = new Date();
 	var hora = formatear(date);
 
-	$("#chat").append("<p><span class='text-dark font-weight-bold'>" + hora + " " + jugador + ":</span>" + mensaje + "</p>");
+	$("#chat").append(
+			"<p><span class='text-dark font-weight-bold'>" + hora + " "
+					+ jugador + ":</span>" + mensaje + "</p>");
 
 	$('#chat').scrollTop($('#chat')[0].scrollHeight);
 }
 
 function formatear(date) {
 
-	hora = addZero(date.getHours());
-	minutos = addZero(date.getMinutes());
+	var hora = addZero(date.getHours());
+	var minutos = addZero(date.getMinutes());
 
 	return "[" + hora + ":" + minutos + "]";
 }

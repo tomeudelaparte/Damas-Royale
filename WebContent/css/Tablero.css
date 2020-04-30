@@ -14,11 +14,11 @@
 }
 
 .selected {
-	box-shadow: inset 0px 0px 20px 3px darkblue;
+	box-shadow: inset 0px 0px 20px 3px darkred;
 }
 
 .move:hover {
-	box-shadow: inset 0px 0px 40px 3px green;
+	box-shadow: inset 0px 0px 20px 3px yellow;
 }
 
 .round-top-left{

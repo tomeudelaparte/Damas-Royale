@@ -50,15 +50,15 @@
 				if (partida.getIdUsuario_A() == oponente.getId()) {
 					
 				%>
-				<h2 class="p-2 text-dark">Oponente <span class="font-weight-light">(Anfitrión)</span></h2>
+				<h2 class="p-2 pt-3 text-dark">Oponente <span class="font-weight-light">(Anfitrión)</span></h2>
 				
 				<% } else { %>
 				
-				<h2 class="p-2 text-dark">Oponente</h2>
+				<h2 class="p-2 pt-3 text-dark">Oponente</h2>
 				
 				<%} %>
 				<hr>
-				<div id="oponente" class="row mx-auto shadow m-3 p-2 rounded">
+				<div id="oponente" class="row mx-auto shadow m-3 mb-5 p-2 rounded">
 				
 				<% if(oponente.getId() == null) { %>
 				
@@ -76,6 +76,7 @@
 				
 				</div>
 				
+				<h1 class="text-dark font-weight-bold mx-auto text-center">VS</h1>
 				<%
 				
 				if (partida.getIdUsuario_A() == usuario.getId()) {
@@ -90,7 +91,7 @@
 				<%} %>
 				
 				<hr>
-				<div class="row mx-auto shadow m-3 p-2 rounded">
+				<div class="row mx-auto shadow m-3 p-2 rounded mb-5">
 					<div class="col-5">
 						<img class="img-fluid mx-auto d-block border" src="media/default.jpg" width="150">
 					</div>
@@ -98,6 +99,59 @@
 						<a href="Ficha?id=<%=usuario.getId() %>" class="text-dark nav-link p-0" target="_blank"><h1 class="text-center"><%=usuario.getNombre() %></a></h1>
 						<p class="text-center"><%=usuarioPuntuacion%> PTS</p>
 					</div>
+				</div>
+				<div class="row mx-auto pt-5">
+					<button type="button" class="btn btn-danger font-weight-bold ml-2 mt-4" data-toggle="modal" data-target="#abandonar">ABANDONAR PARTIDA</button>
+					 <div class="modal fade" id="abandonar" role="dialog">
+					    <div class="modal-dialog modal-dialog-centered">
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <h4 class="modal-title">¿Quiéres abandonar la partida?</h4>
+					        </div>
+					        <div class="modal-body">
+					          <p>Al pulsar el botón de <span class="badge badge-danger">Abandonar partida</span>, la partida terminará y perderás de forma automática. Si no deseas realizar esta acción, pulse el botón de <span class="badge badge-secondary">Cancelar</span> o pulse fuera de esta ventana. </p>
+					          <p>Si deseas una alternativa, puedes solicitar un empate con el oponente mediante el botón <span class="badge badge-secondary">SOLICITAR TABLAS</span> y esperar su respuesta.</p>
+					        </div>
+					        <div class="modal-footer">
+					         <button id="abandonarPartida" type="button" class="btn btn-danger mr-auto">Abandonar partida</button>
+					         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					        </div>
+					      </div>
+					    </div>
+					  </div>
+					<button type="button" class="btn btn-secondary font-weight-bold ml-auto mr-2 mt-4" data-toggle="modal" data-target="#tablas">SOLICITAR TABLAS</button>
+					<div class="modal fade" id="tablas" role="dialog">
+					    <div class="modal-dialog modal-dialog-centered">
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <h4 class="modal-title">¿Quiéres solicitar tablas al oponente?</h4>
+					        </div>
+					        <div class="modal-body">
+					          <p>Al pulsar el botón de <span class="badge badge-danger">Solicitar tablas</span>, solicitarás al oponente terminar la partida en empate. Si no deseas realizar esta acción, pulse el botón de <span class="badge badge-secondary">Cancelar</span> o pulse fuera de esta ventana. </p>
+					          <p>Si deseas terminar la partida sin solicitar tablas, puedes pulsar el botón <span class="badge badge-danger">ABANDONAR PARTIDA</span> con la condición de perder y otorgar la victoria al oponente.</p>
+					        </div>
+					        <div class="modal-footer">
+					         <button type="button" class="btn btn-danger mr-auto">Solicitar tablas</button>
+					         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					        </div>
+					      </div>
+					    </div>
+					  </div>
+					  <div class="modal fade" id="partidaFinalizada" role="dialog">
+					    <div class="modal-dialog modal-dialog-centered">
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <h4 class="modal-title">La partida ha finalizado.</h4>
+					        </div>
+					        <div class="modal-body">
+					        	
+					        </div>
+					        <div class="modal-footer">
+					         <a href="Jugar" class="mx-auto"><button type="button" class="btn btn-secondary">Volver</button></a>
+					        </div>
+					      </div>
+					    </div>
+					  </div>
 				</div>
 			</div>
 			<div class="col-5 border shadow mx-auto m-0 tablero rounded">
