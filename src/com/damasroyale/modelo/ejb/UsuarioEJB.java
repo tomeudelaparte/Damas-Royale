@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.damasroyale.modelo.dao.UsuarioDAO;
+import com.damasroyale.modelo.ejb.extras.EnviarMailEJB;
 import com.damasroyale.modelo.pojo.Usuario;
 
 @Stateless
@@ -17,7 +18,7 @@ public class UsuarioEJB {
 	ActivacionEJB activacionEJB;
 
 	@EJB
-	MailEJB mailEJB;
+	EnviarMailEJB enviarMailEJB;
 
 	public ArrayList<Usuario> getAllUsuario() {
 
@@ -51,17 +52,13 @@ public class UsuarioEJB {
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-		if (usuario.getImagen().length() <= 0) {
-			usuario.setImagen("default.jpg");
-		}
-
 		usuarioDAO.addUsuario(usuario);
 
 		usuario = usuarioDAO.getUsuarioLogin(usuario.getEmail(), usuario.getContrasenya());
 
 		String codigo = activacionEJB.addActivacion(usuario);
 
-		mailEJB.sendActivacion(usuario, codigo);
+		enviarMailEJB.sendActivacion(usuario, codigo);
 	}
 
 	public void updateUsuario(Usuario usuario) {

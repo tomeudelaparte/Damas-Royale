@@ -8,7 +8,7 @@ import javax.ejb.Stateless;
 import com.damasroyale.modelo.dao.PartidaDAO;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
-import com.damasroyale.modelo.pojo.Stat;
+import com.damasroyale.modelo.pojo.extras.Stat;
 
 @Stateless
 @LocalBean

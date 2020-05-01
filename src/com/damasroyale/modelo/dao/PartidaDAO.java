@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.damasroyale.modelo.dao.mappers.PartidaMapper;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
-import com.damasroyale.modelo.pojo.Stat;
+import com.damasroyale.modelo.pojo.extras.Stat;
 
 public class PartidaDAO {
 

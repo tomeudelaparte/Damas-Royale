@@ -13,7 +13,7 @@ public class PuntuacionEJB {
 
 	private final int puntuacionPartidasGanadas = 9;
 	private final int puntuacionPartidasPerdidas = 4;
-	private final int puntuacionTablas = 3;
+	private final int puntuacionPartidasTablas = 3;
 
 	public int getPuntuacion(Integer idUsuario, ArrayList<Resultado> resultados) {
 
@@ -33,7 +33,7 @@ public class PuntuacionEJB {
 
 			if (resultado.isTablas() == true) {
 
-				puntuacionTotal += puntuacionTablas;
+				puntuacionTotal += puntuacionPartidasTablas;
 			}
 		}
 
@@ -71,18 +71,18 @@ public class PuntuacionEJB {
 		return partidasPerdidas;
 	}
 
-	public int getTablas(ArrayList<Resultado> resultados) {
+	public int getPartidasTablas(ArrayList<Resultado> resultados) {
 
-		int tablas = 0;
+		int partidasTablas = 0;
 
 		for (Resultado resultado : resultados) {
 
 			if (resultado.isTablas() == true) {
 
-				tablas += 1;
+				partidasTablas += 1;
 			}
 		}
 
-		return tablas;
+		return partidasTablas;
 	}
 }

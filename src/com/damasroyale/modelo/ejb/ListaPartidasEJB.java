@@ -5,14 +5,15 @@ import java.util.Hashtable;
 import javax.ejb.LocalBean;
 import javax.ejb.Startup;
 import javax.ejb.Stateless;
-import com.damasroyale.modelo.pojo.Damas;
+
+import com.damasroyale.modelo.juego.DamasOnline;
 
 @Stateless
 @Startup
 @LocalBean
-public class ListaPartidasEJB<P extends Damas> {
+public class ListaPartidasEJB<P extends DamasOnline> {
 
-	private Hashtable<Integer, Damas> listaPartidas = new Hashtable<Integer, Damas>();
+	private Hashtable<Integer, DamasOnline> listaPartidas = new Hashtable<Integer, DamasOnline>();
 
 	public void add(P partida) {
 
@@ -35,7 +36,7 @@ public class ListaPartidasEJB<P extends Damas> {
 		return listaPartidas.containsValue(partida);
 	}
 
-	public Damas getPartida(Integer id) {
+	public DamasOnline getPartida(Integer id) {
 
 		return listaPartidas.get(id);
 	}
