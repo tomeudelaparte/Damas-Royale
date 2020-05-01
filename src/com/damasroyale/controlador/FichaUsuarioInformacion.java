@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.PuntuacionEJB;
+import com.damasroyale.modelo.ejb.ResultadoEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Resultado;
@@ -35,6 +36,9 @@ public class FichaUsuarioInformacion extends HttpServlet {
 	@EJB
 	PuntuacionEJB puntuacionEJB;
 
+	@EJB
+	ResultadoEJB resultadoEJB;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -51,7 +55,7 @@ public class FichaUsuarioInformacion extends HttpServlet {
 
 		} else {
 
-			if (id == null || tab==null) {
+			if (id == null || tab == null) {
 
 				response.sendRedirect("Jugar");
 
@@ -69,9 +73,8 @@ public class FichaUsuarioInformacion extends HttpServlet {
 
 					RequestDispatcher rs = getServletContext().getRequestDispatcher("/FichaUsuarioInfomacion.jsp");
 
-					ArrayList<Resultado> resultados = partidaEJB
-							.getAllResultadoByIdUsuario(jugador.getId());
-					
+					ArrayList<Resultado> resultados = resultadoEJB.getAllResultadoByIdUsuario(jugador.getId());
+
 					int puntuacion = puntuacionEJB.getPuntuacion(jugador.getId(), resultados);
 					int partidasJugadas = resultados.size();
 					int partidasGanadas = puntuacionEJB.getPartidasGanadas(jugador.getId(), resultados);

@@ -49,9 +49,28 @@ function mover(casilla) {
 	$(".casilla").unbind();
 }
 
-function jugadorConectado(jugador, puntuacion) {
+function partidaFinalizada(resultado, usuario, oponente) {
+	
+	var nombre;
+	
+	if(resultado.ganador == usuario.id ) {
+		
+		nombre = usuario.nombre;
+		
+	} else {
+		
+		nombre = oponente.nombre;
+	}
+	
+	$("#partidaFinalizada").find('.modal-body').html("<p>El usuario "+nombre+" ha ganado la partida.</p>");
+	
+	$("#partidaFinalizada").modal('show');
+	
+}
 
-	$("#chat").append("<p class='text-danger font-weight-bold'> El usuario " + jugador.nombre + " se ha unido a la partida.</p>");
+function jugadorConectado(usuario, puntuacion) {
+
+	$("#chat").append("<p class='text-danger font-weight-bold'> El usuario " + usuario.nombre + " se ha unido a la partida.</p>");
 
 	$('#chat').scrollTop($('#chat')[0].scrollHeight);
 
@@ -59,13 +78,13 @@ function jugadorConectado(jugador, puntuacion) {
 			.html(
 					"<div class='col-5'>"
 							+ "<img class='img-fluid mx-auto d-block border' src='media/"
-							+ jugador.imagen
+							+ usuario.imagen
 							+ "' width='150'>"
 							+ "</div>"
 							+ "<div class='col-7 mt-3'><a href='Ficha?id="
-							+ jugador.id
+							+ usuario.id
 							+ "' class='text-dark nav-link p-0' target='_blank'>"
-							+ "<h1 class='text-center'>" + jugador.nombre
+							+ "<h1 class='text-center'>" + usuario.nombre
 							+ "</h1></a><p class='text-center'>" + puntuacion
 							+ " PTS</p>" + "</div>");
 

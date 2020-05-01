@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.damasroyale.modelo.dao.mappers.ResultadoMapper'>
+
+	<insert id="addResultadoPartida" parameterType="Resultado">
+		INSERT INTO RESULTADOS
+		( IDPARTIDA, FECHA_HORA, TABLAS, GANADOR, PERDEDOR)
+		VALUES
+		(#{idPartida},#{fecha_hora},#{tablas},#{ganador},#{perdedor})
+	</insert>
+
+	<select id='getResultadoByPartidaID' resultType="Resultado">
+		SELECT * FROM RESULTADOS
+		WHERE IDPARTIDA = #{id}
+	</select>
+	
+
+	<select id='getAllResultadoByIdUsuario' resultType="Resultado">
+		SELECT RESULTADOS.ID, RESULTADOS.IDPARTIDA, RESULTADOS.FECHA_HORA, RESULTADOS.TABLAS, RESULTADOS.GANADOR, RESULTADOS.PERDEDOR
+		FROM PARTIDAS
+		INNER JOIN USUARIOS ON (PARTIDAS.IDUSUARIO_A  = USUARIOS.ID || PARTIDAS.IDUSUARIO_B  = USUARIOS.ID)
+		INNER JOIN RESULTADOS ON PARTIDAS.ID = RESULTADOS.IDPARTIDA
+		AND USUARIOS.ID = #{id} ORDER BY ID DESC;
+	</select>
+
+</mapper>

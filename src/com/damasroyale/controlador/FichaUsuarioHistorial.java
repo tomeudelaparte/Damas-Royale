@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.damasroyale.modelo.ejb.PartidaEJB;
+import com.damasroyale.modelo.ejb.ResultadoEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Partida;
@@ -31,6 +32,9 @@ public class FichaUsuarioHistorial extends HttpServlet {
 
 	@EJB
 	PartidaEJB partidaEJB;
+
+	@EJB
+	ResultadoEJB resultadoEJB;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -65,12 +69,12 @@ public class FichaUsuarioHistorial extends HttpServlet {
 				} else {
 
 					RequestDispatcher rs = getServletContext().getRequestDispatcher("/FichaUsuarioHistorial.jsp");
-					
+
 					ArrayList<Usuario> usuarios = usuarioEJB.getAllUsuario();
-					
+
 					ArrayList<Partida> partidas = partidaEJB.getAllPartidaByIdUsuario(jugador.getId());
-					ArrayList<Resultado> resultados = partidaEJB.getAllResultadoByIdUsuario(jugador.getId());
-					
+					ArrayList<Resultado> resultados = resultadoEJB.getAllResultadoByIdUsuario(jugador.getId());
+
 					request.setAttribute("usuario", usuario);
 					request.setAttribute("jugador", jugador);
 					request.setAttribute("partidas", partidas);

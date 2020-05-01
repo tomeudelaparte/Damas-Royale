@@ -1,6 +1,6 @@
-var jugador = false;
-
 var clienteRest;
+
+var jugador = false;
 
 function crearPartida(idPartida, idUsuario) {
 
@@ -19,7 +19,7 @@ function crearPartida(idPartida, idUsuario) {
 
 }
 
-function empezarPartida() {
+function controlJugadorConectado() {
 	
 	if (jugador === false && clienteRest.oponente !== undefined) {
 		
@@ -38,10 +38,9 @@ function checkPartida() {
 
 	clienteRest.getPartida();
 	clienteRest.getJugadores();
-	controlSetTablero();
 	controlEstadoPartida();
-	
-	empezarPartida();
+	controlJugadorConectado();
+	controlSetTablero();
 }
 
 function controlEstadoPartida(){
@@ -51,18 +50,7 @@ function controlEstadoPartida(){
 	if(estado === true) {
 		var resultado = clienteRest.getResultadoPartida();
 		
-		var nombreUsuario;
-		
-		if(resultado.ganador == clienteRest.usuario.id ) {
-			nombreUsuario = clienteRest.usuario.nombre;
-		} else {
-			nombreUsuario = clienteRest.oponente.nombre;
-
-		}
-		
-		$("#partidaFinalizada").find('.modal-body').html("<p>El usuario "+nombreUsuario+" ha ganado la partida.</p>");
-		
-		$("#partidaFinalizada").modal('show');
+		partidaFinalizada(resultado, clienteRest.usuario, clienteRest.oponente);
 	} 
 }
 

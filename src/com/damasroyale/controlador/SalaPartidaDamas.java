@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.PuntuacionEJB;
+import com.damasroyale.modelo.ejb.ResultadoEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Partida;
@@ -35,6 +36,9 @@ public class SalaPartidaDamas extends HttpServlet {
 
 	@EJB
 	PartidaEJB partidaEJB;
+	
+	@EJB
+	ResultadoEJB resultadoEJB;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -72,7 +76,7 @@ public class SalaPartidaDamas extends HttpServlet {
 					Usuario oponente = usuarioEJB.getUsuarioByID(partida.getIdUsuario_B());
 
 					if (oponente != null) {
-						ArrayList<Resultado> resultadosOponente = partidaEJB
+						ArrayList<Resultado> resultadosOponente = resultadoEJB
 								.getAllResultadoByIdUsuario(oponente.getId());
 
 						int oponentePuntuacion = puntuacionEJB.getPuntuacion(oponente.getId(), resultadosOponente);
@@ -86,7 +90,7 @@ public class SalaPartidaDamas extends HttpServlet {
 				if (partida.getIdUsuario_B() == usuario.getId()) {
 
 					Usuario oponente = usuarioEJB.getUsuarioByID(partida.getIdUsuario_A());
-					ArrayList<Resultado> resultadosOponente = partidaEJB.getAllResultadoByIdUsuario(oponente.getId());
+					ArrayList<Resultado> resultadosOponente = resultadoEJB.getAllResultadoByIdUsuario(oponente.getId());
 
 					int oponentePuntuacion = puntuacionEJB.getPuntuacion(oponente.getId(), resultadosOponente);
 
@@ -97,7 +101,7 @@ public class SalaPartidaDamas extends HttpServlet {
 
 				if (partida.getIdUsuario_A() == usuario.getId() || partida.getIdUsuario_B() == usuario.getId()) {
 
-					ArrayList<Resultado> resultadosUsuario = partidaEJB.getAllResultadoByIdUsuario(usuario.getId());
+					ArrayList<Resultado> resultadosUsuario = resultadoEJB.getAllResultadoByIdUsuario(usuario.getId());
 					int usuarioPuntuacion = puntuacionEJB.getPuntuacion(usuario.getId(), resultadosUsuario);
 
 					int sala = partidaEJB.getAllPartidaEnCurso().size();

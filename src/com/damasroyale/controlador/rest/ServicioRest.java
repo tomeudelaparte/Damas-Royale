@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import com.damasroyale.modelo.ejb.ListaPartidasEJB;
 import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.PuntuacionEJB;
+import com.damasroyale.modelo.ejb.ResultadoEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.juego.DamasOnline;
 import com.damasroyale.modelo.pojo.Movimiento;
@@ -37,6 +38,9 @@ public class ServicioRest {
 
 	@EJB
 	PuntuacionEJB puntuacionEJB;
+
+	@EJB
+	ResultadoEJB resultadoEJB;
 
 	@EJB
 	ListaPartidasEJB<DamasOnline> listaPartidasEJB;
@@ -73,7 +77,7 @@ public class ServicioRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Resultado getResultadoPartida(@PathParam("idPartida") String idPartida) {
 
-		return partidaEJB.getResultadoByPartidaID(Integer.valueOf(idPartida));
+		return resultadoEJB.getResultadoByPartidaID(Integer.valueOf(idPartida));
 	}
 
 	@GET
@@ -98,7 +102,7 @@ public class ServicioRest {
 			Resultado resultado = new Resultado(0, Integer.valueOf(idPartida), fecha_hora, false,
 					Integer.valueOf(idOponente), Integer.valueOf(idUsuario));
 
-			partidaEJB.addResultadoPartida(resultado);
+			resultadoEJB.addResultadoPartida(resultado);
 
 			partida.setFinalizada(true);
 
@@ -128,7 +132,7 @@ public class ServicioRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public int getPuntuacionUsuario(@PathParam("idUsuario") String idUsuario) {
 
-		ArrayList<Resultado> resultados = partidaEJB.getAllResultadoByIdUsuario(Integer.valueOf(idUsuario));
+		ArrayList<Resultado> resultados = resultadoEJB.getAllResultadoByIdUsuario(Integer.valueOf(idUsuario));
 
 		return puntuacionEJB.getPuntuacion(Integer.valueOf(idUsuario), resultados);
 
