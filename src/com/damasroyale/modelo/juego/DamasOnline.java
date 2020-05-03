@@ -68,9 +68,7 @@ public class DamasOnline {
 
 		if (verificarMovimiento(idUsuario, filaInicial, columnaInicial, filaFinal, columnaFinal)) {
 
-			this.tablero[filaInicial][columnaInicial] = 0;
-			this.tablero[filaFinal][columnaFinal] = turno;
-
+			realizarMovimiento(filaInicial, columnaInicial, filaFinal, columnaFinal);
 			eliminar(fichaEliminada[0], fichaEliminada[1]);
 			cambiarTurno(idUsuario);
 
@@ -90,9 +88,13 @@ public class DamasOnline {
 
 		int origen = this.tablero[filaOrigen][columnaOrigen];
 		int destino = this.tablero[filaDestino][columnaDestino];
+		
+		System.out.println(comprobarOrigen(origen)+", "+comprobarDestino(destino)
+		+", "+(comprobarReina(filaOrigen, columnaOrigen) || comprobarDireccion(idUsuario, filaOrigen, filaDestino))
+				+", "+comprobarDistancia(filaOrigen, columnaOrigen, filaDestino, columnaDestino));
 
 		if (comprobarOrigen(origen) && comprobarDestino(destino)
-				&& comprobarDireccion(idUsuario, filaOrigen, filaDestino)
+				&& (comprobarReina(filaOrigen, columnaOrigen) || comprobarDireccion(idUsuario, filaOrigen, filaDestino))
 				&& comprobarDistancia(filaOrigen, columnaOrigen, filaDestino, columnaDestino)) {
 
 			return true;
@@ -105,7 +107,7 @@ public class DamasOnline {
 
 	private boolean comprobarOrigen(int origen) {
 
-		if (origen == turno) {
+		if (origen == turno || String.valueOf(origen).equals(turno +"3")) {
 
 			return true;
 
@@ -177,6 +179,40 @@ public class DamasOnline {
 		return fichaEliminada;
 	}
 
+	private boolean comprobarReina(int fila, int columna) {
+
+		if (tablero[fila][columna] == 13 || tablero[fila][columna] == 23) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private int reinarDama(int dama, int filaLimite) {
+
+		if (dama == 1 && filaLimite == 0) {
+
+			return 13;
+
+		} else if (dama == 2 && filaLimite == 7) {
+
+			return 23;
+
+		} else {
+
+			return dama;
+		}
+	}
+
+	private void realizarMovimiento(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal) {
+
+		int dama = reinarDama(tablero[filaInicial][columnaInicial], filaFinal);
+
+		this.tablero[filaInicial][columnaInicial] = 0;
+		this.tablero[filaFinal][columnaFinal] = dama;
+
+	}
+
 	private void cambiarTurno(Integer idUsuario) {
 
 		if (turno == 1 && anfitrion.equals(idUsuario)) {
@@ -215,9 +251,20 @@ public class DamasOnline {
 			for (int j = 0; j < 8; j++) {
 
 				if (tableroCambiado[i][j] == 1) {
+
 					tableroCambiado[i][j] = 2;
+
 				} else if (tableroCambiado[i][j] == 2) {
+
 					tableroCambiado[i][j] = 1;
+
+				} else if (tableroCambiado[i][j] == 13) {
+
+					tableroCambiado[i][j] = 23;
+
+				} else if (tableroCambiado[i][j] == 23) {
+
+					tableroCambiado[i][j] = 13;
 				}
 			}
 		}

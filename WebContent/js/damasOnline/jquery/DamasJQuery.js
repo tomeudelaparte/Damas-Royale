@@ -3,7 +3,11 @@ function setTablero(tablero) {
 	var filas = $(".fila");
 
 	var usuario = "<img class='img-fluid mx-auto mt-2 ficha usuario' src='media/damas/damaUsuario.png'>";
+	var usuarioReina = "<img class='img-fluid mx-auto mt-2 ficha usuario' src='media/damas/damaReinaUsuario.png'>";
+	
 	var oponente = "<img class='img-fluid mx-auto mt-2 ficha' src='media/damas/damaOponente.png'>";
+	var oponenteReina = "<img class='img-fluid mx-auto mt-2 ficha' src='media/damas/damaReinaOponente.png'>";
+
 	
 	for (var i = 0; i < 8; i++) {
 
@@ -22,6 +26,16 @@ function setTablero(tablero) {
 				if (tablero[i][j] === 2) {
 
 					$(filas[i]).children().eq(j).html(oponente);
+				}
+				
+				if (tablero[i][j] === 13) {
+
+					$(filas[i]).children().eq(j).html(usuarioReina);
+				}
+				
+				if (tablero[i][j] === 23) {
+
+					$(filas[i]).children().eq(j).html(oponenteReina);
 				}
 
 			
