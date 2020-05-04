@@ -29,7 +29,7 @@
 		<img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item">
-				<a href="Ficha?id=<%=usuario.getId()%>"><img class="img-thumbnail mx-auto d-block" src="media/<%= usuario.getImagen() %>" width="50"></a>
+				<a href="Ficha?id=<%=usuario.getId()%>"><img class="img-thumbnail mx-auto d-block rounded img-usuario-50" src="media/<%= usuario.getImagen() %>" width="50"></a>
 			</li>
 			<li class="nav-item dropdown bg-light">
 			<a class="nav-link navbar-brand text-dark font-weight-bold mr-5" href="#" id="navbardrop" data-toggle="dropdown"> 
@@ -46,7 +46,7 @@
 	<nav class="navbar navbar-expand-sm bg-light justify-content-center navbar-dark shadow">
 	  <ul class="navbar-nav ">
 	    <li class="nav-item">
-	      <a class="nav-link text-dark font-weight-bold mr-5" href="Jugar">JUGAR <i class="fa fa-database"></i></a>
+	      <a class="nav-link text-dark font-weight-bold mr-5" href="Jugar">JUGAR ONLINE <i class="fa fa-users"></i></a>
 	    </li>
 	    <li class="nav-item">
 	      <a class="nav-link text-dark font-weight-bold" href="Ranking">RANKING <i class="fa fa-line-chart"></i></a>
@@ -66,9 +66,9 @@
 		        </div>
 		        <div class="modal-body">
 		        <p class="mb-4">Al pulsar el botón <span class="badge badge-danger">Eliminar cuenta</span>, se eliminará, de forma automática, la cuenta y todos los datos asociados. <br><br>· Al realizar esta acción, no habrá vuelta atrás y no podrás acceder a Damas Royale mediante esta cuenta.<br>· Si quieres volver a acceder a Damas Royale, deberás crear una cuenta nueva.</p>
-				<p>¿Estás seguro de eliminar tu cuenta de Damas Royale?</p>
-				<a class="text-decoration-none" href="Eliminar"><button type="button" class="btn btn-outline-danger pl-5 pr-5">Eliminar cuenta</button></a>
 		        <div class="modal-footer mt-3">
+		        <a class="text-decoration-none mr-auto" href="Eliminar"><button type="button" class="btn btn-danger pl-5 pr-5">Eliminar cuenta</button></a>
+		        
 		          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 		        </div>
 		      </div>
@@ -79,7 +79,7 @@
 		<div class="row ml-5">
 			<div class="col-4">
 			<div class="row">
-				<img class="img-thumbnail shadow-sm" src="media/<%=usuario.getImagen() %>" width="250">
+				<img class="img-thumbnail shadow-sm rounded img-usuario-250" src="media/<%=usuario.getImagen() %>" width="250">
 			</div>
 			<div class="row mt-3">
 				<h3><%=usuario.getNombre() %></h3>

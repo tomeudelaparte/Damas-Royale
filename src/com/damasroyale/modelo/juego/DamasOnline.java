@@ -88,10 +88,6 @@ public class DamasOnline {
 
 		int origen = this.tablero[filaOrigen][columnaOrigen];
 		int destino = this.tablero[filaDestino][columnaDestino];
-		
-		System.out.println(comprobarOrigen(origen)+", "+comprobarDestino(destino)
-		+", "+(comprobarReina(filaOrigen, columnaOrigen) || comprobarDireccion(idUsuario, filaOrigen, filaDestino))
-				+", "+comprobarDistancia(filaOrigen, columnaOrigen, filaDestino, columnaDestino));
 
 		if (comprobarOrigen(origen) && comprobarDestino(destino)
 				&& (comprobarReina(filaOrigen, columnaOrigen) || comprobarDireccion(idUsuario, filaOrigen, filaDestino))

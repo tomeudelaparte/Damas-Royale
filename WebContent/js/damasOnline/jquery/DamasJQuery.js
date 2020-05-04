@@ -91,7 +91,7 @@ function jugadorConectado(usuario, puntuacion) {
 	$('#oponente')
 			.html(
 					"<div class='col-5'>"
-							+ "<img class='img-fluid mx-auto d-block border' src='media/"
+							+ "<img class='img-fluid mx-auto d-block border rounded img-usuario-150' src='media/"
 							+ usuario.imagen
 							+ "' width='150'>"
 							+ "</div>"

@@ -11,21 +11,19 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-	<style>
-		body, html {
-			height: 100%;
-		}
-	</style>
 </head>
-<body class="bg-secondary">
+<body class="bg-light">
 	<%
 		String error = (String) request.getAttribute("error");
 	%>
-	<div class="container d-flex h-100">
+	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow mb-5">
+		<a class="navbar-brand p-4"> <img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
+	</nav>
+	<div class="container d-flex h-100 pt-5">
 		<div class="row align-self-center w-100">
 			<div class="col-6 mx-auto">
-				<div class="jumbotron shadow">
-					<h3 class="mb-3">Crear tu cuenta de Damas Royale</h3>
+				<div class="jumbotron shadow bg-light border">
+					<h3 class="mb-5">Crear tu cuenta de Damas Royale</h3>
 					<form action="Register" method="post">
 					 <div class="form-group">
 					    <label>Nombre de usuario</label>
@@ -52,5 +50,11 @@
 			</div>
 		</div>
 	</div>
+	<footer
+		class="fixed-bottom p-4 bg-light text-dark border-top shadow-lg">
+		<div class="container text-center">
+			<small>Copyright &copy; 2020 Damas Royale by Tomeu de la Parte</small>
+		</div>
+	</footer>
 </body>
 </html>

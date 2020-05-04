@@ -1,3 +1,23 @@
 .dropdown-item:active {
 	background-color: #f8f9fa !important;
 }
+
+.img-usuario-40{
+	height: 40px;
+}
+
+.img-usuario-50{
+	height: 50px;
+}
+
+.img-usuario-60{
+	height: 60px;
+}
+
+.img-usuario-150{
+	height: 150px;
+}
+
+.img-usuario-250{
+	height: 250px;
+}

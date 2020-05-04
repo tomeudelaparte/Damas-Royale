@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="media/favicon.png">
+<link rel="stylesheet" href="css/general.css">
 <link rel="stylesheet" href="css/salaPartidaDamas.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -66,7 +67,7 @@
 
 				<% } else { %>
 					<div class="col-5">
-						<img id="opImagen" class="img-fluid mx-auto d-block border" src="media/<%=oponente.getImagen() %>" width="150">
+						<img id="opImagen" class="img-fluid mx-auto d-block border rounded img-usuario-150" src="media/<%=oponente.getImagen() %>" width="150">
 					</div>
 					<div class="col-7 mt-3">	
 						<a href="Ficha?id=<%=oponente.getId() %>" class="text-dark nav-link p-0" target="_blank"><h1 class="text-center"><%=oponente.getNombre() %></h1></a>
@@ -93,7 +94,7 @@
 				<hr>
 				<div class="row mx-auto shadow m-3 p-2 rounded mb-5">
 					<div class="col-5">
-						<img class="img-fluid mx-auto d-block border" src="media/<%=usuario.getImagen() %>" width="150">
+						<img class="img-fluid mx-auto d-block border rounded img-usuario-150" src="media/<%=usuario.getImagen() %>" width="150">
 					</div>
 					<div class="col-7 mt-3">	
 						<a href="Ficha?id=<%=usuario.getId() %>" class="text-dark nav-link p-0" target="_blank"><h1 class="text-center"><%=usuario.getNombre() %></a></h1>

@@ -31,7 +31,7 @@
 		<img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item">
-				<a href="Ficha?id=<%=usuario.getId()%>"><img class="img-thumbnail mx-auto d-block" src="media/<%= usuario.getImagen() %>" width="50"></a>
+				<a href="Ficha?id=<%=usuario.getId()%>"><img class="img-thumbnail mx-auto d-block rounded img-usuario-50" src="media/<%= usuario.getImagen() %>" width="50"></a>
 			</li>
 			<li class="nav-item dropdown bg-light">
 			<a class="nav-link navbar-brand text-dark font-weight-bold mr-5" href="#" id="navbardrop" data-toggle="dropdown"> 
@@ -48,7 +48,7 @@
 	<nav class="navbar navbar-expand-sm bg-light justify-content-center navbar-dark shadow">
 	  <ul class="navbar-nav ">
 	    <li class="nav-item">
-	      <a class="nav-link text-dark font-weight-bold mr-5" href="Jugar">JUGAR <i class="fa fa-database"></i></a>
+	      <a class="nav-link text-dark font-weight-bold mr-5" href="Jugar">JUGAR ONLINE <i class="fa fa-users"></i></a>
 	    </li>
 	    <li class="nav-item">
 	      <a class="nav-link text-dark font-weight-bold" href="Ranking">RANKING <i class="fa fa-line-chart"></i></a>
@@ -71,7 +71,7 @@
 			    <% for(Rank rank : ranking) {%>
 			   <tr>
 			      <td class="text-center text-dark font-weight-bold" scope="row"><%=index++ %></td>
-			      <td><a href="Ficha?id=<%=rank.getId() %>"><img class="rounded-circle float-left mr-2 img-thumbnail shadow-sm" src="media/<%=rank.getImagen() %>" width="60"></a> <a href="Ficha?id=<%=rank.getId() %>" class="text-dark nav-link p-0"><h5 class="mt-3"><%=rank.getNombre() %></h5></a></td>
+			      <td><a href="Ficha?id=<%=rank.getId() %>"><img class="rounded-circle float-left mr-2 img-thumbnail shadow-sm img-usuario-60" src="media/<%=rank.getImagen() %>" width="60"></a> <a href="Ficha?id=<%=rank.getId() %>" class="text-dark nav-link p-0"><h5 class="mt-3"><%=rank.getNombre() %></h5></a></td>
 			      <td class="text-dark font-weight-bold"><%=rank.getPuntuacion() %> PTS</td>
 			    </tr>
 			    <%} %>

@@ -11,23 +11,21 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-	<style>
-		body, html {
-			height: 100%;
-		}
-	</style>
 </head>
-<body class="bg-secondary">
+<body class="bg-light">
 	<%
 		String error = (String) request.getAttribute("error");
 		String register = (String) request.getAttribute("register");
 		String activation = (String) request.getAttribute("activation");
 	%>
-	<div class="container d-flex h-100">
+	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow mb-5">
+		<a class="navbar-brand p-4"> <img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
+	</nav>
+	<div class="container d-flex h-100 pt-5">
 		<div class="row align-self-center w-100">
 			<div class="col-6 mx-auto">
-				<div class="jumbotron shadow pb-4">
-					<img class="img-fluid mx-auto d-block mb-5" src="media/logo.png" width="350">
+				<div class="jumbotron shadow bg-light border pb-4">
+					<h3 class="mb-5">Iniciar sesión en Damas Royale</h3>
 					<form action="Login" method="post">
 						<div class="form-group input-group">
 							<input type="email" class="form-control" name="email" placeholder="Correo electrónico" required="required">
@@ -44,31 +42,37 @@
 						<%
 							if (error != null) {
 				
-								error = "<p class='text-danger text-center'>*ERROR AL INICIAR SESIÓN*</p>";
+								error = "<p class='text-danger text-center font-weight-bold'>CORREO ELECTRÓNICO O CONTRASEÑA INCORRECTA.</p>";
 				
 								out.append(error);
 							}
 				
 							if (register != null) {
 				
-								register = "<p class='text-danger text-center'>COMPRUEBE SU CORREO PARA ACTIVAR LA CUENTA</p>";
+								register = "<p class='text-danger text-center font-weight-bold'>COMPRUEBE SU CORREO PARA ACTIVAR LA CUENTA.</p>";
 				
 								out.append(register);
 							}
 				
 							if (activation != null) {
 				
-								activation = "<p class='text-danger text-center'>SU CUENTA HA SIDO ACTIVADA</p>";
+								activation = "<p class='text-danger text-center font-weight-bold'>SU CUENTA HA SIDO ACTIVADA.</p>";
 				
 								out.append(activation);
 							}
 						%>
-							<button type="submit" class="btn btn-secondary d-flex mx-auto mb-5">Iniciar sesión en Damas Royale<i class="fa fa-sign-out ml-2" style="font-size:24px"></i></button>
+							<button type="submit" class="btn btn-secondary d-flex mx-auto mb-5">Acceder a Damas Royale<i class="fa fa-sign-out ml-2" style="font-size:24px"></i></button>
 							<p class="mb-0">¿No tienes un cuenta de Damas Royale? <a href="Register" class="text-decoration-none">Crear una nueva cuenta</a></p>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+		<footer
+		class="fixed-bottom p-4 bg-light text-dark border-top shadow-lg">
+		<div class="container text-center">
+			<small>Copyright &copy; 2020 Damas Royale by Tomeu de la Parte</small>
+		</div>
+	</footer>
 </body>
 </html>
