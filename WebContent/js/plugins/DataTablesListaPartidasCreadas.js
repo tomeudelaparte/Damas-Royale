@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
 	$('table').DataTable({
 			"scrollY" : "385px",
 			"scrollCollapse" : true,

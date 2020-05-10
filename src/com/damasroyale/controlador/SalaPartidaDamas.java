@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 
 import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.PuntuacionEJB;
@@ -69,6 +72,13 @@ public class SalaPartidaDamas extends HttpServlet {
 					partida.setIdUsuario_B(usuario.getId());
 
 					partidaEJB.updatePartida(partida);
+					
+					Client cliente = ClientBuilder.newClient();
+
+					WebTarget target = cliente.target("http://localhost:8080/Damas-Royale/PartidaRest/setOponente/"
+							+ partida.getId() + "/" + usuario.getId());
+
+					target.request().get();
 				}
 
 				if (partida.getIdUsuario_A() == usuario.getId()) {

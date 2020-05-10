@@ -1,18 +1,37 @@
 package com.damasroyale.modelo.juego;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
+import javax.ejb.EJB;
+
+import com.damasroyale.modelo.ejb.PartidaEJB;
+import com.damasroyale.modelo.ejb.ResultadoEJB;
 import com.damasroyale.modelo.pojo.Movimiento;
+import com.damasroyale.modelo.pojo.Partida;
+import com.damasroyale.modelo.pojo.Resultado;
 
 public class DamasOnline {
 
 	private Integer id;
-	private Integer anfitrion;
 
-	private boolean finalizada = false;
+	private Integer anfitrion;
+	private Integer oponente;
 
 	private int turno = 1;
 
-	private int fichas01 = 12;
-	private int fichas02 = 12;
+	private int fichasAnfitrion = 12;
+	private int fichasOponente = 12;
+
+	private Integer turnoUsuario = 0;
+
+	private Integer ganador = 0;
+	private Integer perdedor = 0;
+
+	private boolean tablasAnfitrion = false;
+	private boolean tablasOponente = false;
+
+	private boolean finalizada = false;
 
 	private int tablero[][] = { { 0, 2, 0, 2, 0, 2, 0, 2 }, { 2, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 2, 0, 2, 0, 2 },
 			{ 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 }, { 1, 0, 1, 0, 1, 0, 1, 0 },
@@ -24,6 +43,7 @@ public class DamasOnline {
 
 		this.id = id;
 		this.anfitrion = anfitrion;
+		this.turnoUsuario = anfitrion;
 	}
 
 	public Integer getId() {
@@ -32,6 +52,34 @@ public class DamasOnline {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getTurnoUsuario() {
+		return turnoUsuario;
+	}
+
+	public Integer getOponente() {
+		return oponente;
+	}
+
+	public void setOponente(Integer oponente) {
+		this.oponente = oponente;
+	}
+
+	public Integer getGanador() {
+		return ganador;
+	}
+
+	public void setGanador(Integer ganador) {
+		this.ganador = ganador;
+	}
+
+	public Integer getPerdedor() {
+		return perdedor;
+	}
+
+	public void setPerdedor(Integer perdedor) {
+		this.perdedor = perdedor;
 	}
 
 	public boolean isFinalizada() {
@@ -69,8 +117,19 @@ public class DamasOnline {
 		if (verificarMovimiento(idUsuario, filaInicial, columnaInicial, filaFinal, columnaFinal)) {
 
 			realizarMovimiento(filaInicial, columnaInicial, filaFinal, columnaFinal);
-			eliminar(fichaEliminada[0], fichaEliminada[1]);
-			cambiarTurno(idUsuario);
+
+			if (eliminar(fichaEliminada[0], fichaEliminada[1])) {
+
+				if (comprobarDobleSalto(idUsuario, filaFinal, columnaFinal) == false) {
+
+					cambiarTurno(idUsuario);
+				}
+
+			} else {
+				cambiarTurno(idUsuario);
+			}
+
+			comprobarEstadoPartida(idPartida);
 
 			Movimiento movimiento = new Movimiento(0, idPartida, idUsuario, filaInicial, filaFinal, columnaInicial,
 					columnaFinal);
@@ -103,7 +162,7 @@ public class DamasOnline {
 
 	private boolean comprobarOrigen(int origen) {
 
-		if (origen == turno || String.valueOf(origen).equals(turno +"3")) {
+		if (origen == turno || String.valueOf(origen).equals(turno + "3")) {
 
 			return true;
 
@@ -161,6 +220,25 @@ public class DamasOnline {
 		}
 	}
 
+	private boolean comprobarDobleSalto(Integer idUsuario, int filaOrigen, int columnaOrigen) {
+		if ((filaOrigen + 2) < 8 && (filaOrigen - 2) > 0 && (columnaOrigen + 2) < 8 && (columnaOrigen - 2) > 0) {
+			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen + 2, columnaOrigen + 2)
+					|| verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen + 2, columnaOrigen - 2)
+					|| verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen - 2, columnaOrigen + 2)
+					|| verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen - 2, columnaOrigen - 2)) {
+
+				fichaEliminada = new int[2];
+
+				return true;
+			} else {
+				return false;
+			}
+
+		} else {
+			return false;
+		}
+	}
+
 	private int[] eliminarFicha(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
 
 		int filaPosicion = filaDestino + ((filaOrigen - filaDestino) / 2);
@@ -181,6 +259,28 @@ public class DamasOnline {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	private void comprobarEstadoPartida(Integer idPartida) {
+
+		if (fichasAnfitrion <= 0) {
+
+			ganador = oponente;
+			perdedor = anfitrion;
+
+			finalizada = true;
+
+			finalizarPartida(idPartida);
+
+		} else if (fichasOponente <= 0) {
+
+			ganador = anfitrion;
+			perdedor = oponente;
+
+			finalizada = true;
+
+			finalizarPartida(idPartida);
 		}
 	}
 
@@ -215,19 +315,32 @@ public class DamasOnline {
 
 			turno = 2;
 
+			turnoUsuario = oponente;
+
 		} else if (turno == 2 && !anfitrion.equals(idUsuario)) {
 
 			turno = 1;
+			turnoUsuario = anfitrion;
 		}
 
 	}
 
-	private void eliminar(int fila, int casilla) {
+	private boolean eliminar(int fila, int casilla) {
 
 		if (fila != 0 && casilla != 0) {
 
 			this.tablero[fila][casilla] = 0;
 			fichaEliminada = new int[2];
+
+			if (turno == 1) {
+				fichasOponente--;
+			} else if (turno == 2) {
+				fichasAnfitrion--;
+			}
+
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -283,6 +396,34 @@ public class DamasOnline {
 		}
 
 		return tableroCambiado;
+	}
+
+	public void finalizarPartida(Integer idPartida) {
+
+		PartidaEJB partidaEJB = new PartidaEJB();
+		ResultadoEJB resultadoEJB = new ResultadoEJB();
+
+		if (oponente != null) {
+			
+			Partida partida = partidaEJB.getPartidaByID(idPartida);
+
+			Date date = new Date();
+
+			Timestamp fecha_hora = new Timestamp(date.getTime());
+
+			Resultado resultado = new Resultado(0, idPartida, fecha_hora, false, ganador, perdedor);
+
+			resultadoEJB.addResultadoPartida(resultado);
+
+			partida.setFinalizada(true);
+
+			partidaEJB.updatePartida(partida);
+
+		} else {
+
+			partidaEJB.delPartidaByIdPartida(idPartida);
+		}
+
 	}
 
 }

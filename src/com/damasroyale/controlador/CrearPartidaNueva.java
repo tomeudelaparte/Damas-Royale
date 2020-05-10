@@ -56,7 +56,7 @@ public class CrearPartidaNueva extends HttpServlet {
 
 				Client cliente = ClientBuilder.newClient();
 
-				WebTarget target = cliente.target("http://localhost:8080/Damas-Royale/Rest/createPartida/"
+				WebTarget target = cliente.target("http://localhost:8080/Damas-Royale/PartidaRest/create/"
 						+ partida.getId() + "/" + usuario.getId());
 
 				target.request().get();

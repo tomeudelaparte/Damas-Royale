@@ -34,9 +34,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="js/ajustes/TextareaAutoHeight.js"></script>
-<script src="js/damasOnline/jquery/DamasJQuery.js"></script>
-<script src="js/damasOnline/ajax/ClienteRest.js"></script>
-<script src="js/damasOnline/Controlador.js"></script>
+<script src="js/damasOnline/ajax/PartidaRestClient.js"></script>
+<script src="js/damasOnline/jquery/PartidaJQuery.js"></script>
+<script src="js/damasOnline/ControladorPartida.js"></script>
 </head>
 <body class="bg-light">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow-sm">
@@ -92,7 +92,7 @@
 				<%} %>
 				
 				<hr>
-				<div class="row mx-auto shadow m-3 p-2 rounded mb-5">
+				<div id="usuario" class="row mx-auto shadow m-3 p-2 rounded mb-5">
 					<div class="col-5">
 						<img class="img-fluid mx-auto d-block border rounded img-usuario-150" src="media/<%=usuario.getImagen() %>" width="150">
 					</div>
@@ -254,7 +254,7 @@
 		    <div class="modal-dialog modal-dialog-centered modal-lg">
 		      <div class="modal-content">
 		        <div class="modal-header rounded">
-		          <h4 class="modal-title font-weight-bold text-danger">Movimiento incorrecto</h4>
+		          <h4 class="modal-title font-weight-bold text-danger">No puedes realizar este movimiento.</h4>
 		          <button type="button" class="close text-danger font-weight-bold" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
 		        </div>
 		      </div>

@@ -63,23 +63,22 @@ function mover(casilla) {
 	$(".casilla").unbind();
 }
 
-function partidaFinalizada(resultado, usuario, oponente) {
-	
-	var nombre;
-	
-	if(resultado.ganador == usuario.id ) {
-		
-		nombre = usuario.nombre;
-		
-	} else {
-		
-		nombre = oponente.nombre;
-	}
+function partidaFinalizada(nombre) {
 	
 	$("#partidaFinalizada").find('.modal-body').html("<p>El usuario "+nombre+" ha ganado la partida.</p>");
 	
 	$("#partidaFinalizada").modal('show');
 	
+}
+
+function addTurnoUsuario() {
+	$('#oponente').removeClass("border border-warning");
+	$('#usuario').addClass("border border-warning");
+}
+
+function addTurnoOponente() {
+	$('#usuario').removeClass("border border-warning");
+	$('#oponente').addClass("border border-warning");
 }
 
 function jugadorConectado(usuario, puntuacion) {

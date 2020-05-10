@@ -27,19 +27,19 @@
 					<form action="Register" method="post">
 					 <div class="form-group">
 					    <label>Nombre de usuario</label>
-					    <input type="text" class="form-control" required="required" name="nombre">
+					    <input type="text" class="form-control" required="required" name="nombre" placeholder="32 carácteres máximo">
 					  </div>
 					  <div class="form-group">
 					    <label>Correo electrónico</label>
-					    <input type="email" class="form-control" required="required" name="email">
+					    <input type="email" class="form-control" required="required" name="email" placeholder="64 carácteres máximo">
 					  </div>
 					  <div class="form-group">
 					    <label>Contraseña</label>
-					    <input type="password" class="form-control"  required="required" name="contrasenya">
+					    <input type="password" class="form-control"  required="required" name="contrasenya" placeholder="64 carácteres máximo">
 					  </div>
 						<%
 							if (error != null) {
-								error = "<p class='text-danger text-center'>*ERROR AL REGISTRARSE*</p>";
+								error = "<p class='text-danger text-center font-weight-bold'>NOMBRE O CORREO ELECTRÓNICO EXISTENTE.</p>";
 								out.append(error);
 							}
 						%>
