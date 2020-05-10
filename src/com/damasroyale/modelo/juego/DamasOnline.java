@@ -397,6 +397,28 @@ public class DamasOnline {
 
 		return tableroCambiado;
 	}
+	
+	public void abanadonarPartida(Integer idPartida, Integer idUsuario) {
+		
+		if (idUsuario == anfitrion) {
+
+			ganador = oponente;
+			perdedor = anfitrion;
+
+			finalizada = true;
+
+			finalizarPartida(idPartida);
+
+		} else if(idUsuario != anfitrion) {
+
+			ganador = anfitrion;
+			perdedor = oponente;
+
+			finalizada = true;
+
+			finalizarPartida(idPartida);
+		}
+	}
 
 	public void finalizarPartida(Integer idPartida) {
 

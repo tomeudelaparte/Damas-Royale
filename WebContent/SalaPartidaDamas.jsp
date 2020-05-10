@@ -40,7 +40,8 @@
 </head>
 <body class="bg-light">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow-sm">
-		<a class="navbar-brand p-4"> <img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
+		<a class="navbar-brand p-4" href="Jugar" target="_blank">
+		<img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
 	</nav>
 	<div class="container-fluid bg-light pt-3 mb-3">
 		<div class="row">

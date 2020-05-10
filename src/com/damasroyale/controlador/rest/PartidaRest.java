@@ -99,9 +99,8 @@ public class PartidaRest {
 	@Path("/abandonar/{idPartida}/{idUsuario}")
 	public void abandonarPartida(@PathParam("idPartida") Integer idPartida, @PathParam("idUsuario") Integer idUsuario) {
 
-		listaPartidasEJB.getPartida(idPartida).finalizarPartida(idPartida);
+		listaPartidasEJB.getPartida(idPartida).abanadonarPartida(idPartida, idUsuario);
 
-		listaPartidasEJB.remove(listaPartidasEJB.getPartida(idPartida));
 	}
 
 	@GET
@@ -140,7 +139,7 @@ public class PartidaRest {
 	public int getPuntuacionUsuario(@PathParam("idUsuario") Integer idUsuario) {
 
 		ArrayList<Resultado> resultados = resultadoEJB.getAllResultadoByIdUsuario(idUsuario);
-
+		
 		return puntuacionEJB.getPuntuacion(idUsuario, resultados);
 
 	}

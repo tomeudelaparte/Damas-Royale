@@ -19,7 +19,7 @@ function crearPartida(idPartida, idUsuario) {
 		}
 	});
 	
-	setInterval("checkPartida()", 300);
+	setInterval("checkPartida()", 1000);
 
 }
 
@@ -114,7 +114,7 @@ function controlSeleccionar() {
 				
 		if(movimiento !== undefined) {
 			
-			$(this).append(ficha);
+			controlSetTablero();
 			mover(casilla);
 
 			
