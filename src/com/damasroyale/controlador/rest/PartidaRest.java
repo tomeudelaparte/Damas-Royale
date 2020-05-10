@@ -1,16 +1,11 @@
 package com.damasroyale.controlador.rest;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
-
 import javax.ejb.EJB;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.damasroyale.modelo.ejb.ListaPartidasEJB;
@@ -24,11 +19,8 @@ import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Usuario;
 
-@Path("/Rest")
-public class ServicioRest {
-
-	@Context
-	HttpServletRequest request;
+@Path("/PartidaRest")
+public class PartidaRest {
 
 	@EJB
 	PartidaEJB partidaEJB;
@@ -46,7 +38,7 @@ public class ServicioRest {
 	ListaPartidasEJB<DamasOnline> listaPartidasEJB;
 
 	@GET
-	@Path("/createPartida/{idPartida}/{idUsuario}")
+	@Path("/create/{idPartida}/{idUsuario}")
 	public void createPartida(@PathParam("idPartida") Integer idPartida, @PathParam("idUsuario") Integer idUsuario) {
 
 		DamasOnline partida = new DamasOnline(idPartida, idUsuario);
@@ -55,86 +47,18 @@ public class ServicioRest {
 	}
 
 	@GET
+	@Path("/setOponente/{idPartida}/{idUsuario}")
+	public void setOponente(@PathParam("idPartida") Integer idPartida, @PathParam("idUsuario") Integer idUsuario) {
+
+		listaPartidasEJB.getPartida(idPartida).setOponente(idUsuario);
+	}
+
+	@GET
 	@Path("/getPartida/{idPartida}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Partida getPartida(@PathParam("idPartida") String idPartida) {
+	public Partida getPartida(@PathParam("idPartida") Integer idPartida) {
 
-		return partidaEJB.getPartidaByID(Integer.valueOf(idPartida));
-
-	}
-
-	@GET
-	@Path("/getEstadoPartida/{idPartida}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public boolean getEstadoPartida(@PathParam("idPartida") String idPartida) {
-
-		return partidaEJB.getPartidaByID(Integer.valueOf(idPartida)).isFinalizada();
-
-	}
-
-	@GET
-	@Path("/getResultadoPartida/{idPartida}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Resultado getResultadoPartida(@PathParam("idPartida") String idPartida) {
-
-		return resultadoEJB.getResultadoByPartidaID(Integer.valueOf(idPartida));
-	}
-
-	@GET
-	@Path("/abandonarPartida/{idPartida}/{idUsuario}/{idOponente}")
-	public void finalizarPartida(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario,
-			@PathParam("idOponente") String idOponente) {
-
-		partidaEJB.getPartidaByID(Integer.valueOf(idPartida)).setFinalizada(true);
-
-		if (idOponente == null) {
-
-			partidaEJB.delPartidaByIdPartida(Integer.valueOf(idPartida));
-
-		} else {
-
-			Partida partida = partidaEJB.getPartidaByID(Integer.valueOf(idPartida));
-
-			Date date = new Date();
-
-			Timestamp fecha_hora = new Timestamp(date.getTime());
-
-			Resultado resultado = new Resultado(0, Integer.valueOf(idPartida), fecha_hora, false,
-					Integer.valueOf(idOponente), Integer.valueOf(idUsuario));
-
-			resultadoEJB.addResultadoPartida(resultado);
-
-			partida.setFinalizada(true);
-
-			partidaEJB.updatePartida(partida);
-
-		}
-
-	}
-
-	@GET
-	@Path("/getUsuario/{idUsuario}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Usuario getUsuario(@PathParam("idUsuario") String idUsuario) {
-
-		Usuario usuario = usuarioEJB.getUsuarioByID(Integer.valueOf(idUsuario));
-
-		usuario.setContrasenya(null);
-		usuario.setEmail(null);
-		usuario.setRegistro(null);
-
-		return usuario;
-
-	}
-
-	@GET
-	@Path("/getPuntuacionUsuario/{idUsuario}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public int getPuntuacionUsuario(@PathParam("idUsuario") String idUsuario) {
-
-		ArrayList<Resultado> resultados = resultadoEJB.getAllResultadoByIdUsuario(Integer.valueOf(idUsuario));
-
-		return puntuacionEJB.getPuntuacion(Integer.valueOf(idUsuario), resultados);
+		return partidaEJB.getPartidaByID(idPartida);
 
 	}
 
@@ -144,6 +68,40 @@ public class ServicioRest {
 	public int[][] getTablero(@PathParam("idPartida") Integer idPartida, @PathParam("idUsuario") Integer idUsuario) {
 
 		return listaPartidasEJB.getPartida(idPartida).getTablero(idUsuario);
+	}
+
+	@GET
+	@Path("/getTurno/{idPartida}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Integer getTurno(@PathParam("idPartida") Integer idPartida) {
+
+		return listaPartidasEJB.getPartida(idPartida).getTurnoUsuario();
+	}
+
+	@GET
+	@Path("/getEstado/{idPartida}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean getEstadoPartida(@PathParam("idPartida") Integer idPartida) {
+
+		return listaPartidasEJB.getPartida(idPartida).isFinalizada();
+
+	}
+
+	@GET
+	@Path("/getGanador/{idPartida}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Integer getResultado(@PathParam("idPartida") Integer idPartida) {
+
+		return listaPartidasEJB.getPartida(idPartida).getGanador();
+	}
+
+	@GET
+	@Path("/abandonar/{idPartida}/{idUsuario}")
+	public void abandonarPartida(@PathParam("idPartida") Integer idPartida, @PathParam("idUsuario") Integer idUsuario) {
+
+		listaPartidasEJB.getPartida(idPartida).finalizarPartida(idPartida);
+
+		listaPartidasEJB.remove(listaPartidasEJB.getPartida(idPartida));
 	}
 
 	@GET
@@ -160,4 +118,31 @@ public class ServicioRest {
 
 		return movimiento;
 	}
+
+	@GET
+	@Path("/getUsuario/{idUsuario}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Usuario getUsuario(@PathParam("idUsuario") Integer idUsuario) {
+
+		Usuario usuario = usuarioEJB.getUsuarioByID(idUsuario);
+
+		usuario.setContrasenya(null);
+		usuario.setEmail(null);
+		usuario.setRegistro(null);
+
+		return usuario;
+
+	}
+
+	@GET
+	@Path("/getPuntuacionUsuario/{idUsuario}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public int getPuntuacionUsuario(@PathParam("idUsuario") Integer idUsuario) {
+
+		ArrayList<Resultado> resultados = resultadoEJB.getAllResultadoByIdUsuario(idUsuario);
+
+		return puntuacionEJB.getPuntuacion(idUsuario, resultados);
+
+	}
+
 }

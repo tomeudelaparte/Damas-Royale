@@ -1,4 +1,4 @@
-class ClienteRest {
+class PartidaRestClient {
 
 	constructor(idPartida, idUsuario) {
 				
@@ -13,12 +13,13 @@ class ClienteRest {
 		this.puntuacionUsuario;
 		this.puntuacionOponente;
 	}
+	
 
 	getPartida() {
 		
 		var tmp;
 		
-		var url = 'http://localhost:8080/Damas-Royale/Rest/getPartida/';
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/getPartida/';
 		
 		$.ajax({
 			url : url + this.idPartida,
@@ -34,11 +35,12 @@ class ClienteRest {
 		this.partida = tmp;
 	}
  
+	
 	getUsuario(idUsuario) {
 		
 		var tmp;
 		
-		var url = 'http://localhost:8080/Damas-Royale/Rest/getUsuario/';
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/getUsuario/';
 
 		$.ajax({
 			url : url + idUsuario,
@@ -53,12 +55,16 @@ class ClienteRest {
 		
 		return tmp;
 	}
+	
+	
 
+
+	
 	getPuntuacionUsuario(idUsuario) {
 	
 		var tmp;
 	
-		var url = 'http://localhost:8080/Damas-Royale/Rest/getPuntuacionUsuario/';
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/getPuntuacionUsuario/';
 	
 		$.ajax({
 			url : url + idUsuario,
@@ -74,11 +80,12 @@ class ClienteRest {
 		return tmp;
 	}
 	
+	
 	getTablero() {
 		
 		var tmp;
 	
-		var url = 'http://localhost:8080/Damas-Royale/Rest/getTablero/';
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/getTablero/';
 			
 		$.ajax({
 			url : url + this.idPartida + "/"+ this.idUsuario,
@@ -94,11 +101,11 @@ class ClienteRest {
 		return tmp;
 	}
 	
-	getEstadoPartida() {
+	getTurno() {
 		
 		var tmp;
 	
-		var url = 'http://localhost:8080/Damas-Royale/Rest/getEstadoPartida/';
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/getTurno/';
 			
 		$.ajax({
 			url : url + this.idPartida,
@@ -114,11 +121,11 @@ class ClienteRest {
 		return tmp;
 	}
 	
-	getResultadoPartida() {
+	getEstado() {
 		
 		var tmp;
 	
-		var url = 'http://localhost:8080/Damas-Royale/Rest/getResultadoPartida/';
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/getEstado/';
 			
 		$.ajax({
 			url : url + this.idPartida,
@@ -134,12 +141,33 @@ class ClienteRest {
 		return tmp;
 	}
 	
+	getGanador() {
+		
+		var tmp;
+	
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/getGanador/';
+			
+		$.ajax({
+			url : url + this.idPartida,
+			async: false,
+			contentType : "application/json",
+			dataType : 'json',
+			success : function(data) {
+	
+				tmp = data;
+			}
+		});
+				
+		return tmp;
+	}
+	
+
 	abandonarPartida() {
 			
-		var url = 'http://localhost:8080/Damas-Royale/Rest/abandonarPartida/';
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/abandonar/';
 			
 		$.ajax({
-			url : url + this.idPartida +"/"+ this.idUsuario +"/"+ this.oponente.id,
+			url : url + this.idPartida +"/"+ this.idUsuario,
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
@@ -147,11 +175,12 @@ class ClienteRest {
 		});	
 	}
 	
+	
 	makeMovimiento(idPartida, idJugador, filaOrigen, filaDestino, columnaOrigen, columnaDestino) {
 		
 		var tmp;
 	
-		var url = "http://localhost:8080/Damas-Royale/Rest/makeMovimiento/"+idPartida+"/"+idJugador+"/"+filaOrigen+"/"+filaDestino+"/"+columnaOrigen+"/"+columnaDestino;
+		var url = "http://localhost:8080/Damas-Royale/PartidaRest/makeMovimiento/"+idPartida+"/"+idJugador+"/"+filaOrigen+"/"+filaDestino+"/"+columnaOrigen+"/"+columnaDestino;
 			
 		$.ajax({
 			url : url,
@@ -166,6 +195,7 @@ class ClienteRest {
 		
 		return tmp;
 	}
+	
 	
 	getJugadores() {
 		
