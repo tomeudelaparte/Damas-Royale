@@ -101,12 +101,12 @@
 					  
 					  if(partida.getId() == resultado.getIdPartida()) {
 						  
-						  if(resultado.getGanador() == jugador.getId()) {
+						  if(resultado.getGanador() == jugador.getId() && resultado.getPerdedor() != jugador.getId()) {
 						  
 			    %>
 			   <tr class="bg-success text-light">
 
-			   <%} else if(resultado.getGanador() != jugador.getId()) {%>
+			   <%} else if(resultado.getGanador() != jugador.getId() && resultado.getPerdedor() == jugador.getId()) {%>
 			   
 			   <tr class="bg-danger text-light">
 			   

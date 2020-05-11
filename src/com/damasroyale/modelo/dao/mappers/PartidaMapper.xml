@@ -18,14 +18,14 @@
 		LIMIT 1
 	</select>
 
-	<insert id="addPartidaByIdUsuario">
+	<insert id="addPartidaByIdUsuario" parameterType="Partida">
 		INSERT INTO PARTIDAS
 		(IDUSUARIO_A, IDUSUARIO_B, FINALIZADA)
 		VALUES
 		(#{id},null,0);
 	</insert>
 	
-	<update id='updatePartida'>
+	<update id='updatePartida' parameterType="Partida">
 		UPDATE PARTIDAS SET IDUSUARIO_B = #{idUsuario_B}, FINALIZADA = #{finalizada} WHERE PARTIDAS.ID = #{id};
 	</update>
 	
@@ -53,5 +53,15 @@
 		INNER JOIN RESULTADOS ON PARTIDAS.ID = RESULTADOS.IDPARTIDA
 		AND USUARIOS.ID = #{id} GROUP BY DATE(FECHA_HORA) ORDER BY DATE(FECHA_HORA) ASC;
 	</select>
+	
+	<insert id="addMovimiento" parameterType="Movimiento">
+		INSERT INTO MOVIMIENTOS
+		(IDPARTIDA, IDUSUARIO, FILA_ORIGEN, FILA_DESTINO, COLUMNA_ORIGEN, COLUMNA_DESTINO)
+		VALUES
+		(#{idPartida},#{idUsuario},#{fila_origen},#{fila_destino},#{columna_origen},#{columna_destino});
+	</insert>
+	
+
+	
 
 </mapper>

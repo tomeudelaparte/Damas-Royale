@@ -70,7 +70,7 @@
 				      <th></th>
 				    </tr>
 				  </thead>
-				  <h2 class="text-dark m-0 font-weight-bold">LISTA DE PARTIDAS</h2>
+				  <h2 class="text-dark m-0 font-weight-bold">LISTA DE PARTIDAS <a href="Jugar" class="text-dark"><i class="fa fa-refresh"></i></a></h2>
 				  <p class="text-dark m-0 font-weight-normal">Selecciona <b>UNIRSE</b> para unirte a una partida o <b>CREAR PARTIDA</b> para crear una nueva partida.</p>
 				  <a href="CrearPartida" class="text-dark" target="_blank"><button type="button" class="btn btn-secondary float-right font-weight-bold">CREAR PARTIDA</button></a>
 				  <tbody>
@@ -94,6 +94,7 @@
 				    	  		<a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm rounded img-usuario-50" src="media/<%=listaUsuarios.getImagen() %>" width="50"></a>
 				    	  		<a class="nav-link p-0 text-dark font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><h5 class="mt-3"><%=listaUsuarios.getNombre() %></h5></a>
 			    	  		</td>
+			    	  		
 			    	  	<%				 
 					}}
 					
@@ -101,8 +102,12 @@
 					
 					<td class="text-dark font-weight-bold">No hay jugador.</td>
 					<td><a href="Sala?id=<%=partida.getId() %>" class="text-dark text-center" target="_blank"><button type="button" class="btn btn-secondary font-weight-bold">UNIRSE</button></a></td>					
-									
-				<%} else {%>
+					
+					<%} else if(usuario.getId() == partida.getIdUsuario_A() || usuario.getId() == partida.getIdUsuario_B()) { %>	
+					
+					<td><a href="Sala?id=<%=partida.getId() %>" class="text-dark text-center" target="_blank"><button type="button" class="btn btn-secondary font-weight-bold">VOLVER A UNIRSE</button></a></td>					
+								
+					<%} else {%>
 					
 					<td><button type="button" class="btn btn-secondary disabled font-weight-bold"  style="cursor:default">UNIRSE</button></td>
 					

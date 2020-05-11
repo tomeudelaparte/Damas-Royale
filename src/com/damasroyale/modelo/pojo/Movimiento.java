@@ -8,25 +8,24 @@ public class Movimiento {
 	private Integer id;
 	private Integer idPartida;
 	private Integer idUsuario;
-	private int filaInicial;
-	private int filaFinal;
-	private int columnaInicial;
-	private int columnaFinal;
+	private int fila_origen;
+	private int fila_destino;
+	private int columna_origen;
+	private int columna_destino;
 
 	public Movimiento() {
 
 	}
 
-	public Movimiento(Integer id, Integer idPartida, Integer idUsuario, int filaInicial, int filaFinal,
-			int columnaInicial, int columnaFinal) {
-
+	public Movimiento(Integer id, Integer idPartida, Integer idUsuario, int fila_origen, int fila_destino, int columna_origen, int columna_destino) {
+		
 		this.id = id;
 		this.idPartida = idPartida;
 		this.idUsuario = idUsuario;
-		this.filaInicial = filaInicial;
-		this.filaFinal = filaFinal;
-		this.columnaInicial = columnaInicial;
-		this.columnaFinal = columnaFinal;
+		this.fila_origen = fila_origen;
+		this.fila_destino = fila_destino;
+		this.columna_origen = columna_origen;
+		this.columna_destino = columna_destino;
 	}
 
 	public Integer getId() {
@@ -53,36 +52,36 @@ public class Movimiento {
 		this.idUsuario = idUsuario;
 	}
 
-	public int getFilaInicial() {
-		return filaInicial;
+	public int getFila_origen() {
+		return fila_origen;
 	}
 
-	public void setFilaInicial(int filaInicial) {
-		this.filaInicial = filaInicial;
+	public void setFila_origen(int fila_origen) {
+		this.fila_origen = fila_origen;
 	}
 
-	public int getFilaFinal() {
-		return filaFinal;
+	public int getFila_destino() {
+		return fila_destino;
 	}
 
-	public void setFilaFinal(int filaFinal) {
-		this.filaFinal = filaFinal;
+	public void setFila_destino(int fila_destino) {
+		this.fila_destino = fila_destino;
 	}
 
-	public int getColumnaInicial() {
-		return columnaInicial;
+	public int getColumna_origen() {
+		return columna_origen;
 	}
 
-	public void setColumnaInicial(int columnaInicial) {
-		this.columnaInicial = columnaInicial;
+	public void setColumna_origen(int columna_origen) {
+		this.columna_origen = columna_origen;
 	}
 
-	public int getColumnaFinal() {
-		return columnaFinal;
+	public int getColumna_destino() {
+		return columna_destino;
 	}
 
-	public void setColumnaFinal(int columnaFinal) {
-		this.columnaFinal = columnaFinal;
+	public void setColumna_destino(int columna_destino) {
+		this.columna_destino = columna_destino;
 	}
 
 }

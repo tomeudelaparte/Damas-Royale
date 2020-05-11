@@ -6,6 +6,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.damasroyale.modelo.dao.PartidaDAO;
+import com.damasroyale.modelo.pojo.Movimiento;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.extras.Stat;
 
@@ -67,6 +68,13 @@ public class PartidaEJB {
 		PartidaDAO partidaDAO = new PartidaDAO();
 
 		return partidaDAO.getAllPartidaEnCurso();
+	}
+
+	public void addMovimiento(Movimiento movimiento) {
+
+		PartidaDAO partidaDAO = new PartidaDAO();
+
+		partidaDAO.addMovimiento(movimiento);
 	}
 
 }

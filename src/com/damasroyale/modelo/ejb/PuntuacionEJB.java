@@ -1,6 +1,6 @@
 package com.damasroyale.modelo.ejb;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;  
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -11,9 +11,9 @@ import com.damasroyale.modelo.pojo.Resultado;
 @LocalBean
 public class PuntuacionEJB {
 
-	private final int puntuacionPartidasGanadas = 9;
-	private final int puntuacionPartidasPerdidas = 4;
-	private final int puntuacionPartidasTablas = 3;
+	private final static int PTS_PARTIDAS_GANADAS = 9;
+	private final static int PTS_PARTIDAS_PERDIDAS = 4;
+	private final static int PTS_PARTIDAS_TABLAS = 3;
 
 	public int getPuntuacion(Integer idUsuario, ArrayList<Resultado> resultados) {
 
@@ -23,17 +23,17 @@ public class PuntuacionEJB {
 
 			if (resultado.getGanador() == idUsuario) {
 
-				puntuacionTotal += puntuacionPartidasGanadas;
+				puntuacionTotal += PTS_PARTIDAS_GANADAS;
 			}
 
 			if (resultado.getPerdedor() == idUsuario) {
 
-				puntuacionTotal += puntuacionPartidasPerdidas;
+				puntuacionTotal += PTS_PARTIDAS_PERDIDAS;
 			}
 
 			if (resultado.isTablas() == true) {
 
-				puntuacionTotal += puntuacionPartidasTablas;
+				puntuacionTotal += PTS_PARTIDAS_TABLAS;
 			}
 		}
 

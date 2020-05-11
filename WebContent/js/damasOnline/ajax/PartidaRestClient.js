@@ -161,6 +161,39 @@ class PartidaRestClient {
 		return tmp;
 	}
 	
+	comprobarTablas() {
+		
+		var tmp;
+	
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/comprobarTablas/';
+			
+		$.ajax({
+			url :url + this.idPartida +"/"+ this.idUsuario,
+			async: false,
+			contentType : "application/json",
+			dataType : 'json',
+			success : function(data) {
+	
+				tmp = data;
+			}
+		});
+				
+		return tmp;
+	}
+	
+	solicitarTablas() {
+		
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/tablas/';
+			
+		$.ajax({
+			url : url + this.idPartida +"/"+ this.idUsuario,
+			async: false,
+			contentType : "application/json",
+			dataType : 'json',
+
+		});	
+	}
+	
 
 	abandonarPartida() {
 			
@@ -173,6 +206,39 @@ class PartidaRestClient {
 			dataType : 'json',
 
 		});	
+	}
+	
+	sendMensaje(texto) {
+		
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/sendMensaje/';
+			
+		$.ajax({
+			url : url + this.idPartida +"/"+ this.idUsuario + "/" + texto,
+			async: false,
+			contentType : "application/json",
+			dataType : 'json',
+
+		});	
+	}
+	
+	getMensajes() {
+		
+		var tmp;
+		
+		var url = 'http://localhost:8080/Damas-Royale/PartidaRest/getMensajes/';
+			
+		$.ajax({
+			url :url + this.idPartida,
+			async: false,
+			contentType : "application/json",
+			dataType : 'json',
+			success : function(data) {
+	
+				tmp = data;
+			}
+		});
+				
+		return tmp;
 	}
 	
 	

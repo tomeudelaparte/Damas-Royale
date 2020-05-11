@@ -98,7 +98,7 @@
 						<img class="img-fluid mx-auto d-block border rounded img-usuario-150" src="media/<%=usuario.getImagen() %>" width="150">
 					</div>
 					<div class="col-7 mt-3">	
-						<a href="Ficha?id=<%=usuario.getId() %>" class="text-dark nav-link p-0" target="_blank"><h1 class="text-center"><%=usuario.getNombre() %></a></h1>
+						<a href="Ficha?id=<%=usuario.getId() %>" class="text-dark nav-link p-0" target="_blank"><h1 class="text-center"><%=usuario.getNombre() %></h1></a>
 						<p class="text-center"><%=usuarioPuntuacion%> PTS</p>
 					</div>
 				</div>
@@ -133,7 +133,7 @@
 					          <p>Si deseas terminar la partida sin solicitar tablas, puedes pulsar el botón <span class="badge badge-danger">ABANDONAR PARTIDA</span> con la condición de perder y otorgar la victoria al oponente.</p>
 					        </div>
 					        <div class="modal-footer">
-					         <button type="button" class="btn btn-danger mr-auto">Solicitar tablas</button>
+					         <button id="solicitarTablas" type="button" class="btn btn-danger mr-auto">Solicitar tablas</button>
 					         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 					        </div>
 					      </div>
@@ -146,7 +146,21 @@
 					          <h4 class="modal-title">La partida ha finalizado.</h4>
 					        </div>
 					        <div class="modal-body">
-					        	
+					        </div>
+					        <div class="modal-footer">
+					         <a href="Jugar" class="mx-auto"><button type="button" class="btn btn-secondary">Volver</button></a>
+					        </div>
+					      </div>
+					    </div>
+					  </div>
+					  	<div class="modal fade" id="partidaTablas" role="dialog">
+					    <div class="modal-dialog modal-dialog-centered">
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <h4 class="modal-title">La partida ha finalizado.</h4>
+					        </div>
+					        <div class="modal-body">
+					        <h1 class='text-center'>TABLAS</h1>
 					        </div>
 					        <div class="modal-footer">
 					         <a href="Jugar" class="mx-auto"><button type="button" class="btn btn-secondary">Volver</button></a>
@@ -246,7 +260,7 @@
 					  <div id="chat" class="mt-2 mb-2 border-0 bg-light" style="overflow-y:scroll"></div>
 					</div>
 					<div class="form-group">
-					  <input id="message" class="form-control bg-white pl-2 text-bold font-weight-bold" name="mensaje" type="text" placeholder=" Envía un mensaje a tu oponente.">
+					  <input id="mensaje" class="form-control bg-white pl-2 text-bold font-weight-bold" name="mensaje" type="text" placeholder="Envía un mensaje a tu oponente.">
 					</div>
 				</form>
 			</div>

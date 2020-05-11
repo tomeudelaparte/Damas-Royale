@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 
 import com.damasroyale.modelo.dao.mappers.PartidaMapper;
+import com.damasroyale.modelo.pojo.Movimiento;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.extras.Stat;
 
@@ -93,6 +94,17 @@ public class PartidaDAO {
 		try {
 			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
 			return partidaMapper.getPartidaCreadaByIdUsuario(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public void addMovimiento(Movimiento movimiento) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
+			partidaMapper.addMovimiento(movimiento);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
