@@ -131,7 +131,7 @@
 			    	  		<td class="font-weight-bold"><a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm rounded img-usuario-40" src="media/<%=listaUsuarios.getImagen() %>" width="40"></a><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
 			    	  <%}}%>
 
-			      <td class="font-weight-bold text-center"><a href="Repeticion?id=<%=partida.getId() %>" class="text-light"><i class="fa fa-desktop"></i></a></td>
+			      <td class="font-weight-bold text-center"><a href="Repeticion?id=<%=partida.getId() %>&usuario=<%=jugador.getId()%>" class="text-light"><i class="fa fa-desktop"></i></a></td>
 			    </tr>
 			   <% }}}%>	  
 			  </tbody>

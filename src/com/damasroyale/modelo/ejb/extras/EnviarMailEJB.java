@@ -15,11 +15,17 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.slf4j.LoggerFactory;
+
 import com.damasroyale.modelo.pojo.Usuario;
+
+import ch.qos.logback.classic.Logger;
 
 @Stateless
 @LocalBean
 public class EnviarMailEJB {
+	
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(EnviarMailEJB.class);
 
 	public void sendMail(String email, String remitente, String asunto, String mensaje) {
 
@@ -58,8 +64,8 @@ public class EnviarMailEJB {
 
 			Transport.send(message);
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
+			logger.error(ex.getMessage());
 		}
 	}
 

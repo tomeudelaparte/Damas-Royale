@@ -1,3 +1,4 @@
+<%@page import="com.damasroyale.modelo.pojo.Movimiento"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.damasroyale.modelo.pojo.Usuario"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,22 +7,18 @@
 <html>
 <head>
 <%
-	int sala = (int) request.getAttribute("sala");
 	Partida partida = (Partida) request.getAttribute("partida");
+
+	ArrayList<Movimiento> movimientos = (ArrayList<Movimiento>) request.getAttribute("movimientos");
+	
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
 	int usuarioPuntuacion = (int) request.getAttribute("usuarioPuntuacion");
-	
-	Usuario oponente = new Usuario();
-	int oponentePuntuacion = 0;
-	
-	if (request.getAttribute("oponente") != null) {
-		oponente = (Usuario) request.getAttribute("oponente");
-		oponentePuntuacion = (int) request.getAttribute("oponentePuntuacion");
-	}
-	
+
+	Usuario oponente = (Usuario) request.getAttribute("oponente");
+	int  oponentePuntuacion = (int) request.getAttribute("oponentePuntuacion");
 
 %>
-<title>Sala <%=sala%> - Damas Royale</title>
+<title>Repetición - Damas Royale</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -33,10 +30,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="js/ajustes/TextareaAutoHeight.js"></script>
-<script src="js/damasOnline/ajax/PartidaRestClient.js"></script>
-<script src="js/damasOnline/jquery/PartidaJQuery.js"></script>
-<script src="js/damasOnline/ControladorPartida.js"></script>
+<script src="js/repeticionPartida/repeticionPartida.js"></script>
 </head>
 <body class="bg-light">
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow-sm">
@@ -61,12 +55,7 @@
 				<%} %>
 				<hr>
 				<div id="oponente" class="row mx-auto shadow m-3 mb-5 p-2 rounded">
-				
-				<% if(oponente.getId() == null) { %>
-				
-					<h3 class="text-center m-5 pt-2 pb-2">Esperando un jugador...</h3>
 
-				<% } else { %>
 					<div class="col-5">
 						<img id="opImagen" class="img-fluid mx-auto d-block border rounded img-usuario-150" src="media/<%=oponente.getImagen() %>" width="150">
 					</div>
@@ -74,8 +63,6 @@
 						<a href="Ficha?id=<%=oponente.getId() %>" class="text-dark nav-link p-0" target="_blank"><h1 class="text-center"><%=oponente.getNombre() %></h1></a>
 						<p class="text-center"><%=oponentePuntuacion %> PTS</p>
 					</div>
-				<%}%>
-				
 				</div>
 				
 				<h1 class="text-dark font-weight-bold mx-auto text-center">VS</h1>
@@ -84,11 +71,11 @@
 				if (partida.getIdUsuario_A() == usuario.getId()) {
 					
 				%>
-				<h2 class="p-2 text-dark">Tú <span class="font-weight-light">(Anfitrión)</span></h2>
+				<h2 class="p-2 text-dark">Usuario <span class="font-weight-light">(Anfitrión)</span></h2>
 				
 				<% } else { %>
 				
-				<h2 class="p-2 text-dark">Tú</h2>
+				<h2 class="p-2 text-dark">Usuario</h2>
 				
 				<%} %>
 				
@@ -101,74 +88,6 @@
 						<a href="Ficha?id=<%=usuario.getId() %>" class="text-dark nav-link p-0" target="_blank"><h1 class="text-center"><%=usuario.getNombre() %></h1></a>
 						<p class="text-center"><%=usuarioPuntuacion%> PTS</p>
 					</div>
-				</div>
-				<div class="row mx-auto pt-5">
-					<button type="button" class="btn btn-danger font-weight-bold ml-2 mt-4" data-toggle="modal" data-target="#abandonar">ABANDONAR PARTIDA</button>
-					 <div class="modal fade" id="abandonar" role="dialog">
-					    <div class="modal-dialog modal-dialog-centered">
-					      <div class="modal-content">
-					        <div class="modal-header">
-					          <h4 class="modal-title">¿Quiéres abandonar la partida?</h4>
-					        </div>
-					        <div class="modal-body">
-					          <p>Al pulsar el botón de <span class="badge badge-danger">Abandonar partida</span>, la partida terminará y perderás de forma automática. Si no deseas realizar esta acción, pulse el botón de <span class="badge badge-secondary">Cancelar</span> o pulse fuera de esta ventana. </p>
-					          <p>Si deseas una alternativa, puedes solicitar un empate con el oponente mediante el botón <span class="badge badge-secondary">SOLICITAR TABLAS</span> y esperar su respuesta.</p>
-					        </div>
-					        <div class="modal-footer">
-					         <button id="abandonarPartida" type="button" class="btn btn-danger mr-auto">Abandonar partida</button>
-					         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-					        </div>
-					      </div>
-					    </div>
-					  </div>
-					<button type="button" class="btn btn-secondary font-weight-bold ml-auto mr-2 mt-4" data-toggle="modal" data-target="#tablas">SOLICITAR TABLAS</button>
-					<div class="modal fade" id="tablas" role="dialog">
-					    <div class="modal-dialog modal-dialog-centered">
-					      <div class="modal-content">
-					        <div class="modal-header">
-					          <h4 class="modal-title">¿Quiéres solicitar tablas al oponente?</h4>
-					        </div>
-					        <div class="modal-body">
-					          <p>Al pulsar el botón de <span class="badge badge-danger">Solicitar tablas</span>, solicitarás al oponente terminar la partida en empate. Si no deseas realizar esta acción, pulse el botón de <span class="badge badge-secondary">Cancelar</span> o pulse fuera de esta ventana. </p>
-					          <p>Si deseas terminar la partida sin solicitar tablas, puedes pulsar el botón <span class="badge badge-danger">ABANDONAR PARTIDA</span> con la condición de perder y otorgar la victoria al oponente.</p>
-					        </div>
-					        <div class="modal-footer">
-					         <button id="solicitarTablas" type="button" class="btn btn-danger mr-auto">Solicitar tablas</button>
-					         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-					        </div>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="modal fade" id="partidaFinalizada" role="dialog">
-					    <div class="modal-dialog modal-dialog-centered">
-					      <div class="modal-content">
-					        <div class="modal-header">
-					          <h4 class="modal-title"></h4>
-					        </div>
-					        <div class="modal-body">
-					        <p class='text-dark text-center'>La partida ha finalizado.</p>
-					        </div>
-					        <div class="modal-footer">
-					         <a href="Jugar" class="mx-auto"><button type="button" class="btn btn-secondary">Volver</button></a>
-					        </div>
-					      </div>
-					    </div>
-					  </div>
-					  	<div class="modal fade" id="partidaTablas" role="dialog">
-					    <div class="modal-dialog modal-dialog-centered">
-					      <div class="modal-content">
-					        <div class="modal-header">
-					          <h1 class="text-dark mx-auto">TABLAS</h1>
-					        </div>
-					        <div class="modal-body">
-					        <p class='text-dark text-center'>La partida ha finalizado.</p>
-					        </div>
-					        <div class="modal-footer">
-					         <a href="Jugar" class="mx-auto"><button type="button" class="btn btn-secondary">Volver</button></a>
-					        </div>
-					      </div>
-					    </div>
-					  </div>
 				</div>
 			</div>
 			<div class="col-5 border shadow mx-auto m-0 tablero rounded">
@@ -254,30 +173,18 @@
 				</div>
 			</div>
 			<div class="col-3 border shadow mr-4 rounded">
-				<h2 class="p-2 text-dark">Chat</h2>
-				<hr>
-				<form class="mx-auto">
-					<div class="form-group">
-					  <div id="chat" class="mt-2 mb-2 border-0 bg-light" style="overflow-y:scroll"></div>
+				<h1 class="p-2 text-dark">Movimientos <span id="movimientos">0/<%=movimientos.size() %></span></h1>
+				<div class="row m-5 border shadow rounded">
+					<div class="col">
+						<button id="anterior" class="btn btn-light float-left pl-4 pr-4"><i class="fa fa-caret-left" style="font-size:200px"></i></button>
 					</div>
-					<div class="form-group">
-					  <input id="mensaje" class="form-control bg-white pl-2 text-bold font-weight-bold" name="mensaje" type="text" placeholder="Envía un mensaje a tu oponente.">
+					<div class="col">
+						<button id="siguiente" class="btn btn-light float-right pl-4 pr-4"><i class="fa fa-caret-right" style="font-size:200px"></i></button>
 					</div>
-				</form>
+				</div>
 			</div>
-		</div>
-		<div class="modal" id="incorrecto">
-		    <div class="modal-dialog modal-dialog-centered modal-lg">
-		      <div class="modal-content">
-		        <div class="modal-header rounded">
-		          <h4 class="modal-title font-weight-bold text-danger">No puedes realizar este movimiento.</h4>
-		          <button type="button" class="close text-danger font-weight-bold" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-		        </div>
-		      </div>
-		    </div>
-		  </div>   
+		</div>  
       </div>
-	</div>
 	<footer id="sticky-footer"
 		class=" p-3 bg-light text-dark border-top shadow-lg">
 		<div class="container text-center">
@@ -286,7 +193,8 @@
 		</div>
 	</footer>
 	<script>
-		crearPartida(<%=partida.getId()%>,<%=usuario.getId()%>);
+		var movimientosJS = <%=movimientos%>;
+		cargarMovimientos(movimientosJS);
 	</script>
 </body>
 </html>

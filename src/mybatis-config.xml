@@ -28,6 +28,7 @@
 		<mapper resource='com/damasroyale/modelo/dao/mappers/UsuarioMapper.xml' />
 		<mapper resource='com/damasroyale/modelo/dao/mappers/PartidaMapper.xml' />
 		<mapper resource='com/damasroyale/modelo/dao/mappers/ResultadoMapper.xml' />
+		<mapper resource='com/damasroyale/modelo/dao/mappers/MovimientoMapper.xml' />
 		<mapper resource='com/damasroyale/modelo/dao/mappers/MensajeMapper.xml' />
 	</mappers>
 </configuration>

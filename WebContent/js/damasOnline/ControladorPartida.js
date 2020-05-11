@@ -168,8 +168,6 @@ function controlGetMensajes() {
 
 function controlSeleccionar() {
 
-	var ficha = $(this);
-
 	var casilla = $(this).parent();
 
 	var filaOrigen = $(casilla).parent().index();

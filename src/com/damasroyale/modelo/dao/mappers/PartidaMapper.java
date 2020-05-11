@@ -1,10 +1,9 @@
 package com.damasroyale.modelo.dao.mappers;
 
-import java.util.ArrayList;
+import java.util.ArrayList ;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.damasroyale.modelo.pojo.Movimiento;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.extras.Stat;
 
@@ -25,7 +24,5 @@ public interface PartidaMapper {
 	public ArrayList<Stat> getEstadisticaByIdUsuario(@Param("id") Integer id);
 
 	public ArrayList<Partida> getAllPartidaEnCurso();
-
-	public void addMovimiento(Movimiento movimiento);
 
 }

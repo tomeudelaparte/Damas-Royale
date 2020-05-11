@@ -17,7 +17,7 @@ function showEstadistica(estadistica) {
 	ctx.width  = 20;
 	ctx.height = 8;
 	
-	var chart = new Chart(ctx, {
+	new Chart(ctx, {
 	    
 		type: 'line',
 	

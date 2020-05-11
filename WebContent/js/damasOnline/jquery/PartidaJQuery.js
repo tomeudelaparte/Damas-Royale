@@ -63,8 +63,8 @@ function mover(casilla) {
 
 function partidaFinalizadaUsuario() {
 
-	$("#partidaFinalizada").find('.modal-body').html(
-			"<h1 class='text-center'>HAS GANADO</h1>");
+	$("#partidaFinalizada").find('.modal-header').html(
+			"<h1 class='text-dark mx-auto'>HAS GANADO</h1>");
 
 	$("#partidaFinalizada").modal('show');
 
@@ -72,8 +72,8 @@ function partidaFinalizadaUsuario() {
 
 function partidaFinalizadaOponente() {
 
-	$("#partidaFinalizada").find('.modal-body').html(
-			"<h1 class='text-center'>HAS PERDIDO</h1>");
+	$("#partidaFinalizada").find('.modal-header').html(
+			"<h1 class='text-dark mx-auto'>HAS PERDIDO</h1>");
 
 	$("#partidaFinalizada").modal('show');
 

@@ -53,9 +53,7 @@ public class FichaUsuarioEstadistica extends HttpServlet {
 
 			} else {
 
-				Usuario jugador = new Usuario();
-
-				jugador = usuarioEJB.getUsuarioByID(Integer.valueOf(id));
+				Usuario jugador = usuarioEJB.getUsuarioByID(Integer.valueOf(id));
 
 				if (jugador == null) {
 
@@ -66,7 +64,7 @@ public class FichaUsuarioEstadistica extends HttpServlet {
 					RequestDispatcher rs = getServletContext().getRequestDispatcher("/FichaUsuarioEstadistica.jsp");
 
 					ArrayList<Stat> estadistica = partidaEJB.getEstadisticaByIdUsuario(jugador.getId());
-					
+
 					request.setAttribute("usuario", usuario);
 					request.setAttribute("jugador", jugador);
 					request.setAttribute("estadistica", estadistica);

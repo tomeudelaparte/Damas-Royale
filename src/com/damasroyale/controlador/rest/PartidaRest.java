@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.damasroyale.modelo.ejb.ListaPartidasEJB;
 import com.damasroyale.modelo.ejb.MensajeEJB;
+import com.damasroyale.modelo.ejb.MovimientoEJB;
 import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.PuntuacionEJB;
 import com.damasroyale.modelo.ejb.ResultadoEJB;
@@ -35,6 +36,9 @@ public class PartidaRest {
 
 	@EJB
 	ResultadoEJB resultadoEJB;
+	
+	@EJB
+	MovimientoEJB movimientoEJB;
 
 	@EJB
 	MensajeEJB mensajeEJB;
@@ -161,7 +165,7 @@ public class PartidaRest {
 				filaDestino, columnaOrigen, columnaDestino);
 
 		if (movimiento != null) {
-			partidaEJB.addMovimiento(movimiento);
+			movimientoEJB.addMovimiento(movimiento);
 		}
 
 		return movimiento;

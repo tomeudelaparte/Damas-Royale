@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper
+	namespace='com.damasroyale.modelo.dao.mappers.MovimientoMapper'>
+	
+	<insert id="addMovimiento" parameterType="Movimiento">
+		INSERT INTO MOVIMIENTOS
+		(IDPARTIDA, IDUSUARIO, FILA_ORIGEN, FILA_DESTINO, COLUMNA_ORIGEN, COLUMNA_DESTINO)
+		VALUES
+		(#{idPartida},#{idUsuario},#{fila_origen},#{fila_destino},#{columna_origen},#{columna_destino});
+	</insert>
+	
+	<select id="getAllMovimientoByIdPartida" resultType="Movimiento">
+		SELECT * FROM MOVIMIENTOS WHERE IDPARTIDA = #{id}
+	</select>
+
+</mapper>

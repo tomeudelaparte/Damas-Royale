@@ -58,9 +58,7 @@ public class FichaUsuarioHistorial extends HttpServlet {
 
 			} else {
 
-				Usuario jugador = new Usuario();
-
-				jugador = usuarioEJB.getUsuarioByID(Integer.valueOf(id));
+				Usuario jugador = usuarioEJB.getUsuarioByID(Integer.valueOf(id));
 
 				if (jugador == null) {
 

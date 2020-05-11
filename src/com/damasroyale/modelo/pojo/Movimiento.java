@@ -84,4 +84,15 @@ public class Movimiento {
 		this.columna_destino = columna_destino;
 	}
 
+	@Override
+	public String toString() {
+		return "{id:'" + id + "', idPartida:'" + idPartida + "', idUsuario:'" + idUsuario + "', fila_origen:'"
+				+ fila_origen + "', fila_destino:'" + fila_destino + "', columna_origen:'" + columna_origen
+				+ "', columna_destino:'" + columna_destino + "'}";
+	}
+
+
+	
+	
+
 }
