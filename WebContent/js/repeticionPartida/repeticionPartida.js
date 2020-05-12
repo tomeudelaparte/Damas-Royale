@@ -73,12 +73,29 @@ function setTablero() {
 	}
 }
 
+function setTurno() {
+	
+	var seleccionado = movimientosPartida[index];
+	
+	if (tablero[seleccionado.fila_origen][seleccionado.columna_origen] == 1) {
+		
+		$('#oponente').removeClass("border border-warning");
+		$('#usuario').addClass("border border-warning");
+		
+	} else {
+		
+		$('#usuario').removeClass("border border-warning");
+		$('#oponente').addClass("border border-warning");
+	}
+}
+
 function setMovimientoAnterior() {
 
 	if (index > -1) {
 		makeMovimientoInvertido();
 		setTablero();
 		index--;
+		setTurno()
 		updateContador();
 	}
 }
@@ -89,6 +106,7 @@ function setMovimientoSiguiente() {
 		updateContador()
 		makeMovimiento();
 		setTablero();
+		setTurno();
 	}
 }
 
@@ -96,34 +114,34 @@ function makeMovimiento() {
 
 	var seleccionado = movimientosPartida[index];
 
-	var ficha = reinarDama(tablero[seleccionado.fila_origen][seleccionado.columna_origen]);
+	var ficha = tablero[seleccionado.fila_origen][seleccionado.columna_origen];
 
 	tablero[seleccionado.fila_origen][seleccionado.columna_origen] = 0;
 	tablero[seleccionado.fila_destino][seleccionado.columna_destino] = ficha;
 
-	eliminarFicha(seleccionado.fila_origen, seleccionado.columna_origen,
-			seleccionado.fila_destino, seleccionado.columna_destino);
+//	eliminarFicha(seleccionado.fila_origen, seleccionado.columna_origen,
+//			seleccionado.fila_destino, seleccionado.columna_destino);
 
 }
 
-function eliminarFicha(filaOrigen, columnaOrigen, filaDestino, columnaDestino) {
-
-	var fila = filaDestino + ((filaOrigen - filaDestino) / 2);
-
-	var columna = columnaDestino + ((columnaOrigen - columnaDestino) / 2);
-	
-	console.log(tablero);
-
-	if (tablero[fila][columna] > 0) {
-
-		fichasEliminadas.push("[fila:'" + fila + "', columna:'" + columna+ "']");
-
-	} else {
-		fichasEliminadas.push("[]");
-
-	}
-
-}
+//function eliminarFicha(filaOrigen, columnaOrigen, filaDestino, columnaDestino) {
+//
+//	var fila = filaDestino + ((filaOrigen - filaDestino) / 2);
+//
+//	var columna = columnaDestino + ((columnaOrigen - columnaDestino) / 2);
+//	
+//	console.log(tablero);
+//
+//	if (tablero[fila][columna] > 0) {
+//
+//		fichasEliminadas.push("[fila:'" + fila + "', columna:'" + columna+ "']");
+//
+//	} else {
+//		fichasEliminadas.push("[]");
+//
+//	}
+//
+//}
 
 function reinarDama(dama, filaLimite) {
 
