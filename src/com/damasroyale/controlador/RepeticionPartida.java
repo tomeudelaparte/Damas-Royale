@@ -71,15 +71,52 @@ public class RepeticionPartida extends HttpServlet {
 
 				ArrayList<Movimiento> movimientos = movimientoEJB.getAllMovimientoByIdPartida(Integer.valueOf(id));
 
-				usuario = usuarioEJB.getUsuarioByID(Integer.valueOf(idUsuario));
-				
-				ArrayList<Resultado> resultadosUsuario = resultadoEJB.getAllResultadoByIdUsuario(Integer.valueOf(idUsuario));
-				int usuarioPuntuacion = puntuacionEJB.getPuntuacion(usuario.getId(), resultadosUsuario);
+				int usuarioPuntuacion;
+				int oponentePuntuacion;
 
-				Usuario oponente = usuarioEJB.getUsuarioByID(partida.getIdUsuario_A());
-				
-				ArrayList<Resultado> resultadosOponente = resultadoEJB.getAllResultadoByIdUsuario(oponente.getId());
-				int oponentePuntuacion = puntuacionEJB.getPuntuacion(oponente.getId(), resultadosOponente);
+				Usuario oponente;
+
+				if (Integer.valueOf(idUsuario) == partida.getIdUsuario_A()) {
+					usuario = usuarioEJB.getUsuarioByID(Integer.valueOf(idUsuario));
+					ArrayList<Resultado> resultadosUsuario = resultadoEJB
+							.getAllResultadoByIdUsuario(Integer.valueOf(idUsuario));
+					usuarioPuntuacion = puntuacionEJB.getPuntuacion(Integer.valueOf(idUsuario), resultadosUsuario);
+
+					oponente = usuarioEJB.getUsuarioByID(partida.getIdUsuario_B());
+
+					ArrayList<Resultado> resultadosOponente = resultadoEJB.getAllResultadoByIdUsuario(oponente.getId());
+					oponentePuntuacion = puntuacionEJB.getPuntuacion(oponente.getId(), resultadosOponente);
+
+				} else {
+
+					usuario = usuarioEJB.getUsuarioByID(Integer.valueOf(idUsuario));
+					ArrayList<Resultado> resultadosUsuario = resultadoEJB
+							.getAllResultadoByIdUsuario(Integer.valueOf(idUsuario));
+					usuarioPuntuacion = puntuacionEJB.getPuntuacion(Integer.valueOf(idUsuario), resultadosUsuario);
+
+					oponente = usuarioEJB.getUsuarioByID(partida.getIdUsuario_A());
+
+					ArrayList<Resultado> resultadosOponente = resultadoEJB.getAllResultadoByIdUsuario(oponente.getId());
+					oponentePuntuacion = puntuacionEJB.getPuntuacion(oponente.getId(), resultadosOponente);
+
+					for (Movimiento movimiento : movimientos) {
+						
+						if (movimiento.getIdUsuario() == usuario.getId()) {
+							
+							movimiento.setFila_origen(7 - movimiento.getFila_origen());
+							movimiento.setColumna_origen(7 - movimiento.getColumna_origen());
+							movimiento.setFila_destino(7 - movimiento.getFila_destino());
+							movimiento.setColumna_destino(7 - movimiento.getColumna_destino());
+							
+						} else {
+							
+							movimiento.setFila_origen(7 - movimiento.getFila_origen());
+							movimiento.setColumna_origen(7 - movimiento.getColumna_origen());
+							movimiento.setFila_destino(7 - movimiento.getFila_destino());
+							movimiento.setColumna_destino(7 - movimiento.getColumna_destino());
+						}
+					}
+				}
 
 				request.setAttribute("partida", partida);
 

@@ -8,17 +8,19 @@ public class Mensaje {
 	private Integer id;
 	private Integer idPartida;
 	private Integer idUsuario;
+	private String hora;
 	private String texto;
 
 	public Mensaje() {
-	
+
 	}
 
-	public Mensaje(Integer id, Integer idPartida, Integer idUsuario, String texto) {
-		
+	public Mensaje(Integer id, Integer idPartida, Integer idUsuario, String hora, String texto) {
+
 		this.id = id;
 		this.idPartida = idPartida;
 		this.idUsuario = idUsuario;
+		this.hora = hora;
 		this.texto = texto;
 	}
 
@@ -46,6 +48,14 @@ public class Mensaje {
 		this.idUsuario = idUsuario;
 	}
 
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
 	public String getTexto() {
 		return texto;
 	}
@@ -53,7 +63,4 @@ public class Mensaje {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-
-
-
 }

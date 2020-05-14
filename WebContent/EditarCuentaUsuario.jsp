@@ -101,7 +101,7 @@
 				<label>Imagen de perfil</label>
 					<div class="custom-file">
 					  <input type="file" class="custom-file-input" name="imagen" id="file">
-					  <label class="custom-file-label" >Seleccionar imagen</label>
+					  <label class="custom-file-label" >Seleccionar imagen (Máx. 5MB)</label>
 					</div>
 				</div>
 				<a href="Ficha?id=<%=usuario.getId() %>" class="text-decoration-none float-left"><button type="button" class="btn btn-secondary d-flex ">Cancelar</button></a>

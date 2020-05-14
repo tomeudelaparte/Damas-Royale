@@ -1,6 +1,9 @@
 package com.damasroyale.controlador.rest;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -78,6 +81,13 @@ public class PartidaRest {
 
 		return listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).getTablero(Integer.valueOf(idUsuario));
 	}
+	
+	@GET
+	@Path("/setTurnoOponente/{idPartida}/{idUsuario}")
+	public void setTurno(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
+
+		listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).setTurnoUsuario(Integer.valueOf(idUsuario));
+	}
 
 	@GET
 	@Path("/getTurno/{idPartida}")
@@ -134,10 +144,14 @@ public class PartidaRest {
 	@Path("/sendMensaje/{idPartida}/{idUsuario}/{texto}")
 	public void sendMensaje(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario,
 			@PathParam("texto") String texto) {
+		
+		Date date = new Date();
+		
+		SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
 
 		if (texto.length() > 0 && texto.length() < 255) {
 
-			Mensaje mensaje = new Mensaje(0, Integer.valueOf(idPartida), Integer.valueOf(idUsuario), texto);
+			Mensaje mensaje = new Mensaje(0, Integer.valueOf(idPartida), Integer.valueOf(idUsuario), hora.format(date), texto);
 
 			mensajeEJB.addMensaje(mensaje);
 		}

@@ -6,9 +6,9 @@
 
 	<insert id="addMensaje" parameterType="Mensaje">
 		INSERT INTO MENSAJES
-		(IDPARTIDA, IDUSUARIO, TEXTO)
+		(IDPARTIDA, IDUSUARIO, HORA, TEXTO)
 		VALUES
-		(#{idPartida},#{idUsuario},#{texto});
+		(#{idPartida},#{idUsuario},#{hora},#{texto});
 	</insert>
 
 	<select id="getMensajesByIdPartida" resultType="Mensaje">

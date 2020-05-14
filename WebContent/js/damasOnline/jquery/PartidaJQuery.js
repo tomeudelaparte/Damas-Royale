@@ -106,7 +106,9 @@ function tablasSolicitadas() {
 }
 
 function jugadorConectadoAlt() {
-	$("#chat").append("<p class='text-danger font-weight-bold'> Te has unido a la partida.</p>");
+	$("#chat")
+			.append(
+					"<p class='text-danger font-weight-bold'> Te has unido a la partida.</p>");
 }
 
 function jugadorConectado(usuario, puntuacion) {
@@ -134,19 +136,18 @@ function jugadorConectado(usuario, puntuacion) {
 }
 
 function setMensajes(usuario, oponente, mensajes) {
-	
-	
+
 	var chat = $(".mensaje").length;
 
 	for (var i = chat; i < mensajes.length; i++) {
-		console.log(mensajes[i]);
+
 		if (mensajes[i].idUsuario === usuario.id) {
-			
-			recibirMensaje(usuario, mensajes[i].texto);
-			
+
+			recibirMensaje(usuario, mensajes[i]);
+
 		} else {
-			
-			recibirMensaje(oponente, mensajes[i].texto);
+
+			recibirMensaje(oponente, mensajes[i]);
 
 		}
 
@@ -154,26 +155,13 @@ function setMensajes(usuario, oponente, mensajes) {
 }
 
 function recibirMensaje(jugador, mensaje) {
-
-	var date = new Date();
-	var hora = formatear(date);
+		
+	var hora = mensaje.hora.substring(0, (mensaje.hora.length-3));
 
 	$("#chat").append(
-			"<p class='mensaje'><span class='text-dark font-weight-bold'>"
-					+ hora + " " + jugador.nombre + ": </span>" + mensaje
-					+ "</p>");
+			"<p class='mensaje'><span class='text-dark font-weight-bold'> ["
+					+ hora + "] " + jugador.nombre + ": </span>"
+					+ mensaje.texto + "</p>");
 
 	$('#chat').scrollTop($('#chat')[0].scrollHeight);
-}
-
-function formatear(date) {
-
-	var hora = addZero(date.getHours());
-	var minutos = addZero(date.getMinutes());
-
-	return "[" + hora + ":" + minutos + "]";
-}
-
-function addZero(n) {
-	return n < 10 ? '0' + n : n;
 }

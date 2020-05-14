@@ -1,6 +1,6 @@
 package com.damasroyale.modelo.juego;
 
-import java.sql.Timestamp ;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import com.damasroyale.modelo.ejb.PartidaEJB;
@@ -64,6 +64,12 @@ public class DamasOnline {
 		this.oponente = oponente;
 	}
 
+	public void setTurnoUsuario(Integer turnoUsuario) {
+		if (turno == 2) {
+			this.turnoUsuario = turnoUsuario;
+		}
+	}
+
 	public Integer getGanador() {
 		return ganador;
 	}
@@ -105,11 +111,11 @@ public class DamasOnline {
 
 		if (!anfitrion.equals(idUsuario)) {
 
-			filaOrigen = (8 - 1) - filaOrigen;
-			filaDestino = (8 - 1) - filaDestino;
+			filaOrigen = 7 - filaOrigen;
+			filaDestino = 7 - filaDestino;
 
-			columnaOrigen = (8 - 1) - columnaOrigen;
-			columnaDestino = (8 - 1) - columnaDestino;
+			columnaOrigen = 7 - columnaOrigen;
+			columnaDestino = 7 - columnaDestino;
 		}
 
 		if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaDestino, columnaDestino)) {
@@ -318,6 +324,7 @@ public class DamasOnline {
 		} else if (turno == 2 && !anfitrion.equals(idUsuario)) {
 
 			turno = 1;
+
 			turnoUsuario = anfitrion;
 		}
 
@@ -425,9 +432,9 @@ public class DamasOnline {
 		}
 
 		if (tablasAnfitrion == true && tablasOponente == true) {
-			
+
 			finalizada = true;
-			
+
 			finalizarPartida(idPartida);
 		}
 

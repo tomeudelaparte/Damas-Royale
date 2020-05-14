@@ -79,6 +79,11 @@ public class SalaPartidaDamas extends HttpServlet {
 							+ partida.getId() + "/" + usuario.getId());
 
 					target.request().get();
+					
+					target = cliente.target("http://localhost:8080/Damas-Royale/PartidaRest/setTurnoOponente/"
+							+ partida.getId() + "/" + usuario.getId());
+
+					target.request().get();
 				}
 
 				if (partida.getIdUsuario_A() == usuario.getId()) {

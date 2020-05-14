@@ -68,17 +68,17 @@ function checkPartida() {
 	partidaRestClient.getPartida();
 	partidaRestClient.getJugadores();
 	controlJugadorConectado();
-	controlGetMensajes()
-	controlSetTablero()
+	controlGetMensajes();
+	controlSetTablero();
 	controlEstadoPartida();
-	controlTurno()
-	controlTablas()
+	controlTurno();
+	controlTablas();
 }
 
 function checkTablero() {
 
-	controlSetTablero()
-	controlTurno()
+	controlSetTablero();
+	controlTurno();
 }
 
 function controlEstadoPartida() {
@@ -114,7 +114,8 @@ function controlTurno() {
 
 		addTurnoUsuario();
 
-	} else {
+	} else if (turno !== partidaRestClient.idUsuario) {
+		
 		addTurnoOponente();
 	}
 
@@ -143,8 +144,6 @@ function controlSetTablero() {
 function controlSendMensaje() {
 
 	var mensaje = $("#mensaje").val();
-
-	console.log(mensaje);
 
 	if (mensaje.length > 0 && mensaje.length < 255) {
 

@@ -12,6 +12,7 @@ $(document).ready(function() {
 });
 
 var index = -1;
+var movimiento = 0;
 
 var movimientosPartida;
 
@@ -22,13 +23,17 @@ var tablero = [ [ 0, 2, 0, 2, 0, 2, 0, 2 ], [ 2, 0, 2, 0, 2, 0, 2, 0 ],
 		[ 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 0, 1, 0, 1, 0, 1, 0 ],
 		[ 0, 1, 0, 1, 0, 1, 0, 1 ], [ 1, 0, 1, 0, 1, 0, 1, 0 ] ];
 
+
+
+
 function cargarMovimientos(movimientos) {
 	movimientosPartida = movimientos;
 }
 
 function updateContador() {
-	$("#movimientos").html((index + 1) + "/" + movimientosPartida.length);
+	$("#movimientos").html((movimiento) + "/" + movimientosPartida.length);
 }
+
 
 function setTablero() {
 
@@ -96,7 +101,11 @@ function setMovimientoAnterior() {
 		setTablero();
 		index--;
 		setTurno()
-		updateContador();
+		
+		if(movimiento > 0) {
+			movimiento--;
+			updateContador();
+		}
 	}
 }
 
@@ -107,6 +116,11 @@ function setMovimientoSiguiente() {
 		makeMovimiento();
 		setTablero();
 		setTurno();
+		
+		if(movimiento < movimientosPartida.length - 1) {
+			movimiento++;
+			updateContador();
+		}
 	}
 }
 

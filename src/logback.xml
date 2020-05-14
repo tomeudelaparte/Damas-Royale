@@ -9,6 +9,18 @@
 			<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
 		</encoder>
 	</appender>
+	
+	¡<appender name="IMAGEN" class="ch.qos.logback.core.FileAppender">
+		<file> damasroyale_error.log </file>
+		<append>true</append>
+		<encoder>
+			<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.damasroyale.modelo.ejb.extras" level="error" additivity="false">
+		<appender-ref ref="IMAGEN" />
+	</logger>
 
 	<root level="debug">
 		<appender-ref ref="DEBUG" />
