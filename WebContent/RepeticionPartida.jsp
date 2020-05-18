@@ -173,7 +173,7 @@
 				</div>
 			</div>
 			<div class="col-3 border shadow mr-4 rounded">
-				<h1 class="p-2 text-dark">Movimientos <span id="movimientos">0/<%=movimientos.size() %></span></h1>
+				<h1 class="p-2 text-dark">Movimientos <span id="movimientos">0/<%=movimientos.size()-1 %></span></h1>
 				<div class="row m-5 border shadow rounded">
 					<div class="col">
 						<button id="anterior" class="btn btn-light float-left pl-4 pr-4"><i class="fa fa-caret-left" style="font-size:200px"></i></button>

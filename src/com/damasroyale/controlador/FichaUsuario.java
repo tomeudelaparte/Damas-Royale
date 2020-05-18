@@ -44,7 +44,7 @@ public class FichaUsuario extends HttpServlet {
 
 				RequestDispatcher rs;
 
-				if (tab == null) {
+				if (tab == null || tab.equals("")) {
 					
 					rs = getServletContext().getRequestDispatcher("/Informacion");
 
