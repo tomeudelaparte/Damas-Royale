@@ -28,7 +28,7 @@ public class DamasOnline {
 
 	private boolean finalizada = false;
 
-	private int tablero[][] = { { 0, 2, 0, 2, 0, 2, 0, 2 }, { 2, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 2, 0, 2, 0, 2 },
+	private int[][] tablero = { { 0, 2, 0, 2, 0, 2, 0, 2 }, { 2, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 2, 0, 2, 0, 2 },
 			{ 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 }, { 1, 0, 1, 0, 1, 0, 1, 0 },
 			{ 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0 } };
 
@@ -135,10 +135,8 @@ public class DamasOnline {
 
 			comprobarEstadoPartida(idPartida);
 
-			Movimiento movimiento = new Movimiento(0, idPartida, idUsuario, filaOrigen, filaDestino, columnaOrigen,
-					columnaDestino);
 
-			return movimiento;
+			return new Movimiento(0, idPartida, idUsuario, filaOrigen, filaDestino, columnaOrigen, columnaDestino);
 
 		} else {
 

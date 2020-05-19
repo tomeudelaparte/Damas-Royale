@@ -69,4 +69,11 @@ public class PartidaEJB {
 		return partidaDAO.getAllPartidaEnCurso();
 	}
 
+	public Partida getPartidaNoTerminadaByID(Integer id) {
+		
+		PartidaDAO partidaDAO = new PartidaDAO();
+
+		return partidaDAO.getPartidaNoTerminadaByID(id);
+	}
+
 }

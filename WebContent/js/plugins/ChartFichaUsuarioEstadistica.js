@@ -1,6 +1,6 @@
 function showEstadistica(estadistica) {
 	
-	var fecha=["Origen"];
+	var fecha=["0"];
 	var partidasGanadas=["0"];
 	var partidasPerdidas=["0"];
 	var tablas=["0"];

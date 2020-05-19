@@ -105,7 +105,7 @@
 					</div>
 				</div>
 				<a href="Ficha?id=<%=usuario.getId() %>" class="text-decoration-none float-left"><button type="button" class="btn btn-secondary d-flex ">Cancelar</button></a>
-				<button type="submit" class="btn btn-secondary d-flex ml-auto ">Guardar cambios</button>
+				<button type="submit" class="btn btn-success d-flex ml-auto ">Guardar cambios</button>
 			</form>
 		</div>
 	</div>

@@ -47,7 +47,7 @@ public class CrearPartidaNueva extends HttpServlet {
 		} else {
 
 			Partida partida = partidaEJB.getPartidaCreadaByIdUsuario(usuario.getId());
-
+			
 			if (partida == null) {
 
 				partidaEJB.addPartidaByIdUsuario(usuario.getId());

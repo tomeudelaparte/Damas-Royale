@@ -1,6 +1,6 @@
 package com.damasroyale.modelo.ejb.extras;
 
-import java.io.File; 
+import java.io.File;
 import java.io.IOException;
 
 import javax.ejb.LocalBean;
@@ -19,7 +19,7 @@ public class GuardarImagenEJB {
 
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(GuardarImagenEJB.class);
 
-	private final String UPLOAD_DIRECTORY = "media";
+	private static final String UPLOAD_DIRECTORY = "media";
 
 	public String uploadImage(HttpServletRequest request) {
 

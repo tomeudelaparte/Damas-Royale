@@ -98,4 +98,16 @@ public class PartidaDAO {
 		}
 	}
 
+	public Partida getPartidaNoTerminadaByID(Integer id) {
+
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			PartidaMapper partidaMapper = sqlSession.getMapper(PartidaMapper.class);
+			return partidaMapper.getPartidaNoTerminadaByID(id);
+		} finally {
+			sqlSession.close();
+		}
+
+	}
+
 }

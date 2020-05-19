@@ -45,43 +45,39 @@ public class FichaUsuario extends HttpServlet {
 				RequestDispatcher rs;
 
 				if (tab == null || tab.equals("")) {
-					
+
+					response.sendRedirect("Ficha?id=" + id + "&tab=info");
+
+				} else if (tab.equals("info")) {
+
 					rs = getServletContext().getRequestDispatcher("/Informacion");
 
 					request.setAttribute("tab", "info");
 
 					rs.forward(request, response);
-					
+
+				} else if (tab.equals("stats")) {
+
+					rs = getServletContext().getRequestDispatcher("/Estadistica");
+
+					request.setAttribute("tab", "info");
+
+					rs.forward(request, response);
+
+				} else if (tab.equals("history")) {
+
+					rs = getServletContext().getRequestDispatcher("/Historial");
+
+					request.setAttribute("tab", "history");
+
+					rs.forward(request, response);
+
 				} else {
 
-					if (tab.equals("info")) {
+					response.sendRedirect("Ficha?id=" + id + "&tab=info");
 
-						rs = getServletContext().getRequestDispatcher("/Informacion");
-
-						request.setAttribute("tab", "info");
-
-						rs.forward(request, response);
-
-					} else if (tab.equals("stats")) {
-
-						rs = getServletContext().getRequestDispatcher("/Estadistica");
-
-						request.setAttribute("tab", "info");
-
-						rs.forward(request, response);
-
-					} else if (tab.equals("history")) {
-
-						rs = getServletContext().getRequestDispatcher("/Historial");
-
-						request.setAttribute("tab", "history");
-
-						rs.forward(request, response);
-
-					}
 				}
 			}
 		}
 	}
-
 }

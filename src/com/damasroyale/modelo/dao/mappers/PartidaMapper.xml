@@ -62,6 +62,10 @@
 	</insert>
 	
 
-	
+	<select id='getPartidaNoTerminadaByID' resultType="Partida">
+		SELECT * FROM PARTIDAS
+		WHERE ID = #{id}
+		AND FINALIZADA = 0
+	</select>
 
 </mapper>

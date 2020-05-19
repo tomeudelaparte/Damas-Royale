@@ -25,4 +25,6 @@ public interface PartidaMapper {
 
 	public ArrayList<Partida> getAllPartidaEnCurso();
 
+	public Partida getPartidaNoTerminadaByID(@Param("id") Integer id);
+
 }

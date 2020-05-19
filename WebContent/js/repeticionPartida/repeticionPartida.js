@@ -93,7 +93,7 @@ function setMovimientoAnterior() {
 }
 
 function updateContador() {
-	$("#movimientos").html(index + 1 + "/" + (movimientosPartida.length));
+	$("#movimientos").html(index + 1 + " de " + (movimientosPartida.length));
 }
 
 function setTurno() {

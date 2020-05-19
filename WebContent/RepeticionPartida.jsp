@@ -54,7 +54,7 @@
 				
 				<%} %>
 				<hr>
-				<div id="oponente" class="row mx-auto shadow m-3 mb-5 p-2 rounded">
+				<div id="oponente" class="row mx-auto shadow m-3 mb-5 p-2 rounded border">
 
 					<div class="col-5">
 						<img id="opImagen" class="img-fluid mx-auto d-block border rounded img-usuario-150" src="media/<%=oponente.getImagen() %>" width="150">
@@ -65,7 +65,7 @@
 					</div>
 				</div>
 				
-				<h1 class="text-dark font-weight-bold mx-auto text-center">VS</h1>
+				<h1 class="text-dark font-weight-bold mx-auto text-center mb-4">VS</h1>
 				<%
 				
 				if (partida.getIdUsuario_A() == usuario.getId()) {
@@ -80,7 +80,7 @@
 				<%} %>
 				
 				<hr>
-				<div id="usuario" class="row mx-auto shadow m-3 p-2 rounded mb-5">
+				<div id="usuario" class="row mx-auto shadow m-3 p-2 rounded mb-5 border">
 					<div class="col-5">
 						<img class="img-fluid mx-auto d-block border rounded img-usuario-150" src="media/<%=usuario.getImagen() %>" width="150">
 					</div>
@@ -173,7 +173,9 @@
 				</div>
 			</div>
 			<div class="col-3 border shadow mr-4 rounded">
-				<h1 class="p-2 text-dark">Movimientos <span id="movimientos">0/<%=movimientos.size()-1 %></span></h1>
+				<h2 class="mt-3 ml-3 text-dark">REPETICIÓN DE PARTIDA</h2>
+				<hr class="mb-5 pb-5">
+				<h2 class="text-dark text-center">Movimiento <span id="movimientos">0 de <%=movimientos.size()%></span></h1>
 				<div class="row m-5 border shadow rounded">
 					<div class="col">
 						<button id="anterior" class="btn btn-light float-left pl-4 pr-4"><i class="fa fa-caret-left" style="font-size:200px"></i></button>
@@ -181,6 +183,10 @@
 					<div class="col">
 						<button id="siguiente" class="btn btn-light float-right pl-4 pr-4"><i class="fa fa-caret-right" style="font-size:200px"></i></button>
 					</div>
+				</div>
+				<div class="row mx-auto pt-5">
+					<a href="Repeticion?id=<%=partida.getId()%>&usuario=<%=usuario.getId()%>" class="text-decoration-none mr-auto ml-5"><button type="button" class="btn btn-danger font-weight-bold mx-auto d-flex">REINICIAR</button></a>
+					<a href="Ficha?id=<%=usuario.getId()%>&tab=history" class="text-decoration-none ml-auto mr-5"><button type="button" class="btn btn-secondary font-weight-bold mx-auto d-flex">VOLVER AL HISTORIAL</button></a>
 				</div>
 			</div>
 		</div>  

@@ -12,16 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.LoggerFactory;
+
 import com.damasroyale.modelo.ejb.PartidaEJB;
 import com.damasroyale.modelo.ejb.SessionEJB;
 import com.damasroyale.modelo.ejb.UsuarioEJB;
 import com.damasroyale.modelo.pojo.Usuario;
 import com.damasroyale.modelo.pojo.extras.Stat;
 
+import ch.qos.logback.classic.Logger;
+
 @WebServlet("/Estadistica")
 public class FichaUsuarioEstadistica extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(FichaUsuarioEstadistica.class);
+	
 	@EJB
 	SessionEJB sessionEJB;
 
@@ -52,8 +58,16 @@ public class FichaUsuarioEstadistica extends HttpServlet {
 				response.sendRedirect("Jugar");
 
 			} else {
+				Usuario jugador = null;
+				
+				try {
+					
+					jugador = usuarioEJB.getUsuarioByID(Integer.valueOf(id));
+					
+				} catch (Exception ex) {
 
-				Usuario jugador = usuarioEJB.getUsuarioByID(Integer.valueOf(id));
+					logger.error(ex.getMessage());
+				}
 
 				if (jugador == null) {
 

@@ -60,7 +60,7 @@
 				
 				<%} %>
 				<hr>
-				<div id="oponente" class="row mx-auto shadow m-3 mb-5 p-2 rounded">
+				<div id="oponente" class="row mx-auto shadow m-3 mb-5 p-2 rounded border">
 				
 				<% if(oponente.getId() == null) { %>
 				
@@ -78,7 +78,7 @@
 				
 				</div>
 				
-				<h1 class="text-dark font-weight-bold mx-auto text-center">VS</h1>
+				<h1 class="text-dark font-weight-bold mx-auto text-center mb-4">VS</h1>
 				<%
 				
 				if (partida.getIdUsuario_A() == usuario.getId()) {
@@ -93,7 +93,7 @@
 				<%} %>
 				
 				<hr>
-				<div id="usuario" class="row mx-auto shadow m-3 p-2 rounded mb-5">
+				<div id="usuario" class="row mx-auto shadow m-3 p-2 rounded mb-5 border">
 					<div class="col-5">
 						<img class="img-fluid mx-auto d-block border rounded img-usuario-150" src="media/<%=usuario.getImagen() %>" width="150">
 					</div>
@@ -102,7 +102,7 @@
 						<p class="text-center"><%=usuarioPuntuacion%> PTS</p>
 					</div>
 				</div>
-				<div class="row mx-auto pt-5">
+				<div class="row mx-auto pt-2">
 					<button type="button" class="btn btn-danger font-weight-bold ml-2 mt-4" data-toggle="modal" data-target="#abandonar">ABANDONAR PARTIDA</button>
 					 <div class="modal fade" id="abandonar" role="dialog">
 					    <div class="modal-dialog modal-dialog-centered">

@@ -77,7 +77,7 @@ public class EditarCuentaUsuario extends HttpServlet {
 				usuario.setContrasenya(contrasenya);
 			}
 
-			if (imagen != null && !imagen.equals("") && imagen.length() <= 64) {
+			if (imagen != null && !imagen.equals("")) {
 				usuario.setImagen(imagen);
 			}
 
