@@ -38,7 +38,7 @@ function crearPartida(idPartida, idUsuario) {
 		}
 	});
 
-	setInterval("checkPartida()", 1000);
+	setInterval("checkPartida()", 3000);
 
 }
 
@@ -128,8 +128,15 @@ function controlTablas() {
 	if (tablasOponente === true && tablas === false) {
 
 		tablasSolicitadas();
-
+		
 		tablas = true;
+		
+		$("#aceptarTablas").click(function() {
+
+			partidaRestClient.solicitarTablas();
+
+			controlEstadoPartida();
+		});
 	}
 
 }

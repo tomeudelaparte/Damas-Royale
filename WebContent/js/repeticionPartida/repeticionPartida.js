@@ -123,13 +123,13 @@ function setTurnoInvertido() {
 
 	if (seleccionado == 1 || seleccionado == 13) {
 
-		$('#oponente').removeClass("border border-warning");
-		$('#usuario').addClass("border border-warning");
+		$('#oponente').removeClass("border-warning");
+		$('#usuario').addClass("border-warning");
 
 	} else if (seleccionado == 2 || seleccionado == 23) {
 
-		$('#usuario').removeClass("border border-warning");
-		$('#oponente').addClass("border border-warning");
+		$('#usuario').removeClass("border-warning");
+		$('#oponente').addClass("border-warning");
 	}
 }
 

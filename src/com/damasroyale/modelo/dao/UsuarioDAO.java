@@ -41,12 +41,12 @@ public class UsuarioDAO {
 		}
 	}
 
-	public String getExistUsuario(String nombre, String email) {
+	public String getUsuarioExistente(String nombre, String email) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			UsuarioMapper usuarioMapper = sqlSession.getMapper(UsuarioMapper.class);
-			return usuarioMapper.getExistUsuario(nombre, email);
+			return usuarioMapper.getUsuarioExistente(nombre, email);
 		} finally {
 			sqlSession.close();
 		}
@@ -100,6 +100,16 @@ public class UsuarioDAO {
 			sqlSession.close();
 		}
 
+	}
+
+	public String getNombreExistente(String nombre) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			UsuarioMapper usuarioMapper = sqlSession.getMapper(UsuarioMapper.class);
+			return usuarioMapper.getNombreExistente(nombre);
+		} finally {
+			sqlSession.close();
+		}
 	}
 
 }

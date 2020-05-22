@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/general.css">
 	<link rel="icon" href="media/favicon.png">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -23,19 +24,19 @@
 		<div class="row align-self-center w-100">
 			<div class="col-6 mx-auto">
 				<div class="jumbotron shadow bg-light border">
-					<h3 class="mb-5">Crear tu cuenta de Damas Royale</h3>
+					<h3 class="mb-5 text-dark">Crear tu cuenta de Damas Royale</h3>
 					<form action="Register" method="post">
 					 <div class="form-group">
 					    <label>Nombre de usuario</label>
-					    <input type="text" class="form-control" required="required" name="nombre" placeholder="32 carácteres máximo">
+					    <input type="text" class="form-control" required="required" name="nombre" placeholder="32 carácteres máx.">
 					  </div>
 					  <div class="form-group">
 					    <label>Correo electrónico</label>
-					    <input type="email" class="form-control" required="required" name="email" placeholder="64 carácteres máximo">
+					    <input type="email" class="form-control" required="required" name="email" placeholder="64 carácteres máx.">
 					  </div>
 					  <div class="form-group">
 					    <label>Contraseña</label>
-					    <input type="password" class="form-control"  required="required" name="contrasenya" placeholder="64 carácteres máximo">
+					    <input type="password" class="form-control"  required="required" name="contrasenya" placeholder="64 carácteres máx.">
 					  </div>
 						<%
 							if (error != null) {

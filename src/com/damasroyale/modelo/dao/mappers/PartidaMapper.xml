@@ -9,13 +9,13 @@
 		WHERE ID = #{id}
 	</select>
 	
-	<select id='getPartidaCreadaByIdUsuario' resultType="Partida">
+	<select id='getPartidaNoFinalizadaByIdUsuario' resultType="Partida">
 		SELECT PARTIDAS.ID, PARTIDAS.IDUSUARIO_A, PARTIDAS.IDUSUARIO_B, FINALIZADA FROM PARTIDAS
-		INNER JOIN USUARIOS ON PARTIDAS.IDUSUARIO_A = USUARIOS.ID 
+		INNER JOIN USUARIOS ON (PARTIDAS.IDUSUARIO_A = USUARIOS.ID || PARTIDAS.IDUSUARIO_B = USUARIOS.ID) 
 		AND USUARIOS.ID= #{id} 
 		AND PARTIDAS.FINALIZADA = 0 
 		ORDER BY ID DESC
-		LIMIT 1
+		LIMIT 1;
 	</select>
 
 	<insert id="addPartidaByIdUsuario" parameterType="Partida">

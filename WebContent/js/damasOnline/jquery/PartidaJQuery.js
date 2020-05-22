@@ -56,9 +56,10 @@ function seleccionar(casilla) {
 
 function mover(casilla) {
 	$(casilla).removeClass("selected");
-	$(casilla).empty();
 	$(".casilla").removeClass("move");
 	$(".casilla").unbind();
+	
+	$(".casilla.bg-dark:not(:has(img))").css("cursor", "default");
 }
 
 function partidaFinalizadaUsuario() {
@@ -86,20 +87,19 @@ function partidaTablas(usuario, oponente) {
 }
 
 function addTurnoUsuario() {
-	$('#oponente').removeClass("border border-warning");
-	$('#usuario').addClass("border border-warning");
+	$('#oponente').removeClass("border-warning");
+	$('#usuario').addClass("border-warning");
 }
 
 function addTurnoOponente() {
-	$('#usuario').removeClass("border border-warning");
-	$('#oponente').addClass("border border-warning");
+	$('#usuario').removeClass("border-warning");
+	$('#oponente').addClass("border-warning");
 }
 
 function tablasSolicitadas() {
 
-	$("#chat")
-			.append(
-					"<p class='text-secondary font-weight-bold'>Tu oponente ha solicitado tablas.</p>");
+	$("#chat").append("<p class='text-secondary font-weight-bold shadow border text-center pt-3'>Tu oponente ha solicitado tablas.<br>"
+			+"<button id='aceptarTablas' type='button' class='btn btn-secondary btn-sm mt-3 mb-3 font-weight-bold'>ACEPTAR TABLAS</button></p>");
 
 	$('#chat').scrollTop($('#chat')[0].scrollHeight);
 

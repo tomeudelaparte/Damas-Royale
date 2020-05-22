@@ -20,11 +20,11 @@ public class PartidaEJB {
 		return partidaDAO.getPartidaByID(id);
 	}
 
-	public Partida getPartidaCreadaByIdUsuario(Integer id) {
+	public Partida getPartidaNoFinalizadaByIdUsuario(Integer id) {
 
 		PartidaDAO partidaDAO = new PartidaDAO();
 
-		return partidaDAO.getPartidaCreadaByIdUsuario(id);
+		return partidaDAO.getPartidaNoFinalizadaByIdUsuario(id);
 	}
 
 	public void addPartidaByIdUsuario(Integer id) {

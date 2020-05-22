@@ -98,12 +98,18 @@
 			    	  	<%				 
 					}}
 					
-					if(partida.getIdUsuario_B() == null) {%>
+					if(usuario.getId() != partida.getIdUsuario_A() && partida.getIdUsuario_B() == null) {%>
 					
 					<td class="text-dark font-weight-bold">No hay jugador.</td>
 					<td><a href="Sala?id=<%=partida.getId() %>" class="text-dark text-center" ><button type="button" class="btn btn-secondary font-weight-bold">UNIRSE</button></a></td>					
 					
-					<%} else if(usuario.getId() == partida.getIdUsuario_A() || usuario.getId() == partida.getIdUsuario_B()) { %>	
+					<%}else if(usuario.getId() == partida.getIdUsuario_A() && partida.getIdUsuario_B() == null){%>
+					
+					<td class="text-dark font-weight-bold">No hay jugador.</td>
+					<td><a href="Sala?id=<%=partida.getId() %>" class="text-dark text-center" ><button type="button" class="btn btn-secondary font-weight-bold">VOLVER A UNIRSE</button></a></td>	
+						
+					<%}else if(usuario.getId() == partida.getIdUsuario_A() || usuario.getId() == partida.getIdUsuario_B()) { %>	
+					
 					
 					<td><a href="Sala?id=<%=partida.getId() %>" class="text-dark text-center" ><button type="button" class="btn btn-secondary font-weight-bold">VOLVER A UNIRSE</button></a></td>					
 								

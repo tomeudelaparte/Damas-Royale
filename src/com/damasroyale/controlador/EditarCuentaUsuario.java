@@ -69,15 +69,22 @@ public class EditarCuentaUsuario extends HttpServlet {
 			String contrasenya = request.getParameter("contrasenya");
 			String imagen = guardarImagenEJB.uploadImage(request);
 
-			if (nombre != null && !nombre.equals("") && nombre.length() <= 32) {
-				usuario.setNombre(nombre);
+			if (nombre != null && !nombre.equals("") && nombre.length() <= 32 && !usuario.getNombre().equals(nombre)) {
+
+				String idUsuario = usuarioEJB.getNombreExistente(nombre);
+
+				if (idUsuario == null) {
+
+					usuario.setNombre(nombre);
+				}
 			}
 
-			if (contrasenya != null && !contrasenya.equals("") && contrasenya.length() <= 64) {
+			if (contrasenya != null && !contrasenya.equals("") && contrasenya.length() <= 64
+					&& !usuario.getContrasenya().equals(contrasenya)) {
 				usuario.setContrasenya(contrasenya);
 			}
 
-			if (imagen != null && !imagen.equals("")) {
+			if (imagen != null) {
 				usuario.setImagen(imagen);
 			}
 

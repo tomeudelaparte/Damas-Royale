@@ -20,10 +20,16 @@
 		CONTRASENYA = #{contrasenya}
 	</select>
 
-	<select id='getExistUsuario' resultType='string'>
+	<select id='getUsuarioExistente' resultType='string'>
 		SELECT ID FROM
 		USUARIOS
 		WHERE NOMBRE = #{nombre} OR EMAIL = #{email}
+	</select>
+	
+	<select id='getNombreExistente' resultType='string'>
+		SELECT ID FROM
+		USUARIOS
+		WHERE NOMBRE = #{nombre}
 	</select>
 
 	<insert id="addUsuario" parameterType="Usuario">

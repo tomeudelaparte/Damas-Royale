@@ -74,7 +74,7 @@ public class RegistrarCuentaNueva extends HttpServlet {
 
 			} else {
 
-				String usuarioID = usuarioEJB.getExistUsuario(nombre, email);
+				String usuarioID = usuarioEJB.getUsuarioExistente(nombre, email);
 
 				if (usuarioID != null) {
 

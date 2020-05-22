@@ -28,9 +28,15 @@ public class DamasOnline {
 
 	private boolean finalizada = false;
 
-	private int[][] tablero = { { 0, 2, 0, 2, 0, 2, 0, 2 }, { 2, 0, 2, 0, 2, 0, 2, 0 }, { 0, 2, 0, 2, 0, 2, 0, 2 },
-			{ 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0 }, { 1, 0, 1, 0, 1, 0, 1, 0 },
-			{ 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0 } };
+	private int[][] tablero = { 
+			{ 0, 2, 0, 2, 0, 2, 0, 2 }, 
+			{ 2, 0, 2, 0, 2, 0, 2, 0 }, 
+			{ 0, 2, 0, 2, 0, 2, 0, 2 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 0, 0, 0, 0, 0, 0, 0, 0 }, 
+			{ 1, 0, 1, 0, 1, 0, 1, 0 },
+			{ 0, 1, 0, 1, 0, 1, 0, 1 }, 
+			{ 1, 0, 1, 0, 1, 0, 1, 0 } };
 
 	private Integer turnoUsuario = 0;
 
@@ -124,7 +130,7 @@ public class DamasOnline {
 
 			if (eliminar(fichaEliminada[0], fichaEliminada[1])) {
 
-				if (comprobarDobleSalto(idUsuario, filaDestino, columnaDestino) == false) {
+				if (comprobarSaltoMultiple(idUsuario, filaDestino, columnaDestino) == false) {
 
 					cambiarTurno(idUsuario);
 				}
@@ -134,7 +140,6 @@ public class DamasOnline {
 			}
 
 			comprobarEstadoPartida(idPartida);
-
 
 			return new Movimiento(0, idPartida, idUsuario, filaOrigen, filaDestino, columnaOrigen, columnaDestino);
 
@@ -161,6 +166,24 @@ public class DamasOnline {
 			return false;
 		}
 	}
+
+//	private boolean verificarMovimientoEliminarFicha(Integer idUsuario, int filaOrigen, int columnaOrigen, int filaDestino,
+//			int columnaDestino) {
+//
+//		int origen = this.tablero[filaOrigen][columnaOrigen];
+//		int destino = this.tablero[filaDestino][columnaDestino];
+//
+//		if (comprobarOrigen(origen) && comprobarDestino(destino)
+//				&& (comprobarReina(filaOrigen, columnaOrigen) || comprobarDireccion(idUsuario, filaOrigen, filaDestino))
+//				&& comprobarDistancia(filaOrigen, columnaOrigen, filaDestino, columnaDestino) ) {
+//
+//			return true;
+//
+//		} else {
+//
+//			return false;
+//		}
+//	}
 
 	private boolean comprobarOrigen(int origen) {
 
@@ -192,14 +215,15 @@ public class DamasOnline {
 
 			return false;
 
-		} else if (turno == 2 && !anfitrion.equals(idUsuario) && filaDestino < filaOrigen) {
+		}
+		if (turno == 2 && !anfitrion.equals(idUsuario) && filaDestino < filaOrigen) {
 
 			return false;
 
-		} else {
-
-			return true;
 		}
+
+		return true;
+
 	}
 
 	private boolean comprobarDistancia(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
@@ -211,57 +235,98 @@ public class DamasOnline {
 
 			return true;
 
-		} else if (saltoFila == 2 && saltoCasilla == 2
-				&& (eliminarFicha(filaOrigen, columnaOrigen, filaDestino, columnaDestino).length > 0)) {
+		}
+
+		if (saltoFila == 2 && saltoCasilla == 2
+				&& eliminarFicha(filaOrigen, columnaOrigen, filaDestino, columnaDestino)) {
 
 			return true;
 
-		} else {
-
-			return false;
 		}
+
+		return false;
+
 	}
 
-	private boolean comprobarDobleSalto(Integer idUsuario, int filaOrigen, int columnaOrigen) {
-		if ((filaOrigen + 2) < 8 && (filaOrigen - 2) > 0 && (columnaOrigen + 2) < 8 && (columnaOrigen - 2) > 0) {
-			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen + 2, columnaOrigen + 2)
-					|| verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen + 2, columnaOrigen - 2)
-					|| verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen - 2, columnaOrigen + 2)
-					|| verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen - 2, columnaOrigen - 2)) {
+	private boolean comprobarSaltoMultiple(Integer idUsuario, int filaOrigen, int columnaOrigen) {
 
-				fichaEliminada = new int[2];
-
+		if ((filaOrigen + 2) < 8 && (columnaOrigen + 2) < 8) {
+			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen + 2, columnaOrigen + 2)) {
 				return true;
-			} else {
-				return false;
 			}
-
-		} else {
-			return false;
 		}
+
+		if ((filaOrigen + 2) < 8 && (columnaOrigen - 2) >= 0) {
+			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen + 2, columnaOrigen - 2)) {
+				return true;
+			}
+		}
+
+		if ((filaOrigen - 2) >= 0 && (columnaOrigen + 2) < 8) {
+			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen - 2, columnaOrigen + 2)) {
+				return true;
+			}
+		}
+
+		if ((filaOrigen - 2) >= 0 && (columnaOrigen - 2) >= 0) {
+			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen - 2, columnaOrigen - 2)) {
+				return true;
+			}
+		}
+
+		return false;
+
 	}
 
-	private int[] eliminarFicha(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
+//	private boolean comprobarEliminarFicha(Integer idUsuario, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
+//		
+//		for (int i = 0; i < tablero.length; i++) {
+//			
+//			for (int j = 0; j < tablero.length; j++) {
+//				
+//				if(tablero[i][j] == turno || String.valueOf(tablero[i][j]).equals(turno + "3")) {
+//										
+//					if ((i + 2) < 8 && (i - 2) >= 0 && (j + 2) < 8 && (j - 2) >= 0) {
+//
+//						if((verificarMovimientoEliminarFicha(idUsuario, i, j, i + 2, j + 2) && ( filaOrigen != i  && columnaOrigen != j  && filaDestino != i+2  && columnaDestino != j+2))
+//								|| (verificarMovimientoEliminarFicha(idUsuario, i, j, i + 2, j - 2) && ( filaOrigen != i  && columnaOrigen != j  && filaDestino != i+2  && columnaDestino != j-2))
+//								|| (verificarMovimientoEliminarFicha(idUsuario, i, j, i - 2, j + 2) && ( filaOrigen != i  && columnaOrigen != j  && filaDestino != i-2  && columnaDestino != j+2))
+//								|| (verificarMovimientoEliminarFicha(idUsuario, i, j, i - 2, j - 2) && ( filaOrigen != i  && columnaOrigen != j  && filaDestino != i-2  && columnaDestino != j-2)))		{
+//														
+//							return false;
+//						}
+//					}
+//
+//				}
+//			}
+//		}
+//		
+//		return true;
+//	}
+
+	private boolean eliminarFicha(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
 
 		int filaPosicion = filaDestino + ((filaOrigen - filaDestino) / 2);
 		int casillaPosicion = columnaDestino + ((columnaOrigen - columnaDestino) / 2);
 
-		if (this.tablero[filaPosicion][casillaPosicion] != turno) {
+		if (this.tablero[filaPosicion][casillaPosicion] != turno && this.tablero[filaPosicion][casillaPosicion] != 0) {
 
 			fichaEliminada[0] = filaPosicion;
 			fichaEliminada[1] = casillaPosicion;
-		}
 
-		return fichaEliminada;
+			return true;
+		}
+		return false;
+
 	}
 
 	private boolean comprobarReina(int fila, int columna) {
 
 		if (tablero[fila][columna] == 13 || tablero[fila][columna] == 23) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
+
 	}
 
 	private void comprobarEstadoPartida(Integer idPartida) {
@@ -292,14 +357,15 @@ public class DamasOnline {
 
 			return 13;
 
-		} else if (dama == 2 && filaLimite == 7) {
+		}
+		if (dama == 2 && filaLimite == 7) {
 
 			return 23;
 
-		} else {
-
-			return dama;
 		}
+
+		return dama;
+
 	}
 
 	private void realizarMovimiento(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
@@ -342,9 +408,9 @@ public class DamasOnline {
 			}
 
 			return true;
-		} else {
-			return false;
 		}
+		return false;
+
 	}
 
 	private int[][] cambiarTablero(int[][] tablero) {
@@ -407,14 +473,15 @@ public class DamasOnline {
 
 			return tablasOponente;
 
-		} else if (idUsuario != anfitrion) {
+		}
+
+		if (idUsuario != anfitrion) {
 
 			return tablasAnfitrion;
 
-		} else {
-
-			return false;
 		}
+
+		return false;
 
 	}
 

@@ -41,11 +41,18 @@ public class UsuarioEJB {
 		return usuarioDAO.getUsuarioLogin(email, contrasenya);
 	}
 
-	public String getExistUsuario(String nombre, String email) {
+	public String getUsuarioExistente(String nombre, String email) {
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-		return usuarioDAO.getExistUsuario(nombre, email);
+		return usuarioDAO.getUsuarioExistente(nombre, email);
+	}
+	
+	public String getNombreExistente(String nombre) {
+
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+		return usuarioDAO.getNombreExistente(nombre);
 	}
 
 	public void addUsuario(Usuario usuario) {

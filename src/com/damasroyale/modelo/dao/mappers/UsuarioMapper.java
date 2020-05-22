@@ -14,7 +14,7 @@ public interface UsuarioMapper {
 
 	public Usuario getUsuarioByID(@Param("id") Integer id);
 
-	public String getExistUsuario(@Param("nombre") String nombre, @Param("email") String email);
+	public String getUsuarioExistente(@Param("nombre") String nombre, @Param("email") String email);
 
 	public void addUsuario(Usuario usuario);
 
@@ -23,5 +23,7 @@ public interface UsuarioMapper {
 	public void activateUsuario(Usuario usuario);
 
 	public void delUsuarioByID(@Param("id") Integer id);
+
+	public String getNombreExistente(@Param("nombre") String nombre);
 
 }

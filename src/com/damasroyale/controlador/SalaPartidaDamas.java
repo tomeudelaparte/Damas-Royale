@@ -1,6 +1,6 @@
 package com.damasroyale.controlador;
 
-import java.io.IOException; 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.ejb.EJB;
@@ -30,9 +30,9 @@ import ch.qos.logback.classic.Logger;
 
 @WebServlet("/Sala")
 public class SalaPartidaDamas extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(SalaPartidaDamas.class);
 
 	@EJB
@@ -70,23 +70,26 @@ public class SalaPartidaDamas extends HttpServlet {
 
 			} else {
 				Partida partida = null;
-				
+
 				try {
 					partida = partidaEJB.getPartidaNoTerminadaByID(Integer.valueOf(id));
 
 				} catch (Exception ex) {
-					
+
 					logger.error(ex.getMessage());
 				}
-				
-				RequestDispatcher rs = getServletContext().getRequestDispatcher("/SalaPartidaDamas.jsp");
 
-				if (partida == null) {
-					
+				Partida partidaExistente = partidaEJB.getPartidaNoFinalizadaByIdUsuario(usuario.getId());
+
+				RequestDispatcher rs = getServletContext().getRequestDispatcher("/SalaPartidaDamas.jsp");
+				
+
+				if (partida == null || partidaExistente != null && partidaExistente.getId() != partida.getId()) {
+
 					response.sendRedirect("Jugar");
-					
+
 				} else {
-					
+
 					if (partida.getIdUsuario_A() != usuario.getId() && partida.getIdUsuario_B() == null) {
 
 						partida.setIdUsuario_B(usuario.getId());
@@ -104,6 +107,7 @@ public class SalaPartidaDamas extends HttpServlet {
 								+ partida.getId() + "/" + usuario.getId());
 
 						target.request().get();
+
 					}
 
 					if (partida.getIdUsuario_A() == usuario.getId()) {
@@ -156,7 +160,6 @@ public class SalaPartidaDamas extends HttpServlet {
 					}
 
 				}
-
 			}
 		}
 

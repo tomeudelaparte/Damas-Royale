@@ -11,7 +11,7 @@ public interface PartidaMapper {
 
 	public Partida getPartidaByID(@Param("id") Integer id);
 
-	public Partida getPartidaCreadaByIdUsuario(@Param("id") Integer id);
+	public Partida getPartidaNoFinalizadaByIdUsuario(@Param("id") Integer id);
 
 	public void addPartidaByIdUsuario(@Param("id") Integer id);
 

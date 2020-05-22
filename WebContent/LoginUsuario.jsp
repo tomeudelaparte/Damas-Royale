@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/general.css">
 	<link rel="icon" href="media/favicon.png">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -25,7 +26,7 @@
 		<div class="row align-self-center w-100">
 			<div class="col-6 mx-auto">
 				<div class="jumbotron shadow bg-light border pb-4">
-					<h3 class="mb-5">Iniciar sesión en Damas Royale</h3>
+					<h3 class="mb-5 text-dark">Iniciar sesión en Damas Royale</h3>
 					<form action="Login" method="post">
 						<div class="form-group input-group">
 							<input type="email" class="form-control" name="email" placeholder="Correo electrónico" required="required">

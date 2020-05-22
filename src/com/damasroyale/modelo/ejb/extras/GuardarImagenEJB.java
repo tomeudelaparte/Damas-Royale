@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Logger;
@@ -34,7 +35,18 @@ public class GuardarImagenEJB {
 
 		try {
 			for (Part part : request.getParts()) {
+
 				fileName = getFileName(part);
+
+				if (fileName == null || fileName.equals("")) {
+
+					fileName = null;
+
+				} else {
+
+					fileName = "img" + RandomStringUtils.random(15, true, true);
+				}
+
 				part.write(uploadPath + File.separator + fileName);
 			}
 		} catch (IllegalStateException | IOException | ServletException ex) {
@@ -51,7 +63,7 @@ public class GuardarImagenEJB {
 			if (content.trim().startsWith("filename"))
 				return content.substring(content.indexOf("=") + 2, content.length() - 1);
 		}
-		return "desconocido.txt";
+		return null;
 	}
 
 }
