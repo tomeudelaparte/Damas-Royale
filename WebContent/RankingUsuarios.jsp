@@ -1,7 +1,7 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.damasroyale.modelo.pojo.Usuario" %>
-<%@ page import="com.damasroyale.modelo.pojo.extras.Rank" %>
+<%@ page import="com.damasroyale.modelo.pojo.Rank" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>

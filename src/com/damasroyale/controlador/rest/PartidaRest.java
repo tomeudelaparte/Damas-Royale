@@ -25,30 +25,49 @@ import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
 import com.damasroyale.modelo.pojo.Usuario;
 
+/**
+ * Servicio Rest para la comunicación entre partidas online.
+ * 
+ * @author Tomeu de la Parte Mulet
+ *
+ */
 @Path("/PartidaRest")
 public class PartidaRest {
-
+	
+	// EJB para utilizar las funciones de partida.
 	@EJB
 	PartidaEJB partidaEJB;
 
+	// EJB para utilizar las funciones de usuario.
 	@EJB
 	UsuarioEJB usuarioEJB;
 
+	// EJB para utilizar las funciones de puntuación.
 	@EJB
 	PuntuacionEJB puntuacionEJB;
 
+	// EJB para utilizar las funciones de resultado.
 	@EJB
 	ResultadoEJB resultadoEJB;
-	
+
+	// EJB para utilizar las funciones de movimiento.
 	@EJB
 	MovimientoEJB movimientoEJB;
 
+	// EJB para utilizar las funciones de mensaje.
 	@EJB
 	MensajeEJB mensajeEJB;
 
+	// EJB para utilizar las funciones de la lista de partidas.
 	@EJB
 	ListaPartidasEJB<DamasOnline> listaPartidasEJB;
 
+	/**
+	 * Crea una partida y la añade a una lista de partidas.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @param idUsuario String, identificador de usuario.
+	 */
 	@GET
 	@Path("/create/{idPartida}/{idUsuario}")
 	public void createPartida(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
@@ -58,13 +77,38 @@ public class PartidaRest {
 		listaPartidasEJB.add(partida);
 	}
 
+	/**
+	 * Añade el segundo jugador (oponente) a la partida.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @param idUsuario String, identificador de usuario.
+	 */
 	@GET
 	@Path("/setOponente/{idPartida}/{idUsuario}")
 	public void setOponente(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
 
 		listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).setOponente(Integer.valueOf(idUsuario));
 	}
+	
+	/**
+	 * Añade el turno al usuario.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @param idUsuario String, identificador de usuario.
+	 */
+	@GET
+	@Path("/setTurnoOponente/{idPartida}/{idUsuario}")
+	public void setTurno(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
 
+		listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).setTurnoUsuario(Integer.valueOf(idUsuario));
+	}
+
+	/**
+	 * Obtiene la partida y la devuelve en formato JSON.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @return Partida
+	 */
 	@GET
 	@Path("/getPartida/{idPartida}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -74,117 +118,12 @@ public class PartidaRest {
 
 	}
 
-	@GET
-	@Path("/getTablero/{idPartida}/{idUsuario}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public int[][] getTablero(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
-
-		return listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).getTablero(Integer.valueOf(idUsuario));
-	}
-	
-	@GET
-	@Path("/setTurnoOponente/{idPartida}/{idUsuario}")
-	public void setTurno(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
-
-		listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).setTurnoUsuario(Integer.valueOf(idUsuario));
-	}
-
-	@GET
-	@Path("/getTurno/{idPartida}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Integer getTurno(@PathParam("idPartida") String idPartida) {
-
-		return listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).getTurnoUsuario();
-	}
-
-	@GET
-	@Path("/getEstado/{idPartida}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public boolean getEstadoPartida(@PathParam("idPartida") String idPartida) {
-
-		return listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).isFinalizada();
-
-	}
-
-	@GET
-	@Path("/getGanador/{idPartida}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Integer getResultado(@PathParam("idPartida") String idPartida) {
-
-		return listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).getGanador();
-	}
-
-	@GET
-	@Path("/abandonar/{idPartida}/{idUsuario}")
-	public void abandonarPartida(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
-
-		listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).abandonarPartida(Integer.valueOf(idPartida),
-				Integer.valueOf(idUsuario));
-
-	}
-
-	@GET
-	@Path("/comprobarTablas/{idPartida}/{idUsuario}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public boolean comprobarTablas(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
-
-		return listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).comprobarTablas(Integer.valueOf(idUsuario));
-	}
-
-	@GET
-	@Path("/tablas/{idPartida}/{idUsuario}")
-	public void solicitarTablas(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
-
-		listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).solicitarTablas(Integer.valueOf(idPartida),
-				Integer.valueOf(idUsuario));
-
-	}
-
-	@GET
-	@Path("/sendMensaje/{idPartida}/{idUsuario}/{texto}")
-	public void sendMensaje(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario,
-			@PathParam("texto") String texto) {
-		
-		Date date = new Date();
-		
-		SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
-
-		if (texto.length() > 0 && texto.length() < 255) {
-
-			Mensaje mensaje = new Mensaje(0, Integer.valueOf(idPartida), Integer.valueOf(idUsuario), hora.format(date), texto);
-
-			mensajeEJB.addMensaje(mensaje);
-		}
-
-	}
-
-	@GET
-	@Path("/getMensajes/{idPartida}")
-	public ArrayList<Mensaje> getMensajes(@PathParam("idPartida") String idPartida) {
-
-		return mensajeEJB.getMensajesByIdPartida(Integer.valueOf(idPartida));
-
-	}
-
-	@GET
-	@Path("/makeMovimiento/{idPartida}/{idJugador}/{filaOrigen}/{filaDestino}/{columnaOrigen}/{columnaDestino}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Movimiento makeMovimiento(@PathParam("idPartida") String idPartida, @PathParam("idJugador") String idJugador,
-			@PathParam("filaOrigen") int filaOrigen, @PathParam("filaDestino") int filaDestino,
-			@PathParam("columnaOrigen") int columnaOrigen, @PathParam("columnaDestino") int columnaDestino) {
-
-		DamasOnline damas = listaPartidasEJB.getPartida(Integer.valueOf(idPartida));
-
-		Movimiento movimiento = damas.mover(Integer.valueOf(idPartida), Integer.valueOf(idJugador), filaOrigen,
-				filaDestino, columnaOrigen, columnaDestino);
-
-		if (movimiento != null) {
-			movimientoEJB.addMovimiento(movimiento);
-		}
-
-		return movimiento;
-	}
-
+	/**
+	 * Obtiene el usuario y lo devuelve en formato JSON.
+	 * 
+	 * @param idUsuario String, identificador de usuario.
+	 * @return Usuario
+	 */
 	@GET
 	@Path("/getUsuario/{idUsuario}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -197,9 +136,14 @@ public class PartidaRest {
 		usuario.setRegistro(null);
 
 		return usuario;
-
 	}
 
+	/**
+	 * Obtiene la puntuación del usuario y lo devuelve en format JSON.
+	 * 
+	 * @param idUsuario String, identificador de usuario.
+	 * @return int
+	 */
 	@GET
 	@Path("/getPuntuacionUsuario/{idUsuario}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -208,7 +152,179 @@ public class PartidaRest {
 		ArrayList<Resultado> resultados = resultadoEJB.getAllResultadoByIdUsuario(Integer.valueOf(idUsuario));
 
 		return puntuacionEJB.getPuntuacion(Integer.valueOf(idUsuario), resultados);
-
 	}
 
+	/**
+	 * Obtiene el tablero de la partida y lo devuelve en formato JSON.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @param idUsuario String, identificador de usuario.
+	 * @return int[][]
+	 */
+	@GET
+	@Path("/getTablero/{idPartida}/{idUsuario}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public int[][] getTablero(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
+
+		return listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).getTablero(Integer.valueOf(idUsuario));
+	}
+
+	/**
+	 * Obtiene el turno de la partida y lo devuelve en formato JSON.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @return Integer
+	 */
+	@GET
+	@Path("/getTurno/{idPartida}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Integer getTurno(@PathParam("idPartida") String idPartida) {
+
+		return listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).getTurnoUsuario();
+	}
+
+	/**
+	 * Obtiene el estado de la partida y lo devuelve en formato JSON.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @return boolean
+	 */
+	@GET
+	@Path("/getEstado/{idPartida}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean getEstado(@PathParam("idPartida") String idPartida) {
+
+		return listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).isFinalizada();
+	}
+
+	/**
+	 * Obtiene el ganador de la partida y lo devuelve en formato JSON.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @return Integer
+	 */
+	@GET
+	@Path("/getGanador/{idPartida}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Integer getResultado(@PathParam("idPartida") String idPartida) {
+
+		return listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).getGanador();
+	}
+
+	/**
+	 * Abandona la partida dando la victoria al oponente.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @param idUsuario String, identificador de usuario.
+	 */
+	@GET
+	@Path("/abandonar/{idPartida}/{idUsuario}")
+	public void abandonar(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
+
+		listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).abandonarPartida(Integer.valueOf(idPartida), Integer.valueOf(idUsuario));
+	}
+
+	/**
+	 * Comprueba si uno de los dos jugadores han solicitado tablas.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @param idUsuario String, identificador de usuario.
+	 * @return boolean
+	 */
+	@GET
+	@Path("/comprobarTablas/{idPartida}/{idUsuario}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean comprobarTablas(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
+
+		return listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).comprobarTablas(Integer.valueOf(idUsuario));
+	}
+
+	/**
+	 * Solicita acordar tablas al oponente.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @param idUsuario String, identificador de usuario.
+	 */
+	@GET
+	@Path("/tablas/{idPartida}/{idUsuario}")
+	public void solicitarTablas(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario) {
+
+		listaPartidasEJB.getPartida(Integer.valueOf(idPartida)).solicitarTablas(Integer.valueOf(idPartida), Integer.valueOf(idUsuario));
+	}
+
+	/**
+	 * Realiza el movimiento de una ficha.
+	 * 
+	 * @param idPartida      String, identificador de partida.
+	 * @param idUsuario      String, identificador de usuario.
+	 * @param filaOrigen     String, fila origen de la ficha.
+	 * @param filaDestino    String, fila destino de la ficha.
+	 * @param columnaOrigen  String, columna origen de la ficha.
+	 * @param columnaDestino String, columa destino de la ficha.
+	 * @return Movimiento
+	 */
+	@GET
+	@Path("/makeMovimiento/{idPartida}/{idUsuario}/{filaOrigen}/{filaDestino}/{columnaOrigen}/{columnaDestino}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Movimiento makeMovimiento(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario,
+			@PathParam("filaOrigen") int filaOrigen, @PathParam("filaDestino") int filaDestino,
+			@PathParam("columnaOrigen") int columnaOrigen, @PathParam("columnaDestino") int columnaDestino) {
+		
+
+		// Obtiene la partida.
+		DamasOnline damas = listaPartidasEJB.getPartida(Integer.valueOf(idPartida));
+
+		// Realiza y obtiene el movimiento.
+		Movimiento movimiento = damas.mover(Integer.valueOf(idPartida), Integer.valueOf(idUsuario), filaOrigen, filaDestino, columnaOrigen, columnaDestino);
+
+		// Si movimiento es diferente a null.
+		if (movimiento != null) {
+
+			// Añade el movimiento a la partida.
+			movimientoEJB.addMovimiento(movimiento);
+		}
+
+		// Devuelve el movimiento
+		return movimiento;
+	}
+	
+	/**
+	 * Envia un mensaje por el chat.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @param idUsuario String, identificador de usuario.
+	 * @param texto     String, mensaje del chat.
+	 */
+	@GET
+	@Path("/sendMensaje/{idPartida}/{idUsuario}/{texto}")
+	public void sendMensaje(@PathParam("idPartida") String idPartida, @PathParam("idUsuario") String idUsuario, @PathParam("texto") String texto) {
+
+		// Obtiene la fecha actual.
+		Date date = new Date();
+
+		// Formatea la fecha a un formato de hora.
+		SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
+
+		// Si el mensaje cumple con el límite de carácteres.
+		if (texto.length() > 0 && texto.length() < 255) {
+
+			// Crea el mensaje y se añade.
+			Mensaje mensaje = new Mensaje(0, Integer.valueOf(idPartida), Integer.valueOf(idUsuario), hora.format(date), texto);
+
+			mensajeEJB.addMensaje(mensaje);
+		}
+	}
+
+	/**
+	 * Obtiene todos los mensajes de la partida y los devuelve en formato JSON.
+	 * 
+	 * @param idPartida String, identificador de partida.
+	 * @return ArrayList<Mensaje>
+	 */
+	@GET
+	@Path("/getMensajes/{idPartida}")
+	public ArrayList<Mensaje> getMensajes(@PathParam("idPartida") String idPartida) {
+
+		return mensajeEJB.getAllMensajeByIdPartida(Integer.valueOf(idPartida));
+	}
 }

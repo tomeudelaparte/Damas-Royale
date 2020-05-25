@@ -2,6 +2,7 @@
 <!DOCTYPE xml>
 <configuration>
 
+	<!-- APPENDER DONDE GUARDA LOS LOGS DEBUG Y EL PATTERN QUE UTILIZA PARA GUARDAR LA INFORMACIÓN -->
 	<appender name="DEBUG" class="ch.qos.logback.core.FileAppender">
 		<file> damasroyale_debug.log </file>
 		<append>true</append>
@@ -10,6 +11,7 @@
 		</encoder>
 	</appender>
 	
+	<!-- APPENDER DONDE GUARDA LOS LOGS ERROR DE CONTROLADOR Y EL PATTERN QUE UTILIZA PARA GUARDAR LA INFORMACIÓN -->
 	<appender name="SERVLETS" class="ch.qos.logback.core.FileAppender">
 		<file> damasroyale_error.log </file>
 		<append>true</append>
@@ -18,7 +20,8 @@
 		</encoder>
 	</appender>
 	
-	¡<appender name="EXTRAS" class="ch.qos.logback.core.FileAppender">
+	<!-- APPENDER DONDE GUARDA LOS LOGS ERROR DE EJB.EXTRAS Y EL PATTERN QUE UTILIZA PARA GUARDAR LA INFORMACIÓN -->
+	<appender name="EXTRAS" class="ch.qos.logback.core.FileAppender">
 		<file> damasroyale_error.log </file>
 		<append>true</append>
 		<encoder>
@@ -26,14 +29,17 @@
 		</encoder>
 	</appender>
 	
+	<!-- ALMACENA TODO LOS LOGS ERROR DE CONTROLADOR -->
 	<logger name="com.damasroyale.controlador" level="error" additivity="false">
 		<appender-ref ref="SERVLETS" />
 	</logger>
-
+	
+	<!-- ALMACENA TODO LOS LOGS ERROR DE EJB.EXTRAS -->
 	<logger name="com.damasroyale.modelo.ejb.extras" level="error" additivity="false">
 		<appender-ref ref="EXTRAS" />
 	</logger>
-
+	
+	<!-- ALMACENA TODO LOS LOGS DEBUG EXISTENTES -->
 	<root level="debug">
 		<appender-ref ref="DEBUG" />
 	</root>

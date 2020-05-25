@@ -9,27 +9,24 @@ import com.damasroyale.modelo.pojo.Movimiento;
 import com.damasroyale.modelo.pojo.Partida;
 import com.damasroyale.modelo.pojo.Resultado;
 
+/**
+ * Clase núcleo de la lógica del juego de las damas.
+ * 
+ * @author Tomeu de la Parte Mulet
+ *
+ */
 public class DamasOnline {
 
+	// Identificador de la partida.
 	private Integer id;
 
+	// Identificadores de los usuarios participantes.
 	private Integer anfitrion;
 	private Integer oponente;
-
-	private int turno = 1;
-
-	private int fichasAnfitrion = 12;
-	private int fichasOponente = 12;
-
-	private int[] fichaEliminada = new int[2];
-
-	private boolean tablasAnfitrion = false;
-	private boolean tablasOponente = false;
-
-	private boolean finalizada = false;
-
-	private int[][] tablero = { 
-			{ 0, 2, 0, 2, 0, 2, 0, 2 }, 
+	
+	// Tablero virtual sobre el que se realizan los movimientos.
+	private int[][] tablero = {
+			{ 0, 2, 0, 2, 0, 2, 0, 2 },
 			{ 2, 0, 2, 0, 2, 0, 2, 0 }, 
 			{ 0, 2, 0, 2, 0, 2, 0, 2 },
 			{ 0, 0, 0, 0, 0, 0, 0, 0 }, 
@@ -38,11 +35,38 @@ public class DamasOnline {
 			{ 0, 1, 0, 1, 0, 1, 0, 1 }, 
 			{ 1, 0, 1, 0, 1, 0, 1, 0 } };
 
+	// Turno principal, el anfitrión siempre empieza.
+	private int turno = 1;
+	
+	// Identificador del usuario al que le corresponde el turno.
 	private Integer turnoUsuario = 0;
 
-	private Integer ganador = 0;
-	private Integer perdedor = 0;
+	// Número de fichas de cada participante.
+	private int fichasAnfitrion = 12;
+	private int fichasOponente = 12;
 
+	// Posición de la ficha comida para ser eliminada.
+	private int[] fichaEliminada = new int[2];
+
+	// Participantes que ha solicitado acordar tablas.
+	private boolean tablasAnfitrion = false;
+	private boolean tablasOponente = false;
+
+	// Estado de la partida.
+	private boolean finalizada = false;
+
+
+
+	// Identificador del usuario ganador y perdedor.
+	private Integer ganador;
+	private Integer perdedor;
+
+	/**
+	 * Constructor del juego.
+	 * 
+	 * @param id        Integer, identificador de la partida.
+	 * @param anfitrion Integer, identificador del usuario anfitrión.
+	 */
 	public DamasOnline(Integer id, Integer anfitrion) {
 
 		this.id = id;
@@ -61,6 +85,19 @@ public class DamasOnline {
 	public Integer getTurnoUsuario() {
 		return turnoUsuario;
 	}
+	
+	/**
+	 * Añade el turno al usuario oponente si le corresponde.
+	 * 
+	 * @param turnoUsuario Integer
+	 */
+	public void setTurnoUsuario(Integer turnoUsuario) {
+		
+		if (turno == 2) {
+			
+			this.turnoUsuario = turnoUsuario;
+		}
+	}
 
 	public Integer getOponente() {
 		return oponente;
@@ -68,12 +105,6 @@ public class DamasOnline {
 
 	public void setOponente(Integer oponente) {
 		this.oponente = oponente;
-	}
-
-	public void setTurnoUsuario(Integer turnoUsuario) {
-		if (turno == 2) {
-			this.turnoUsuario = turnoUsuario;
-		}
 	}
 
 	public Integer getGanador() {
@@ -100,6 +131,12 @@ public class DamasOnline {
 		this.finalizada = finalizada;
 	}
 
+	/**
+	 * Devuelve el tablero con una perspectiva u otra según el usuario.
+	 * 
+	 * @param idUsuario Integer, identificador del usuario.
+	 * @return int[][]
+	 */
 	public int[][] getTablero(Integer idUsuario) {
 
 		if (anfitrion.equals(idUsuario)) {
@@ -108,13 +145,25 @@ public class DamasOnline {
 
 		} else {
 
-			return cambiarTablero(tablero);
+			return invertirTablero(tablero);
 		}
 	}
 
+	/**
+	 * Realiza un movimiento realizado por un usuario.
+	 * 
+	 * @param idPartida      Integer, identificador de la partida.
+	 * @param idUsuario      Integer, identificador del usuario.
+	 * @param filaOrigen     int, fila origen de la ficha.
+	 * @param filaDestino    int, fila destino de la ficha.
+	 * @param columnaOrigen  int, columna origen de la ficha.
+	 * @param columnaDestino int, columna destino de la ficha .
+	 * @return Movimiento
+	 */
 	public Movimiento mover(Integer idPartida, Integer idUsuario, int filaOrigen, int filaDestino, int columnaOrigen,
 			int columnaDestino) {
 
+		// Si el usuario no es el anfitrión, invierte las posiciones del movimiento de la ficha.
 		if (!anfitrion.equals(idUsuario)) {
 
 			filaOrigen = 7 - filaOrigen;
@@ -124,37 +173,167 @@ public class DamasOnline {
 			columnaDestino = 7 - columnaDestino;
 		}
 
+		// Si el movimiento realizado cumple con las condiciones.
 		if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaDestino, columnaDestino)) {
 
+			// Realiza el movimiento.
 			realizarMovimiento(filaOrigen, columnaOrigen, filaDestino, columnaDestino);
 
-			if (eliminar(fichaEliminada[0], fichaEliminada[1])) {
+			// Si se come una ficha.
+			if (comerFicha(fichaEliminada[0], fichaEliminada[1])) {
 
-				if (comprobarSaltoMultiple(idUsuario, filaDestino, columnaDestino) == false) {
+				// Comprueba que no pueda dar más saltos para cambiar de turno.
+				if (comprobarSaltoEncadenado(idUsuario, filaDestino, columnaDestino) == false) {
 
 					cambiarTurno(idUsuario);
 				}
 
 			} else {
+
+				// Cambia de turno.
 				cambiarTurno(idUsuario);
 			}
 
+			// Comprueba el estado de la partida tras el movimiento realizado.
 			comprobarEstadoPartida(idPartida);
 
+			// Devuelve el movimiento realizado.
 			return new Movimiento(0, idPartida, idUsuario, filaOrigen, filaDestino, columnaOrigen, columnaDestino);
 
 		} else {
 
+			// Devuelve null debido a que no ha cumplido las condiciones necesarias.
 			return null;
 		}
 	}
+	
+	/**
+	 * Cambia el turno del jugador.
+	 * 
+	 * @param idUsuario Integer, identificador del usuario.
+	 */
+	private void cambiarTurno(Integer idUsuario) {
 
+		// Si turno es 1 y el usuario es igual al anfitrión.
+		if (turno == 1 && anfitrion.equals(idUsuario)) {
+
+			// Turno cambia a 2.
+			turno = 2;
+
+			// TurnoUsuario cambia al id del oponente.
+			turnoUsuario = oponente;
+
+		} else if (turno == 2 && !anfitrion.equals(idUsuario)) {
+
+			// Turno cambia a 1.
+			turno = 1;
+
+			// TurnoUsuario cambia al id del anfitrión.
+			turnoUsuario = anfitrion;
+		}
+
+	}
+
+	/**
+	 * Realiza el movimiento en el tablero virtual.
+	 * 
+	 * @param filaOrigen     int, fila origen de la ficha.
+	 * @param columnaOrigen  int, columna origen de la ficha.
+	 * @param filaDestino    int, fila destino de la ficha.
+	 * @param columnaDestino int, columna destino de la ficha.
+	 */
+	private void realizarMovimiento(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
+
+		// Obtiene la ficha correspondiente a la posición con la posibilidad de convertirse en reina.
+		int dama = reinarDama(tablero[filaOrigen][columnaOrigen], filaDestino);
+
+		// Cambia la posición origen por una posición vacía y la posición destino por la ficha.
+		this.tablero[filaOrigen][columnaOrigen] = 0;
+		this.tablero[filaDestino][columnaDestino] = dama;
+	}
+
+	/**
+	 * Convierte la ficha en reina.
+	 * 
+	 * @param dama       int, ficha
+	 * @param filaLimite int, fila
+	 * @return int, ficha
+	 */
+	private int reinarDama(int dama, int filaLimite) {
+
+		// Si la ficha es de jugador 1 y el límite de la fila es 0
+		if (dama == 1 && filaLimite == 0) {
+
+			// Devuelve 13
+			return 13;
+		}
+
+		// Si la ficha es de jugador 2 y el límite de la fila es 7
+		if (dama == 2 && filaLimite == 7) {
+
+			// Devuelve 23
+			return 23;
+		}
+
+		// En cambio, devuelve la ficha igual.
+		return dama;
+	}
+
+	/**
+	 * Elimina la ficha que ha sido comida.
+	 * 
+	 * @param fila    int, posición de la fila.
+	 * @param columna int, posición de la columna.
+	 * @return boolean
+	 */
+	private boolean comerFicha(int fila, int columna) {
+
+		// Si la fila y la columna es difente a 0
+		if (fila != 0 && columna != 0) {
+
+			// Elimina la ficha del tablero y reinicia el array.
+			this.tablero[fila][columna] = 0;
+			fichaEliminada = new int[2];
+
+			// Si turno es 1
+			if (turno == 1) {
+
+				// Resta el número de fichas al oponente.
+				fichasOponente--;
+
+				// Si turno es 2
+			} else if (turno == 2) {
+
+				// Resta el número de fichas al anfitrión.
+				fichasAnfitrion--;
+			}
+
+			// Devuele que ha eliminado una ficha.
+			return true;
+		}
+
+		// Devuelve que no ha eliminado una ficha.
+		return false;
+	}
+
+	/**
+	 * Verifica el movimiento realizado.
+	 * 
+	 * @param idUsuario      Integer, identificador del usuario.
+	 * @param filaOrigen     int, fila origen de la ficha.
+	 * @param columnaOrigen  int, columna origen de la ficha.
+	 * @param filaDestino    int, fila destino de la ficha.
+	 * @param columnaDestino int, columna destino de la ficha.
+	 * @return boolean
+	 */
 	private boolean verificarMovimiento(Integer idUsuario, int filaOrigen, int columnaOrigen, int filaDestino,
 			int columnaDestino) {
 
+		// Posición origen y destino del movimiento de la ficha.
 		int origen = this.tablero[filaOrigen][columnaOrigen];
 		int destino = this.tablero[filaDestino][columnaDestino];
 
+		// Si cumple con el origen, destino, reina o direccion y distancia, devuelve true, en cambio, devuelve false.
 		if (comprobarOrigen(origen) && comprobarDestino(destino)
 				&& (comprobarReina(filaOrigen, columnaOrigen) || comprobarDireccion(idUsuario, filaOrigen, filaDestino))
 				&& comprobarDistancia(filaOrigen, columnaOrigen, filaDestino, columnaDestino)) {
@@ -167,26 +346,16 @@ public class DamasOnline {
 		}
 	}
 
-//	private boolean verificarMovimientoEliminarFicha(Integer idUsuario, int filaOrigen, int columnaOrigen, int filaDestino,
-//			int columnaDestino) {
-//
-//		int origen = this.tablero[filaOrigen][columnaOrigen];
-//		int destino = this.tablero[filaDestino][columnaDestino];
-//
-//		if (comprobarOrigen(origen) && comprobarDestino(destino)
-//				&& (comprobarReina(filaOrigen, columnaOrigen) || comprobarDireccion(idUsuario, filaOrigen, filaDestino))
-//				&& comprobarDistancia(filaOrigen, columnaOrigen, filaDestino, columnaDestino) ) {
-//
-//			return true;
-//
-//		} else {
-//
-//			return false;
-//		}
-//	}
-
+	/**
+	 * Comprueba la posición origen del movimiento de la ficha.
+	 * 
+	 * @param origen int, posición de la ficha.
+	 * @return boolean
+	 */
 	private boolean comprobarOrigen(int origen) {
 
+		// Si la ficha es igual al turno que corresponde. Se comprueba las fichas reina,
+		// 13 si el turno es de 1 o 23 si el turno es de 2.
 		if (origen == turno || String.valueOf(origen).equals(turno + "3")) {
 
 			return true;
@@ -197,6 +366,12 @@ public class DamasOnline {
 		}
 	}
 
+	/**
+	 * Comprueba el destino del movimiento la ficha. 0 indica que la posición está vacía.
+	 * 
+	 * @param destino int, posición de la ficha.
+	 * @return boolean
+	 */
 	private boolean comprobarDestino(int destino) {
 
 		if (destino == 0) {
@@ -209,13 +384,24 @@ public class DamasOnline {
 		}
 	}
 
+	/**
+	 * Comprueba la dirección del movimiento de la ficha.
+	 * 
+	 * @param idUsuario   Integer, identificador del usuario.
+	 * @param filaOrigen  int, fila origen de la ficha.
+	 * @param filaDestino int, fila destino de la ficha.
+	 * @return boolean
+	 */
 	private boolean comprobarDireccion(Integer idUsuario, int filaOrigen, int filaDestino) {
 
+		// Si turno es 1 y el usuario es igual al anfitrion y la fila destino es mayor a la fila origen.
 		if (turno == 1 && anfitrion.equals(idUsuario) && filaDestino > filaOrigen) {
 
 			return false;
 
 		}
+
+		// Si turno es 2 y el usuario es diferente al anfitrion y la fila destino es menor a la fila origen.
 		if (turno == 2 && !anfitrion.equals(idUsuario) && filaDestino < filaOrigen) {
 
 			return false;
@@ -226,276 +412,256 @@ public class DamasOnline {
 
 	}
 
-	private boolean comprobarDistancia(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
+	/**
+	 * Comprueba que la posición de la ficha sea reina.
+	 * 
+	 * @param fila    int, posición en filas
+	 * @param columna int, posición en columnas
+	 * @return boolean
+	 */
+	private boolean comprobarReina(int fila, int columna) {
 
-		int saltoFila = Math.abs(filaOrigen - filaDestino);
-		int saltoCasilla = Math.abs(columnaOrigen - columnaDestino);
-
-		if (saltoFila == 1 && saltoCasilla == 1) {
+		// Si la posición es 13 o 23 representado a una dama reina.
+		if (tablero[fila][columna] == 13 || tablero[fila][columna] == 23) {
 
 			return true;
-
 		}
 
-		if (saltoFila == 2 && saltoCasilla == 2
+		return false;
+	}
+
+	/**
+	 * Comprueba la distancia del movimiento de la ficha.
+	 * 
+	 * @param filaOrigen     int, fila origen de la ficha.
+	 * @param columnaOrigen  int, columna origen de la ficha.
+	 * @param filaDestino    int, fila destino de la ficha.
+	 * @param columnaDestino int, columna destino de la ficha.
+	 * @return boolean
+	 */
+	private boolean comprobarDistancia(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
+
+		// El número que indica el salto en filas.
+		int saltoFila = Math.abs(filaOrigen - filaDestino);
+
+		// El número que indica el salto en columnas.
+		int saltoColumna = Math.abs(columnaOrigen - columnaDestino);
+
+		// Si el salto es de 1 fila y 1 columna.
+		if (saltoFila == 1 && saltoColumna == 1) {
+
+			return true;
+		}
+
+		// Si el salto es de 2 filas y 2 columnas y se elimina una ficha.
+		if (saltoFila == 2 && saltoColumna == 2
 				&& eliminarFicha(filaOrigen, columnaOrigen, filaDestino, columnaDestino)) {
 
 			return true;
-
 		}
 
 		return false;
-
 	}
 
-	private boolean comprobarSaltoMultiple(Integer idUsuario, int filaOrigen, int columnaOrigen) {
-
-		if ((filaOrigen + 2) < 8 && (columnaOrigen + 2) < 8) {
-			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen + 2, columnaOrigen + 2)) {
-				return true;
-			}
-		}
-
-		if ((filaOrigen + 2) < 8 && (columnaOrigen - 2) >= 0) {
-			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen + 2, columnaOrigen - 2)) {
-				return true;
-			}
-		}
-
-		if ((filaOrigen - 2) >= 0 && (columnaOrigen + 2) < 8) {
-			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen - 2, columnaOrigen + 2)) {
-				return true;
-			}
-		}
-
-		if ((filaOrigen - 2) >= 0 && (columnaOrigen - 2) >= 0) {
-			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen - 2, columnaOrigen - 2)) {
-				return true;
-			}
-		}
-
-		return false;
-
-	}
-
-//	private boolean comprobarEliminarFicha(Integer idUsuario, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
-//		
-//		for (int i = 0; i < tablero.length; i++) {
-//			
-//			for (int j = 0; j < tablero.length; j++) {
-//				
-//				if(tablero[i][j] == turno || String.valueOf(tablero[i][j]).equals(turno + "3")) {
-//										
-//					if ((i + 2) < 8 && (i - 2) >= 0 && (j + 2) < 8 && (j - 2) >= 0) {
-//
-//						if((verificarMovimientoEliminarFicha(idUsuario, i, j, i + 2, j + 2) && ( filaOrigen != i  && columnaOrigen != j  && filaDestino != i+2  && columnaDestino != j+2))
-//								|| (verificarMovimientoEliminarFicha(idUsuario, i, j, i + 2, j - 2) && ( filaOrigen != i  && columnaOrigen != j  && filaDestino != i+2  && columnaDestino != j-2))
-//								|| (verificarMovimientoEliminarFicha(idUsuario, i, j, i - 2, j + 2) && ( filaOrigen != i  && columnaOrigen != j  && filaDestino != i-2  && columnaDestino != j+2))
-//								|| (verificarMovimientoEliminarFicha(idUsuario, i, j, i - 2, j - 2) && ( filaOrigen != i  && columnaOrigen != j  && filaDestino != i-2  && columnaDestino != j-2)))		{
-//														
-//							return false;
-//						}
-//					}
-//
-//				}
-//			}
-//		}
-//		
-//		return true;
-//	}
-
+	/**
+	 * Obtiene la posición de la ficha comida que para ser eliminada.
+	 * 
+	 * @param filaOrigen     int, fila origen de la ficha.
+	 * @param columnaOrigen  int, columna origen de la ficha.
+	 * @param filaDestino    int, fila destino de la ficha.
+	 * @param columnaDestino int, columna destino de la ficha.
+	 * @return boolean
+	 */
 	private boolean eliminarFicha(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
 
+		// Número de la fila y de la columna de la ficha comida. Obtenido mediante una media de los dos valores.
 		int filaPosicion = filaDestino + ((filaOrigen - filaDestino) / 2);
-		int casillaPosicion = columnaDestino + ((columnaOrigen - columnaDestino) / 2);
+		int columnaPosicion = columnaDestino + ((columnaOrigen - columnaDestino) / 2);
 
-		if (this.tablero[filaPosicion][casillaPosicion] != turno && this.tablero[filaPosicion][casillaPosicion] != 0) {
+		// Si la ficha es diferente al turno y la posición no está vacía.
+		if (this.tablero[filaPosicion][columnaPosicion] != turno && this.tablero[filaPosicion][columnaPosicion] != 0) {
 
 			fichaEliminada[0] = filaPosicion;
-			fichaEliminada[1] = casillaPosicion;
+			fichaEliminada[1] = columnaPosicion;
 
 			return true;
 		}
+
 		return false;
-
 	}
 
-	private boolean comprobarReina(int fila, int columna) {
+	/**
+	 * Comprueba la posibilidad de un siguiente movimiento para comer una ficha sin cambiar el turno.
+	 * 
+	 * @param idUsuario     Integer, identificador del usuario.
+	 * @param filaOrigen    int, fila origen de la ficha.
+	 * @param columnaOrigen int, columna origen de la ficha.
+	 * @return boolean
+	 */
+	private boolean comprobarSaltoEncadenado(Integer idUsuario, int filaOrigen, int columnaOrigen) {
 
-		if (tablero[fila][columna] == 13 || tablero[fila][columna] == 23) {
-			return true;
-		}
-		return false;
+		// Si un salto de +2 filas es menor a 8 y un salto de +2 columnas es menor a 8.
+		if ((filaOrigen + 2) < 8 && (columnaOrigen + 2) < 8) {
 
-	}
+			// Verifica el posible movimiento para comer una ficha.
+			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen + 2, columnaOrigen + 2)) {
 
-	private void comprobarEstadoPartida(Integer idPartida) {
-
-		if (fichasAnfitrion <= 0) {
-
-			ganador = oponente;
-			perdedor = anfitrion;
-
-			finalizada = true;
-
-			finalizarPartida(idPartida);
-
-		} else if (fichasOponente <= 0) {
-
-			ganador = anfitrion;
-			perdedor = oponente;
-
-			finalizada = true;
-
-			finalizarPartida(idPartida);
-		}
-	}
-
-	private int reinarDama(int dama, int filaLimite) {
-
-		if (dama == 1 && filaLimite == 0) {
-
-			return 13;
-
-		}
-		if (dama == 2 && filaLimite == 7) {
-
-			return 23;
-
-		}
-
-		return dama;
-
-	}
-
-	private void realizarMovimiento(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino) {
-
-		int dama = reinarDama(tablero[filaOrigen][columnaOrigen], filaDestino);
-
-		this.tablero[filaOrigen][columnaOrigen] = 0;
-		this.tablero[filaDestino][columnaDestino] = dama;
-
-	}
-
-	private void cambiarTurno(Integer idUsuario) {
-
-		if (turno == 1 && anfitrion.equals(idUsuario)) {
-
-			turno = 2;
-
-			turnoUsuario = oponente;
-
-		} else if (turno == 2 && !anfitrion.equals(idUsuario)) {
-
-			turno = 1;
-
-			turnoUsuario = anfitrion;
-		}
-
-	}
-
-	private boolean eliminar(int fila, int casilla) {
-
-		if (fila != 0 && casilla != 0) {
-
-			this.tablero[fila][casilla] = 0;
-			fichaEliminada = new int[2];
-
-			if (turno == 1) {
-				fichasOponente--;
-			} else if (turno == 2) {
-				fichasAnfitrion--;
+				return true;
 			}
-
-			return true;
 		}
-		return false;
 
+		// Si un salto de +2 filas es menor a 8 y un salto de -2 columnas es mayor o igual a 0.
+		if ((filaOrigen + 2) < 8 && (columnaOrigen - 2) >= 0) {
+
+			// Verifica el posible movimiento para comer una ficha.
+			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen + 2, columnaOrigen - 2)) {
+
+				return true;
+			}
+		}
+
+		// Si un salto de -2 filas es mayor o igual a 0 y un salto de +2 columnas es menor a 8.
+		if ((filaOrigen - 2) >= 0 && (columnaOrigen + 2) < 8) {
+
+			// Verifica el posible movimiento para comer una ficha.
+			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen - 2, columnaOrigen + 2)) {
+
+				return true;
+			}
+		}
+
+		// Si un salto de -2 filas es mayor o igual a 0 y un salto de -2 columnas es mayor o igual a 0.
+		if ((filaOrigen - 2) >= 0 && (columnaOrigen - 2) >= 0) {
+
+			// Verifica el posible movimiento para comer una ficha.
+			if (verificarMovimiento(idUsuario, filaOrigen, columnaOrigen, filaOrigen - 2, columnaOrigen - 2)) {
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
-	private int[][] cambiarTablero(int[][] tablero) {
+	/**
+	 * Invierte el tablero virtual.
+	 * 
+	 * @param tablero int [][]
+	 * @return int [][]
+	 */
+	private int[][] invertirTablero(int[][] tablero) {
 
-		int[][] tableroCambiado = new int[8][8];
+		// Pasa el array original a otro array.
+		int[][] tableroInvertido = new int[8][8];
 
 		for (int i = 0; i < 8; i++) {
 
 			for (int j = 0; j < 8; j++) {
-				tableroCambiado[i][j] = tablero[i][j];
+				
+				tableroInvertido[i][j] = tablero[i][j];
 			}
 		}
 
+		// Convierte las fichas del anfitrión a las fichas del oponente y viceversa.
 		for (int i = 0; i < 8; i++) {
 
 			for (int j = 0; j < 8; j++) {
 
-				if (tableroCambiado[i][j] == 1) {
+				if (tableroInvertido[i][j] == 1) {
 
-					tableroCambiado[i][j] = 2;
+					tableroInvertido[i][j] = 2;
 
-				} else if (tableroCambiado[i][j] == 2) {
+				} else if (tableroInvertido[i][j] == 2) {
 
-					tableroCambiado[i][j] = 1;
+					tableroInvertido[i][j] = 1;
 
-				} else if (tableroCambiado[i][j] == 13) {
+				} else if (tableroInvertido[i][j] == 13) {
 
-					tableroCambiado[i][j] = 23;
+					tableroInvertido[i][j] = 23;
 
-				} else if (tableroCambiado[i][j] == 23) {
+				} else if (tableroInvertido[i][j] == 23) {
 
-					tableroCambiado[i][j] = 13;
+					tableroInvertido[i][j] = 13;
 				}
 			}
 		}
 
+		// Gira el tablero de forma vertical por filas.
 		for (int i = 0; i < 8 / 2; i++) {
 
-			int[] tmp = tableroCambiado[7 - i];
-			tableroCambiado[7 - i] = tableroCambiado[i];
-			tableroCambiado[i] = tmp;
+			// La variable temporal guarda la posición invertida.
+			int[] tmp = tableroInvertido[7 - i];
+
+			// La posición invertida guarda la posición actual.
+			tableroInvertido[7 - i] = tableroInvertido[i];
+
+			// La posición actual guarda la posición invertida.
+			tableroInvertido[i] = tmp;
 
 		}
 
+		// Gira el tablero de forma horizontal por filas y columnas.
 		for (int i = 0; i < 8; i++) {
 
 			for (int j = 0; j < 8 / 2; j++) {
-				int tmp = tableroCambiado[i][7 - j];
-				tableroCambiado[i][7 - j] = tableroCambiado[i][j];
-				tableroCambiado[i][j] = tmp;
+
+				// La variable temporal guarda la posición invertida.
+				int tmp = tableroInvertido[i][7 - j];
+
+				// La posición invertida guarda la posición actual.
+				tableroInvertido[i][7 - j] = tableroInvertido[i][j];
+
+				// La posición actual guarda la posición invertida.
+				tableroInvertido[i][j] = tmp;
 			}
 		}
 
-		return tableroCambiado;
+		return tableroInvertido;
 	}
 
+	/**
+	 * Comprueba que un usuario haya solicitado acordar tablas.
+	 * 
+	 * @param idUsuario Integer, identificador del usuario.
+	 * @return boolean
+	 */
 	public boolean comprobarTablas(Integer idUsuario) {
 
+		// Si el usuario es igual al anfitrión.
 		if (idUsuario == anfitrion) {
 
 			return tablasOponente;
-
 		}
 
+		// Si el usuario es diferente al anfitrión.
 		if (idUsuario != anfitrion) {
 
 			return tablasAnfitrion;
-
 		}
 
 		return false;
-
 	}
 
+	/**
+	 * Solicita acordar tablas según el usuario.
+	 * 
+	 * @param idPartida Integer, identificador del usuario.
+	 * @param idUsuario Integer, identificador de la partida.
+	 */
 	public void solicitarTablas(Integer idPartida, Integer idUsuario) {
 
+		// Si el usuario es igual al anfitrión.
 		if (idUsuario == anfitrion) {
 
 			tablasAnfitrion = true;
 
+			// Si el usuario es diferente al anfitrión.
 		} else if (idUsuario != anfitrion) {
 
 			tablasOponente = true;
 		}
 
+		// Si los dos usuarios ha solicitado tablas, finaliza la partida en un empate.
 		if (tablasAnfitrion == true && tablasOponente == true) {
 
 			finalizada = true;
@@ -505,62 +671,128 @@ public class DamasOnline {
 
 	}
 
+	/**
+	 * Finaliza forzosamente la partida por un usuario dando la victoria al contrario.
+	 * 
+	 * @param idPartida Integer, identificador del usuario.
+	 * @param idUsuario Integer, identificador de la partida.
+	 */
 	public void abandonarPartida(Integer idPartida, Integer idUsuario) {
 
+		// Si el usuario es igual al anfitrion
 		if (idUsuario == anfitrion) {
 
+			// Almacena el ganador y perdedor.
 			ganador = oponente;
 			perdedor = anfitrion;
 
+			// Indica que la partida ha finalizado.
 			finalizada = true;
 
+			// Finaliza la partida.
 			finalizarPartida(idPartida);
 
+			// Si el usuario es diferente al anfitrion.
 		} else if (idUsuario != anfitrion) {
 
+			// Almacena el ganador y perdedor.
 			ganador = anfitrion;
 			perdedor = oponente;
 
+			// Indica que la partida ha finalizado.
 			finalizada = true;
 
+			// Finaliza la partida.
 			finalizarPartida(idPartida);
 		}
 	}
 
+	/**
+	 * Comprueba el estado de la partida.
+	 * 
+	 * @param idPartida Integer, identificador de la partida.
+	 */
+	private void comprobarEstadoPartida(Integer idPartida) {
+
+		// Si el número de fichas del anfitrión ha llegado a 0.
+		if (fichasAnfitrion <= 0) {
+
+			// Almacena el ganador y perdedor.
+			ganador = oponente;
+			perdedor = anfitrion;
+
+			// Indica que la partida ha finalizado.
+			finalizada = true;
+
+			// Finaliza la partida.
+			finalizarPartida(idPartida);
+
+			// Si el número de fichas del oponente ha llegado a 0.
+		} else if (fichasOponente <= 0) {
+
+			// Almacena el ganador y perdedor.
+			ganador = anfitrion;
+			perdedor = oponente;
+
+			// Indica que la partida ha finalizado.
+			finalizada = true;
+
+			// Finaliza la partida.
+			finalizarPartida(idPartida);
+		}
+	}
+
+	/**
+	 * Finaliza la partida añadiendo el resultado.
+	 * 
+	 * @param idPartida Integer, identificador de la partida.
+	 */
 	public void finalizarPartida(Integer idPartida) {
 
 		PartidaEJB partidaEJB = new PartidaEJB();
 		ResultadoEJB resultadoEJB = new ResultadoEJB();
 
+		// Obtiene la partida.
 		Partida partida = partidaEJB.getPartidaByID(idPartida);
 
+		// Obtiene la fecha actual.
 		Date date = new Date();
 
+		// Obtiene el timestamp a partir de la fecha.
 		Timestamp fechaHora = new Timestamp(date.getTime());
 
+		// Si los dos participantes han solicitado tablas.
 		if (tablasAnfitrion == true && tablasOponente == true) {
 
+			// Crea un resultado donde no hay ganador ni perdedor solo tablas.
 			Resultado resultado = new Resultado(0, idPartida, fechaHora, true, null, null);
 
+			// Añade el resultado.
 			resultadoEJB.addResultadoPartida(resultado);
 
+			// Actualiza la información de la partida.
 			partida.setFinalizada(true);
 
 			partidaEJB.updatePartida(partida);
 
+			// Si el oponente no es null
 		} else if (oponente != null) {
 
+			// Crea un resultado con ganador y perdedor.
 			Resultado resultado = new Resultado(0, idPartida, fechaHora, false, ganador, perdedor);
 
+			// Añade el resultado.
 			resultadoEJB.addResultadoPartida(resultado);
 
+			// Actualiza la información de la partida.
 			partida.setFinalizada(true);
 
 			partidaEJB.updatePartida(partida);
 
+			// En cambio, elimina la partida.
 		} else {
 
-			partidaEJB.delPartidaByIdPartida(idPartida);
+			partidaEJB.delPartidaByID(idPartida);
 		}
 	}
 

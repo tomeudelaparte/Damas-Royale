@@ -2,6 +2,12 @@ package com.damasroyale.modelo.pojo;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Clase POJO de Partida
+ * 
+ * @author Tomeu de la Parte Mulet
+ *
+ */
 @XmlRootElement
 public class Partida {
 

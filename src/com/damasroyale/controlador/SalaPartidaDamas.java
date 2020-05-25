@@ -28,74 +28,98 @@ import com.damasroyale.modelo.pojo.Usuario;
 
 import ch.qos.logback.classic.Logger;
 
+/**
+ * Servlet que sirve como sala para que dos jugadores puedan realizar una partida de forma online.
+ * 
+ * @author Tomeu de la Parte Mulet
+ *
+ */
 @WebServlet("/Sala")
 public class SalaPartidaDamas extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	// Logger para almacenar los errores que pueda ocasionar el identificador de usuario de la petición.
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(SalaPartidaDamas.class);
 
+	// EJB para utilizar las funciones de sesión.
 	@EJB
 	SessionEJB sessionEJB;
 
+	// EJB para utilizar las funciones de usuario.
 	@EJB
 	UsuarioEJB usuarioEJB;
 
-	@EJB
-	PuntuacionEJB puntuacionEJB;
-
+	// EJB para utilizar las funciones de partida.
 	@EJB
 	PartidaEJB partidaEJB;
 
+	// EJB para utilizar las funciones de resultado.
 	@EJB
 	ResultadoEJB resultadoEJB;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	// EJB para utilizar las funciones de puntuación.
+	@EJB
+	PuntuacionEJB puntuacionEJB;
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// Obtiene una sesion existente sin crear una nueva.
 		HttpSession session = request.getSession(false);
 
-		String id = request.getParameter("id");
+		// Obtiene un usuario si hay un usuario existente en la sesión.
 		Usuario usuario = sessionEJB.usuarioLogueado(session);
 
+		// Obtiene el parametro identificador de la partida.
+		String idPartida = request.getParameter("id");
+
+		// Si no hay ningún usuario existente, reenvia al servlet LogInOutUsuario.
 		if (usuario == null) {
 
 			response.sendRedirect("Login");
 
 		} else {
-
-			if (id == null || id.equals("")) {
+			
+			// Si idPartida es null o equivalente a un string vacío, reenvia al servlet ListaPartidasCreadas.
+			if (idPartida == null || idPartida.equals("")) {
 
 				response.sendRedirect("Jugar");
 
 			} else {
 				Partida partida = null;
 
+				// Evita errores como que el identificador no sea un valor numérico.
 				try {
-					partida = partidaEJB.getPartidaNoTerminadaByID(Integer.valueOf(id));
+
+					// Obtiene una partida no finalizada.
+					partida = partidaEJB.getPartidaNoFinalizadaByID(Integer.valueOf(idPartida));
 
 				} catch (Exception ex) {
 
+					// Almacena en un log el error que pueda ocasionar.
 					logger.error(ex.getMessage());
 				}
 
-				Partida partidaExistente = partidaEJB.getPartidaNoFinalizadaByIdUsuario(usuario.getId());
+				// Obtiene una partida no finalizada donde el usuario participa en ella,
+				Partida usuarioPartida = partidaEJB.getPartidaNoFinalizadaByIdUsuario(usuario.getId());
 
-				RequestDispatcher rs = getServletContext().getRequestDispatcher("/SalaPartidaDamas.jsp");
-				
-
-				if (partida == null || partidaExistente != null && partidaExistente.getId() != partida.getId()) {
+				// Si partida es null o usuarioPartida es diferente a null y el identificador de un partida es diferente a la otra, reenvia al servler ListaPartidasCreadas.
+				if (partida == null || usuarioPartida != null && usuarioPartida.getId() != partida.getId()) {
 
 					response.sendRedirect("Jugar");
 
 				} else {
 
+					// Si el usuario es diferente al anfitrion y el segundo jugador está vacío.
 					if (partida.getIdUsuario_A() != usuario.getId() && partida.getIdUsuario_B() == null) {
 
+						// Setea el segundo jugador con el usuario.
 						partida.setIdUsuario_B(usuario.getId());
 
+						// Actualiza la partida.
 						partidaEJB.updatePartida(partida);
 
+						// Crea un cliente para realizar una llamada rest al servicio PartidaRest para añadir el usuario como oponente.
 						Client cliente = ClientBuilder.newClient();
 
 						WebTarget target = cliente.target("http://localhost:8080/Damas-Royale/PartidaRest/setOponente/"
@@ -110,59 +134,73 @@ public class SalaPartidaDamas extends HttpServlet {
 
 					}
 
+					// Si el usuario es igual al anfitrión.
 					if (partida.getIdUsuario_A() == usuario.getId()) {
 
+						// Obtiene el usuario oponente.
 						Usuario oponente = usuarioEJB.getUsuarioByID(partida.getIdUsuario_B());
 
+						// Si oponente es diferente a null
 						if (oponente != null) {
-							ArrayList<Resultado> resultadosOponente = resultadoEJB
-									.getAllResultadoByIdUsuario(oponente.getId());
 
+							// Obtiene los resultados del oponente.
+							ArrayList<Resultado> resultadosOponente = resultadoEJB.getAllResultadoByIdUsuario(oponente.getId());
+
+							// Obtiene la puntuación del oponente.
 							int oponentePuntuacion = puntuacionEJB.getPuntuacion(oponente.getId(), resultadosOponente);
 
+							// Setea el usuario y la puntuación.
 							request.setAttribute("oponente", oponente);
 							request.setAttribute("oponentePuntuacion", oponentePuntuacion);
 
 						}
 					}
 
+					// Si el usuario es igual al segundo jugador.
 					if (partida.getIdUsuario_B() == usuario.getId()) {
 
+						// Obtiene los resultados del anfitrion.
 						Usuario oponente = usuarioEJB.getUsuarioByID(partida.getIdUsuario_A());
-						ArrayList<Resultado> resultadosOponente = resultadoEJB
-								.getAllResultadoByIdUsuario(oponente.getId());
+						ArrayList<Resultado> resultadosOponente = resultadoEJB.getAllResultadoByIdUsuario(oponente.getId());
 
+						// Obtiene la puntuación del oponente.
 						int oponentePuntuacion = puntuacionEJB.getPuntuacion(oponente.getId(), resultadosOponente);
 
+						// Setea el oponente y la puntuación.
 						request.setAttribute("oponente", oponente);
 						request.setAttribute("oponentePuntuacion", oponentePuntuacion);
 
 					}
 
+					// Si el usuario es igual al anfitrion or es igual al segundo jugador.
 					if (partida.getIdUsuario_A() == usuario.getId() || partida.getIdUsuario_B() == usuario.getId()) {
 
-						ArrayList<Resultado> resultadosUsuario = resultadoEJB
-								.getAllResultadoByIdUsuario(usuario.getId());
+						// Obtiene la puntuación del usuario a partir de los resultados.
+						ArrayList<Resultado> resultadosUsuario = resultadoEJB.getAllResultadoByIdUsuario(usuario.getId());
 						int usuarioPuntuacion = puntuacionEJB.getPuntuacion(usuario.getId(), resultadosUsuario);
-
+						
+						// Obtiene el número de la sala.
 						int sala = partidaEJB.getAllPartidaEnCurso().size();
 
+						// Prepara una solicitud para mostrar un jsp.
+						RequestDispatcher rs = getServletContext().getRequestDispatcher("/SalaPartidaDamas.jsp");
+						
+						// Setea la el número de la sala, la partida, el usuario y su puntuación.
 						request.setAttribute("sala", sala);
 						request.setAttribute("partida", partida);
 						request.setAttribute("usuario", usuario);
 						request.setAttribute("usuarioPuntuacion", usuarioPuntuacion);
 
+						// Reenvia al jsp.
 						rs.forward(request, response);
 
 					} else {
-
+						
+						// Reenvia al servlet ListaPartidasCreadas
 						response.sendRedirect("Jugar");
 					}
-
 				}
 			}
 		}
-
 	}
-
 }

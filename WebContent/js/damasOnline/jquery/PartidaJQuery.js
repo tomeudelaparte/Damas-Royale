@@ -1,3 +1,4 @@
+
 function setTablero(tablero) {
 
 	var filas = $(".fila");
@@ -45,6 +46,7 @@ function setTablero(tablero) {
 }
 
 function seleccionar(casilla) {
+	
 	$(".casilla").removeClass("selected");
 	$(".casilla").removeClass("move");
 	$(".casilla").unbind();
@@ -55,6 +57,7 @@ function seleccionar(casilla) {
 }
 
 function mover(casilla) {
+	
 	$(casilla).removeClass("selected");
 	$(".casilla").removeClass("move");
 	$(".casilla").unbind();
@@ -64,6 +67,8 @@ function mover(casilla) {
 
 function partidaFinalizadaUsuario() {
 
+	$('#partidaFinalizada').modal({backdrop: 'static', keyboard: false});
+	
 	$("#partidaFinalizada").find('.modal-header').html(
 			"<h1 class='text-dark mx-auto'>HAS GANADO</h1>");
 
@@ -72,7 +77,9 @@ function partidaFinalizadaUsuario() {
 }
 
 function partidaFinalizadaOponente() {
-
+	
+	$('#partidaFinalizada').modal({backdrop: 'static', keyboard: false});
+	
 	$("#partidaFinalizada").find('.modal-header').html(
 			"<h1 class='text-dark mx-auto'>HAS PERDIDO</h1>");
 
@@ -81,7 +88,9 @@ function partidaFinalizadaOponente() {
 }
 
 function partidaTablas(usuario, oponente) {
-
+	
+	$('#partidaTablas').modal({backdrop: 'static', keyboard: false});
+	
 	$("#partidaTablas").modal('show');
 
 }

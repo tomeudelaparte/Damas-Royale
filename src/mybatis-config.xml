@@ -3,15 +3,20 @@
 <configuration>
 	<properties resource='jdbc.properties' />
 	<typeAliases>
+	
+		<!-- LOS ALIAS QUE IDENTIFICA CADA OBJETO POJO EN LOS MAPPERS XML -->
 		<typeAlias type='com.damasroyale.modelo.pojo.Activacion' alias='Activacion'></typeAlias>
 		<typeAlias type='com.damasroyale.modelo.pojo.Usuario' alias='Usuario'></typeAlias>
 		<typeAlias type='com.damasroyale.modelo.pojo.Partida' alias='Partida'></typeAlias>
 		<typeAlias type='com.damasroyale.modelo.pojo.Resultado' alias='Resultado'></typeAlias>
 		<typeAlias type='com.damasroyale.modelo.pojo.Movimiento' alias='Movimiento'></typeAlias>
 		<typeAlias type='com.damasroyale.modelo.pojo.Mensaje' alias='Mensaje'></typeAlias>
-		<typeAlias type='com.damasroyale.modelo.pojo.extras.Rank' alias='Rank'></typeAlias>
-		<typeAlias type='com.damasroyale.modelo.pojo.extras.Stat' alias='Stat'></typeAlias>
+		<typeAlias type='com.damasroyale.modelo.pojo.Rank' alias='Rank'></typeAlias>
+		<typeAlias type='com.damasroyale.modelo.pojo.Stat' alias='Stat'></typeAlias>
+		
 	</typeAliases>
+	
+	<!-- LA CONFIGURACIÓN DE MYBATIS CON JDBC -->
 	<environments default='development'>
 		<environment id='development'>
 			<transactionManager type='JDBC' />
@@ -24,11 +29,14 @@
 		</environment>
 	</environments>
 	<mappers>
+	
+		<!-- LOS MAPPERS QUE VA A UTILIZAR -->
 		<mapper resource='com/damasroyale/modelo/dao/mappers/ActivacionMapper.xml' />
 		<mapper resource='com/damasroyale/modelo/dao/mappers/UsuarioMapper.xml' />
 		<mapper resource='com/damasroyale/modelo/dao/mappers/PartidaMapper.xml' />
 		<mapper resource='com/damasroyale/modelo/dao/mappers/ResultadoMapper.xml' />
 		<mapper resource='com/damasroyale/modelo/dao/mappers/MovimientoMapper.xml' />
 		<mapper resource='com/damasroyale/modelo/dao/mappers/MensajeMapper.xml' />
+		
 	</mappers>
 </configuration>

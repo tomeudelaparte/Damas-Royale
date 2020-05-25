@@ -2,6 +2,12 @@ package com.damasroyale.modelo.pojo;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Clase POJO de Movimiento
+ * 
+ * @author Tomeu de la Parte Mulet
+ *
+ */
 @XmlRootElement
 public class Movimiento {
 
@@ -84,15 +90,12 @@ public class Movimiento {
 		this.columna_destino = columna_destino;
 	}
 
+	// toString() para poder manejar la información en JavaScript
 	@Override
 	public String toString() {
-		return "{id:'" + id + "', idPartida:'" + idPartida + "', idUsuario:'" + idUsuario + "', fila_origen:'"
-				+ fila_origen + "', fila_destino:'" + fila_destino + "', columna_origen:'" + columna_origen
-				+ "', columna_destino:'" + columna_destino + "'}";
+		return "{id:'" + id + "', idPartida:'" + idPartida + "', idUsuario:'" + idUsuario 
+				+ "', fila_origen:'" + fila_origen + "', fila_destino:'" + fila_destino 
+				+ "', columna_origen:'" + columna_origen + "', columna_destino:'" + columna_destino + "'}";
 	}
-
-
 	
-	
-
 }

@@ -10,44 +10,48 @@ import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Logger;
 
 /**
- * Clase de utilidad para obtener una configuraciónn de MyBatis
+ * Clase para obtener la configuración de MyBatis.
  * 
- * @author daw
+ * @author Tomeu de la Parte Mulet
  *
  */
 public class MyBatisUtil {
 	private static SqlSessionFactory factory;
 
-	/**
-	 * Logger
-	 */
+	// Logger para obtener la información debug de MyBatis.
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(MyBatisUtil.class);
 
 	/**
-	 * Constructor privado
+	 * Constructor
 	 */
 	private MyBatisUtil() {
+
 	}
 
-	/**
-	 * Estático para que sólo se configure MyBatis una vez
-	 */
+	// Se ejecuta una vez para la configuración.
 	static {
+
 		Reader reader = null;
+
 		try {
+
 			reader = Resources.getResourceAsReader("mybatis-config.xml");
+
 		} catch (IOException e) {
+
 			logger.debug(e.getMessage());
 		}
+
 		factory = new SqlSessionFactoryBuilder().build(reader);
 	}
 
 	/**
-	 * Obtiene una SqlSessionFactory
+	 * Devuelve SqlSessionFactory
 	 * 
-	 * @return La SqlSessionFactory
+	 * @return SqlSessionFactory
 	 */
 	public static SqlSessionFactory getSqlSessionFactory() {
+
 		return factory;
 	}
 }

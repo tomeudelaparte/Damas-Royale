@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.damasroyale.modelo.pojo.Usuario" %>
-<%@ page import="com.damasroyale.modelo.pojo.extras.Stat" %>
+<%@ page import="com.damasroyale.modelo.pojo.Stat" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>

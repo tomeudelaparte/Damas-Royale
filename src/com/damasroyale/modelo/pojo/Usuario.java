@@ -4,6 +4,12 @@ import java.sql.Timestamp;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Clase POJO de Usuario
+ * 
+ * @author Tomeu de la Parte Mulet
+ *
+ */
 @XmlRootElement
 public class Usuario {
 

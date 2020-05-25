@@ -1,12 +1,17 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 
-<mapper
-	namespace='com.damasroyale.modelo.dao.mappers.PartidaMapper'>
+<mapper namespace='com.damasroyale.modelo.dao.mappers.PartidaMapper'>
 
 	<select id='getPartidaByID' resultType="Partida">
 		SELECT * FROM PARTIDAS
 		WHERE ID = #{id}
+	</select>
+	
+	<select id='getPartidaNoFinalizadaByID' resultType="Partida">
+		SELECT * FROM PARTIDAS
+		WHERE ID = #{id}
+		AND FINALIZADA = 0
 	</select>
 	
 	<select id='getPartidaNoFinalizadaByIdUsuario' resultType="Partida">
@@ -29,7 +34,7 @@
 		UPDATE PARTIDAS SET IDUSUARIO_B = #{idUsuario_B}, FINALIZADA = #{finalizada} WHERE PARTIDAS.ID = #{id};
 	</update>
 	
-	<delete id="delPartidaByIdPartida">
+	<delete id="delPartidaByID">
 		DELETE FROM PARTIDAS WHERE ID = #{id}
 	</delete>
 	
@@ -47,25 +52,11 @@
 	</select>
 	
 	<select id="getEstadisticaByIdUsuario" resultType="Stat">
-		SELECT DATE(RESULTADOS.FECHA_HORA) AS FECHA, SUM(IF(RESULTADOS.GANADOR = USUARIOS.ID,1, 0)) AS PARTIDAS_GANADAS, SUM(IF(RESULTADOS.PERDEDOR = USUARIOS.ID,1, 0)) as PARTIDAS_PERDIDAS, SUM(IF(RESULTADOS.TABLAS = 1,1, 0)) AS TABLAS
+		SELECT DATE(RESULTADOS.FECHA_HORA) AS FECHA, SUM(IF(RESULTADOS.GANADOR = USUARIOS.ID,1, 0)) AS PARTIDAS_GANADAS, SUM(IF(RESULTADOS.PERDEDOR = USUARIOS.ID,1, 0)) as PARTIDAS_PERDIDAS, SUM(IF(RESULTADOS.TABLAS = 1,1, 0)) AS PARTIDAS_TABLAS
 		FROM PARTIDAS
 		INNER JOIN USUARIOS ON (PARTIDAS.IDUSUARIO_A  = USUARIOS.ID || PARTIDAS.IDUSUARIO_B  = USUARIOS.ID)
 		INNER JOIN RESULTADOS ON PARTIDAS.ID = RESULTADOS.IDPARTIDA
 		AND USUARIOS.ID = #{id} GROUP BY DATE(FECHA_HORA) ORDER BY DATE(FECHA_HORA) ASC;
-	</select>
-	
-	<insert id="addMovimiento" parameterType="Movimiento">
-		INSERT INTO MOVIMIENTOS
-		(IDPARTIDA, IDUSUARIO, FILA_ORIGEN, FILA_DESTINO, COLUMNA_ORIGEN, COLUMNA_DESTINO)
-		VALUES
-		(#{idPartida},#{idUsuario},#{fila_origen},#{fila_destino},#{columna_origen},#{columna_destino});
-	</insert>
-	
-
-	<select id='getPartidaNoTerminadaByID' resultType="Partida">
-		SELECT * FROM PARTIDAS
-		WHERE ID = #{id}
-		AND FINALIZADA = 0
 	</select>
 
 </mapper>

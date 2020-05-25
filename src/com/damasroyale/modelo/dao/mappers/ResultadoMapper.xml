@@ -3,18 +3,17 @@
 
 <mapper namespace='com.damasroyale.modelo.dao.mappers.ResultadoMapper'>
 
+	<select id='getResultadoByIdPartida' resultType="Resultado">
+		SELECT * FROM RESULTADOS
+		WHERE IDPARTIDA = #{id}
+	</select>
+
 	<insert id="addResultadoPartida" parameterType="Resultado">
 		INSERT INTO RESULTADOS
 		( IDPARTIDA, FECHA_HORA, TABLAS, GANADOR, PERDEDOR)
 		VALUES
 		(#{idPartida},#{fecha_hora},#{tablas},#{ganador},#{perdedor})
 	</insert>
-
-	<select id='getResultadoByPartidaID' resultType="Resultado">
-		SELECT * FROM RESULTADOS
-		WHERE IDPARTIDA = #{id}
-	</select>
-	
 
 	<select id='getAllResultadoByIdUsuario' resultType="Resultado">
 		SELECT RESULTADOS.ID, RESULTADOS.IDPARTIDA, RESULTADOS.FECHA_HORA, RESULTADOS.TABLAS, RESULTADOS.GANADOR, RESULTADOS.PERDEDOR

@@ -1,5 +1,11 @@
-package com.damasroyale.modelo.pojo.extras;
+package com.damasroyale.modelo.pojo;
 
+/**
+ * Clase POJO de Rank
+ * 
+ * @author Tomeu de la Parte Mulet
+ *
+ */
 public class Rank {
 
 	private Integer id;

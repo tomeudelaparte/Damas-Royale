@@ -1,5 +1,11 @@
 package com.damasroyale.modelo.pojo;
 
+/**
+ * Clase POJO de Activacion
+ * 
+ * @author Tomeu de la Parte Mulet
+ *
+ */
 public class Activacion {
 
 	private Integer id;

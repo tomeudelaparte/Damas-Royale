@@ -5,6 +5,8 @@ var jugador = false;
 
 var tablas = false;
 
+var partidaActualizada;
+
 function crearPartida(idPartida, idUsuario) {
 
 	partidaRestClient = new PartidaRestClient(idPartida, idUsuario);
@@ -38,8 +40,8 @@ function crearPartida(idPartida, idUsuario) {
 		}
 	});
 
-	setInterval("checkPartida()", 3000);
-
+	partidaActualizada = setInterval("checkPartida()", 3000);
+	
 }
 
 function controlJugadorConectado() {
@@ -92,14 +94,20 @@ function controlEstadoPartida() {
 		if (ganador === partidaRestClient.usuario.id) {
 
 			partidaFinalizadaUsuario();
+			
+			clearInterval(partidaActualizada);
 
 		} else if (ganador === partidaRestClient.oponente.id) {
 
 			partidaFinalizadaOponente();
+			
+			clearInterval(partidaActualizada);
 
 		} else {
 
 			partidaTablas(partidaRestClient.usuario, partidaRestClient.oponente);
+			
+			clearInterval(partidaActualizada);
 
 		}
 
@@ -134,8 +142,10 @@ function controlTablas() {
 		$("#aceptarTablas").click(function() {
 
 			partidaRestClient.solicitarTablas();
-
+			
 			controlEstadoPartida();
+			
+			clearInterval(partidaActualizada);
 		});
 	}
 
