@@ -58,7 +58,7 @@ public class EliminarCuentaUsuario extends HttpServlet {
 			usuarioEJB.delUsuarioByID(usuario.getId());
 
 			// Reenvia al servlet LogInOutUsuario.
-			response.sendRedirect("Login");
+			response.sendRedirect("Login?delaccount=true");
 		}
 	}
 }

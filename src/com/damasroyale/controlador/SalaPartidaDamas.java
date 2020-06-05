@@ -126,7 +126,8 @@ public class SalaPartidaDamas extends HttpServlet {
 								+ partida.getId() + "/" + usuario.getId());
 
 						target.request().get();
-
+						
+						// Realiza una llamada rest al servicio PartidaRest para asignarle el turno de la partida si le pertenece.
 						target = cliente.target("http://localhost:8080/Damas-Royale/PartidaRest/setTurnoOponente/"
 								+ partida.getId() + "/" + usuario.getId());
 

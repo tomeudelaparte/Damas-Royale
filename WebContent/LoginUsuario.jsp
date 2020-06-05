@@ -18,6 +18,7 @@
 		String error = (String) request.getAttribute("error");
 		String register = (String) request.getAttribute("register");
 		String activation = (String) request.getAttribute("activation");
+		String delaccount = (String) request.getAttribute("delaccount");
 	%>
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow mb-5">
 		<a class="navbar-brand p-4"> <img class="img-fluid mx-auto d-block" src="media/banner.png" width="400"></a>
@@ -50,16 +51,23 @@
 				
 							if (register != null) {
 				
-								register = "<p class='text-danger text-center font-weight-bold'>COMPRUEBE SU CORREO PARA ACTIVAR LA CUENTA.</p>";
+								register = "<p class='text-danger text-center font-weight-bold'>COMPRUEBE SU CORREO PARA VERIFICAR LA CUENTA.</p>";
 				
 								out.append(register);
 							}
 				
 							if (activation != null) {
 				
-								activation = "<p class='text-danger text-center font-weight-bold'>SU CUENTA HA SIDO ACTIVADA.</p>";
+								activation = "<p class='text-danger text-center font-weight-bold'>SU CUENTA HA SIDO VERIFICADA.</p>";
 				
 								out.append(activation);
+							}
+							
+							if (delaccount != null) {
+								
+								delaccount = "<p class='text-danger text-center font-weight-bold'>SU CUENTA HA SIDO ELIMINADA.</p>";
+				
+								out.append(delaccount);
 							}
 						%>
 							<button type="submit" class="btn btn-secondary d-flex mx-auto mb-5">Acceder a Damas Royale<i class="fa fa-sign-out ml-2" style="font-size:24px"></i></button>

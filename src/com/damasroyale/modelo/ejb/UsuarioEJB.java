@@ -30,7 +30,7 @@ public class UsuarioEJB {
 	/**
 	 * Obtiene todos los usuarios.
 	 * 
-	 * @return ArrayList<Usuario>
+	 * @return ArrayList(Usuario)
 	 */
 	public ArrayList<Usuario> getAllUsuario() {
 

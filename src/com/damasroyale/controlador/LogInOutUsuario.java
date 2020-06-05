@@ -54,6 +54,7 @@ public class LogInOutUsuario extends HttpServlet {
 		String error = request.getParameter("error");
 		String register = request.getParameter("register");
 		String activation = request.getParameter("activation");
+		String delaccount = request.getParameter("delaccount");
 
 		// Si hay usuario existente, cierra la sesión.
 		if (usuario != null) {
@@ -82,6 +83,7 @@ public class LogInOutUsuario extends HttpServlet {
 		request.setAttribute("error", error);
 		request.setAttribute("register", register);
 		request.setAttribute("activation", activation);
+		request.setAttribute("delaccount", delaccount);
 
 		// Reenvia al jsp.
 		rs.forward(request, response);

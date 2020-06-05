@@ -53,7 +53,7 @@ public class ResultadoDAO {
 	 * Obtiene todos los resultados de las partidas realizadas de un usuario a partir de su identificador.
 	 * 
 	 * @param id Integer, identificador del usuario.
-	 * @return ArrayList<Resultado>
+	 * @return ArrayList(Resultado)
 	 */
 	public ArrayList<Resultado> getAllResultadoByIdUsuario(Integer id) {
 

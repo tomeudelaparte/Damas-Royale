@@ -1,14 +1,21 @@
 $(document).ready(function() {
 	
-  function ResizeTextArea() {
-	  var windowHeight = window.innerHeight;
-    $("#chat").height(windowHeight - ($("#chat")[0].clientHeight - $("#chat")[0].clientHeight + 320));
-  }
-
+  // Ejecuta la función por primera vez.
+  ResizeTextArea();
+	
+  // Cada vez que el tamaño de la ventana cambie, se ejecuta la función.
   $(window).resize(function() {
     ResizeTextArea();
   });
-  
-  ResizeTextArea()
-
+	
+// Función que hace que el chat llegue hasta bajo de la ventana según la altura. 
+  function ResizeTextArea() {
+	  
+	  // Obtiene la altura de la ventana.
+	  var windowHeight = window.innerHeight;
+	  
+	  // Aplica la altura modificada al chat (AlturaVentana - - 320 px)
+    $("#chat").height(windowHeight - 320);
+  }
+	
 });

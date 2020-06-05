@@ -66,7 +66,7 @@
 				    <tr>
 				      <th>SALA</th>
 				      <th>ANFITRIÓN</th>
-				      <th>JUGADOR</th>
+				      <th>OPONENTE</th>
 				      <th></th>
 				    </tr>
 				  </thead>

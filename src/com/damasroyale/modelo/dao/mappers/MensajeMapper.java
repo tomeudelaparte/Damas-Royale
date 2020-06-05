@@ -25,7 +25,7 @@ public interface MensajeMapper {
 	 * Obtiene todos los mensajes de la partida.
 	 * 
 	 * @param id Integer, identificador de la partida.
-	 * @return ArrayList<Mensaje>
+	 * @return ArrayList(Mensaje)
 	 */
 	public ArrayList<Mensaje> getAllMensajeByIdPartida(@Param("id") Integer id);
 }

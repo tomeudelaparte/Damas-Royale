@@ -40,7 +40,7 @@
 					  </div>
 						<%
 							if (error != null) {
-								error = "<p class='text-danger text-center font-weight-bold'>NOMBRE O CORREO ELECTRÓNICO EXISTENTE.</p>";
+								error = "<p class='text-danger text-center font-weight-bold'>DATOS EXISTENTES O FUERA DE RANGO.</p>";
 								out.append(error);
 							}
 						%>

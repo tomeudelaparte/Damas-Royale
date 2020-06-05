@@ -18,7 +18,7 @@ public class UsuarioDAO {
 	/**
 	 * Obtiene todos los usuarios.
 	 * 
-	 * @return ArrayList<Usuario>
+	 * @return ArrayList(Usuario)
 	 */
 	public ArrayList<Usuario> getAllUsuario() {
 

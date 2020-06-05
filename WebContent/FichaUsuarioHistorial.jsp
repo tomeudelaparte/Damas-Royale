@@ -90,7 +90,7 @@
 			      <th>FECHA</th>
 			      <th>HORA</th>
 			      <th>ANFITRIÓN</th>
-			      <th>JUGADOR</th>
+			      <th>OPONENTE</th>
 			      <th>REPETICIÓN</th>
 			    </tr>
 			  </thead>

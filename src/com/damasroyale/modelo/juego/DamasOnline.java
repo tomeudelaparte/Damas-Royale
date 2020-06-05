@@ -55,8 +55,6 @@ public class DamasOnline {
 	// Estado de la partida.
 	private boolean finalizada = false;
 
-
-
 	// Identificador del usuario ganador y perdedor.
 	private Integer ganador;
 	private Integer perdedor;

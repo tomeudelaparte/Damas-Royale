@@ -51,7 +51,7 @@ public class JavaMailEJB {
 		int port = 587;
 
 		// Cuenta del remitente
-		String username = "dwesaplicaciontomeu@gmail.com";
+		String username = "damasroyale@gmail.com";
 		String password = "Ageofempires2";
 
 		// Configuración de las propiedades
@@ -108,18 +108,25 @@ public class JavaMailEJB {
 
 		String asunto = "Verificar cuenta - Damas Royale";
 		
-		String mensaje = "<div style='background-color:#f5f5f5;'>" + "<br><br>"
+		String mensaje = "<div style='background-color:#f5f5f5;'>"
+				+ "<br><br>"
 				+ "<div style='text-align:center;margin-left:25vw;margin-right:25vw;border-radius: 10px;background-color:#FFFFFF;'>"
 				+ "<br><br><br>"
-				+ "<img src='http://vps-25166920.vps.ovh.net/Damas-Royale/media/banner.png' width='500' style='margin-left:50px;margin-right:50px;'>"
-				+ "<br><br>" + "<h1>Hola " + usuario.getNombre() + ",</h1>"
-				+ "<h1>¡Te has registrado correctamente!</h1>" + "<br><br>"
-				+ "<a href='http://localhost:8080/Damas-Royale/Login?activation=" + codigo
-				+ "' style='text-decoration:none;'>"
+				+ "<img src='http://damasroyale.tk/media/banner.png' width='500' style='margin-left:50px;margin-right:50px;'>"
+				+ "<br><br>"
+				+ "<h1>Hola " + usuario.getNombre()+",</h1>"
+				+ "<h1>¡Te has registrado correctamente!</h1>"
+				+ "<br><br>"
+				+ "<a href='http://localhost:8080/Damas-Royale/Login?activation="+ codigo+"' style='text-decoration:none;'>"
 				+ "<div style='background-color:darkred;text-align:center;border-radius:10px; margin-left:30%;margin-right:30%; padding:1px'>"
-				+ "<h3 style=\"color:white\">Verificar cuenta</h3>" + "</div></a>" + "</p><br><br>" + "<br></div>"
-				+ "<br>" + "<p style='text-align:center;'>Copyright &copy; 2020 Damas Royale by Tomeu de la Parte</p>"
-				+ "<br>" + "</div>";
+				+ "<h3 style=\"color:white\">Verificar cuenta</h3>"
+				+ "</div></a>"
+				+ "</p><br><br>"
+				+ "<br></div>"
+				+ "<br>"
+				+ "<p style='text-align:center;'>Copyright &copy; 2020 Damas Royale by Tomeu de la Parte</p>"
+				+ "<br>"
+				+ "</div>";
 
 		String remitente = "dwesaplicaciontomeu@gmail.com";
 

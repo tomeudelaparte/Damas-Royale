@@ -34,7 +34,7 @@ public class MensajeEJB {
 	 * Obtiene todos los mensajes de la partida.
 	 * 
 	 * @param id Integer, identificador de la partida.
-	 * @return ArrayList<Mensaje>
+	 * @return ArrayList(Mensaje)
 	 */
 	public ArrayList<Mensaje> getAllMensajeByIdPartida(Integer id) {
 

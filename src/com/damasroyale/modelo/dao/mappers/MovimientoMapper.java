@@ -25,7 +25,7 @@ public interface MovimientoMapper {
 	 * Obtiene todos los movimientos de la partida.
 	 * 
 	 * @param id Integer, identificador de la partida.
-	 * @return ArrayList<Movimiento>
+	 * @return ArrayList(Movimiento)
 	 */
 	public ArrayList<Movimiento> getAllMovimientoByIdPartida(@Param("id") Integer id);
 }

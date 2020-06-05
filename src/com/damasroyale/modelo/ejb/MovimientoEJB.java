@@ -34,7 +34,7 @@ public class MovimientoEJB {
 	 * Obtiene todos los movimientos de la partida.
 	 * 
 	 * @param id Integer, identificador de la partida.
-	 * @return ArrayList<Movimiento>
+	 * @return ArrayList(Movimiento)
 	 */
 	public ArrayList<Movimiento> getAllMovimientoByIdPartida(Integer id) {
 

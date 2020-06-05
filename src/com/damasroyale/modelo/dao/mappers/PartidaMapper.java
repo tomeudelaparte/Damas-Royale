@@ -64,14 +64,14 @@ public interface PartidaMapper {
 	 * Obtiene todas las partidas donde haya participado un usuario.
 	 * 
 	 * @param id Integer, identificador del usuario.
-	 * @return ArrayList<Partida>
+	 * @return ArrayList(Partida)
 	 */
 	public ArrayList<Partida> getAllPartidaByIdUsuario(@Param("id") Integer id);
 
 	/**
 	 * Obtiene todas las partidas no finalizadas.
 	 * 
-	 * @return ArrayList<Partida>
+	 * @return ArrayList(Partida)
 	 */
 	public ArrayList<Partida> getAllPartidaEnCurso();
 
@@ -79,7 +79,7 @@ public interface PartidaMapper {
 	 * Obtiene las estadisticas de un usuario en base a sus partidas.
 	 * 
 	 * @param id Integer, identificador del usuario.
-	 * @return ArrayList<Stat>
+	 * @return ArrayList(Stat)
 	 */
 	public ArrayList<Stat> getEstadisticaByIdUsuario(@Param("id") Integer id);
 

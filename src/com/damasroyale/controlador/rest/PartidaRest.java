@@ -319,7 +319,7 @@ public class PartidaRest {
 	 * Obtiene todos los mensajes de la partida y los devuelve en formato JSON.
 	 * 
 	 * @param idPartida String, identificador de partida.
-	 * @return ArrayList<Mensaje>
+	 * @return ArrayList(Mensaje)
 	 */
 	@GET
 	@Path("/getMensajes/{idPartida}")

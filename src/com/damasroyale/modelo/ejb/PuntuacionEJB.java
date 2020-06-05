@@ -26,7 +26,7 @@ public class PuntuacionEJB {
 	 * Obtiene la puntuacióne en base a los resultados.
 	 * 
 	 * @param idUsuario  Integer, identificador del usuario.
-	 * @param resultados ArrayList<Resultado>, resultados del usuario.
+	 * @param resultados ArrayList(Resultado), resultados del usuario.
 	 * @return int
 	 */
 	public int getPuntuacion(Integer idUsuario, ArrayList<Resultado> resultados) {
@@ -63,7 +63,7 @@ public class PuntuacionEJB {
 	 * Obtiene el número de partidas ganadas.
 	 * 
 	 * @param idUsuario  Integer, identificador del usuario.
-	 * @param resultados ArrayList<Resultado>, resultados del usuario.
+	 * @param resultados ArrayList(Resultado), resultados del usuario.
 	 * @return int
 	 */
 	public int getPartidasGanadas(Integer idUsuario, ArrayList<Resultado> resultados) {
@@ -86,7 +86,7 @@ public class PuntuacionEJB {
 	 * Obtiene el número de partidas perdidas.
 	 * 
 	 * @param idUsuario  Integer, identificador del usuario.
-	 * @param resultados ArrayList<Resultado>, resultados del usuario.
+	 * @param resultados ArrayList(Resultado), resultados del usuario.
 	 * @return int
 	 */
 	public int getPartidasPerdidas(Integer idUsuario, ArrayList<Resultado> resultados) {
@@ -108,8 +108,7 @@ public class PuntuacionEJB {
 	/**
 	 * Obtiene el número de partidas terminadas en tablas.
 	 * 
-	 * @param idUsuario  Integer, identificador del usuario.
-	 * @param resultados ArrayList<Resultado>, resultados del usuario.
+	 * @param resultados ArrayList(Resultado), resultados del usuario.
 	 * @return int
 	 */
 	public int getPartidasTablas(ArrayList<Resultado> resultados) {

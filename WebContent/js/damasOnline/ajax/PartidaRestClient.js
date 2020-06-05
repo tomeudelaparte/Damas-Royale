@@ -26,6 +26,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 			success : function(data) {
 				
 				tmp  = data;
@@ -47,6 +50,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 			success : function(data) {
 				
 				tmp =  data;
@@ -56,8 +62,6 @@ class PartidaRestClient {
 		return tmp;
 	}
 	
-	
-
 
 	
 	getPuntuacionUsuario(idUsuario) {
@@ -71,6 +75,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 			success : function(data) {
 	
 				tmp = data;
@@ -92,6 +99,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 			success : function(data) {
 	
 				tmp = data;
@@ -112,6 +122,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 			success : function(data) {
 	
 				tmp = data;
@@ -132,6 +145,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 			success : function(data) {
 	
 				tmp = data;
@@ -152,6 +168,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 			success : function(data) {
 	
 				tmp = data;
@@ -172,6 +191,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 			success : function(data) {
 	
 				tmp = data;
@@ -190,6 +212,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 
 		});	
 	}
@@ -204,6 +229,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 
 		});	
 	}
@@ -217,6 +245,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 
 		});	
 	}
@@ -232,6 +263,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 			success : function(data) {
 	
 				tmp = data;
@@ -253,6 +287,9 @@ class PartidaRestClient {
 			async: false,
 			contentType : "application/json",
 			dataType : 'json',
+		    headers: {
+	              'Access-Control-Allow-Origin': '*'
+	          },
 			success : function(data) {
 	
 				tmp = data;
