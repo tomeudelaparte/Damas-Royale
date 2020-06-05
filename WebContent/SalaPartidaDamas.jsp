@@ -6,14 +6,21 @@
 <html>
 <head>
 <%
+	// Número de sala
 	int sala = (int) request.getAttribute("sala");
+
+	// Partida
 	Partida partida = (Partida) request.getAttribute("partida");
+	
+	// Usuario y puntuación
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
 	int usuarioPuntuacion = (int) request.getAttribute("usuarioPuntuacion");
 	
+	// Oponente y puntuación
 	Usuario oponente = new Usuario();
 	int oponentePuntuacion = 0;
 	
+	// Si hay oponente, setea el oponente y su puntuación.
 	if (request.getAttribute("oponente") != null) {
 		oponente = (Usuario) request.getAttribute("oponente");
 		oponentePuntuacion = (int) request.getAttribute("oponentePuntuacion");
@@ -49,6 +56,7 @@
 			
 				<%
 				
+				// Si el anfitrión es el oponente
 				if (partida.getIdUsuario_A() == oponente.getId()) {
 					
 				%>
@@ -62,7 +70,10 @@
 				<hr>
 				<div id="oponente" class="row mx-auto shadow m-3 mb-5 p-2 rounded border">
 				
-				<% if(oponente.getId() == null) { %>
+				<% 
+				
+				// Si no hay oponente
+				if(oponente.getId() == null) { %>
 				
 					<h3 class="text-center m-5 pt-2 pb-2">Esperando un jugador...</h3>
 
@@ -80,7 +91,7 @@
 				
 				<h1 class="text-dark font-weight-bold mx-auto text-center mb-4">VS</h1>
 				<%
-				
+				// Si el anfitrión es el usuario
 				if (partida.getIdUsuario_A() == usuario.getId()) {
 					
 				%>
@@ -286,6 +297,7 @@
 		</div>
 	</footer>
 	<script>
+		// Empieza la partida
 		crearPartida(<%=partida.getId()%>,<%=usuario.getId()%>);
 	</script>
 </body>

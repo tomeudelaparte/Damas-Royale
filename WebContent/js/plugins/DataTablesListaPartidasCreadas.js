@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	
+	// Configuración de la tabla de partidas en curso.
+	
 	$('table').DataTable({
 			"scrollY" : "385px",
 			"scrollCollapse" : true,
@@ -22,6 +24,9 @@ $(document).ready(function() {
 	        },
 	        
 	        "drawCallback": function() {
+	        	
+	        	// Crea filas para rellenar el espacio.
+	        	
 	            var api = this.api();
 	            var rowCount = api.rows({page: 'current'}).count();
 	            

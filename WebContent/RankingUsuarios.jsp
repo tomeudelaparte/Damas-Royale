@@ -6,10 +6,13 @@
 <!DOCTYPE html>
 <html>
 <%
+	// Usuario de la sesión
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
-
+	
+	// Ranking de usuarios
 	ArrayList<Rank> ranking = (ArrayList<Rank>) request.getAttribute("ranking");
 	
+	// Index contador de posiciones
 	int index = 1;
 %>
 <head>
@@ -68,7 +71,9 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <% for(Rank rank : ranking) {%>
+			    <%
+			    // Por cada usuario del ranking
+			    for(Rank rank : ranking) {%>
 			   <tr>
 			      <td class="text-center text-dark font-weight-bold" scope="row"><%=index++ %></td>
 			      <td><a href="Ficha?id=<%=rank.getId() %>"><img class="rounded-circle float-left mr-2 img-thumbnail shadow-sm img-usuario-60" src="media/<%=rank.getImagen() %>" width="60"></a> <a href="Ficha?id=<%=rank.getId() %>" class="text-dark nav-link p-0"><h5 class="mt-3"><%=rank.getNombre() %></h5></a></td>

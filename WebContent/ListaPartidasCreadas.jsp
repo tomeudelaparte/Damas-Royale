@@ -6,10 +6,16 @@
 <html>
 <head>
 <%
+	// Usuario de la sesión
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
+
+	// Partidas en curso
 	ArrayList<Partida> partidas = (ArrayList<Partida>) request.getAttribute("partidas");
+	
+	// Lista de usuarios
 	ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuarios");
 	
+	// Index contador de sala
 	int index = 1;
 %>
 <title>Jugar Online - Damas Royale</title>
@@ -74,21 +80,31 @@
 				  <p class="text-dark m-0 font-weight-normal">Selecciona <b>UNIRSE</b> para unirte a una partida o <b>CREAR PARTIDA</b> para crear una nueva partida.</p>
 				  <a href="CrearPartida" class="text-dark"><button type="button" class="btn btn-secondary float-right font-weight-bold">CREAR PARTIDA</button></a>
 				  <tbody>
-				<% for(Partida partida : partidas) { 
+				<% 
+				
+				// Por cada partida
+				for(Partida partida : partidas) { 
 				
 				%>
 					<tr>
 					<td class="font-weight-bold"><%=index++%></td>
 					
-					<% for (Usuario listaUsuarios : usuarios) {
-					
+					<% 
+					// Por cada usuario
+					for (Usuario listaUsuarios : usuarios) {
+							
+						// Si el anfitrión es igual al usuario
 						 if(partida.getIdUsuario_A() == listaUsuarios.getId()) { %>
 				    	  		<td class="font-weight-bold">
 					    	  		<a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm rounded img-usuario-50" src="media/<%=listaUsuarios.getImagen() %>" width="50"></a>
 					    	  		<a class="nav-link p-0 text-dark font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><h5 class="mt-3"><%=listaUsuarios.getNombre() %></h5></a>
 				    	  		</td>
 				    	  <%}}
+					
+					// Por cada usuario
 					for (Usuario listaUsuarios : usuarios) {	  
+						
+						// Si el oponente es igual al usuario
 						 if(partida.getIdUsuario_B() == listaUsuarios.getId()) { %>
 			    	  		<td class="font-weight-bold">
 				    	  		<a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm rounded img-usuario-50" src="media/<%=listaUsuarios.getImagen() %>" width="50"></a>
@@ -98,17 +114,24 @@
 			    	  	<%				 
 					}}
 					
+					// Si no hay usuario oponente
 					if(usuario.getId() != partida.getIdUsuario_A() && partida.getIdUsuario_B() == null) {%>
 					
 					<td class="text-dark font-weight-bold">No hay jugador.</td>
 					<td><a href="Sala?id=<%=partida.getId() %>" class="text-dark text-center" ><button type="button" class="btn btn-secondary font-weight-bold">UNIRSE</button></a></td>					
 					
-					<%}else if(usuario.getId() == partida.getIdUsuario_A() && partida.getIdUsuario_B() == null){%>
+					<%}
+					
+					// Si el usuario es el anfitrión
+					else if(usuario.getId() == partida.getIdUsuario_A() && partida.getIdUsuario_B() == null){%>
 					
 					<td class="text-dark font-weight-bold">No hay jugador.</td>
 					<td><a href="Sala?id=<%=partida.getId() %>" class="text-dark text-center" ><button type="button" class="btn btn-secondary font-weight-bold">VOLVER A UNIRSE</button></a></td>	
 						
-					<%}else if(usuario.getId() == partida.getIdUsuario_A() || usuario.getId() == partida.getIdUsuario_B()) { %>	
+					<%}
+					
+					// Si el usuario participa en la partida
+					else if(usuario.getId() == partida.getIdUsuario_A() || usuario.getId() == partida.getIdUsuario_B()) { %>	
 					
 					
 					<td><a href="Sala?id=<%=partida.getId() %>" class="text-dark text-center" ><button type="button" class="btn btn-secondary font-weight-bold">VOLVER A UNIRSE</button></a></td>					

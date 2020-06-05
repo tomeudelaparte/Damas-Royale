@@ -1,4 +1,7 @@
 $(document).ready(function() {
+	
+	// Configuración de la tabla de historial de partidas.
+	
 	$('table').DataTable({
 			"scrollY" : "320px",
 			"scrollCollapse" : true,
@@ -23,11 +26,13 @@ $(document).ready(function() {
 	            }},
 			 
 	        "drawCallback": function() {
-	            var api = this.api();
+	            
+	        	// Crea filas para rellenar el espacio.
+	        	var api = this.api();
 	            var rowCount = api.rows({page: 'current'}).count();
 	            
 	            var difference = api.page.len() - rowCount;
-	
+	            
 	            if( api.page.len()==10 && rowCount < 10) {
 	
 	                for (var i = 0; i < difference-2 ; i++) {

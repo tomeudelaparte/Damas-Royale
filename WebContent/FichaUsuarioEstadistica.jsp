@@ -6,8 +6,13 @@
 <html>
 <head>
 <%
+	// Usuario de la sesión
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
+
+	// Usuario
 	Usuario jugador = (Usuario) request.getAttribute("jugador");
+	
+	// Estadísticas
 	ArrayList<Stat> estadistica = (ArrayList<Stat>) request.getAttribute("estadistica");
 %>
 <title><%=jugador.getNombre() %> - Damas Royale</title>
@@ -85,6 +90,7 @@
 		</div>
 	</footer>
 	<script>
+		// Añade las estadisticas al gráfico.
 		var estadisticas =<%=estadistica.toString()%>;
 		showEstadistica(estadisticas);
 	</script>	

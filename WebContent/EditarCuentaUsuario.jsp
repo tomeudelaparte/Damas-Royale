@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.damasroyale.modelo.pojo.Usuario" %>
 <%@ page import="org.joda.time.DateTime" %>
-<!DOCTYPE html>
 <html>
 <head>
 <%
+	//Usuario de la sesión
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
-
+	
+	// Fecha de registro 
 	DateTime fecha = new DateTime(usuario.getRegistro());
 	
+	// Meses
 	String mes[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"};
 %>
 <title>Editar cuenta - Damas Royale</title>

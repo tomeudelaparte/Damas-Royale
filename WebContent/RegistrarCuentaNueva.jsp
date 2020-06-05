@@ -15,6 +15,7 @@
 </head>
 <body class="bg-light">
 	<%
+		// Muestra un mensaje de error de registro.
 		String error = (String) request.getAttribute("error");
 	%>
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow mb-5">
@@ -39,6 +40,7 @@
 					    <input type="password" class="form-control"  required="required" name="contrasenya" placeholder="64 carácteres máx.">
 					  </div>
 						<%
+							// Si no es null muestra el mensaje.
 							if (error != null) {
 								error = "<p class='text-danger text-center font-weight-bold'>DATOS EXISTENTES O FUERA DE RANGO.</p>";
 								out.append(error);

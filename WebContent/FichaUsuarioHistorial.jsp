@@ -9,15 +9,26 @@
 <html>
 <head>
 <%
+	// Usuario de la sesión
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
+
+	// Usuario
 	Usuario jugador = (Usuario) request.getAttribute("jugador");
+	
+	// Partidas del usuario
 	ArrayList<Partida> partidas = (ArrayList<Partida>) request.getAttribute("partidas");
+	
+	// Resultados del usuario
 	ArrayList<Resultado> resultados = (ArrayList<Resultado>) request.getAttribute("resultados");
+	
+	// Lista de usuarios
 	ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuarios");
 	
+	// Formateo de string en fecha y hora.
 	SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy"); 
   	SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
 	
+  	// Index del número de partidas
 	int index = 1;
 %>
 <title><%=jugador.getNombre() %> - Damas Royale</title>
@@ -95,24 +106,35 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <% for(Resultado resultado : resultados) {
-				  
+			  <% 
+			  // Por cada resultado
+			  for(Resultado resultado : resultados) {
+				  	
+				  // Por cada partida
 				  for(Partida partida : partidas) {
 					  
+					  // Si la partida corresponde con el resultado.
 					  if(partida.getId() == resultado.getIdPartida()) {
 						  
+						  // Si el ganador es el usuario y no es el perdedor
 						  if(resultado.getGanador() == jugador.getId() && resultado.getPerdedor() != jugador.getId()) {
 						  
-			    %>
-			   <tr class="bg-success text-light">
-
-			   <%} else if(resultado.getGanador() != jugador.getId() && resultado.getPerdedor() == jugador.getId()) {%>
-			   
-			   <tr class="bg-danger text-light">
-			   
-			   <%} else if(resultado.isTablas()) {%>
-			   
-			    <tr class="bg-warning text-light">
+						    %>
+						   <tr class="bg-success text-light">
+			
+						   <%} 
+									  
+							// Si el usuario no es el ganador y es el perdedor
+							else if(resultado.getGanador() != jugador.getId() && resultado.getPerdedor() == jugador.getId()) {%>
+						   
+						   <tr class="bg-danger text-light">
+						   
+						   <%} 
+							
+							// Si el resultado es tablas		  
+							else if(resultado.isTablas()) {%>
+						   
+						    <tr class="bg-warning text-light">
 			    
 			    <%} %>
 			      <td class="text-center font-weight-bold"><%=index++%></td>
@@ -120,13 +142,19 @@
 			      <td class="font-weight-bold"><%=fecha.format(resultado.getFecha_hora()) %></td>
 			      <td class="font-weight-bold"><%=hora.format(resultado.getFecha_hora()) %></td>
 			      
-			      <% for(Usuario listaUsuarios : usuarios) { 
+			      <% 
+			      
+			      // Por cada usuario
+			      for(Usuario listaUsuarios : usuarios) { 
 			    	  
+			    	  // Si el usuario es el anfitrión
 			    	  if(partida.getIdUsuario_A() == listaUsuarios.getId()) { %>
 			    	  		<td class="font-weight-bold"><a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm rounded img-usuario-40" src="media/<%=listaUsuarios.getImagen() %>" width="40"></a><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
 			    	  <%}}
-			      
+			      // Por cada usuario
 			      for(Usuario listaUsuarios : usuarios) {  
+			    	  
+			    	 // Si el usuario es el oponente
 			    	 if(partida.getIdUsuario_B() == listaUsuarios.getId()) { %>
 			    	  		<td class="font-weight-bold"><a href="Ficha?id=<%=listaUsuarios.getId() %>"><img class="img-thumbnail float-left mr-2 shadow-sm rounded img-usuario-40" src="media/<%=listaUsuarios.getImagen() %>" width="40"></a><a class="nav-link text-light font-weight-bold" href="Ficha?id=<%=listaUsuarios.getId()%>"><%=listaUsuarios.getNombre()%></a></td>
 			    	  <%}}%>

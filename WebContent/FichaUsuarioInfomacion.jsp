@@ -5,16 +5,31 @@
 <html>
 <head>
 <%
+	// Usuario de la sesión
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
+
+	// Usuario
 	Usuario jugador = (Usuario) request.getAttribute("jugador");
+	
+	// Puntuación del usuario
 	int puntuacion = (int) request.getAttribute("puntuacion");
+	
+	// Partidas jugadas del usuario
 	int partidasJugadas = (int) request.getAttribute("jugadas");
+	
+	// Partidas ganadas del usuario
 	int partidasGanadas = (int) request.getAttribute("ganadas");
+	
+	// Partidas perdidas del usuario
 	int partidasPerdidas = (int) request.getAttribute("perdidas");
+	
+	// Partidas tablas del usuario
 	int partidasTablas = (int) request.getAttribute("tablas");
 	
+	// Fecha de registro
 	DateTime fecha = new DateTime(usuario.getRegistro());
 	
+	// Meses
 	String mes[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"};
 %>
 <title><%=jugador.getNombre() %> - Damas Royale</title>
@@ -120,9 +135,13 @@
 					</div>
 				</div>
 			</div>
-			<% if(jugador.getId()==usuario.getId()){ %>
+			
+			<% 
+			// Si el usuario es igual al usuario de la sesióm.
+			if(jugador.getId()==usuario.getId()){ %>
 			<a href="Editar" class="text-decoration-none d-flex ml-auto mr-5 pr-4"><button type="button" class="btn btn-secondary ">Editar mi perfil</button></a>
 			<%} %>
+			
 		</div>
 	</div>
 	<footer

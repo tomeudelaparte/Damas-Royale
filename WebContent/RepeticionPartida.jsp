@@ -7,13 +7,17 @@
 <html>
 <head>
 <%
+	// Partida
 	Partida partida = (Partida) request.getAttribute("partida");
-
+	
+	// Lista de movimientos 
 	ArrayList<Movimiento> movimientos = (ArrayList<Movimiento>) request.getAttribute("movimientos");
 	
+	// Usuario y puntuación
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
 	int usuarioPuntuacion = (int) request.getAttribute("usuarioPuntuacion");
-
+	
+	// Oponente y puntuación
 	Usuario oponente = (Usuario) request.getAttribute("oponente");
 	int  oponentePuntuacion = (int) request.getAttribute("oponentePuntuacion");
 
@@ -43,6 +47,7 @@
 			
 				<%
 				
+				// Si el anfitrion es igual al oponente
 				if (partida.getIdUsuario_A() == oponente.getId()) {
 					
 				%>
@@ -67,7 +72,7 @@
 				
 				<h1 class="text-dark font-weight-bold mx-auto text-center mb-4">VS</h1>
 				<%
-				
+				// Si el anfitrion es igual al usuario
 				if (partida.getIdUsuario_A() == usuario.getId()) {
 					
 				%>
@@ -199,6 +204,7 @@
 		</div>
 	</footer>
 	<script>
+		// Carga los movimientos
 		var movimientosJS = <%=movimientos%>;
 		cargarMovimientos(movimientosJS);
 	</script>

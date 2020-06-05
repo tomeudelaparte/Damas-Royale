@@ -14,7 +14,7 @@ $(document).ready(function() {
 	  // Obtiene la altura de la ventana.
 	  var windowHeight = window.innerHeight;
 	  
-	  // Aplica la altura modificada al chat (AlturaVentana - - 320 px)
+	  // Aplica la altura modificada al chat (AlturaVentana - 320 px)
     $("#chat").height(windowHeight - 320);
   }
 	

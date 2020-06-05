@@ -15,9 +15,16 @@
 </head>
 <body class="bg-light">
 	<%
+		// Muestra mensaje de error de inicio de sesión.
 		String error = (String) request.getAttribute("error");
+	
+		// Muestra mensaje de registro completado.
 		String register = (String) request.getAttribute("register");
+		
+		// Muestra mensaje de cuenta verificada.
 		String activation = (String) request.getAttribute("activation");
+		
+		// Muestra mensaje de cuenta eliminada.
 		String delaccount = (String) request.getAttribute("delaccount");
 	%>
 	<nav class="navbar navbar-expand-sm bg-light navbar-dark border-bottom shadow mb-5">
@@ -42,6 +49,7 @@
 							</div>
 						</div>
 						<%
+							// Si no es null, muestra el mensaje
 							if (error != null) {
 				
 								error = "<p class='text-danger text-center font-weight-bold'>CORREO ELECTRÓNICO O CONTRASEÑA INCORRECTA.</p>";
@@ -49,6 +57,7 @@
 								out.append(error);
 							}
 				
+							// Si no es null, muestra el mensaje
 							if (register != null) {
 				
 								register = "<p class='text-danger text-center font-weight-bold'>COMPRUEBE SU CORREO PARA VERIFICAR LA CUENTA.</p>";
@@ -56,6 +65,7 @@
 								out.append(register);
 							}
 				
+							// Si no es null, muestra el mensaje
 							if (activation != null) {
 				
 								activation = "<p class='text-danger text-center font-weight-bold'>SU CUENTA HA SIDO VERIFICADA.</p>";
@@ -63,6 +73,7 @@
 								out.append(activation);
 							}
 							
+							// Si no es null, muestra el mensaje
 							if (delaccount != null) {
 								
 								delaccount = "<p class='text-danger text-center font-weight-bold'>SU CUENTA HA SIDO ELIMINADA.</p>";
