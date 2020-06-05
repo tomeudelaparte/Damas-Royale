@@ -287,7 +287,7 @@ function controlSeleccionar() {
 		var columnaDestino = $(this).index();
 
 		// Obtiene el movimiento
-		var movimiento = partidaRestClient.makeMovimiento(filaOrigen, filaDestino, columnaOrigen, columnaDestino);
+		var movimiento = partidaRestClient.makeMovimiento(partidaRestClient.idPartida, partidaRestClient.idUsuario, filaOrigen, filaDestino, columnaOrigen, columnaDestino);
 		
 		// Si hay movimiento
 		if (movimiento !== undefined) {

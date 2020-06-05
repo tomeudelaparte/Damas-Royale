@@ -333,12 +333,12 @@ class PartidaRestClient {
 	}
 	
 	// Realiza el movimiento del usuario.
-	makeMovimiento(filaOrigen, filaDestino, columnaOrigen, columnaDestino) {
+	makeMovimiento(idPartida, idJugador, filaOrigen, filaDestino, columnaOrigen, columnaDestino) {
 		
 		var tmp;
 		
 		// Dirección REST
-		var url = "http://localhost:8080/Damas-Royale/PartidaRest/makeMovimiento/"+this.idPartida+"/"+this.idJugador+"/"+filaOrigen+"/"+filaDestino+"/"+columnaOrigen+"/"+columnaDestino;
+		var url = "http://localhost:8080/Damas-Royale/PartidaRest/makeMovimiento/"+idPartida+"/"+idJugador+"/"+filaOrigen+"/"+filaDestino+"/"+columnaOrigen+"/"+columnaDestino;
 			
 		// Petición asíncrona de AJAX
 		$.ajax({

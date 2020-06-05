@@ -128,7 +128,7 @@ public class JavaMailEJB {
 				+ "<br>"
 				+ "</div>";
 
-		String remitente = "dwesaplicaciontomeu@gmail.com";
+		String remitente = "damasroyale@gmail.com";
 
 		// Envia el correo electrónico
 		mail.sendMail(usuario.getEmail(), remitente, asunto, mensaje);
