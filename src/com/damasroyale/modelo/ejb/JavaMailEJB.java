@@ -52,7 +52,7 @@ public class JavaMailEJB {
 
 		// Cuenta del remitente
 		String username = "damasroyale@gmail.com";
-		String password = "Ageofempires2";
+		String password = "Patata23";
 
 		// Configuración de las propiedades
 		Properties prop = new Properties();
